@@ -30,4 +30,5 @@ export const MaterialModules: any[] = [
   MatAutocompleteModule,
   MatExpansionModule,
   MatStepperModule,
+  MatRippleModule,
 ];
