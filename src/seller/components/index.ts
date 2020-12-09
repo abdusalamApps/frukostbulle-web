@@ -1,0 +1,15 @@
+export { ItemEditorComponent } from '../components/item-editor/item-editor.component';
+export { ChooseBakeryComponent } from '../components/choose-bakery/choose-bakery.component';
+export { SignupComponent } from '../components/signup/signup.component';
+export { ChooseDaysComponent } from '../components/choose-days/choose-days.component';
+export { MapComponent } from '../components/map/map.component';
+export { MyItemsComponent } from '../components/my-items/my-items.component';
+export { NotificationsComponent } from '../components/notifications/notifications.component';
+export { OrderDetailsComponent } from '../components/order-details/order-details.component';
+export { HistoryComponent } from '../components/history/history.component';
+export { ProfileComponent } from '../components/profile/profile.component';
+export { ProfileEditorComponent } from '../components/profile-editor/profile-editor.component';
+export { RootComponent } from '../components/root/root.component';
+export { SendToBakeryComponent } from '../components/send-to-bakery/send-to-bakery.component';
+export { LoginComponent } from '../components/login/login.component';
+export { WeekOrdersComponent } from '../components/week-orders/week-orders.component';
