@@ -16,6 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, CustomSerializer } from './state';
+import { effects } from './state/effects/index';
 
 @NgModule({
   declarations: [AppComponent, LandingComponent],
@@ -32,7 +33,7 @@ import { reducers, CustomSerializer } from './state';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(),
     ...materialModules,
   ],

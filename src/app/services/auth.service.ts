@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse } from 'src/models/authUser.model';
+import { AuthResponse } from 'src/models/authResponse.model';
 import * as urls from '../../urls';
 
 @Injectable({
@@ -10,7 +10,7 @@ import * as urls from '../../urls';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(): Observable<LoginResponse> {
-    return this.http.get<LoginResponse>(urls.usersUrls.Get.loginUrl);
+  login(): Observable<AuthResponse> {
+    return this.http.get<AuthResponse>(urls.usersUrls.Get.loginUrl);
   }
 }
