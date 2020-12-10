@@ -13,6 +13,8 @@ import { AgmCoreModule } from '@agm/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import * as fromGuards from './guards';
+
 @NgModule({
   declarations: [
     Components.ItemEditorComponent,
@@ -42,5 +44,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers: [...fromGuards.guards],
 })
 export class SellerModule {}

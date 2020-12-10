@@ -42,8 +42,12 @@ export class AuthEffects {
     })
   );
 
+  @Effect()
   setNotAuthenticated$ = this.actions$.pipe(
     ofType(authActions.SET_NOT_AUTHINTICATED),
-    map(() => new routerActions.Go({ path: [''] }))
+    map((action: authActions.SetAuthenticated) => {
+      console.log(`effect called, action: ${action.payload}`);
+      new routerActions.Go({ path: ['login'] });
+    })
   );
 }

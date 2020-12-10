@@ -1,6 +1,4 @@
-import { AuthAction } from './../actions/auth.actions';
 import { AuthResponse } from '../../../models/authResponse.model';
-import { Action, createReducer, on } from '@ngrx/store';
 import * as fromAuth from '../actions/auth.actions';
 
 export interface AuthState {
@@ -38,6 +36,7 @@ export function reducer(
   }
 }
 
+export const getAuthState = (state: AuthState) => state;
 export const getAuthenticated = (state: AuthState) => state.isAuthenticated;
 export const getAuthResponse = (state: AuthState) => state.authResponse;
 export const getToken = (state: AuthState) => state.authResponse?.Authorization;

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from '../app/components/login/login.component';
 
 // Material modules
 import { materialModules } from 'src/material-modules';
