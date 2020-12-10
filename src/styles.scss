@@ -38,7 +38,8 @@ $frukostbulle-theme: mat-light-theme(
 
 html,
 body {
-  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 body {
   margin: 0;
@@ -46,9 +47,54 @@ body {
   background: mat-color($frukostbulle-primary);
 }
 
+.back-icon {
+  margin-right: 16px;
+  align-self: center;
+  clip-path: circle();
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-stepper-vertical {
+  border-radius: 8px;
+}
+
+.container {
+  height: 100%;
+  padding: 16px 16px 16px 16px;
+}
+
+.mat-icon {
+  cursor: pointer;
+}
+
+.form-container {
+  display: grid;
+  grid-gap: 2em;
+}
+.buttons-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+.landing-item {
+  cursor: pointer;
+  border-radius: 5px;
+}
+
 @media (min-width: 900px) {
   .mat-toolbar-row,
   .mat-toolbar-single-row {
     padding: 0 25% 0 25% !important;
+  }
+
+  .container {
+    padding: 16px 25% 0 25%;
+  }
+
+  .form-container {
+    padding: 0 5em 0 5em;
   }
 }

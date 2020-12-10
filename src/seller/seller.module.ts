@@ -1,8 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SellerRoutingModule } from './seller-routing.module';
+
+// Components
 import * as Components from './components';
-import { MaterialModules } from '../material-modules';
+
+// Material Modules
+import { materialModules } from '../material-modules';
+
+// Google maps
+import { AgmCoreModule } from '@agm/core';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +31,16 @@ import { MaterialModules } from '../material-modules';
     Components.LoginComponent,
     Components.WeekOrdersComponent,
   ],
-  imports: [CommonModule, SellerRoutingModule, ...MaterialModules],
+  imports: [
+    CommonModule,
+    SellerRoutingModule,
+    ...materialModules,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA5uM21fX0xEYTcqRKgvjwVFqBs1Ve9hAc',
+      libraries: ['places', 'drawing', 'geometry'],
+    }),
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class SellerModule {}

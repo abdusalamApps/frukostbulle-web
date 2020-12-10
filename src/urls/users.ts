@@ -6,6 +6,7 @@ export namespace Get {
   export const getAllUsersUrl = `${baseUrl}/user-users`;
   export const getSellerDatesUrl = `${baseUrl}/user-dates`;
   export const getUsersByPermissionLevelUrl = `${baseUrl}/get-users-level`;
+  export const loginUrl = `${baseUrl}/login`;
 }
 
 export namespace Post {

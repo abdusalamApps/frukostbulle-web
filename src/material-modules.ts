@@ -13,8 +13,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatBadgeModule } from '@angular/material/badge';
 
-export const MaterialModules: any[] = [
+export const materialModules: any[] = [
   MatIconModule,
   MatButtonModule,
   MatFormFieldModule,
@@ -31,4 +32,5 @@ export const MaterialModules: any[] = [
   MatExpansionModule,
   MatStepperModule,
   MatRippleModule,
+  MatBadgeModule,
 ];

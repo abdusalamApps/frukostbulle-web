@@ -1,3 +1,4 @@
+import { materialModules } from './../material-modules';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {
@@ -33,6 +34,7 @@ import { reducers, CustomSerializer } from './state';
     }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
+    ...materialModules,
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
   bootstrap: [AppComponent],

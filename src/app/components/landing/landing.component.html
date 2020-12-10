@@ -1,1 +1,56 @@
-<p>landing works!</p>
+<mat-toolbar class="toolbar" color="primary"> </mat-toolbar>
+
+<div class="container">
+  <mat-card class="card">
+    <mat-card-title>
+      {{ title }}
+    </mat-card-title>
+    <mat-card-subtitle> Du kan köpa eller sälja bullar </mat-card-subtitle>
+    <mat-list>
+      <mat-list-item
+        matRipple
+        class="landing-item"
+        [routerLink]="['/buyer/map']"
+      >
+        <h3 matLine>KÖP BULLAR</h3>
+        <mat-icon>shopping_basket</mat-icon>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-list-item
+        matRipple
+        class="landing-item"
+        [routerLink]="['/seller/my-items']"
+      >
+        <h3 matLine>SÄLJ BULLAR</h3>
+        <mat-icon>storefront</mat-icon>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+
+  <mat-card style="margin-top: 2em">
+    <mat-card-title>Skapa Profil</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item
+          matRipple
+          class="landing-item"
+          [routerLink]="['/buyer/signup']"
+        >
+          <h3 matLine>SKAPA KÖPARPROFIL</h3>
+          <mat-icon matBadge="+" matBadgeColor="accent"
+            >shopping_basket</mat-icon
+          >
+          <mat-divider></mat-divider>
+        </mat-list-item>
+        <mat-list-item
+          matRipple
+          class="landing-item"
+          [routerLink]="['/seller/signup']"
+        >
+          <h3 matLine>SKAPA SÄLJARPROFIL</h3>
+          <mat-icon matBadge="+" matBadgeColor="accent">storefront</mat-icon>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

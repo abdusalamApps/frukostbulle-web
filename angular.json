@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "frukostbulle"
+  "defaultProject": "frukostbulle",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
