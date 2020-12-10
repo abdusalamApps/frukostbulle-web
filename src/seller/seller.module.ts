@@ -1,3 +1,4 @@
+import { StoreModule } from '@ngrx/store';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SellerRoutingModule } from './seller-routing.module';
@@ -14,6 +15,11 @@ import { AgmCoreModule } from '@agm/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import * as fromGuards from './guards';
+
+import { reducers } from './state';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -43,6 +49,12 @@ import * as fromGuards from './guards';
     }),
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forFeature('seller', reducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forFeature(),
   ],
   providers: [...fromGuards.guards],
 })
