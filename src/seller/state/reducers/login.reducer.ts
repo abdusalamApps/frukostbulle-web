@@ -49,3 +49,5 @@ export function reducer(
 export const getAuthResponse = (state: LoginState) => state.response;
 export const getPending = (state: LoginState) => state.pending;
 export const getLoggedIn = (state: LoginState) => state.loggedIn;
+export const getToken = (state: LoginState) => state.response?.Authorization;
+export const getAuthEmail = (state: LoginState) => state.response?.email;

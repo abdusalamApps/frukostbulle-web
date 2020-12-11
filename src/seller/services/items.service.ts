@@ -4,15 +4,22 @@ import * as urls from '../../urls';
 import {Observable} from 'rxjs';
 import {Item} from '../../models/item.model';
 
+import * as fromState from '../state/selectors/login.selectors';
+import {Store} from '@ngrx/store';
+import {tap} from 'rxjs/operators';
+import {SellerState} from '../state/reducers';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ItemsService {
 
-  constructor(private http: HttpClient) {
+  token: string | undefined = '';
+
+  constructor(private http: HttpClient, private store: Store<SellerState>) {
   }
 
-  getItems(): Observable<Item[]> {
-    return this.http.get<Item[]>(urls.itemsUrls.Get.getAllItemsUrl);
+  getSellerItems(email: string | undefined): Observable<Item[]> {
+    return this.http.get<Item[]>(`${urls.itemsUrls.Get.getItemBySellerEmail}${email}`);
   }
 }

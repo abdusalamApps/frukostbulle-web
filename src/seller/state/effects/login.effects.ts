@@ -7,6 +7,7 @@ import { AuthService } from '../../../app/services/auth.service';
 import { of } from 'rxjs';
 
 import * as fromRoot from '../../../app/state';
+import * as userActions from '../actions/currentUser.action'
 
 @Injectable()
 export class LoginEffects {
@@ -29,6 +30,7 @@ export class LoginEffects {
   loginSuccess$ = this.actions$.pipe(
     ofType(loginAction.LOGIN_SUCCESS),
     map((action: loginAction.LoginSuccess) => action.payload),
+    map((authResponse) => new userActions.LoadCurrentUser(authResponse.email)),
     map((authResponse) => new fromRoot.Go({ path: ['seller/my-items'] }))
   );
 

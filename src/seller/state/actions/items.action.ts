@@ -8,6 +8,8 @@ export const LOAD_ITEMS_SUCCESS = '[Seller] Load Items Success';
 
 export class LoadItems implements Action {
   readonly type = LOAD_ITEMS;
+  constructor(public payload: string | undefined) {
+  }
 }
 
 export class LoadItemsFail implements Action {

@@ -4,14 +4,14 @@ import * as itemActions from '../actions/items.action';
 
 export interface ItemState {
   entities: { [id: number]: Item};
-  loaded: boolean;
-  loading: boolean;
+  itemsLoaded: boolean;
+  itemsLoading: boolean;
 }
 
 export const initialState: ItemState = {
   entities: {},
-  loaded: false,
-  loading: false,
+  itemsLoaded: false,
+  itemsLoading: false,
 };
 
 
@@ -23,15 +23,15 @@ export function reducer(
     case itemActions.LOAD_ITEMS: {
       return {
         ...state,
-        loading: true,
-        loaded: false,
+        itemsLoading: true,
+        itemsLoaded: false,
       };
     }
     case itemActions.LOAD_ITEMS_FAIL: {
       return {
         ...state,
-        loading: false,
-        loaded: false,
+        itemsLoading: false,
+        itemsLoaded: false,
       };
     }
     case itemActions.LOAD_ITEMS_SUCCESS: {
@@ -49,8 +49,8 @@ export function reducer(
       );
       return {
         ...state,
-        loading: false,
-        loaded: true,
+        itemsLoading: false,
+        itemsLoaded: true,
         entities,
       };
     }
@@ -60,7 +60,7 @@ export function reducer(
 }
 
 export const getItemsEntities = (state: ItemState) => state.entities;
-export const getItemsLoading = (state: ItemState) => state.loading;
-export const getItemsLoaded = (state: ItemState) => state.loaded;
+export const getItemsLoading = (state: ItemState) => state.itemsLoading;
+export const getItemsLoaded = (state: ItemState) => state.itemsLoaded;
 
 

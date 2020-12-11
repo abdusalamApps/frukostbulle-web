@@ -2,7 +2,8 @@ import { baseUrl } from './base';
 
 export namespace Get {
   export const getItemById = `${baseUrl}/get-item`;
-  export const getItemBySellerId = `${baseUrl}/get-item-by-seller`;
+  export const getItemBySellerId = `${baseUrl}/get-item-by-seller?sellerId=`;
+  export const getItemBySellerEmail = `${baseUrl}/get-item-by-sellerEmail?sellerEmail=`;
   export const getAllItemsUrl = `${baseUrl}/get-all-items`;
 }
 

@@ -11,6 +11,6 @@ export interface User {
   reminder: boolean;
   associatedBakery: string;
   active: boolean;
-  avaialableDates: string[];
+  availableDates: string[];
   lasOrderDay: string;
 }
