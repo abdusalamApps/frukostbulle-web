@@ -1,6 +1,7 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 import * as fromLogin from './login.reducer';
 
+
 export interface SellerState {
   login: fromLogin.LoginState;
 }

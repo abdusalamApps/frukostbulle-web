@@ -17,11 +17,9 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers, CustomSerializer } from './state';
-import { effects } from './state/effects/index';
+import {reducers, CustomSerializer, metaReducers} from './state';
+import { effects } from './state/effects';
 import { commonModules } from '../common-modules';
-
-import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent, LandingComponent],
@@ -33,7 +31,7 @@ import { AuthModule } from '../auth/auth.module';
       apiKey: 'AIzaSyA5uM21fX0xEYTcqRKgvjwVFqBs1Ve9hAc',
       libraries: ['places', 'drawing', 'geometry'],
     }),
-    StoreModule.forRoot(reducers, {}),
+    StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -42,7 +40,6 @@ import { AuthModule } from '../auth/auth.module';
     StoreRouterConnectingModule.forRoot(),
     ...materialModules,
     ...commonModules,
-    AuthModule,
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
   bootstrap: [AppComponent],

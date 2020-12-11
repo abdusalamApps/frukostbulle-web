@@ -1,4 +1,4 @@
-import { AuthResponse } from './../../../models/authResponse.model';
+import {AuthResponse} from '../../../models/authResponse.model';
 import * as fromLogin from './../actions/login.action';
 
 export interface LoginState {
@@ -26,21 +26,23 @@ export function reducer(
       };
     }
     case fromLogin.LOGIN_SUCCESS: {
-      const authResponse = action.payload;
       return {
         ...state,
         pending: false,
         loggedIn: true,
-        response: authResponse,
+        response: action.payload,
       };
     }
-    case fromLogin.LOGIN_FAIL: {
-      return {
-        ...state,
-        pending: false,
-        loggedIn: false,
-      };
-    }
+    case fromLogin.LOGIN_FAIL:
+      {
+        return {
+          ...state,
+          pending: false,
+          loggedIn: false,
+        };
+      }
+    default:
+      return state;
   }
 }
 

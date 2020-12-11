@@ -3,9 +3,10 @@ import {
   RouterStateSnapshot,
   Params,
 } from '@angular/router';
-import { createFeatureSelector, ActionReducerMap } from '@ngrx/store';
+import {createFeatureSelector, ActionReducerMap, MetaReducer} from '@ngrx/store';
 
 import * as fromRouter from '@ngrx/router-store';
+import {hydrationMetaReducer} from './hydration.reducer';
 
 export interface RouterStateUrl {
   url: string;
@@ -40,3 +41,5 @@ export class CustomSerializer
     return { url, queryParams, params };
   }
 }
+
+export const metaReducers: MetaReducer[] = [hydrationMetaReducer];

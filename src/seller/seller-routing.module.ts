@@ -32,6 +32,7 @@ const routes: Routes = [
   },
   { path: 'signup', component: Components.SignupComponent },
   { path: 'choose-bakery', component: Components.ChooseBakeryComponent },
+  { path: 'login', component: Components.LoginComponent },
 ];
 
 @NgModule({

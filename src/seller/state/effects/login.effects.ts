@@ -6,7 +6,7 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 import { AuthService } from '../../../app/services/auth.service';
 import { of } from 'rxjs';
 
-import * as fromAuth from '../../../auth/state';
+import * as fromRoot from '../../../app/state';
 
 @Injectable()
 export class LoginEffects {
@@ -17,12 +17,10 @@ export class LoginEffects {
     this.actions$.pipe(
       ofType(loginAction.LOGIN),
       switchMap((action: loginAction.Login) => {
-        return this.authService
-          .login(action.payload.email, action.payload.password)
-          .pipe(
-            map((response) => new loginAction.LoginSuccess(response)),
-            catchError((error) => of(new loginAction.LoginFail(error)))
-          );
+        return this.authService.login(action.payload).pipe(
+          map((response) => new loginAction.LoginSuccess(response)),
+          catchError((error) => of(new loginAction.LoginFail(error)))
+        );
       })
     )
   );
@@ -31,13 +29,12 @@ export class LoginEffects {
   loginSuccess$ = this.actions$.pipe(
     ofType(loginAction.LOGIN_SUCCESS),
     map((action: loginAction.LoginSuccess) => action.payload),
-    map((authResponse) => new fromAuth.SetAuthenticated(authResponse))
+    map((authResponse) => new fromRoot.Go({ path: ['seller/my-items'] }))
   );
 
-  @Effect()
+  @Effect({ dispatch: false })
   loginFail$ = this.actions$.pipe(
     ofType(loginAction.LOGIN_FAIL),
-    map((action: loginAction.LoginFail) => action.payload),
-    map(() => new fromAuth.SetNotAuthenticated())
+    map((action: loginAction.LoginFail) => action.payload)
   );
 }

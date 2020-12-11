@@ -1,3 +1,4 @@
+import { LoginInfo } from './../../models/loginInfo.model';
 import { User } from './../../models/user.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -11,11 +12,8 @@ import * as urls from '../../urls';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(urls.usersUrls.Post.loginUrl, {
-      email,
-      password,
-    });
+  login(info: LoginInfo): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(urls.usersUrls.Post.loginUrl, info);
   }
 
   checkAuthenticated() {

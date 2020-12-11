@@ -8,38 +8,22 @@ import {
 import { Observable } from 'rxjs';
 import { tap, filter, take, switchMap, catchError } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import * as fromAuth from '../../auth/state';
+import * as fromSeller from '../state';
 import * as fromRoot from '../../app/state';
-import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private store: Store<fromAuth.AuthState>) {}
+  constructor(private store: Store<fromSeller.SellerState>) {}
 
   canActivate(): Observable<boolean> {
-    let token = localStorage.getItem('toke');
-    return this.checkStoreAuthentication().pipe(
-      switchMap((authenticated) => {
-        if (authenticated) {
-          return of(true);
+    return this.store.select(fromSeller.getLoggedIn).pipe(
+      tap((loggedIn) => {
+        if (!loggedIn) {
+          this.store.dispatch(new fromRoot.Go({ path: ['seller/login'] }));
         }
-        if (token) {
-          return of(true);
-        }
-        this.store.dispatch(new fromRoot.Go({ path: ['login'] }));
-        return of(false);
       })
     );
-    if (token == undefined) {
-      this.store.dispatch(new fromRoot.Go({ path: ['login'] }));
-      return of(false);
-    }
-    return of(true);
-  }
-
-  checkStoreAuthentication() {
-    return this.store.select(fromAuth.getAuthState).pipe(take(1));
   }
 }
