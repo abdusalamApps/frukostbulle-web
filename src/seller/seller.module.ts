@@ -1,25 +1,28 @@
-import { StoreModule } from '@ngrx/store';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SellerRoutingModule } from './seller-routing.module';
+import {StoreModule} from '@ngrx/store';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {SellerRoutingModule} from './seller-routing.module';
 
 // Components
 import * as Components from './components';
 
 // Material Modules
-import { materialModules } from '../material-modules';
+import {materialModules} from '../material-modules';
 
 // Google maps
-import { AgmCoreModule } from '@agm/core';
+import {AgmCoreModule} from '@agm/core';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import * as fromGuards from './guards';
 
-import { reducers, effects } from '../seller/state';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from 'src/environments/environment';
-import { EffectsModule } from '@ngrx/effects';
+import {reducers, effects} from '../seller/state';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from 'src/environments/environment';
+import {EffectsModule} from '@ngrx/effects';
+import {commonModules} from '../common-modules';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TokenInterceptor} from '../app/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,16 @@ import { EffectsModule } from '@ngrx/effects';
       logOnly: environment.production,
     }),
     EffectsModule.forFeature(effects),
+    ...commonModules
   ],
-  providers: [...fromGuards.guards],
+  providers: [
+    ...fromGuards.guards,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
 })
-export class SellerModule {}
+export class SellerModule {
+}

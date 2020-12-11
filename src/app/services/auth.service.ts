@@ -1,5 +1,4 @@
-import { LoginInfo } from './../../models/loginInfo.model';
-import { User } from './../../models/user.model';
+import { LoginInfo } from '../../models/loginInfo.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -16,10 +15,4 @@ export class AuthService {
     return this.http.post<AuthResponse>(urls.usersUrls.Post.loginUrl, info);
   }
 
-  checkAuthenticated() {
-    let email = localStorage.getItem('email');
-    return this.http.get<User>(
-      `${urls.usersUrls.Get.getUserByEmailUrl}${email}`
-    );
-  }
 }

@@ -1,25 +1,27 @@
-import { materialModules } from './../material-modules';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {materialModules} from './../material-modules';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {
   StoreRouterConnectingModule,
   RouterStateSerializer,
 } from '@ngrx/router-store';
 
 // Components
-import { LandingComponent } from './components/landing/landing.component';
+import {LandingComponent} from './components/landing/landing.component';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './components/root/app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AgmCoreModule } from '@agm/core';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './components/root/app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AgmCoreModule} from '@agm/core';
+import {StoreModule} from '@ngrx/store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
+import {EffectsModule} from '@ngrx/effects';
 import {reducers, CustomSerializer, metaReducers} from './state';
-import { effects } from './state/effects';
-import { commonModules } from '../common-modules';
+import {effects} from './state/effects';
+import {commonModules} from '../common-modules';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TokenInterceptor} from './token.interceptor';
 
 @NgModule({
   declarations: [AppComponent, LandingComponent],
@@ -41,7 +43,18 @@ import { commonModules } from '../common-modules';
     ...materialModules,
     ...commonModules,
   ],
-  providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
+  providers: [
+    {
+      provide: RouterStateSerializer,
+      useClass: CustomSerializer
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

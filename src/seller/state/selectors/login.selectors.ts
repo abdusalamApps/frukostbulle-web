@@ -1,6 +1,6 @@
-import { createSelector } from '@ngrx/store';
+import {createSelector} from '@ngrx/store';
 import * as fromRoot from '../../state';
-import { AuthResponse } from '../../../models/authResponse.model';
+import {AuthResponse} from '../../../models/authResponse.model';
 import * as fromFeature from '../reducers';
 import * as fromLogin from '../reducers/login.reducer';
 
@@ -12,7 +12,4 @@ export const getLoginState = createSelector(
 export const getPending = createSelector(getLoginState, fromLogin.getPending);
 export const getLoggedIn = createSelector(getLoginState, fromLogin.getLoggedIn);
 
-export const getAuthResponse = createSelector(
-  getLoginState,
-  fromLogin.getAuthResponse
-);
+export const getAuthResponse = createSelector(getLoginState, fromLogin.getAuthResponse);
