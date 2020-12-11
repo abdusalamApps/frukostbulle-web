@@ -16,7 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import * as fromGuards from './guards';
 
-import { reducers } from './state';
+import { reducers, effects } from '../seller/state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
@@ -54,7 +54,7 @@ import { EffectsModule } from '@ngrx/effects';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forFeature(),
+    EffectsModule.forFeature(effects),
   ],
   providers: [...fromGuards.guards],
 })

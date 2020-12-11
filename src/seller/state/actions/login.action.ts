@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { AuthResponse } from './../../../models/loginResponse.model';
+import { AuthResponse } from './../../../models/authResponse.model';
 
 export const LOGIN = '[Login] Login';
 export const LOGIN_SUCCESS = '[Login] Login Success';

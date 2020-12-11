@@ -1,3 +1,5 @@
+import { createFeatureSelector } from '@ngrx/store';
+
 import { AuthResponse } from '../../../models/authResponse.model';
 import * as fromAuth from '../actions/auth.actions';
 
@@ -24,19 +26,39 @@ export function reducer(
         authResponse: response,
       };
     }
-    case fromAuth.SET_NOT_AUTHINTICATED:
+    case fromAuth.SET_NOT_AUTHINTICATED: {
+      return {
+        ...state,
+        isAuthenticated: false,
+        authResponse: null,
+      };
+    }
+    case fromAuth.CHECK_AUTHINTICATED: {
+      return {
+        ...state,
+      };
+    }
+    case fromAuth.CHECK_AUTHINTICATED_SUCCESS:
+      {
+        return {
+          ...state,
+          isAuthenticated: true,
+        };
+      }
+      return state;
+    case fromAuth.CHECK_AUTHINTICATED_FAIL:
       {
         return {
           ...state,
           isAuthenticated: false,
-          authResponse: null,
         };
       }
       return state;
   }
 }
 
-export const getAuthState = (state: AuthState) => state;
+export const getAuthState = createFeatureSelector<AuthState>('auth');
+
 export const getAuthenticated = (state: AuthState) => state.isAuthenticated;
 export const getAuthResponse = (state: AuthState) => state.authResponse;
 export const getToken = (state: AuthState) => state.authResponse?.Authorization;

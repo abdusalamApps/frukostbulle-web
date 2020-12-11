@@ -8,7 +8,6 @@ import {
 
 // Components
 import { LandingComponent } from './components/landing/landing.component';
-import { LoginComponent } from './components/login/login.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/root/app.component';
@@ -20,10 +19,12 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, CustomSerializer } from './state';
 import { effects } from './state/effects/index';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { commonModules } from '../common-modules';
+
+import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent, LoginComponent],
+  declarations: [AppComponent, LandingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,8 +41,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(),
     ...materialModules,
-    FormsModule,
-    ReactiveFormsModule,
+    ...commonModules,
+    AuthModule,
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
   bootstrap: [AppComponent],

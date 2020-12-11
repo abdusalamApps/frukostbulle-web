@@ -1,4 +1,4 @@
-import { AuthResponse } from './../../../models/loginResponse.model';
+import { AuthResponse } from './../../../models/authResponse.model';
 import * as fromLogin from './../actions/login.action';
 
 export interface LoginState {

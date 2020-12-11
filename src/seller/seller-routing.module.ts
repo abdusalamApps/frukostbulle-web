@@ -8,7 +8,11 @@ const routes: Routes = [
     path: '',
     component: Components.RootComponent,
     children: [
-      { path: '', component: Components.MyItemsComponent },
+      {
+        path: '',
+        component: Components.MyItemsComponent,
+        canActivate: [fromGuards.AuthGuard],
+      },
       { path: 'item-editor', component: Components.ItemEditorComponent },
       {
         path: 'my-items',
