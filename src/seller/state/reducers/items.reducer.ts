@@ -3,7 +3,7 @@ import * as itemActions from '../actions/items.action';
 
 
 export interface ItemState {
-  entities: { [id: number]: Item};
+  entities: { [id: number]: Item };
   itemsLoaded: boolean;
   itemsLoading: boolean;
 }
@@ -48,10 +48,29 @@ export function reducer(
         }
       );
       return {
+        // ...state,
         itemsLoading: false,
         itemsLoaded: true,
-        entities: items,
+        entities: entities,
       };
+    }
+    case itemActions.INSERT_ITEM_SUCCESS: {
+      const item = action.payload;
+      const entities = {
+        ...state.entities,
+        [item.itemId]: item,
+      };
+      return {
+        ...state,
+        entities
+      };
+    }
+    case itemActions.DELETE_ITEM_SUCCESS: {
+      const {[action.payload]: deleted, ...entities} = state.entities;
+      return {
+        ...state,
+        entities
+      }
     }
     default:
       return state;

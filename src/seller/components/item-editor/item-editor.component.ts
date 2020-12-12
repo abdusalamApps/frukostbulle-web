@@ -29,6 +29,8 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
   price = 0;
   imageSrc = 'assets/img/product-placeholder.png';
 
+  itemId = -1;
+
   nameControl = new FormControl(Validators.name, Validators.required);
   priceControl = new FormControl(Validators.required);
 
@@ -55,6 +57,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
           this.name = item.itemName;
           this.price = item.price;
           this.imageSrc = item.imageUrl ? item.imageUrl : 'assets/img/product-placeholder.png';
+          this.itemId = item.itemId;
         }
       })
     );
@@ -87,5 +90,8 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
     this.rootStore.dispatch(new fromRoot.Back());
   }
 
+  onDelete() {
+    this.store.dispatch(new fromState.DeleteItem(this.itemId))
+  }
 
 }

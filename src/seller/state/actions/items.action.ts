@@ -10,9 +10,9 @@ export const INSERT_ITEM = '[Seller] Insert Item';
 export const INSERT_ITEM_SUCCESS = '[Seller] Insert Item Success';
 export const INSERT_ITEM_FAIL = '[Seller] Insert Item Fail';
 
-export const REMOVE_ITEM = '[Seller] Remove Item';
-export const REMOVE_ITEM_SUCCESS = '[Seller] Remove Item Success';
-export const REMOVE_ITEM_FAIL = '[Seller] Remove Item Fail';
+export const DELETE_ITEM = '[Seller] Delete Item';
+export const DELETE_ITEM_SUCCESS = '[Seller] Delete Item Success';
+export const DELETE_ITEM_FAIL = '[Seller] Delete Item Fail';
 
 
 export class LoadItems implements Action {
@@ -45,6 +45,8 @@ export class InsertItem implements Action {
 
 export class InsertItemSuccess implements Action {
   readonly type = INSERT_ITEM_SUCCESS;
+  constructor(public payload: Item) {
+  }
 }
 
 export class InsertItemFail implements Action {
@@ -54,19 +56,21 @@ export class InsertItemFail implements Action {
   }
 }
 
-export class RemoveItem implements Action {
-  readonly type = REMOVE_ITEM;
+export class DeleteItem implements Action {
+  readonly type = DELETE_ITEM;
 
-  constructor(public payload: Item) {
+  constructor(public payload: number) {
   }
 }
 
-export class RemoveItemSuccess implements Action {
-  readonly type = REMOVE_ITEM_SUCCESS;
+export class DeleteItemSuccess implements Action {
+  readonly type = DELETE_ITEM_SUCCESS;
+  constructor(public payload: number) {
+  }
 }
 
-export class RemoveItemFail implements Action {
-  readonly type = REMOVE_ITEM_FAIL;
+export class DeleteItemFail implements Action {
+  readonly type = DELETE_ITEM_FAIL;
 
   constructor(public payload: any) {
   }
@@ -81,6 +85,6 @@ export type ItemsAction =
   | InsertItem
   | InsertItemSuccess
   | InsertItemFail
-  | RemoveItem
-  | RemoveItemSuccess
-  | RemoveItemFail;
+  | DeleteItem
+  | DeleteItemSuccess
+  | DeleteItemFail;

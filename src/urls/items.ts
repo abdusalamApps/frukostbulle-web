@@ -10,5 +10,5 @@ export namespace Get {
 export namespace Post {
   export const insertItemUrl = `${baseUrl}/insert-item`;
   export const updateItemUrl = `${baseUrl}/update-item`;
-  export const deleteItemUrl = `${baseUrl}/delete-item`;
+  export const deleteItemUrl = `${baseUrl}/delete-item?itemId=`;
 }

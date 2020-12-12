@@ -27,4 +27,9 @@ export class ItemsService {
     console.log(`on insertItem()@ItemsService`)
     return this.http.post<any>(`${urls.itemsUrls.Post.insertItemUrl}`, item);
   }
+
+  deleteItem(itemId: number) {
+    console.log(`itemId in deleteItem()@ItemsService: ${itemId}`)
+    return this.http.post<any>(`${urls.itemsUrls.Post.deleteItemUrl}${itemId}`, {'itemId': itemId});
+  }
 }

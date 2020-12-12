@@ -31,7 +31,7 @@ export class ItemsEffects {
       ofType(itemActions.INSERT_ITEM),
       exhaustMap((action: itemActions.InsertItem) => {
         return this.itemsService.insertItem(action.payload).pipe(
-          map(() => new itemActions.InsertItemSuccess()),
+          map(() => new itemActions.InsertItemSuccess(action.payload)),
           catchError(error => of(new itemActions.InsertItemFail(error)))
         );
       })
@@ -45,7 +45,8 @@ export class ItemsEffects {
         this.snackBar.open('Sparat!', 'Ok', {duration: 1000});
         return of(new fromRoot.Back());
       })
-    ));
+    )
+  );
 
   insertItemFail$ = createEffect(() =>
       this.actions$.pipe(
@@ -56,4 +57,29 @@ export class ItemsEffects {
       ),
     {dispatch: false}
   );
+
+  deleteItem$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(itemActions.DELETE_ITEM),
+      exhaustMap((action: itemActions.DeleteItem) => {
+        return this.itemsService.deleteItem(action.payload).pipe(
+          map(() => new itemActions.DeleteItemSuccess(action.payload)),
+          catchError(error => of(new itemActions.DeleteItemFail(error)))
+        );
+      })
+    )
+  );
+
+  deleteItemSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(itemActions.DELETE_ITEM_SUCCESS),
+      exhaustMap((action: itemActions.DeleteItemSuccess) => {
+        return of(new fromRoot.Back());
+      })
+    )
+  );
+
+
+
+
 }
