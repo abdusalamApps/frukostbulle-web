@@ -1,39 +1,43 @@
 <mat-toolbar class="toolbar" color="primary">
+  <mat-icon class="back-icon" (click)="onCancel()">arrow_back</mat-icon>
   <span class="spacer"></span>
-  <span>{{ title }}</span>
+  <span>{{ (itemObservable$ | async) ? 'Redigera bulle' : 'Ny bulle' }}</span>
 </mat-toolbar>
 
 <div class="container">
 
-  <div class="form-container">
-
-    <mat-form-field hintLabel="Vad heter frallan?" appearance="fill">
-      <mat-label>Namn</mat-label>
-      <input matInput placeholder="Ex. kaffebulle" [(ngModel)]="name">
-    </mat-form-field>
-
-    <mat-form-field hintLabel="Hur mycket vill du sälja den för?" appearance="fill">
-      <mat-label>Pris</mat-label>
-      <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="price"  class="right-align">
-      <span matSuffix>kr</span>
-    </mat-form-field>
-
+  <mat-card>
     <label class="image-chooser">
       <input id="image-input" type="file" accept="image/*" (change)="chooseImage($event)">
       <img alt="product image" src="{{this.imageSrc}}">
     </label>
 
-  </div>
+    <div class="form-container">
+      <mat-form-field hintLabel="Vad heter frallan?" appearance="fill">
+        <mat-label>Namn</mat-label>
+        <input matInput placeholder="Ex. kaffebulle"
+               [(ngModel)]="name">
+      </mat-form-field>
 
-  <div class="buttons-container">
+      <mat-form-field hintLabel="Hur mycket vill du sälja den för?" appearance="fill">
+        <mat-label>Pris</mat-label>
+        <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="price" class="right-align">
+        <span matSuffix>kr</span>
+      </mat-form-field>
+    </div>
 
-    <button routerLinkActive="active" mat-button class="text-button"
-            (click)="location.back()">
-      AVBRYT
-    </button>
-    <button mat-raised-button color="accent"
-            (click)="onSave()">
-      SPARA
-    </button>
-  </div>
+    <div class="buttons-container">
+
+      <button routerLinkActive="active" mat-button class="text-button"
+              (click)="onCancel()">
+        AVBRYT
+      </button>
+      <button mat-raised-button color="accent"
+              (click)="onSave()">
+        SPARA
+      </button>
+    </div>
+
+  </mat-card>
+
 </div>

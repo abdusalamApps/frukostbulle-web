@@ -10,11 +10,14 @@
   }
   img {
     object-fit: scale-down;
-    margin: 3em 0 3em 0;
     align-self: center;
     justify-self: center;
     height: 300px;
-    width: 300px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0.5em;
+    background-color: #e8e8e8;
   }
 }
 
@@ -26,4 +29,9 @@ input.right-align::-webkit-inner-spin-button {
 
 input.right-align {
   -moz-appearance: textfield;
+}
+
+.form-container {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }

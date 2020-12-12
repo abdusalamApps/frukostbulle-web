@@ -14,7 +14,6 @@ const routes: Routes = [
         canActivate: [fromGuards.AuthGuard],
       },
       { path: 'items/new', component: Components.ItemEditorComponent },
-      { path: 'items/:id', component: Components.ItemEditorComponent },
       {
         path: 'items',
         component: Components.MyItemsComponent,
@@ -29,6 +28,8 @@ const routes: Routes = [
       { path: 'choos-days', component: Components.ChooseDaysComponent },
       { path: 'send-to-bakery', component: Components.SendToBakeryComponent },
       { path: 'map', component: Components.MapComponent },
+      { path: 'items/:itemId', component: Components.ItemEditorComponent },
+
     ],
   },
   { path: 'signup', component: Components.SignupComponent },

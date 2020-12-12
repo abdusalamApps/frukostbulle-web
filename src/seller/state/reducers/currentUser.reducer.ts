@@ -46,7 +46,7 @@ export function reducer(
   }
 }
 
-export const getCurrentUser = (state: CurrentUserState) => state;
+export const getCurrentUser = (state: CurrentUserState) => state.currentUser;
 export const getCurrentUserId = (state: CurrentUserState) => state.currentUser?.id;
 export const getCurrentUserName = (state: CurrentUserState) => state.currentUser?.name;
 export const getCurrentUserCounty = (state: CurrentUserState) => state.currentUser?.county;

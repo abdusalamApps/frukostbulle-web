@@ -48,10 +48,9 @@ export function reducer(
         }
       );
       return {
-        ...state,
         itemsLoading: false,
         itemsLoaded: true,
-        entities,
+        entities: items,
       };
     }
     default:

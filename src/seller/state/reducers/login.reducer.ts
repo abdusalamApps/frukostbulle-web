@@ -1,6 +1,6 @@
 import {AuthResponse} from '../../../models/authResponse.model';
 import * as fromLogin from './../actions/login.action';
-
+import * as constants from 'src/constants';
 export interface LoginState {
   pending: boolean;
   loggedIn: boolean;
@@ -48,6 +48,6 @@ export function reducer(
 
 export const getAuthResponse = (state: LoginState) => state.response;
 export const getPending = (state: LoginState) => state.pending;
-export const getLoggedIn = (state: LoginState) => state.loggedIn;
+export const getLoggedIn = (state: LoginState) => state.loggedIn && state.response?.roles === constants.ROLE_SELLER;
 export const getToken = (state: LoginState) => state.response?.Authorization;
 export const getAuthEmail = (state: LoginState) => state.response?.email;

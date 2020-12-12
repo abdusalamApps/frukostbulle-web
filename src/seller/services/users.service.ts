@@ -13,6 +13,8 @@ export class UsersService {
   }
 
   getUserByEmail(email: string): Observable<User> {
-    return this.http.get<User>(`${urls.usersUrls.Get.getUserByEmailUrl}${email}`);
+    let jsonString = JSON.stringify(email);
+    let e = jsonString.substring(12, jsonString.search(',')-1);
+    return this.http.get<User>(urls.usersUrls.Get.getUserByEmailUrl + e);
   }
 }

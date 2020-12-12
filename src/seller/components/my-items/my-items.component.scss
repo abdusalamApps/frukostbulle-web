@@ -5,6 +5,17 @@
 }
 
   .grid-img {
+    object-fit: scale-down;
     height: 100px;
   }
+.fab {
+  position: fixed;
+  bottom: 4em;
+  right: 0;
+  margin-right: 1em;
+  justify-self: end;
+  align-self: end;
+  color: white;
+  font-size: large;
+}
 

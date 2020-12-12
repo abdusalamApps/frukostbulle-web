@@ -11,7 +11,7 @@
       <div class="img-container">
         <img mat-card-image
              class="grid-img"
-             src="{{ item.imageUrl == null ? 'assets/img/bread.svg' : item.imageUrl }}"
+             src="{{ item.imageUrl == null ? 'assets/img/no-image.png' : item.imageUrl }}"
              alt="product-image-placeholder"
         />
       </div>
@@ -20,3 +20,6 @@
     </mat-card>
 
 </div>
+<button class="fab" mat-fab color="accent" routerLink="/seller/items/new">
+  <mat-icon>add</mat-icon>
+</button>

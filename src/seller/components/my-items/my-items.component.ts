@@ -5,6 +5,8 @@ import {Store} from '@ngrx/store';
 import * as fromState from '../../state';
 import {tap} from 'rxjs/operators';
 import {AuthResponse} from '../../../models/authResponse.model';
+import * as fromRoot from 'src/app/state';
+
 @Component({
   selector: 'app-my-items',
   templateUrl: './my-items.component.html',
@@ -20,7 +22,8 @@ export class MyItemsComponent implements OnInit {
 
   email$: Observable<AuthResponse>= new Observable<AuthResponse>();
 
-  constructor(private store: Store<fromState.SellerState>) {}
+  constructor(private store: Store<fromState.SellerState>,
+              private rootStore: Store<fromRoot.State>) {}
 
   ngOnInit(): void {
     this.store.select(fromState.getAuthEmail).subscribe(

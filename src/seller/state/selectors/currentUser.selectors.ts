@@ -9,6 +9,10 @@ export const getCurrentUserState = createSelector(
   (state: fromFeature.SellerState) => state.currentUser
 );
 
+export const getCurrentUser = createSelector(
+  getCurrentUserState,
+  fromCurrentUser.getCurrentUser
+)
 export const getCurrentUserId = createSelector(
   getCurrentUserState,
   fromCurrentUser.getCurrentUserId

@@ -1,13 +1,11 @@
-export class Item {
-  itemId: number;
+export class InsertItem {
   sellerId: number;
   sellerEmail: string;
   price: number;
   itemName: string;
   imageUrl: string;
 
-  constructor(itemId: number, sellerId: number, sellerEmail: string, price: number, itemName: string, imageUrl: string) {
-    this.itemId = itemId;
+  constructor(sellerId: number, sellerEmail: string, price: number, itemName: string, imageUrl: string) {
     this.sellerId = sellerId;
     this.sellerEmail = sellerEmail;
     this.price = price;

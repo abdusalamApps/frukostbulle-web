@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { Effect, Actions, createEffect, ofType } from '@ngrx/effects';
+import {Effect, Actions, createEffect, ofType} from '@ngrx/effects';
 import * as loginAction from '../actions/login.action';
-import { map, switchMap, catchError } from 'rxjs/operators';
-import { AuthService } from '../../../app/services/auth.service';
-import { of } from 'rxjs';
+import {map, switchMap, catchError} from 'rxjs/operators';
+import {AuthService} from '../../../app/services/auth.service';
+import {of} from 'rxjs';
 
 import * as fromRoot from '../../../app/state';
-import * as userActions from '../actions/currentUser.action'
+import * as userActions from '../actions/currentUser.action';
 
 @Injectable()
 export class LoginEffects {
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(private actions$: Actions, private authService: AuthService) {
+  }
 
   @Effect()
   login$ = createEffect(() =>
@@ -29,12 +30,16 @@ export class LoginEffects {
   @Effect()
   loginSuccess$ = this.actions$.pipe(
     ofType(loginAction.LOGIN_SUCCESS),
-    map((action: loginAction.LoginSuccess) => action.payload),
-    map((authResponse) => new userActions.LoadCurrentUser(authResponse.email)),
-    map((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
+    switchMap((action: loginAction.LoginSuccess) => [
+      // console.log(`paylod@LoginSuccess: ${action.payload.email}`);
+      new userActions.LoadCurrentUser(action.payload.email),
+      new fromRoot.Go({ path: ['seller/items'] })
+      ]),
+    // map((authResponse) => new userActions.LoadCurrentUser(authResponse)),
+    // map((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
   );
 
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   loginFail$ = this.actions$.pipe(
     ofType(loginAction.LOGIN_FAIL),
     map((action: loginAction.LoginFail) => action.payload)

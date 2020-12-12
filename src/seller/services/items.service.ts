@@ -22,4 +22,9 @@ export class ItemsService {
   getSellerItems(email: string | undefined): Observable<Item[]> {
     return this.http.get<Item[]>(`${urls.itemsUrls.Get.getItemBySellerEmail}${email}`);
   }
+
+  insertItem(item: Item) {
+    console.log(`on insertItem()@ItemsService`)
+    return this.http.post<any>(`${urls.itemsUrls.Post.insertItemUrl}`, item);
+  }
 }

@@ -8,13 +8,16 @@ export const LOAD_CURRENT_USER_FAIL = '[Current User] Load Current User Fail';
 export class LoadCurrentUser implements Action {
   readonly type = LOAD_CURRENT_USER;
   // payload == current user's email
-  constructor(public payload: string) {}
+  constructor(public payload: string) {
+    console.log(`LoadCurrentUser@UserActions invoked`)
+  }
 }
 
 export class LoadCurrentUserSuccess implements Action {
   readonly type = LOAD_CURRENT_USER_SUCCESS;
 
-  constructor(public payload: User) {}
+  constructor(public payload: User) {    console.log(`LoadCurrentUserSuccess@UserActions invoked`)
+  }
 }
 
 export class LoadCurrentUserFail implements Action {
