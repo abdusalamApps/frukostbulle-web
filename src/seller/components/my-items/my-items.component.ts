@@ -28,24 +28,10 @@ export class MyItemsComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(fromState.getAuthEmail).subscribe(
       email => {
-/*
-        let respString= JSON.stringify(resp);
-        console.log(respString.search("user"));
-        let userString = respString.substring(respString.search("user"));
-        console.log(`userString: ${userString}`)
-        let userJSONObject = JSON.parse( '{"' + userString)
-        let email = userJSONObject.Username;
-        console.log(`email: ${email}`)
-        console.log(JSON.parse(JSON.stringify(resp)))
-*/
         console.log(`email in subscribe ${email}`)
         this.store.dispatch(new fromState.LoadItems(email));
       }
     );
-/*
-    console.log('email in my-items.comp: ' + this.email);
-    this.store.dispatch(new fromState.LoadItems(this.email));
-*/
     this.items$ = this.store.select(fromState.getAllItems);
     this.loading$ = this.store.select(fromState.getItemsLoading);
     this.loaded$ = this.store.select(fromState.getItemsLoaded);
