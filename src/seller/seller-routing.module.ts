@@ -13,10 +13,10 @@ const routes: Routes = [
         component: Components.MyItemsComponent,
         canActivate: [fromGuards.AuthGuard],
       },
-      { path: 'item-editor', component: Components.ItemEditorComponent },
-      { path: 'item-editor/:id', component: Components.ItemEditorComponent },
+      { path: 'items/new', component: Components.ItemEditorComponent },
+      { path: 'items/:id', component: Components.ItemEditorComponent },
       {
-        path: 'my-items',
+        path: 'items',
         component: Components.MyItemsComponent,
         canActivate: [fromGuards.AuthGuard],
       },

@@ -6,7 +6,7 @@
   <div class="grid-container">
     <mat-card class="grid-item"
       mat-ripple *ngFor="let item of items$ | async"
-      [routerLink]="['/seller/item-editor', item.itemId]"
+      [routerLink]="['/seller/items', item.itemId]"
     >
       <div class="img-container">
         <img mat-card-image
