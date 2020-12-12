@@ -80,8 +80,9 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
     console.log(`onSave()@ItemEditor`);
     this.store.select(fromState.getCurrentUser).subscribe(
       currentUser => {
+        let imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
         if (currentUser) {
-          let newItem = new Item(0, currentUser.id, currentUser.email, this.price, this.name, this.imageSrc);
+          let newItem = new Item(0, currentUser.id, currentUser.email, this.price, this.name, imageUrl);
           this.store.dispatch(new fromState.InsertItem(newItem));
         }
       }

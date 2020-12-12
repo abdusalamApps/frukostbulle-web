@@ -51,7 +51,7 @@ export function reducer(
         // ...state,
         itemsLoading: false,
         itemsLoaded: true,
-        entities: entities,
+        entities,
       };
     }
     case itemActions.INSERT_ITEM_SUCCESS: {
