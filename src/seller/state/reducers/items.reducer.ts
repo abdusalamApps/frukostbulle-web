@@ -54,6 +54,7 @@ export function reducer(
         entities,
       };
     }
+    case itemActions.UPDATE_ITEM_SUCCESS:
     case itemActions.INSERT_ITEM_SUCCESS: {
       const item = action.payload;
       const entities = {

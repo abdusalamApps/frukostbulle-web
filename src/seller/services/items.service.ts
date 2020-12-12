@@ -28,6 +28,10 @@ export class ItemsService {
     return this.http.post<any>(`${urls.itemsUrls.Post.insertItemUrl}`, item);
   }
 
+  updateItem(item: Item) {
+    return this.http.post<any>(`${urls.itemsUrls.Post.updateItemUrl}`, item);
+  }
+
   deleteItem(itemId: number) {
     console.log(`itemId in deleteItem()@ItemsService: ${itemId}`)
     return this.http.post<any>(`${urls.itemsUrls.Post.deleteItemUrl}${itemId}`, {'itemId': itemId});

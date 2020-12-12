@@ -40,8 +40,8 @@ export class ItemsEffects {
 
   insertItemSuccess$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(itemActions.INSERT_ITEM_SUCCESS),
-      switchMap((action: itemActions.InsertItemSuccess) => {
+      ofType(itemActions.INSERT_ITEM_SUCCESS, itemActions.UPDATE_ITEM_SUCCESS),
+      switchMap((action: itemActions.InsertItemSuccess | itemActions.UpdateItemSuccess) => {
         this.snackBar.open('Sparat!', 'Ok', {duration: 1000});
         return of(new fromRoot.Back());
       })
@@ -50,13 +50,26 @@ export class ItemsEffects {
 
   insertItemFail$ = createEffect(() =>
       this.actions$.pipe(
-        ofType(itemActions.INSERT_ITEM_FAIL),
-        switchMap((action: itemActions.InsertItemFail) => {
+        ofType(itemActions.INSERT_ITEM_FAIL, itemActions.UPDATE_ITEM_FAIL),
+        switchMap((action: itemActions.InsertItemFail | itemActions.UpdateItemFail) => {
           return of(this.snackBar.open('Fel! Försök igen senare', 'Ok', {duration: 2000}));
         }),
       ),
     {dispatch: false}
   );
+
+  updateItem$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(itemActions.UPDATE_ITEM),
+      exhaustMap((action: itemActions.UpdateItem) => {
+        return this.itemsService.updateItem(action.payload).pipe(
+          map(() => new itemActions.UpdateItemSuccess(action.payload)),
+          catchError(error => of(new itemActions.UpdateItemFail(error)))
+        );
+      })
+    )
+  );
+
 
   deleteItem$ = createEffect(() =>
     this.actions$.pipe(
@@ -74,11 +87,21 @@ export class ItemsEffects {
     this.actions$.pipe(
       ofType(itemActions.DELETE_ITEM_SUCCESS),
       exhaustMap((action: itemActions.DeleteItemSuccess) => {
+        this.snackBar.open('Borttagen!', 'Ok', {duration: 1000});
         return of(new fromRoot.Back());
       })
     )
   );
 
+  deleteItemFail$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(itemActions.DELETE_ITEM_FAIL),
+      switchMap((action: itemActions.DeleteItemFail) => {
+        this.snackBar.open('Fel! Försök igen senare!', 'Ok', {duration: 1000});
+        return of(new fromRoot.Back());
+      })
+    )
+  );
 
 
 

@@ -10,6 +10,10 @@ export const INSERT_ITEM = '[Seller] Insert Item';
 export const INSERT_ITEM_SUCCESS = '[Seller] Insert Item Success';
 export const INSERT_ITEM_FAIL = '[Seller] Insert Item Fail';
 
+export const UPDATE_ITEM = '[Seller] Update Item';
+export const UPDATE_ITEM_SUCCESS = '[Seller] Update Item Success';
+export const UPDATE_ITEM_FAIL = '[Seller] Update Item Fail';
+
 export const DELETE_ITEM = '[Seller] Delete Item';
 export const DELETE_ITEM_SUCCESS = '[Seller] Delete Item Success';
 export const DELETE_ITEM_FAIL = '[Seller] Delete Item Fail';
@@ -56,6 +60,27 @@ export class InsertItemFail implements Action {
   }
 }
 
+export class UpdateItem implements Action {
+  readonly type = UPDATE_ITEM;
+
+  constructor(public payload: Item) {
+  }
+}
+
+export class UpdateItemSuccess implements Action {
+  readonly type = UPDATE_ITEM_SUCCESS;
+  constructor(public payload: Item) {
+  }
+}
+
+export class UpdateItemFail implements Action {
+  readonly type = UPDATE_ITEM_FAIL;
+
+  constructor(public payload: any) {
+  }
+}
+
+
 export class DeleteItem implements Action {
   readonly type = DELETE_ITEM;
 
@@ -76,15 +101,9 @@ export class DeleteItemFail implements Action {
   }
 }
 
-
 // actions types
 export type ItemsAction =
-  | LoadItems
-  | LoadItemsFail
-  | LoadItemsSuccess
-  | InsertItem
-  | InsertItemSuccess
-  | InsertItemFail
-  | DeleteItem
-  | DeleteItemSuccess
-  | DeleteItemFail;
+  | LoadItems | LoadItemsFail | LoadItemsSuccess
+  | InsertItem | InsertItemSuccess | InsertItemFail
+  | UpdateItem | UpdateItemSuccess | UpdateItemFail
+  | DeleteItem | DeleteItemSuccess | DeleteItemFail;

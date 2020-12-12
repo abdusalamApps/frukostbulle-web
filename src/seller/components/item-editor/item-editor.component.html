@@ -33,8 +33,12 @@
               (click)="onCancel()">
         AVBRYT
       </button>
-      <button mat-raised-button color="accent"
-              (click)="onSave()">
+      <button *ngIf="!(itemObservable$ | async)"
+              mat-raised-button color="accent" (click)="onSave()">
+        LÄGG TILL
+      </button>
+      <button *ngIf="!!(itemObservable$ | async)"
+              mat-raised-button color="accent" (click)="onUpdate()">
         SPARA
       </button>
     </div>
