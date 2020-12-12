@@ -31,7 +31,7 @@ export class LoginEffects {
     ofType(loginAction.LOGIN_SUCCESS),
     map((action: loginAction.LoginSuccess) => action.payload),
     map((authResponse) => new userActions.LoadCurrentUser(authResponse.email)),
-    map((authResponse) => new fromRoot.Go({ path: ['seller/my-items'] }))
+    map((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
   );
 
   @Effect({ dispatch: false })

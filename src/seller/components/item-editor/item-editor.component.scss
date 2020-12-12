@@ -1,0 +1,29 @@
+.image-chooser {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  #image-input {
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    height: 0;
+  }
+  img {
+    object-fit: scale-down;
+    margin: 3em 0 3em 0;
+    align-self: center;
+    justify-self: center;
+    height: 300px;
+    width: 300px;
+  }
+}
+
+
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.right-align {
+  -moz-appearance: textfield;
+}
