@@ -23,6 +23,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {commonModules} from '../common-modules';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../app/token.interceptor';
+import {DeleteDialog} from './components/item-editor/item-editor.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {TokenInterceptor} from '../app/token.interceptor';
     Components.SendToBakeryComponent,
     Components.LoginComponent,
     Components.WeekOrdersComponent,
+    DeleteDialog
   ],
   imports: [
     CommonModule,

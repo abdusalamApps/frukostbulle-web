@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormControl, Validators} from '@angular/forms';
@@ -13,6 +13,7 @@ import * as urls from '../../../urls';
 import {HttpClient} from '@angular/common/http';
 import {log} from 'util';
 import {ItemsService} from '../../services/items.service';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-item-editor',
@@ -41,7 +42,8 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
   constructor(
     private _snackBar: MatSnackBar,
     private store: Store<fromState.SellerState>,
-    private rootStore: Store<fromRoot.State>) {
+    private rootStore: Store<fromRoot.State>,
+    private dialog: MatDialog) {
   }
 
   ngOnDestroy(): void {
@@ -91,7 +93,34 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.store.dispatch(new fromState.DeleteItem(this.itemId))
+    const dialogRef = this.dialog.open(DeleteDialog, {
+      width: "250px",
+      data: {
+        store: this.store,
+        name: this.name,
+        id: this.itemId
+      }
+    });
+  }
+
+}
+
+@Component({
+  selector: 'delete-dialog',
+  templateUrl: 'delete-dialog.html',
+})
+export class DeleteDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DeleteDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: { store: Store, name: string, id: number }) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onYesClick(): void {
+    this.data.store.dispatch(new fromState.DeleteItem(this.data.id))
   }
 
 }
