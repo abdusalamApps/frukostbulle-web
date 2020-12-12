@@ -3,21 +3,20 @@
   <span>{{ title }}</span>
 </mat-toolbar>
 <mat-progress-spinner color="accent" class="spinner" *ngIf="(loading$ | async)"></mat-progress-spinner>
-<div class="container">
   <div class="grid-container">
-    <mat-card mat-ripple *ngFor="let item of items$ | async"
-      [routerLink]="['/seller/items', item.itemId]"
+    <mat-card class="grid-item"
+      mat-ripple *ngFor="let item of items$ | async"
+      [routerLink]="['/seller/item-editor', item.itemId]"
     >
       <div class="img-container">
         <img mat-card-image
              class="grid-img"
-             src="{{ item.imageUrl == null ? 'assets/img/fralla1.jpg' : item.imageUrl }}"
+             src="{{ item.imageUrl == null ? 'assets/img/bread.svg' : item.imageUrl }}"
              alt="product-image-placeholder"
         />
       </div>
       <mat-card-title>{{ item.itemName }}</mat-card-title>
       <mat-card-subtitle>{{ item.price }}:-</mat-card-subtitle>
     </mat-card>
-  </div>
 
 </div>

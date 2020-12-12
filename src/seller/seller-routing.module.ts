@@ -14,6 +14,7 @@ const routes: Routes = [
         canActivate: [fromGuards.AuthGuard],
       },
       { path: 'item-editor', component: Components.ItemEditorComponent },
+      { path: 'item-editor/:id', component: Components.ItemEditorComponent },
       {
         path: 'my-items',
         component: Components.MyItemsComponent,
