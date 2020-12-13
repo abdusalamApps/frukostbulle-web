@@ -41,7 +41,7 @@
     </mat-list-item>
 
     <mat-list-item mat-ripple role="listitem">
-      <h3 matLine>Mitt bageri - {{user ? user.associatedBakery : ''}}</h3>
+      <h3 matLine>{{user ? (user.associatedBakery ? user.associatedBakery : 'Välj bageri' ): ''}}</h3>
       <mat-icon>storefront</mat-icon>
       <mat-divider></mat-divider>
     </mat-list-item>
