@@ -1,4 +1,4 @@
-export { ItemEditorComponent, DeleteDialog } from './item-editor/item-editor.component';
+export { ItemEditorComponent } from './item-editor/item-editor.component';
 export { ChooseBakeryComponent } from './choose-bakery/choose-bakery.component';
 export { SignupComponent } from './signup/signup.component';
 export { ChooseDaysComponent } from './choose-days/choose-days.component';
@@ -14,4 +14,5 @@ export { SendToBakeryComponent } from './send-to-bakery/send-to-bakery.component
 export { LoginComponent } from './login/login.component';
 export { WeekOrdersComponent } from './week-orders/week-orders.component';
 export { UpdatePasswordComponent } from './update-password/update-password.component';
+export { ProfileCardComponent } from './profile/profile-card/profiel-card.component';
 

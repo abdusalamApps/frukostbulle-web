@@ -23,9 +23,9 @@ import {EffectsModule} from '@ngrx/effects';
 import {commonModules} from '../common-modules';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../app/token.interceptor';
+import {LogoutDialog} from './components/logout-dialog/logout-dialog.component';
 import {DeleteDialog} from './components/item-editor/item-editor.component';
 import {ProfileCardComponent} from './components/profile/profile-card/profiel-card.component';
-import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +45,7 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
     Components.LoginComponent,
     Components.WeekOrdersComponent,
     Components.UpdatePasswordComponent,
+    LogoutDialog,
     DeleteDialog,
     ProfileCardComponent,
   ],

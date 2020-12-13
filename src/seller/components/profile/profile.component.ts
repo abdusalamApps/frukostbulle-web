@@ -1,11 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {User} from '../../../models/user.model';
 import {Store} from '@ngrx/store';
 import * as fromState from '../../state';
 import * as fromRoot from '../../../app/state';
 import {Observable, of} from 'rxjs';
-import {MatDialog} from '@angular/material/dialog';
-import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +26,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private store: Store<fromState.SellerState>,
               private rootStore: Store<fromRoot.State>,
-              private dialog: MatDialog
+
   ) {
   }
 
@@ -56,8 +54,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onLogout() {
-    console.log(`onLogout `);
     this.store.dispatch(new fromState.Logout());
-    this.rootStore.dispatch(new fromRoot.Go({path: ['/seller/login']}));
   }
 }
