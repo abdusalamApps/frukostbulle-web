@@ -3,7 +3,7 @@
   <span>{{ title }}</span>
 </mat-toolbar>
 <mat-spinner color="accent" class="spinner" *ngIf="!!(loading$ | async)"></mat-spinner>
-<div *ngIf="items$ | async"></div>
+<div *ngIf="userId$ | async"></div>
 <div class="grid-container">
   <mat-card class="grid-item"
             mat-ripple *ngFor="let item of items$ | async"
