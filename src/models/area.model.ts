@@ -1,6 +1,6 @@
 interface Pos {
   lat: number;
-  lon: number;
+  lng: number;
 }
 
 export interface Area {

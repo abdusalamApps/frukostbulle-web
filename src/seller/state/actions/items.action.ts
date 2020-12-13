@@ -22,7 +22,7 @@ export const DELETE_ITEM_FAIL = '[Seller] Delete Item Fail';
 export class LoadItems implements Action {
   readonly type = LOAD_ITEMS;
 
-  constructor(public payload: string | undefined) {
+  constructor(public payload: number | undefined) {
   }
 }
 

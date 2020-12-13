@@ -19,12 +19,18 @@ export class ItemsService {
   constructor(private http: HttpClient, private store: Store<SellerState>) {
   }
 
-  getSellerItems(email: string | undefined): Observable<Item[]> {
+  getSellerItems(email: string | undefined ): Observable<Item[]> {
     return this.http.get<Item[]>(`${urls.itemsUrls.Get.getItemBySellerEmail}${email}`);
+
+  }
+
+  getSellerItemsById(id: number | undefined) {
+    return this.http.get<Item[]>(`${urls.itemsUrls.Get.getItemBySellerId}${id}`);
+
   }
 
   insertItem(item: Item) {
-    console.log(`on insertItem()@ItemsService`)
+    console.log(`on insertItem()@ItemsService`);
     return this.http.post<any>(`${urls.itemsUrls.Post.insertItemUrl}`, item);
   }
 
@@ -33,7 +39,7 @@ export class ItemsService {
   }
 
   deleteItem(itemId: number) {
-    console.log(`itemId in deleteItem()@ItemsService: ${itemId}`)
+    console.log(`itemId in deleteItem()@ItemsService: ${itemId}`);
     return this.http.post<any>(`${urls.itemsUrls.Post.deleteItemUrl}${itemId}`, {'itemId': itemId});
   }
 }

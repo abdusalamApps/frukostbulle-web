@@ -18,7 +18,7 @@ export class ItemsEffects {
     this.actions$.pipe(
       ofType(itemActions.LOAD_ITEMS),
       switchMap((action: itemActions.LoadItems) => {
-        return this.itemsService.getSellerItems(action.payload).pipe(
+        return this.itemsService.getSellerItemsById(action.payload).pipe(
           map((items) => new itemActions.LoadItemsSuccess(items)),
           catchError((error) => of(new itemActions.LoadItemsFail(error)))
         );

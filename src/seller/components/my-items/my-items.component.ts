@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Item } from 'src/models/item.model';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Item} from 'src/models/item.model';
 import {Store} from '@ngrx/store';
 import * as fromState from '../../state';
 import {tap} from 'rxjs/operators';
@@ -19,18 +19,22 @@ export class MyItemsComponent implements OnInit {
   items$: Observable<Item[]> = new Observable<[]>();
   loading$: Observable<boolean> = new Observable<boolean>();
   loaded$: Observable<boolean> = new Observable<boolean>();
-
-  email$: Observable<AuthResponse>= new Observable<AuthResponse>();
+  userId$ = new Observable();
+  email$: Observable<AuthResponse> = new Observable<AuthResponse>();
 
   constructor(private store: Store<fromState.SellerState>,
-              private rootStore: Store<fromRoot.State>) {}
+              private rootStore: Store<fromRoot.State>) {
+
+  }
 
   ngOnInit(): void {
-    this.store.select(fromState.getAuthEmail).subscribe(
-      email => {
-        console.log(`email in subscribe ${email}`)
-        this.store.dispatch(new fromState.LoadItems(email));
-      }
+    this.userId$ = this.store.select(fromState.getCurrentUserId).pipe(
+      tap(id => {
+        if (id) {
+          console.log(`userid: ${id}`);
+          this.store.dispatch(new fromState.LoadItems(id));
+        }
+      })
     );
     this.items$ = this.store.select(fromState.getAllItems);
     this.loading$ = this.store.select(fromState.getItemsLoading);

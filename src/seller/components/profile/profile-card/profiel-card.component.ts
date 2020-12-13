@@ -17,7 +17,7 @@ export class ProfileCardComponent {
     county:'',
     city: '',
     address: '',
-    mobilenbr: -1,
+    mobilenbr: '',
     email: '',
     password: '',
     permissionLevel: -1,

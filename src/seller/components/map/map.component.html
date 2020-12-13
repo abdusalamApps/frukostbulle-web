@@ -1,1 +1,28 @@
-<p>map works!</p>
+<mat-toolbar color="primary">
+  <span class="spacer"></span>
+  <mat-icon mat-ripple class="back-icon" (click)="navigateBack()">
+    arrow_back
+  </mat-icon>
+  <span>{{ title }}</span>
+  <span  class="toolbar-spacer"></span>
+  <mat-icon
+  *ngIf="pointList.length > 0"
+  (click)="deleteSelectedShape()">delete</mat-icon>
+</mat-toolbar>
+
+<div class="container">
+
+  <agm-map [zoom]="15" [latitude]="lat"
+           [longitude]="lng"
+           (mapReady)="onMapReady($event)">
+
+    <agm-marker [latitude]="lat" [longitude]="lng">
+
+    </agm-marker>
+  </agm-map>
+
+  <div class="buttons-container" style="margin-top: 16px">
+    <button mat-raised-button (click)="navigateBack()">AVBRYT</button>
+    <button mat-raised-button color="accent" (click)="onSave()">SPARA</button>
+  </div>
+</div>
