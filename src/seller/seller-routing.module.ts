@@ -59,6 +59,7 @@ const routes: Routes = [
         path: 'items/:itemId', component: Components.ItemEditorComponent,
         canActivate: [fromGuards.AuthGuard],
       },
+      {path: 'update-password', component: Components.UpdatePasswordComponent}
 
     ],
   },

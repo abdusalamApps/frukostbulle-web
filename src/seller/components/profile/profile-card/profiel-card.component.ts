@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../../../../models/user.model';
 import {Store} from '@ngrx/store';
 import {Observable, of} from 'rxjs';
@@ -27,5 +27,10 @@ export class ProfileCardComponent {
     availableDates: [''],
     lasOrderDay: '',
   };
+  @Output() logout = new EventEmitter();
+
+  logoutClick() {
+    this.logout.emit();
+  }
 }
 

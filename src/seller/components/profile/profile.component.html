@@ -15,5 +15,9 @@
          src="{{(imageSrc || imageSrc === '') ? imageSrc
            : 'assets/img/profile-photo-placeholder.png'}}">
   </label>
-  <app-profile-card [user]="userObservable$ | async"></app-profile-card>
+  <app-profile-card
+    [user]="userObservable$ | async"
+    (logout)="onLogout()">
+
+  </app-profile-card>
 </div>

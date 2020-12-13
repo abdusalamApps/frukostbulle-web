@@ -23,8 +23,8 @@ export class ProfileComponent implements OnInit {
   imageSrc: string = 'assets/img/profile-photo-placeholder.png';
   name: string = '';
   email: string = '';
-  bakery: string  = '';
-  mobile= 0;
+  bakery: string = '';
+  mobile = 0;
 
   constructor(private store: Store<fromState.SellerState>,
               private rootStore: Store<fromRoot.State>,
@@ -55,6 +55,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  logout() {
+  onLogout() {
+    console.log(`onLogout `);
+    this.store.dispatch(new fromState.Logout());
+    this.rootStore.dispatch(new fromRoot.Go({path: ['/seller/login']}));
   }
 }

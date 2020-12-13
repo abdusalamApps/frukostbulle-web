@@ -1,11 +1,11 @@
 <mat-card style="margin:16px 0 5em 0;">
-  <h1 style="margin-top: 1em" routerLink="../seller-profile-editor" matRipple>
+  <h1 style="margin-top: 1em" routerLink="/seller/profile-editor" matRipple>
     {{user ? user.name : ''}}
   </h1>
 
   <mat-list role="list">
     <mat-list-item mat-ripple role="listitem"
-                   routerLink="seller/profile-editor"
+                   routerLink="/seller/profile-editor"
                    matRipple>
       <h3 matLine>
         {{user ? user.email : ''}}
@@ -14,7 +14,7 @@
       <mat-divider></mat-divider>
     </mat-list-item>
 
-    <mat-list-item mat-ripple role="listitem" routerLink="seller/my-items">
+    <mat-list-item mat-ripple role="listitem" routerLink="/seller/my-items">
       <h3 matLine>Mina frallor</h3>
       <mat-icon>store_mall_directory</mat-icon>
       <mat-divider></mat-divider>
@@ -47,7 +47,7 @@
     </mat-list-item>
 
     <mat-list-item mat-ripple role="listitem"
-                   routerLink="seller/profile-editor"
+                   routerLink="/seller/profile-editor"
                    matRipple>
       <h3 matLine>{{user ? user.mobilenbr : ''}}</h3>
       <mat-icon>phone</mat-icon>
@@ -55,19 +55,17 @@
     </mat-list-item>
 
     <mat-list-item mat-ripple role="listitem"
-                   routerLink="seller/profile-editor"
                    matRipple
-                   routerLink="/update-password">
+                   routerLink="/seller/update-password">
       <h3 matLine>ÄNDRA LÖSENORD</h3>
       <mat-icon>settings</mat-icon>
       <mat-divider></mat-divider>
     </mat-list-item>
 
     <mat-list-item mat-ripple role="listitem"
-                   routerLink="seller/profile-editor"
                    matRipple
     >
-      <h3 matLine class="logout">LOGGA UT</h3>
+      <h3 matLine class="logout" (click)="logoutClick()">LOGGA UT</h3>
       <mat-icon color="warn">exit_to_app</mat-icon>
     </mat-list-item>
   </mat-list>

@@ -33,12 +33,14 @@ export function reducer(
         response: action.payload,
       };
     }
+    case fromLogin.LOGOUT:
     case fromLogin.LOGIN_FAIL:
       {
         return {
           ...state,
           pending: false,
           loggedIn: false,
+          response: null
         };
       }
     default:

@@ -25,6 +25,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../app/token.interceptor';
 import {DeleteDialog} from './components/item-editor/item-editor.component';
 import {ProfileCardComponent} from './components/profile/profile-card/profiel-card.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,9 @@ import {ProfileCardComponent} from './components/profile/profile-card/profiel-ca
     Components.SendToBakeryComponent,
     Components.LoginComponent,
     Components.WeekOrdersComponent,
+    Components.UpdatePasswordComponent,
     DeleteDialog,
-    ProfileCardComponent
+    ProfileCardComponent,
   ],
   imports: [
     CommonModule,
