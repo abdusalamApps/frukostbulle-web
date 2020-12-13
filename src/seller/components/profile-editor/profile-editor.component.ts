@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Store} from '@ngrx/store';
+import * as fromState from '../../state';
+import * as fromRoot from 'src/app/state';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-editor',
@@ -7,9 +14,115 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileEditorComponent implements OnInit {
 
-  constructor() { }
+  userObservable$ = new Observable();
+
+  title = 'Redigera din profil';
+
+  newName = '';
+  newEmail = '';
+  newMobile = '';
+
+  name: string = '';
+  email: string = '';
+  mobile = '';
+
+  emailControl = new FormControl();
+  mobileControl = new FormControl(0, [
+    Validators.minLength(10),
+    Validators.maxLength(13)
+  ]);
+  nameControl = new FormControl();
+
+  constructor(private snackBar: MatSnackBar,
+              private store: Store<fromState.SellerState>) {
+  }
 
   ngOnInit(): void {
+    this.userObservable$ = this.store.select(fromState.getCurrentUser).pipe(
+      tap(user => {
+        if (user) {
+          this.name = user.name;
+          this.nameControl = new FormControl(user.name, [Validators.required]);
+          this.email = user.email;
+          this.emailControl = new FormControl(user.email,
+            [Validators.email, Validators.required]);
+          this.mobile = user.mobilenbr;
+          this.mobileControl = new FormControl(user.mobilenbr, [
+            Validators.minLength(10),
+            Validators.maxLength(13),
+            Validators.required
+          ]);
+        }
+      })
+    );
+  }
+
+  onSave() {
+    if (
+      this.emailControl.hasError('email')
+      || this.emailControl.hasError('required')
+      || this.mobileControl.hasError('maxLength')
+      || this.mobileControl.hasError('minLength')
+      || this.mobileControl.hasError('required')
+      || this.nameControl.hasError('required')
+    ) {
+      this.snackBar.open('Rätta felen!', 'Ok', {
+        duration: 2000
+      });
+    } else if (isNaN(Number(this.mobileControl.value))) {
+      this.snackBar.open('Mobilnummret kan bara innehålla siffror.', 'Ok', {
+        duration: 2000
+      });
+    } else {
+
+      if (this.isMobileChanged() || this.isNameChanged() || this.isEmailChanged()) {
+        /*
+                this.snackBar.open('Ändringarna sparades', 'ok', {
+                  duration: 2000
+                });
+        */
+        this.userObservable$ = this.store.select(fromState.getCurrentUser).pipe(
+          tap(user => {
+            if (user) {
+              const newUser =
+                {
+                  ...user,
+                  email:  this.emailControl.value,
+                  name: this.nameControl.value,
+                  mobilenbr: this.mobileControl.value
+                };
+              this.store.dispatch(new fromState.UpdateUser(newUser));
+            }
+          })
+        );
+
+      } else {
+        this.snackBar.open('Inga ändringar', 'ok', {
+          duration: 2000
+        });
+
+      }
+    }
+    console.log('isEmailChanged: ' + this.isEmailChanged());
+    console.log('isNameChanged: ' + this.isNameChanged());
+    console.log('isMobileChanged: ' + this.isMobileChanged());
+
+  }
+
+  onCancel() {
+    this.store.dispatch(new fromRoot.Back());
+  }
+
+  private isEmailChanged() {
+    return this.email !== this.emailControl.value;
+  }
+
+  private isNameChanged() {
+    return this.name !== this.nameControl.value;
+  }
+
+  private isMobileChanged() {
+    return this.mobile !== this.mobileControl.value;
   }
 
 }

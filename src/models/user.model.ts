@@ -4,7 +4,7 @@ export interface User {
   county: string;
   city: string;
   address: string;
-  mobilenbr: number;
+  mobilenbr: string;
   email: string;
   password: string;
   permissionLevel: number;

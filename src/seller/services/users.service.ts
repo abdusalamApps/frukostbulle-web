@@ -17,4 +17,8 @@ export class UsersService {
     let e = jsonString.substring(12, jsonString.search(',')-1);
     return this.http.get<User>(urls.usersUrls.Get.getUserByEmailUrl + e);
   }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.post<User>(urls.usersUrls.Post.updateUser, user);
+  }
 }

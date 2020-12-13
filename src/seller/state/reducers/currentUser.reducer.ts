@@ -18,6 +18,7 @@ export function reducer(
   action: userActions.CurrentUserAction
 ): CurrentUserState {
   switch (action.type) {
+    case userActions.UPDATE_USER:
     case userActions.LOAD_CURRENT_USER: {
       return {
         ...state,
@@ -25,6 +26,7 @@ export function reducer(
         currentUserLoading: true
       };
     }
+    case userActions.UPDATE_USER_SUCCESS:
     case userActions.LOAD_CURRENT_USER_SUCCESS: {
       return {
         ...state,
