@@ -6,6 +6,8 @@ import * as fromState from '../../state';
 import {Store} from '@ngrx/store';
 import {tap} from 'rxjs/operators';
 import {Area} from '../../../models/area.model';
+import {Observable} from 'rxjs';
+
 declare const google: any;
 
 @Component({
@@ -23,6 +25,8 @@ export class MapComponent implements OnInit {
   drawingManager: any;
   selectedShape: any;
   selectedArea: number = 0;
+
+  observableId$ = new Observable();
 
   constructor(private locationService: LocationService,
               private store: Store) {
@@ -134,14 +138,14 @@ export class MapComponent implements OnInit {
   }
 
   onSave() {
-    this.store.select(fromState.getCurrentUserId).pipe(
+    this.observableId$ = this.store.select(fromState.getCurrentUserId).pipe(
       tap(id => {
         if (id) {
           const newArea: Area = {sellerId: id, coordinates: this.pointList};
-          this.store.dispatch(new fromState.UpdateArea(newArea))
+          this.store.dispatch(new fromState.UpdateArea(newArea));
         }
       })
-    )
+    );
     console.log(this.pointList);
   }
 

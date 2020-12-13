@@ -25,4 +25,5 @@
     <button mat-raised-button (click)="navigateBack()">AVBRYT</button>
     <button mat-raised-button color="accent" (click)="onSave()">SPARA</button>
   </div>
+  <div *ngIf="observableId$ | async"></div>
 </div>
