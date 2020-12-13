@@ -33,7 +33,7 @@ export function reducer(
         response: action.payload,
       };
     }
-    case fromLogin.LOGOUT:
+    case fromLogin.LOGOUT_CONFIRM:
     case fromLogin.LOGIN_FAIL:
       {
         return {
