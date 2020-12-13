@@ -6,8 +6,8 @@ export const LOGIN_SUCCESS = '[Login] Login Success';
 export const LOGIN_FAIL = '[Login] Login Fail';
 
 export const LOGOUT = '[Logout] Logout';
-export const LOGOUT_SUCCESS = '[Logout] Logout Success';
-export const LOGOUT_FAIL = '[Logout] Logout Fail';
+export const LOGOUT_CONFIRM = '[Logout] Logout Confirm';
+export const LOGOUT_CANCEL = '[Logout] Logout Cancel';
 
 export class Login implements Action {
   readonly type = LOGIN;
@@ -28,13 +28,13 @@ export class Logout implements Action {
   readonly type = LOGOUT;
 }
 
-export class LogoutSuccess implements Action {
-  readonly type = LOGOUT;
+export class LogoutConfirm implements Action {
+  readonly type = LOGOUT_CONFIRM;
 }
 
-export class LogoutFail implements Action {
-  readonly type = LOGOUT;
+export class LogoutCancel implements Action {
+  readonly type = LOGOUT_CANCEL;
 }
 
 
-export type LoginAction = Login | LoginSuccess | LoginFail | Logout | LogoutSuccess | LogoutFail;
+export type LoginAction = Login | LoginSuccess | LoginFail | Logout | LogoutConfirm | LogoutCancel;
