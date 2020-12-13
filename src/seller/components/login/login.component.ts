@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import * as fromStore from '../../state';
 import { Store } from '@ngrx/store';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -16,12 +17,16 @@ export class LoginComponent implements OnInit {
 
   signup = false;
 
+  pending$ = new Observable();
+
   constructor(
     public location: Location,
     private store: Store<fromStore.SellerState>
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.pending$ = this.store.select(fromStore.getPending);
+  }
 
   signIn() {
     this.store.dispatch(new fromStore.Login(this.loginInfo));

@@ -36,7 +36,8 @@
           <button mat-button class="text-button" (click)="signup = !signup">
             SKAPA PROFIL
           </button>
-          <button (click)="signIn()" mat-raised-button color="accent">
+          <mat-spinner color="accent" diameter="30" *ngIf="(pending$ | async)"></mat-spinner>
+          <button *ngIf="!(pending$ | async)" (click)="signIn()" mat-raised-button color="accent">
             LOGGA IN
           </button>
         </div>
