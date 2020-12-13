@@ -1,0 +1,76 @@
+<mat-card style="margin:16px 0 5em 0;">
+  <h1 style="margin-top: 1em" routerLink="../seller-profile-editor" matRipple>
+    {{user ? user.name : ''}}
+  </h1>
+
+  <mat-list role="list">
+    <mat-list-item mat-ripple role="listitem"
+                   routerLink="seller/profile-editor"
+                   matRipple>
+      <h3 matLine>
+        {{user ? user.email : ''}}
+      </h3>
+      <mat-icon>email</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem" routerLink="seller/my-items">
+      <h3 matLine>Mina frallor</h3>
+      <mat-icon>store_mall_directory</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem" routerLink="../seller-week-orders">
+      <h3 matLine>
+        Beställningar
+      </h3>
+      <mat-icon>list_alt</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem" routerLink="../seller-days-selection">
+      <h3 matLine>Mina dagar</h3>
+      <mat-icon>date_range</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem">
+      <h3 matLine>Mitt område</h3>
+      <mat-icon>room</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem">
+      <h3 matLine>Mitt bageri - {{user ? user.associatedBakery : ''}}</h3>
+      <mat-icon>storefront</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem"
+                   routerLink="seller/profile-editor"
+                   matRipple>
+      <h3 matLine>{{user ? user.mobilenbr : ''}}</h3>
+      <mat-icon>phone</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem"
+                   routerLink="seller/profile-editor"
+                   matRipple
+                   routerLink="/update-password">
+      <h3 matLine>ÄNDRA LÖSENORD</h3>
+      <mat-icon>settings</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem"
+                   routerLink="seller/profile-editor"
+                   matRipple
+    >
+      <h3 matLine class="logout">LOGGA UT</h3>
+      <mat-icon color="warn">exit_to_app</mat-icon>
+    </mat-list-item>
+  </mat-list>
+
+
+</mat-card>

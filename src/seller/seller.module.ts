@@ -24,6 +24,7 @@ import {commonModules} from '../common-modules';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../app/token.interceptor';
 import {DeleteDialog} from './components/item-editor/item-editor.component';
+import {ProfileCardComponent} from './components/profile/profile-card/profiel-card.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {DeleteDialog} from './components/item-editor/item-editor.component';
     Components.SendToBakeryComponent,
     Components.LoginComponent,
     Components.WeekOrdersComponent,
-    DeleteDialog
+    DeleteDialog,
+    ProfileCardComponent
   ],
   imports: [
     CommonModule,

@@ -52,7 +52,7 @@ export const getCurrentUserName = (state: CurrentUserState) => state.currentUser
 export const getCurrentUserCounty = (state: CurrentUserState) => state.currentUser?.county;
 export const getCurrentUserCity = (state: CurrentUserState) => state.currentUser?.city;
 export const getCurrentUserAddress = (state: CurrentUserState) => state.currentUser?.address;
-export const getCurrentUserMobile = (state: CurrentUserState) => state.currentUser?.mobile;
+export const getCurrentUserMobile = (state: CurrentUserState) => state.currentUser?.mobilenbr;
 export const getCurrentUserEmail = (state: CurrentUserState) => state.currentUser?.email;
 export const getCurrentUserPassword = (state: CurrentUserState) => state.currentUser?.password;
 export const getCurrentUserPermissionLevel = (state: CurrentUserState) => state.currentUser?.permissionLevel;

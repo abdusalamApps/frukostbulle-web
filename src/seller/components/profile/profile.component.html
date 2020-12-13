@@ -1,1 +1,19 @@
-<p>profile works!</p>
+<mat-toolbar class="toolbar" color="primary">
+  <span class="spacer"></span>
+  <span>{{ title }}</span>
+  <span class="toolbar-spacer"></span>
+  <button (click)="navigateToProfileEditor()"
+          mat-icon-button>
+    <mat-icon>edit</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="container">
+
+  <label class="image-chooser">
+    <input id="image-input" type="file" accept="image/*" (change)="chooseImage($event)">
+    <img class="profile-photo" alt="profile photo"
+         src="{{(imageSrc || imageSrc === '') ? imageSrc
+           : 'assets/img/profile-photo-placeholder.png'}}">
+  </label>
+  <app-profile-card [user]="userObservable$ | async"></app-profile-card>
+</div>

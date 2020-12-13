@@ -27,7 +27,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
 
   title = 'Ny bulle';
   name = '';
-  price = 0;
+  price = -1;
   imageSrc = 'assets/img/product-placeholder.png';
 
   itemId = -1;
@@ -43,7 +43,8 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private store: Store<fromState.SellerState>,
     private rootStore: Store<fromRoot.State>,
-    private dialog: MatDialog) {
+    private dialog: MatDialog
+  ) {
   }
 
   ngOnDestroy(): void {
@@ -77,28 +78,38 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
-    console.log(`onSave()@ItemEditor`);
-    this.store.select(fromState.getCurrentUser).subscribe(
-      currentUser => {
-        let imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
-        if (currentUser) {
-          let newItem = new Item(0, currentUser.id, currentUser.email, this.price, this.name, imageUrl);
-          this.store.dispatch(new fromState.InsertItem(newItem));
+    if (this.name === '' || this.price < 0) {
+      this._snackBar.open('Rätta felen!', 'Ok', {duration: 1000});
+    } else {
+
+      console.log(`onSave()@ItemEditor`);
+      this.store.select(fromState.getCurrentUser).subscribe(
+        currentUser => {
+          let imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
+          if (currentUser) {
+            let newItem = new Item(0, currentUser.id, currentUser.email, this.price, this.name, imageUrl);
+            this.store.dispatch(new fromState.InsertItem(newItem));
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   onUpdate() {
-    this.store.select(fromState.getCurrentUser).subscribe(
-      currentUser => {
-        let imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
-        if (currentUser) {
-          let newItem = new Item(this.itemId, currentUser.id, currentUser.email, this.price, this.name, imageUrl);
-          this.store.dispatch(new fromState.UpdateItem(newItem))
+    if (this.name === '' || this.price < 0) {
+      this._snackBar.open('Rätta felen!', 'Ok', {duration: 1000});
+    } else {
+
+      this.store.select(fromState.getCurrentUser).subscribe(
+        currentUser => {
+          let imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
+          if (currentUser) {
+            let newItem = new Item(this.itemId, currentUser.id, currentUser.email, this.price, this.name, imageUrl);
+            this.store.dispatch(new fromState.UpdateItem(newItem));
+          }
         }
-      }
-    );
+      );
+    }
 
   }
 
@@ -108,7 +119,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
 
   onDelete() {
     const dialogRef = this.dialog.open(DeleteDialog, {
-      width: "250px",
+      width: '250px',
       data: {
         store: this.store,
         name: this.name,
@@ -127,14 +138,15 @@ export class DeleteDialog {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: { store: Store, name: string, id: number }) {}
+    @Inject(MAT_DIALOG_DATA) public data: { store: Store, name: string, id: number }) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   onYesClick(): void {
-    this.data.store.dispatch(new fromState.DeleteItem(this.data.id))
+    this.data.store.dispatch(new fromState.DeleteItem(this.data.id));
   }
 
 }
