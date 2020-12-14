@@ -36,17 +36,14 @@ export function reducer(
     }
     case itemActions.LOAD_ITEMS_SUCCESS: {
       const items = action.payload;
-      const entities = items.reduce(
+
+      const entities: { [p: number]: Item } = items.reduce(
         (newEntities: { [id: number]: Item }, item) => {
           return {
             ...newEntities,
             [item.itemId]: item,
           };
-        },
-        {
-          ...state.entities,
-        }
-      );
+        }, {});
       return {
         // ...state,
         itemsLoading: false,
@@ -71,7 +68,7 @@ export function reducer(
       return {
         ...state,
         entities
-      }
+      };
     }
     default:
       return state;
