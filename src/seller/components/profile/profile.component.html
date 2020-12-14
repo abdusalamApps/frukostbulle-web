@@ -17,6 +17,7 @@
   </label>
   <app-profile-card
     [user]="userObservable$ | async"
+    [associatedBakery]="bakery$ | async"
     (logout)="onLogout()">
 
   </app-profile-card>

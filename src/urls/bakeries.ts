@@ -1,11 +1,13 @@
-import { baseUrl } from './base';
+import {baseUrl} from './base';
+
 export namespace Get {
-  export const getBakeries = `${baseUrl}/get-all-bakeries`;
-  export const getBakeriesByCity = `${baseUrl}/get-bakeries-by-city?city=`;
-  export const getBakeriesByCounty = `${baseUrl}/get-bakeries-by-county?county=`;
+  export const getBakeriesUrl = `${baseUrl}/get-all-bakeries`;
+  export const getBakeriesByCityUrl = `${baseUrl}/get-bakeries-by-city?city=`;
+  export const getBakeriesByCountyUrl = `${baseUrl}/get-bakeries-by-county?county=`;
+  export const getBakeryByIdUrl = `${baseUrl}/get-bakery-by-id?bakeryId=`;
 }
 
 export namespace Post {
   // Body: sellerId, bakeryId
-  export const associateBakery = `${baseUrl}/associate-bakery`;
+  export const associateBakeryUrl = `${baseUrl}/associate-bakery`;
 }

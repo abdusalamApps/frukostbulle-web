@@ -4,6 +4,8 @@ import {Store} from '@ngrx/store';
 import * as fromState from '../../state';
 import * as fromRoot from '../../../app/state';
 import {Observable, of} from 'rxjs';
+import {Bakery} from '../../../models/bakery.model';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +15,7 @@ import {Observable, of} from 'rxjs';
 export class ProfileComponent implements OnInit {
 
   userObservable$ = new Observable<User | null>();
+  bakery$ = new Observable<Bakery | null>();
 
   title = 'Min profil';
 
@@ -21,17 +24,24 @@ export class ProfileComponent implements OnInit {
   imageSrc: string = 'assets/img/profile-photo-placeholder.png';
   name: string = '';
   email: string = '';
-  bakery: string = '';
   mobile = 0;
 
   constructor(private store: Store<fromState.SellerState>,
               private rootStore: Store<fromRoot.State>,
-
   ) {
   }
 
   ngOnInit(): void {
-    this.userObservable$ = this.store.select(fromState.getCurrentUser);
+    this.userObservable$ = this.store.select(fromState.getCurrentUser).pipe(
+      tap(user => {
+        if (user) {
+          if (user.associatedBakery) {
+            this.store.dispatch(new fromState.LoadBakeryById(user.associatedBakery));
+            this.bakery$ = this.store.select(fromState.getAssociatedBakery);
+          }
+        }
+      })
+    );
   }
 
   public navigateToProfileEditor(): void {

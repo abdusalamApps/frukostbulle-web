@@ -91,4 +91,17 @@ export class BakeryEffects {
       })
     )
   );
+
+  loadBakeryById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(bakeryActions.LOAD_BAKERY_BY_ID),
+      switchMap((action: bakeryActions.LoadBakeryById) => {
+        return this.bakeryService.getBakeryById(action.payload).pipe(
+          map((bakery) => new bakeryActions.LoadBakeryByIdSuccess(bakery)),
+          catchError((error) => of(new bakeryActions.LoadBakeryByIdFail(error)))
+        );
+      })
+    )
+  );
+
 }

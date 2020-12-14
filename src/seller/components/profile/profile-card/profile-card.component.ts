@@ -4,6 +4,7 @@ import {Store} from '@ngrx/store';
 import {Observable, of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {tap} from 'rxjs/operators';
+import {Bakery} from '../../../../models/bakery.model';
 
 @Component({
   selector: 'app-profile-card',
@@ -22,11 +23,14 @@ export class ProfileCardComponent {
     password: '',
     permissionLevel: -1,
     reminder: false,
-    associatedBakery: '',
+    associatedBakery: -1,
     active: false,
     availableDates: [''],
     lasOrderDay: '',
   };
+  
+  @Input() associatedBakery: Bakery | null = null;
+
   @Output() logout = new EventEmitter();
 
   logoutClick() {

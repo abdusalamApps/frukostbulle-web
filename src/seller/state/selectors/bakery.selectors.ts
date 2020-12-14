@@ -28,3 +28,9 @@ export const getBakeriesLoading = createSelector(
   getBakeryState,
   fromBakery.getBakeryLoading
 );
+
+export const getAssociatedBakery = createSelector(
+  getBakeryState,
+  fromBakery.getAssociatedBakery
+);
+

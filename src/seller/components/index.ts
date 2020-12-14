@@ -14,5 +14,5 @@ export { SendToBakeryComponent } from './send-to-bakery/send-to-bakery.component
 export { LoginComponent } from './login/login.component';
 export { WeekOrdersComponent } from './week-orders/week-orders.component';
 export { UpdatePasswordComponent } from './update-password/update-password.component';
-export { ProfileCardComponent } from './profile/profile-card/profiel-card.component';
+export { ProfileCardComponent } from './profile/profile-card/profile-card.component';
 

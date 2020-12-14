@@ -9,7 +9,7 @@ export interface User {
   password: string;
   permissionLevel: number;
   reminder: boolean;
-  associatedBakery: string;
+  associatedBakery: number;
   active: boolean;
   availableDates: string[];
   lasOrderDay: string;

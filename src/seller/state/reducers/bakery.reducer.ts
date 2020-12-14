@@ -5,12 +5,14 @@ export interface BakeryState {
   entities: { [bakeryId: number]: Bakery }
   bakeriesLoaded: boolean;
   bakeriesLoading: boolean;
+  associatedBakery: Bakery | null;
 }
 
 export const initialState: BakeryState = {
   entities: {},
   bakeriesLoaded: false,
   bakeriesLoading: false,
+  associatedBakery: null,
 };
 
 export function reducer(
@@ -54,6 +56,13 @@ export function reducer(
         bakeriesLoading: false,
       };
     }
+    case bakeryActions.LOAD_BAKERY_BY_ID_SUCCESS: {
+      return {
+        ...state,
+        associatedBakery: action.payload
+      };
+    }
+
     default:
       return state;
   }
@@ -62,3 +71,4 @@ export function reducer(
 export const getBakeryEntities = (state: BakeryState) => state.entities;
 export const getBakeryLoading = (state: BakeryState) => state.bakeriesLoading;
 export const getBakeryLoaded = (state: BakeryState) => state.bakeriesLoaded;
+export const getAssociatedBakery = (state: BakeryState) => state.associatedBakery;
