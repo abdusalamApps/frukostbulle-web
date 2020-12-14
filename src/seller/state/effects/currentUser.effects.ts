@@ -22,7 +22,8 @@ export class CurrentUserEffects {
           catchError((error) => of(new userActions.LoadCurrentUserFail(error)))
         );
       })
-    ));
+    )
+  );
 
   @Effect()
   updateUser$ = this.actions$.pipe(
@@ -41,6 +42,26 @@ export class CurrentUserEffects {
     mergeMap((action: userActions.UpdateUserSuccess) => {
       return of(new fromRoot.Back());
     })
+  );
+
+  @Effect()
+  updateDates$ = this.actions$.pipe(
+    ofType(userActions.UPDATE_DATES),
+    switchMap((action: userActions.UpdateDates) => {
+      return this.userService.updateSellerDates(action.sellerId, action.dates).pipe(
+        map(() => new userActions.UpdateDatesSuccess(action.dates)),
+        catchError((error) => of(new userActions.UpdateDatesFail(error)))
+      );
+    })
+  );
+
+  @Effect()
+  updateDatesSuccess$ = this.actions$.pipe(
+    ofType(userActions.UPDATE_DATES_SUCCESS),
+    switchMap((action: userActions.UpdateDatesSuccess) => [
+      // new fromRoot.UpdateStorageAvailableDates(action.dates),
+      new fromRoot.Back()
+    ])
   );
 
 }

@@ -10,9 +10,10 @@ export namespace Get {
 
 export namespace Post {
   export const loginUrl = `${baseUrl}/login`;
-  export const createUser = `${baseUrl}/create-user`;
-  export const updateUser = `${baseUrl}/update-user`;
-  export const deleteUserById = `${baseUrl}/delete-user`;
-  export const addSellerDate = `${baseUrl}/add-date`;
-  export const removeSellerDate = `${baseUrl}/remove-date`;
+  export const createUserUrl = `${baseUrl}/create-user`;
+  export const updateUserUrl = `${baseUrl}/update-user`;
+  export const deleteUserByIdUrl = `${baseUrl}/delete-user`;
+  export const addSellerDateUrl = `${baseUrl}/add-date`;
+  export const removeSellerDateUrl = `${baseUrl}/remove-date`;
+  export const updateSellerDatesUrl = `${baseUrl}/update-dates`;
 }

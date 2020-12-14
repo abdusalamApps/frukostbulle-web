@@ -1,1 +1,31 @@
-<p>choose-days works!</p>
+<mat-toolbar class="toolbar" color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon class="back-icon" (click)="navigateBack()">arrow_back</mat-icon>
+  </button>
+  <span>{{title}}</span>
+</mat-toolbar>
+
+<div *ngIf="userId$ | async"></div>
+<div *ngIf="dateValues$ | async"></div>
+<div class="container">
+  <mat-card>
+    <ejs-calendar weekNumber='true'
+                  [(values)]="newDates" [isMultiSelection]='multiSelect'>
+    </ejs-calendar>
+
+    <div class="buttons-container">
+
+      <button (click)="navigateBack()"
+              mat-button class="text-button">
+        AVBRYT
+      </button>
+      <button (click)="onSave()"
+              mat-raised-button color="accent">
+        SPARA
+      </button>
+
+    </div>
+
+  </mat-card>
+
+</div>

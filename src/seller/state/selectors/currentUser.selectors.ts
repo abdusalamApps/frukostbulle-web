@@ -9,6 +9,18 @@ export const getCurrentUserState = createSelector(
   (state: fromFeature.SellerState) => state.currentUser
 );
 
+export const getCurrentUserLoading = createSelector(
+  getCurrentUserState,
+  fromCurrentUser.getCurrentUserLoading
+)
+
+
+export const getCurrentUserLoaded = createSelector(
+  getCurrentUserState,
+  fromCurrentUser.getCurrentUserLoaded
+)
+
+
 export const getCurrentUser = createSelector(
   getCurrentUserState,
   fromCurrentUser.getCurrentUser

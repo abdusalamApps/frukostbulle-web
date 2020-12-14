@@ -28,6 +28,9 @@ import {DeleteDialog} from './components/item-editor/item-editor.component';
 import {ProfileCardComponent} from './components/profile/profile-card/profile-card.component';
 import { ChooseBakeryDialogComponent } from './components/choose-bakery-dialog/choose-bakery-dialog.component';
 
+import {CalendarModule} from '@syncfusion/ej2-angular-calendars';
+
+// @ts-ignore
 @NgModule({
   declarations: [
     Components.ItemEditorComponent,
@@ -67,7 +70,8 @@ import { ChooseBakeryDialogComponent } from './components/choose-bakery-dialog/c
       logOnly: environment.production,
     }),
     EffectsModule.forFeature(effects),
-    ...commonModules
+    ...commonModules,
+    CalendarModule
   ],
   providers: [
     ...fromGuards.guards,

@@ -1,0 +1,9 @@
+mat-card {
+  display: grid;
+  ejs-calendar {
+    justify-self: center;
+    align-self: center;
+    margin-bottom: 2em;
+  }
+}
+

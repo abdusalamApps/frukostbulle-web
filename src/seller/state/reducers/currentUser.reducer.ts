@@ -1,5 +1,6 @@
 import {User} from '../../../models/user.model';
 import * as userActions from '../actions/currentUser.action';
+import {UPDATE_DATES_SUCCESS} from '../actions/currentUser.action';
 
 export interface CurrentUserState {
   currentUserLoading: boolean;
@@ -43,12 +44,23 @@ export function reducer(
         currentUser: null,
       }
     }
+    case userActions.UPDATE_DATES_SUCCESS: {
+      const dates = action.dates;
+      let newUser: User;
+      if (state.currentUser) {
+        newUser = {...state.currentUser, availableDates: dates}
+        return {...state, currentUser: newUser}
+      }
+      return state;
+    }
     default:
       return state;
   }
 }
 
 export const getCurrentUser = (state: CurrentUserState) => state.currentUser;
+export const getCurrentUserLoaded = (state: CurrentUserState) => state.currentUserLoaded;
+export const getCurrentUserLoading = (state: CurrentUserState) => state.currentUserLoading;
 export const getCurrentUserId = (state: CurrentUserState) => state.currentUser?.id;
 export const getCurrentUserName = (state: CurrentUserState) => state.currentUser?.name;
 export const getCurrentUserCounty = (state: CurrentUserState) => state.currentUser?.county;

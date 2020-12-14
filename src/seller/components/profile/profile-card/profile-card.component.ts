@@ -25,10 +25,10 @@ export class ProfileCardComponent {
     reminder: false,
     associatedBakery: -1,
     active: false,
-    availableDates: [''],
+    availableDates: [new Date('')],
     lasOrderDay: '',
   };
-  
+
   @Input() associatedBakery: Bakery | null = null;
 
   @Output() logout = new EventEmitter();

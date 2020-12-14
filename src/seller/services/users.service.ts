@@ -14,11 +14,15 @@ export class UsersService {
 
   getUserByEmail(email: string): Observable<User> {
     let jsonString = JSON.stringify(email);
-    let e = jsonString.substring(12, jsonString.search(',')-1);
+    let e = jsonString.substring(12, jsonString.search(',') - 1);
     return this.http.get<User>(urls.usersUrls.Get.getUserByEmailUrl + e);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.post<User>(urls.usersUrls.Post.updateUser, user);
+    return this.http.post<User>(urls.usersUrls.Post.updateUserUrl, user);
+  }
+
+  updateSellerDates(sellerId: number, dates: Date[]): Observable<any> {
+    return this.http.post<any>(`${urls.usersUrls.Post.updateSellerDatesUrl}`, {sellerId: sellerId, dates: dates});
   }
 }

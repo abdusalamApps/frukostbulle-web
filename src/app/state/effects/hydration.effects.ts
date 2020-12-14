@@ -40,6 +40,43 @@ export class HydrationEffects implements OnInitEffects {
     {dispatch: false}
   );
 
+  updateStorage = createEffect(() =>
+      this.action$.pipe(
+        ofType(HydrationActions.UPDATE_STORAGE),
+        map((action: HydrationActions.UpdateStorage) => {
+          console.log(`key@updateStore: ${action.key}`);
+          console.log(`value@updateStore: ${action.value}`);
+          let stateFromStorage = localStorage.getItem('state');
+          if (stateFromStorage != null) {
+            let jsonState = JSON.parse(stateFromStorage);
+            console.log(`jsonState: ${
+              JSON.stringify(jsonState.seller.currentUser.currentUser.availableDates)
+            }`);
+          }
+        })
+      ),
+    {dispatch: false}
+  );
+
+  updateStorageAvailableDates = createEffect(() =>
+      this.action$.pipe(
+        ofType(HydrationActions.UPDATE_STORAGE_AVAILABLE_DATES),
+        map((action: HydrationActions.UpdateStorageAvailableDates) => {
+          localStorage.setItem('state', 'non');
+          // let stateFromStorage = localStorage.getItem('state');
+          // if (stateFromStorage != null) {
+          //   let jsonState = JSON.parse(stateFromStorage);
+          //   jsonState.seller.currentUser.currentUser['availableDates'] = action.newDates;
+          //   console.log(`newJsonState ${JSON.stringify(jsonState.seller.currentUser.currentUser)}`);
+          //   localStorage.clear();
+          //   localStorage.setItem('state', 'non');
+          // }
+        })
+      ),
+    {dispatch: false}
+  );
+
+
   ngrxOnInitEffects(): Action {
     return HydrationActions.hydrate();
   }

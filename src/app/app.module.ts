@@ -1,4 +1,4 @@
-import {materialModules} from './../material-modules';
+import {materialModules} from '../material-modules';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {
@@ -23,6 +23,8 @@ import {commonModules} from '../common-modules';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from './token.interceptor';
 
+import {CalendarModule} from '@syncfusion/ej2-angular-calendars';
+
 @NgModule({
   declarations: [AppComponent, LandingComponent],
   imports: [
@@ -42,6 +44,7 @@ import {TokenInterceptor} from './token.interceptor';
     StoreRouterConnectingModule.forRoot(),
     ...materialModules,
     ...commonModules,
+    CalendarModule
   ],
   providers: [
     {

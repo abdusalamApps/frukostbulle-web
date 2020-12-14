@@ -45,7 +45,7 @@ const routes: Routes = [
       },
       {
         path: 'choose-days', component: Components.ChooseDaysComponent,
-        canActivate: [fromGuards.AuthGuard],
+        canActivate: [fromGuards.AuthGuard, fromGuards.DatesGuard],
       },
       {
         path: 'send-to-bakery', component: Components.SendToBakeryComponent,
@@ -71,6 +71,7 @@ const routes: Routes = [
   {path: 'login', component: Components.LoginComponent},
 ];
 
+// @ts-ignore
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
