@@ -1,1 +1,74 @@
-<p>choose-bakery works!</p>
+<div class="container">
+
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel hideToggle
+                         (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon mat-ripple class="back-icon" (click)="navigateBack()">
+            arrow_back
+          </mat-icon>
+          {{title}}
+        </mat-panel-title>
+        <mat-panel-description style="display: grid; justify-content: end">
+          <mat-icon>filter_list</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>
+        <mat-form-field appearance="legacy" style="width: 90%; padding: 0 5%;">
+          <mat-label>Bagerinamn</mat-label>
+          <input matInput placeholder="" #bakeryName>
+          <mat-icon matRipple matSuffix style="clip-path: circle()"
+                    (click)="accordion ? accordion.closeAll() : '';">
+            search
+          </mat-icon>
+        </mat-form-field>
+      </p>
+      <div style="
+        display: grid;
+        grid-gap: 1em;
+        width: 90%;
+        padding: 0 5%;
+         grid-template-columns: repeat(auto-fit, minmax(15em, 1fr))
+">
+        <mat-form-field appearance="legacy">
+          <mat-label>Län</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let county of counties"
+                        value="{{county}}"
+                        (click)="getBakeriesByCounty(county)">
+              {{county}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy">
+          <mat-label>Stad</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let city of cities"
+                        value="{{city}}"
+                        (click)="getBakeriesByCity(city)">
+              {{city}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <div *ngIf="sellerId$ | async"></div>
+  <mat-card style="margin-top: 16px">
+    <mat-list>
+      <mat-list-item matRipple *ngFor="let bakery of bakeries$ | async"
+      (click)="onListItemClick(bakery.id)">
+        <h3 matLine>{{bakery.name}}</h3>
+        <p matLine>
+          <span>{{bakery.address}}</span>
+        </p>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+</div>

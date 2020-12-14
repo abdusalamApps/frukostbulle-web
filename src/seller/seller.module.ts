@@ -26,6 +26,7 @@ import {TokenInterceptor} from '../app/token.interceptor';
 import {LogoutDialog} from './components/logout-dialog/logout-dialog.component';
 import {DeleteDialog} from './components/item-editor/item-editor.component';
 import {ProfileCardComponent} from './components/profile/profile-card/profiel-card.component';
+import { ChooseBakeryDialogComponent } from './components/choose-bakery-dialog/choose-bakery-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {ProfileCardComponent} from './components/profile/profile-card/profiel-ca
     LogoutDialog,
     DeleteDialog,
     ProfileCardComponent,
+    ChooseBakeryDialogComponent,
   ],
   imports: [
     CommonModule,
