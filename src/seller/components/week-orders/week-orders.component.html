@@ -15,7 +15,7 @@
     <mat-list>
       <h3 matSubheader>Aktuell denna vecka</h3>
       <mat-list-item mat-ripple
-                     *ngFor="let order of orders$ | async; index as k"
+                     *ngFor="let order of orders$ | async; index as k;"
                      [routerLink]="['/seller/orders', order.id]">
         <img mat-list-avatar src="assets/img/product-placeholder.png">
         <h3 matLine> {{order.buyerName}} </h3>
@@ -23,7 +23,7 @@
           <p *ngIf="i === 0">{{item.key.itemName}}...</p>
         </div>
         <h3 matLine> {{getOrderTotal(order.id)}}:- </h3>
-        <mat-divider *ngIf="k < (orders$ | async) - 1"></mat-divider>
+        <mat-divider></mat-divider>
       </mat-list-item>
     </mat-list>
 
