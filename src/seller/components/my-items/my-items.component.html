@@ -2,8 +2,7 @@
   <span class="spacer"></span>
   <span>{{ title }}</span>
 </mat-toolbar>
-<mat-spinner color="accent" class="spinner" *ngIf="!!(loading$ | async)"></mat-spinner>
-<div *ngIf="userId$ | async"></div>
+<mat-spinner color="accent" class="spinner" *ngIf="(loading$ | async)"></mat-spinner>
 <div class="grid-container">
   <mat-card class="grid-item"
             mat-ripple *ngFor="let item of items$ | async"

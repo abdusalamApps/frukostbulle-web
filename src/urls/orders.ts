@@ -2,9 +2,9 @@ import { baseUrl } from './base';
 
 export namespace Get {
   export const getOrderByIdUrl = `${baseUrl}/get-orders-buyerid`;
-  export const getReceipByOrderIdtUrl = `${baseUrl}/get-receipt`;
+  export const getReceiptByOrderIdtUrl = `${baseUrl}/get-receipt`;
   export const getAllOrdersUrl = `${baseUrl}/get-all-orders`;
-  export const getOrdersBySellerIdUrl = `${baseUrl}/get-orders-sellerid`;
+  export const getOrdersBySellerIdUrl = `${baseUrl}/get-orders-sellerid?id=`;
   export const getOrdersByBuyerIdUrl = `${baseUrl}/get-orders-buyerid`;
 }
 

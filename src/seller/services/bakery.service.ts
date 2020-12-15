@@ -3,7 +3,6 @@ import {Observable} from 'rxjs';
 import {Bakery} from '../../models/bakery.model';
 import {HttpClient} from '@angular/common/http';
 import * as urls from '../../urls';
-import {B} from '@angular/cdk/keycodes';
 
 
 @Injectable({

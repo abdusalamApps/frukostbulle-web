@@ -5,6 +5,7 @@ import {UsersService} from '../../services/users.service';
 import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import * as fromRoot from 'src/app/state';
+import {User} from 'src/models/user.model';
 
 @Injectable()
 export class CurrentUserEffects {
@@ -15,13 +16,23 @@ export class CurrentUserEffects {
   loadCurrentUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.LOAD_CURRENT_USER),
-      switchMap((email) => {
+      switchMap((email: string) => {
         return this.userService.getUserByEmail(email).pipe(
-          map((user) => new userActions.LoadCurrentUserSuccess(user)),
-          catchError((error) => of(new userActions.LoadCurrentUserFail(error)))
+          map((user: User) => new userActions.LoadCurrentUserSuccess(user)),
+          catchError((error: any) => of(new userActions.LoadCurrentUserFail(error)))
         );
       })
     )
+  );
+
+  loadCurrentUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.LOAD_CURRENT_USER_SUCCESS),
+      map((action: userActions.LoadCurrentUserSuccess) => {
+        localStorage.setItem('currentUserId', action.payload.id.toString(10))
+      })
+    ),
+    {dispatch: false}
   );
 
   updateUser$ = createEffect(() =>
@@ -30,7 +41,7 @@ export class CurrentUserEffects {
       switchMap((action: userActions.UpdateUser) => {
         return this.userService.updateUser(action.payload).pipe(
           map(() => new userActions.UpdateUserSuccess(action.payload)),
-          catchError((error) => of(new userActions.UpdateUserFail(error)))
+          catchError((error: any) => of(new userActions.UpdateUserFail(error)))
         );
       })
     )
@@ -50,7 +61,7 @@ export class CurrentUserEffects {
     switchMap((action: userActions.UpdateDates) => {
       return this.userService.updateSellerDates(action.sellerId, action.dates).pipe(
         map(() => new userActions.UpdateDatesSuccess(action.dates)),
-        catchError((error) => of(new userActions.UpdateDatesFail(error)))
+        catchError((error: any) => of(new userActions.UpdateDatesFail(error)))
       );
     })
     )
@@ -59,8 +70,8 @@ export class CurrentUserEffects {
   updateDatesSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(userActions.UPDATE_DATES_SUCCESS),
     mergeMap((action: userActions.UpdateDatesSuccess) => {
-        return of(new fromRoot.Back());
-      })
+      return of(new fromRoot.Back());
+    })
     )
   );
 

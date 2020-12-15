@@ -22,7 +22,8 @@ export const getSelectedItem = createSelector(
   }
 );
 
-export const getAllItems = createSelector(getItemsEntities, (entities) => {
+export const getAllItems = createSelector(
+  getItemsEntities, (entities) => {
   return Object.keys(entities).map((id) => {
     return entities[parseInt(id, 10)];
   });

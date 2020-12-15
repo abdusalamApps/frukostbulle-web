@@ -6,6 +6,7 @@ describe('ChooseDaysComponent', () => {
   let component: ChooseDaysComponent;
   let fixture: ComponentFixture<ChooseDaysComponent>;
 
+  // @ts-ignore
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ChooseDaysComponent ]

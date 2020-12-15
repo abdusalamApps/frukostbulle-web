@@ -11,7 +11,7 @@
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     cursor: default;
     user-select: none;
     border-radius: 0.5em;
@@ -26,6 +26,7 @@
     place-items: center;
     font-size: 2em;
     cursor: pointer;
+    transform: scale(0.85);
   }
 
   .active {

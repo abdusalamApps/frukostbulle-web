@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import * as fromState from '../../state';
+import {Store} from '@ngrx/store';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-week-orders',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeekOrdersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<fromState.SellerState>) {
+  }
 
   ngOnInit(): void {
+
   }
 
 }

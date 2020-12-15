@@ -1,4 +1,4 @@
-import {LoginInfo} from './../../../models/loginInfo.model';
+import {LoginInfo} from '../../../models/loginInfo.model';
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import * as fromStore from '../../state';
@@ -6,6 +6,7 @@ import * as fromRoot from 'src/app/state';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 
+// @ts-ignore
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
