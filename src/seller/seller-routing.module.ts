@@ -20,12 +20,12 @@ const routes: Routes = [
         canActivate: [fromGuards.AuthGuard, fromGuards.ItemsGuard],
       },
       {
-        path: 'order-details', component: Components.OrderDetailsComponent,
-        canActivate: [fromGuards.AuthGuard],
+        path: 'orders', component: Components.WeekOrdersComponent,
+        canActivate: [fromGuards.AuthGuard, fromGuards.OrdersGuard],
       },
       {
-        path: 'week-orders', component: Components.WeekOrdersComponent,
-        canActivate: [fromGuards.AuthGuard, fromGuards.OrdersGuard],
+        path: 'orders/:orderId', component: Components.OrderDetailsComponent,
+        canActivate: [fromGuards.AuthGuard],
       },
       {
         path: 'profile', component: Components.ProfileComponent,

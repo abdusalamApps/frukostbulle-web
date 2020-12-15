@@ -1,11 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../../../../models/user.model';
-import {Store} from '@ngrx/store';
-import {Observable, of} from 'rxjs';
-import {MatDialog} from '@angular/material/dialog';
-import {tap} from 'rxjs/operators';
 import {Bakery} from '../../../../models/bakery.model';
 
+// @ts-ignore
 @Component({
   selector: 'app-profile-card',
   templateUrl: './profile-card.component.html',

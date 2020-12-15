@@ -1,10 +1,13 @@
-import { Item } from './item.model';
+import {Item} from './item.model';
 
 export interface Order {
   id: number;
   sellerId: number;
   buyerId: number;
   bakeryId: number;
+  sellerName: string;
+  buyerName: string;
+  bakeryName: string;
   deliveryMethod: boolean;
   deliveryTime: string;
   deliveryDate: string;

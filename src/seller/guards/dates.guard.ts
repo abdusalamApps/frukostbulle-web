@@ -20,11 +20,14 @@ export class DatesGuard implements CanActivate {
   }
 
   checkStore(): Observable<boolean> {
+    let storage = localStorage.getItem('currentUserEmail');
+    let email = '';
+    if (storage) {
+      email = storage;
+    }
     return this.store.select(fromState.getCurrentUserLoaded).pipe(
       tap(loaded => {
-        if (!loaded) {
-          this.store.dispatch(new fromState.LoadCurrentUser(this.getUserEmail()));
-        }
+        this.store.dispatch(new fromState.LoadCurrentUser(email));
       }),
       filter(loaded => loaded),
       take(1)

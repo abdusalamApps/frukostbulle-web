@@ -5,6 +5,7 @@ import * as fromRoot from 'src/app/state';
 import {Store} from '@ngrx/store';
 import {tap} from 'rxjs/operators';
 
+// @ts-ignore
 @Component({
   selector: 'app-choose-days',
   templateUrl: './choose-days.component.html',
@@ -25,14 +26,7 @@ export class ChooseDaysComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dateValues$ = this.store.select(fromState.getCurrentUserAvailableDates).pipe(
-      tap((dates: Date[] | undefined) => {
-        if (dates) {
-          console.log(`dates: ${dates}`)
-          this.newDates = dates;
-        }
-      })
-    );
+    this.dateValues$ = this.store.select(fromState.getCurrentUserAvailableDates);
   }
 
   onSave(): void {

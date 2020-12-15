@@ -30,6 +30,18 @@ export const getSellerOrders = createSelector(
   }
 );
 
+export const getOrderTotal = createSelector(
+  getOrderEntities,
+  (entities: { [p: number]: Order }, props: any) => {
+    let total = 0;
+    for (const [key, value] of
+      entities[props.orderId].content[Symbol.iterator]()) {
+      total += key.price * value;
+    }
+    return total;
+  }
+);
+
 export const getOrdersLoaded = createSelector(
   getOrderState,
   fromOrder.getSellerOrdersLoaded

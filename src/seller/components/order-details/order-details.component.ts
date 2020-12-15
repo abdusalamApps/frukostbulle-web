@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import * as fromRoot from 'src/app/state';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-order-details',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<fromRoot.State>) {
+  }
 
   ngOnInit(): void {
+  }
+
+  navigateBack() {
+    this.store.dispatch(new fromRoot.Back());
   }
 
 }

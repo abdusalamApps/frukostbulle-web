@@ -1,5 +1,4 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {Location} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormControl, Validators} from '@angular/forms';
 import {Item} from '../../../models/item.model';
@@ -10,10 +9,9 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, tap} from 'rxjs/operators';
 import {InsertItem} from '../../../models/insertItem.model';
 import * as urls from '../../../urls';
-import {HttpClient} from '@angular/common/http';
-import {log} from 'util';
 import {ItemsService} from '../../services/items.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {User} from '../../../models/user.model';
 
 @Component({
   selector: 'app-item-editor',
@@ -53,7 +51,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.itemObservable$ = this.store.select(fromState.getSelectedItem).pipe(
-      tap((item) => {
+      tap((item: Item) => {
         if (item) {
           console.log('item not null');
           this.title = 'Redigera bulle';
@@ -84,7 +82,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
 
       console.log(`onSave()@ItemEditor`);
       this.store.select(fromState.getCurrentUser).subscribe(
-        currentUser => {
+        (currentUser: User | null) => {
           let imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
           if (currentUser) {
             let newItem = new Item(0, currentUser.id, currentUser.email, this.price, this.name, imageUrl);
@@ -101,7 +99,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
     } else {
 
       this.store.select(fromState.getCurrentUser).subscribe(
-        currentUser => {
+        (currentUser: User | null) => {
           let imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
           if (currentUser) {
             let newItem = new Item(this.itemId, currentUser.id, currentUser.email, this.price, this.name, imageUrl);
