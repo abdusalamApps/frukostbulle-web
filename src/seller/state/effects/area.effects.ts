@@ -13,7 +13,6 @@ export class AreaEffects {
               private areaService: AreaService) {
   }
 
-  @Effect()
   updateArea$ = createEffect(() =>
     this.actions$.pipe(
       ofType(areaActions.UPDATE_AREA),
@@ -26,7 +25,6 @@ export class AreaEffects {
     )
   );
 
-  @Effect()
   updateAreaSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(areaActions.UPDATE_AREA_SUCCESS),

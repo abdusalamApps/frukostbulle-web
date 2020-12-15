@@ -12,7 +12,6 @@ export class CurrentUserEffects {
               private userService: UsersService) {
   }
 
-  @Effect()
   loadCurrentUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.LOAD_CURRENT_USER),
@@ -25,27 +24,28 @@ export class CurrentUserEffects {
     )
   );
 
-  @Effect()
-  updateUser$ = this.actions$.pipe(
-    ofType(userActions.UPDATE_USER),
-    switchMap((action: userActions.UpdateUser) => {
-      return this.userService.updateUser(action.payload).pipe(
-        map(() => new userActions.UpdateUserSuccess(action.payload)),
-        catchError((error) => of(new userActions.UpdateUserFail(error)))
-      );
-    })
+  updateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.UPDATE_USER),
+      switchMap((action: userActions.UpdateUser) => {
+        return this.userService.updateUser(action.payload).pipe(
+          map(() => new userActions.UpdateUserSuccess(action.payload)),
+          catchError((error) => of(new userActions.UpdateUserFail(error)))
+        );
+      })
+    )
   );
 
-  @Effect()
-  updateUserSuccess$ = this.actions$.pipe(
-    ofType(userActions.UPDATE_USER_SUCCESS),
-    mergeMap((action: userActions.UpdateUserSuccess) => {
-      return of(new fromRoot.Back());
-    })
+  updateUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.UPDATE_USER_SUCCESS),
+      mergeMap((action: userActions.UpdateUserSuccess) => {
+        return of(new fromRoot.Back());
+      })
+    )
   );
 
-  @Effect()
-  updateDates$ = this.actions$.pipe(
+  updateDates$ = createEffect(() => this.actions$.pipe(
     ofType(userActions.UPDATE_DATES),
     switchMap((action: userActions.UpdateDates) => {
       return this.userService.updateSellerDates(action.sellerId, action.dates).pipe(
@@ -53,15 +53,15 @@ export class CurrentUserEffects {
         catchError((error) => of(new userActions.UpdateDatesFail(error)))
       );
     })
+    )
   );
 
-  @Effect()
-  updateDatesSuccess$ = this.actions$.pipe(
+  updateDatesSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(userActions.UPDATE_DATES_SUCCESS),
-    switchMap((action: userActions.UpdateDatesSuccess) => [
-      // new fromRoot.UpdateStorageAvailableDates(action.dates),
-      new fromRoot.Back()
-    ])
+    mergeMap((action: userActions.UpdateDatesSuccess) => {
+        return of(new fromRoot.Back());
+      })
+    )
   );
 
 }

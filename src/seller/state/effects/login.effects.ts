@@ -16,16 +16,17 @@ import {MatDialog} from '@angular/material/dialog';
 import {Store} from '@ngrx/store';
 import {LogoutDialog} from '../../components/logout-dialog/logout-dialog.component';
 import {LoginState} from '../reducers/login.reducer';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable()
 export class LoginEffects {
   constructor(private actions$: Actions,
               private authService: AuthService,
               private dialog: MatDialog,
-              private store: Store<LoginState>) {
+              private store: Store<LoginState>,
+              private snackBar: MatSnackBar) {
   }
 
-  @Effect()
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loginAction.LOGIN),
@@ -38,42 +39,53 @@ export class LoginEffects {
     )
   );
 
-  @Effect()
-  loginSuccess$ = this.actions$.pipe(
-    ofType(loginAction.LOGIN_SUCCESS),
-    switchMap((action: loginAction.LoginSuccess) => [
-      // console.log(`paylod@LoginSuccess: ${action.payload.email}`);
-      new userActions.LoadCurrentUser(action.payload.email),
-      new fromRoot.Go({path: ['seller/items']})
-    ]),
-    // map((authResponse) => new userActions.LoadCurrentUser(authResponse)),
-    // map((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
+  loginSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loginAction.LOGIN_SUCCESS),
+      switchMap((action: loginAction.LoginSuccess) => [
+        // console.log(`paylod@LoginSuccess: ${action.payload.email}`);
+        new userActions.LoadCurrentUser(action.payload.email),
+        new fromRoot.Go({path: ['seller/items']})
+      ]),
+      // map((authResponse) => new userActions.LoadCurrentUser(authResponse)),
+      // map((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
+    )
   );
 
-  @Effect({dispatch: false})
-  loginFail$ = this.actions$.pipe(
-    ofType(loginAction.LOGIN_FAIL),
-    map((action: loginAction.LoginFail) => action.payload)
+  logout$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(loginAction.LOGOUT),
+        map((action: loginAction.Logout) => {
+          this.dialog.open(LogoutDialog, {
+            data: {
+              name: '',
+              store: this.store
+            }
+          });
+        })
+      ),
+    {dispatch: false}
   );
 
-  @Effect({dispatch: false})
-  logout$ = this.actions$.pipe(
-    ofType(loginAction.LOGOUT),
-    map((action: loginAction.Logout) => {
-      this.dialog.open(LogoutDialog, {
-        data: {
-          name: '',
-          store: this.store
-        }
-      });
-    })
+  loginFail$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(loginActions.LOGIN_FAIL),
+        map((action: loginActions.LoginFail) => {
+          this.snackBar.open('Fel e-post eller lösenord!', 'Ok', {
+            duration: 2000
+          });
+        }),
+      ),
+    {dispatch: false}
   );
 
-  @Effect()
-  logoutConfirm$ = this.actions$.pipe(
-    ofType(loginAction.LOGOUT_CONFIRM),
-    mergeMap((action: loginAction.LogoutConfirm) => {
-      return of(new fromRoot.Go({path: ['/seller/login']}))
-    })
+
+  logoutConfirm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loginAction.LOGOUT_CONFIRM),
+      mergeMap((action: loginAction.LogoutConfirm) => {
+        return of(new fromRoot.Go({path: ['/seller/login'], extras: {replaceUrl: true}}));
+      })
+    )
   );
 }

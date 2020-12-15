@@ -1,6 +1,6 @@
 <mat-toolbar class="toolbar" color="primary">
   <span class="spacer"></span>
-  <mat-icon mat-ripple class="back-icon" (click)="location.back()">
+  <mat-icon mat-ripple class="back-icon" (click)="navigateHome()">
     arrow_back
   </mat-icon>
   <span>{{ title }}</span>
@@ -11,13 +11,13 @@
       <div class="form-container">
         <mat-form-field appearance="fill">
           <mat-label>E-post</mat-label>
-          <input matInput [(ngModel)]="this.loginInfo.email" />
+          <input matInput [(ngModel)]="email" />
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Lösenord</mat-label>
           <input
-            [(ngModel)]="this.loginInfo.password"
+            [(ngModel)]="password"
             matInput
             [type]="hide ? 'password' : 'text'"
           />
