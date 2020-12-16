@@ -24,6 +24,7 @@ export class ProfileCardComponent {
     active: false,
     availableDates: [new Date('')],
     lasOrderDay: '',
+    profilePictureUrl: ''
   };
 
   @Input() associatedBakery: Bakery | null = null;

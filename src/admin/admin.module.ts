@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { components } from './components';
 import {materialModules} from '../material-modules';
+import {commonModules} from '../common-modules';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {materialModules} from '../material-modules';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    ...materialModules
+    ...materialModules,
+    ...commonModules
   ]
 })
 export class AdminModule { }

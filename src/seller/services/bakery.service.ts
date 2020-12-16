@@ -25,7 +25,7 @@ export class BakeryService {
     return this.http.get<Bakery[]>(`${urls.bakeryUrls.Get.getBakeriesByCountyUrl}${county}`);
   }
 
-  associateBakery(userId: number, bakeryId: number): any {
+  associateBakery(userId: number, bakeryId: number): Observable<any> {
     return this.http.post<any>(`${urls.bakeryUrls.Post.associateBakeryUrl}?userId=${userId}&bakeryId=${bakeryId}`, {});
   }
 

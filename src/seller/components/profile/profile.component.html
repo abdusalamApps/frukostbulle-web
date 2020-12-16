@@ -12,8 +12,12 @@
   <label class="image-chooser">
     <input id="image-input" type="file" accept="image/*" (change)="chooseImage($event)">
     <img class="profile-photo" alt="profile photo"
-         src="{{(imageSrc || imageSrc === '') ? imageSrc
-           : 'assets/img/profile-photo-placeholder.png'}}">
+         src="{{
+         (userObservable$ | async) ?
+          (userObservable$ | async)?.profilePictureUrl ?
+           (userObservable$ | async)?.profilePictureUrl : 'assets/img/profile-photo-placeholder.png'
+           :
+           'assets/img/profile-photo-placeholder.png'}}">
   </label>
   <app-profile-card
     [user]="userObservable$ | async"

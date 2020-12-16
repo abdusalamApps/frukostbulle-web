@@ -103,4 +103,5 @@ export type BakeryActions =
   | LoadBakeries | LoadBakeriesByCity | LoadBakeriesByCounty
   | LoadBakeriesSuccess | LoadBakeriesFail
   | AssociateBakery | AssociateBakerySuccess | AssociateBakeryFail
+  | AssociateBakeryConfirm
   | LoadBakeryById | LoadBakeryByIdSuccess | LoadBakeryByIdFail;

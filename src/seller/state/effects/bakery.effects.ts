@@ -77,7 +77,7 @@ export class BakeryEffects {
       switchMap((action: bakeryActions.AssociateBakeryConfirm) => {
         return this.bakeryService.associateBakery(action.userId, action.bakeryId).pipe(
           map(() => new bakeryActions.AssociateBakerySuccess()),
-          catchError(error => of(new bakeryActions.AssociateBakeryFail(error)))
+          catchError((error: any) => of(new bakeryActions.AssociateBakeryFail(error)))
         );
       })
     )

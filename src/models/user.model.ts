@@ -13,4 +13,5 @@ export interface User {
   active: boolean;
   availableDates: Date[];
   lasOrderDay: string;
+  profilePictureUrl: string;
 }
