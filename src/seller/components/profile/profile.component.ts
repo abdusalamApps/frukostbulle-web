@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userObservable$ = this.store.select(fromState.getCurrentUser);
-    this.bakery$ = this.store.select(fromState.getAssociatedBakery);
+    this.bakery$ = this.store.select(fromState.getCurrentUserAssociatedBakery);
   }
 
   public navigateToProfileEditor(): void {

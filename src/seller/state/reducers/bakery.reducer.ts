@@ -46,7 +46,7 @@ export function reducer(
         ...state,
         bakeriesLoaded: true,
         bakeriesLoading: false,
-        entities: entities
+        entities
       };
     }
     case bakeryActions.LOAD_BAKERIES_FAIL: {
