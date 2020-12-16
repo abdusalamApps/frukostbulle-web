@@ -1,7 +1,7 @@
 import { baseUrl } from './base';
 
 export namespace Get {
-  export const getUserByIdUrl = `${baseUrl}/user-by-id`;
+  export const getUserByIdUrl = `${baseUrl}/user-by-id?id=`;
   export const getUserByEmailUrl = `${baseUrl}/user-by-email?user-email=`;
   export const getAllUsersUrl = `${baseUrl}/user-users`;
   export const getSellerDatesUrl = `${baseUrl}/user-dates`;

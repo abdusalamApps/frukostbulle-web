@@ -29,6 +29,7 @@ import {ProfileCardComponent} from './components/profile/profile-card/profile-ca
 import { ChooseBakeryDialogComponent } from './components/choose-bakery-dialog/choose-bakery-dialog.component';
 
 import {CalendarModule} from '@syncfusion/ej2-angular-calendars';
+import { OrderDetailsCardComponent } from './components/order-details/order-details-card/order-details-card.component';
 
 // @ts-ignore
 @NgModule({
@@ -53,6 +54,7 @@ import {CalendarModule} from '@syncfusion/ej2-angular-calendars';
     DeleteDialog,
     ProfileCardComponent,
     ChooseBakeryDialogComponent,
+    OrderDetailsCardComponent,
   ],
   imports: [
     CommonModule,

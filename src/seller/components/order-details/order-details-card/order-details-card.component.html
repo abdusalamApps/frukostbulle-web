@@ -1,0 +1,56 @@
+<mat-card>
+  <h1>{{(buyer$ | async)?.name}}</h1>
+  <mat-list>
+
+    <h3 matSubheader>Frallor</h3>
+    <mat-list-item *ngFor="let entry of order?.content | keyvalue">
+      <img mat-list-avatar src="assets/img/no-image.png">
+      <h3 matLine> {{entry.key.itemName}} </h3>
+      <p matLine>{{entry.key.price}}</p>
+      <p matLine> {{entry.value}}</p>
+      <h3> {{entry.key.price * entry.value}}:- </h3>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+  </mat-list>
+
+  <mat-list>
+    <mat-list-item>
+      <h2>Total</h2>
+      <span class="toolbar-spacer"></span>
+      <h2>{{total}}:-</h2>
+    </mat-list-item>
+  </mat-list>
+
+
+  <mat-list>
+    <h3 matSubheader>Address</h3>
+    <mat-list-item>
+      <h2>{{(buyer$ | async)?.address}}</h2>
+    </mat-list-item>
+  </mat-list>
+
+  <mat-list>
+    <h3 matSubheader>Beställningsnummer</h3>
+    <mat-list-item>
+      <h2>{{order?.id}}</h2>
+    </mat-list-item>
+  </mat-list>
+  <!--
+    <mat-list>
+      <h3 matSubheader>Mobilnummer</h3>
+      <mat-list-item>
+        <h2>Buyer's mobile number</h2>
+      </mat-list-item>
+    </mat-list>
+  -->
+
+  <div class="form-container">
+    <button mat-raised-button color="accent">
+      SKRIV UT KVITTO
+    </button>
+
+  </div>
+
+
+</mat-card>

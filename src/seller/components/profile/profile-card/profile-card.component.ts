@@ -12,7 +12,7 @@ export class ProfileCardComponent {
   @Input() user: User | null = {
     id: -1,
     name: '',
-    county:'',
+    county: '',
     city: '',
     address: '',
     mobilenbr: '',
@@ -30,7 +30,7 @@ export class ProfileCardComponent {
 
   @Output() logout = new EventEmitter();
 
-  logoutClick() {
+  logoutClick(): void {
     this.logout.emit();
   }
 }

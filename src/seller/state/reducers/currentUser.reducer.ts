@@ -15,7 +15,7 @@ export const initialState: CurrentUserState = {
 };
 
 export function reducer(
-  state= initialState,
+  state = initialState,
   action: userActions.CurrentUserAction
 ): CurrentUserState {
   switch (action.type) {
@@ -34,7 +34,7 @@ export function reducer(
         currentUserLoaded: true,
         currentUserLoading: false,
         currentUser: action.payload
-      }
+      };
     }
     case userActions.LOAD_CURRENT_USER_FAIL: {
       return {
@@ -42,14 +42,14 @@ export function reducer(
         currentUserLoaded: false,
         currentUserLoading: false,
         currentUser: null,
-      }
+      };
     }
     case userActions.UPDATE_DATES_SUCCESS: {
       const dates = action.dates;
       let newUser: User;
       if (state.currentUser) {
-        newUser = {...state.currentUser, availableDates: dates}
-        return {...state, currentUser: newUser}
+        newUser = {...state.currentUser, availableDates: dates};
+        return {...state, currentUser: newUser};
       }
       return state;
     }

@@ -38,7 +38,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
   sellerEmail = '';
 
   constructor(
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private store: Store<fromState.SellerState>,
     private rootStore: Store<fromRoot.State>,
     private dialog: MatDialog
@@ -77,7 +77,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
 
   onSave() {
     if (this.name === '' || this.price < 0) {
-      this._snackBar.open('Rätta felen!', 'Ok', {duration: 1000});
+      this.snackBar.open('Rätta felen!', 'Ok', {duration: 1000});
     } else {
 
       console.log(`onSave()@ItemEditor`);
@@ -95,7 +95,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
 
   onUpdate() {
     if (this.name === '' || this.price < 0) {
-      this._snackBar.open('Rätta felen!', 'Ok', {duration: 1000});
+      this.snackBar.open('Rätta felen!', 'Ok', {duration: 1000});
     } else {
 
       this.store.select(fromState.getCurrentUser).subscribe(

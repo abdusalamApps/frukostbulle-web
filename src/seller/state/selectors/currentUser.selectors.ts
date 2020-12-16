@@ -12,19 +12,19 @@ export const getCurrentUserState = createSelector(
 export const getCurrentUserLoading = createSelector(
   getCurrentUserState,
   fromCurrentUser.getCurrentUserLoading
-)
+);
 
 
 export const getCurrentUserLoaded = createSelector(
   getCurrentUserState,
   fromCurrentUser.getCurrentUserLoaded
-)
+);
 
 
 export const getCurrentUser = createSelector(
   getCurrentUserState,
   fromCurrentUser.getCurrentUser
-)
+);
 export const getCurrentUserId = createSelector(
   getCurrentUserState,
   fromCurrentUser.getCurrentUserId

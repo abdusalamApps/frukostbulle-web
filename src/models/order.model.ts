@@ -8,7 +8,7 @@ export interface Order {
   sellerName: string;
   buyerName: string;
   bakeryName: string;
-  deliveryMethod: boolean;
+  deliveryMethod: number;
   deliveryTime: string;
   deliveryDate: string;
   handled: boolean;

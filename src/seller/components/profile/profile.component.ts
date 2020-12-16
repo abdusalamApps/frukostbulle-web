@@ -21,9 +21,9 @@ export class ProfileComponent implements OnInit {
 
   file = new File(['nofing'], 'empty file');
 
-  imageSrc: string = 'assets/img/profile-photo-placeholder.png';
-  name: string = '';
-  email: string = '';
+  imageSrc = 'assets/img/profile-photo-placeholder.png';
+  name = '';
+  email = '';
   mobile = 0;
 
   constructor(private store: Store<fromState.SellerState>,

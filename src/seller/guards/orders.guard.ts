@@ -15,12 +15,12 @@ export class OrdersGuard implements CanActivate {
   }
 
   canActivate(): Observable<boolean> {
-    let userId: string = '';
-    let fromStorage = localStorage.getItem('currentUserId');
+    let userId = '';
+    const fromStorage = localStorage.getItem('currentUserId');
     if (fromStorage) {
       userId = fromStorage;
     }
-    return this.checkStore(parseInt(userId)).pipe(
+    return this.checkStore(parseInt(userId, 10)).pipe(
       switchMap(() => of(true)),
       catchError(() => of(false))
     );
@@ -29,9 +29,7 @@ export class OrdersGuard implements CanActivate {
   checkStore(sellerId: number): Observable<boolean> {
     return this.store.select(fromState.getOrdersLoaded).pipe(
       tap((loaded) => {
-        if (!loaded) {
-          this.store.dispatch(new fromState.LoadSellerOrders(sellerId));
-        }
+        this.store.dispatch(new fromState.LoadSellerOrders(sellerId));
       }),
       filter(loaded => loaded),
       take(1)
