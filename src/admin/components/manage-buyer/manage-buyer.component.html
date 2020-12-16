@@ -1,0 +1,14 @@
+<mat-toolbar class="toolbar" color="primary">
+  <span class="spacer"></span>
+  <mat-icon mat-ripple
+            class="back-icon"
+            (click)="navigateBack()">
+    arrow_back
+  </mat-icon>
+  <span>{{ title }}</span>
+</mat-toolbar>
+<div class="container">
+  <button mat-raised-button class="delete-button" style="margin: 16px 0 16px 0" (click)="confirmDelete('köparnamn');">
+    TA BORT KÖPARE
+  </button>
+</div>

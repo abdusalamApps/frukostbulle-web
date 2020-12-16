@@ -1,0 +1,83 @@
+<p>create-seller works!</p>
+<mat-toolbar class="toolbar" color="primary">
+    <span class="spacer"></span>
+    <mat-icon mat-ripple
+              class="back-icon"
+              (click)="navigateBack()">
+      arrow_back
+    </mat-icon>
+    <span>{{ title }}</span>
+  </mat-toolbar>
+  
+  <div class="container">
+    <div class="form-container">
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Epost</mat-label>
+        <input matInput placeholder="Placeholder" value="{{email}}">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Namn</mat-label>
+        <input matInput placeholder="Placeholder">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Mobilnummer</mat-label>
+        <input matInput placeholder="Placeholder">
+      </mat-form-field>
+  
+      <button routerLinkActive="active"
+              routerLink="/seller-choose-bakery"
+              mat-button class="text-button" style="margin: 16px 0 16px 0">
+        VÄLJ BAGERI
+      </button>
+  
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Län</mat-label>
+        <mat-select>
+          <mat-option value="option">Skåne</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Stad</mat-label>
+        <mat-select>
+          <mat-option value="option">Höganäs</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <button mat-button class="text-button" style="margin: 16px 0 16px 0">
+        VÄLJ OMRÅDE
+      </button>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Lösenord</mat-label>
+        <input [(ngModel)]='enteredPassword' matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Bekräfta lösenord</mat-label>
+        <input [(ngModel)]='enteredPassword2' matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+  
+      <mat-error>{{enteredPassword === enteredPassword2 ? '' : 'Passwords do not match'}}</mat-error>
+  
+      <button mat-raised-button color="accent" style="margin-top: 16px"
+              (click)="createProfile()">
+        SKAPA
+      </button>
+  
+  
+    </div>
+  
+  </div>

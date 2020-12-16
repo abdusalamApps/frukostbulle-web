@@ -5,11 +5,8 @@ import {Item} from '../../../models/item.model';
 import {Store} from '@ngrx/store';
 import * as fromState from '../../state';
 import * as fromRoot from '../../../app/state';
-import {Observable, of} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
-import {InsertItem} from '../../../models/insertItem.model';
-import * as urls from '../../../urls';
-import {ItemsService} from '../../services/items.service';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {User} from '../../../models/user.model';
 
@@ -64,7 +61,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
     );
   }
 
-  chooseImage(event: any) {
+  chooseImage(event: any): void {
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       [this.file] = event.target.files;
@@ -75,48 +72,42 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSave() {
+  onSave(): void {
     if (this.name === '' || this.price < 0) {
       this.snackBar.open('Rätta felen!', 'Ok', {duration: 1000});
     } else {
-
       console.log(`onSave()@ItemEditor`);
-      this.store.select(fromState.getCurrentUser).subscribe(
-        (currentUser: User | null) => {
-          let imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
-          if (currentUser) {
-            let newItem = new Item(0, currentUser.id, currentUser.email, this.price, this.name, imageUrl);
-            this.store.dispatch(new fromState.InsertItem(newItem));
-          }
-        }
-      );
+      const currentEmail = localStorage.getItem('currentUserEmail');
+      const currentUserId = localStorage.getItem('currentUserId');
+      if (currentEmail && currentUserId) {
+        const imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
+        const newItem = new Item(0, parseInt(currentUserId, 10), currentEmail, this.price, this.name, imageUrl);
+        this.store.dispatch(new fromState.InsertItem(newItem));
+      }
     }
   }
 
-  onUpdate() {
+  onUpdate(): void {
     if (this.name === '' || this.price < 0) {
       this.snackBar.open('Rätta felen!', 'Ok', {duration: 1000});
     } else {
-
-      this.store.select(fromState.getCurrentUser).subscribe(
-        (currentUser: User | null) => {
-          let imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
-          if (currentUser) {
-            let newItem = new Item(this.itemId, currentUser.id, currentUser.email, this.price, this.name, imageUrl);
-            this.store.dispatch(new fromState.UpdateItem(newItem));
-          }
-        }
-      );
+      const currentEmail = localStorage.getItem('currentUserEmail');
+      const currentUserId = localStorage.getItem('currentUserId');
+      if (currentUserId && currentEmail) {
+        const imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
+        const newItem = new Item(this.itemId, parseInt(currentUserId, 10), currentEmail, this.price, this.name, imageUrl);
+        this.store.dispatch(new fromState.UpdateItem(newItem));
+      }
     }
 
   }
 
-  onCancel() {
+  onCancel(): void {
     this.rootStore.dispatch(new fromRoot.Back());
   }
 
-  onDelete() {
-    const dialogRef = this.dialog.open(DeleteDialog, {
+  onDelete(): void {
+    this.dialog.open(DeleteDialog, {
       width: '250px',
       data: {
         store: this.store,
@@ -129,9 +120,11 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
 }
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'delete-dialog',
   templateUrl: 'delete-dialog.html',
 })
+// tslint:disable-next-line:component-class-suffix
 export class DeleteDialog {
 
   constructor(

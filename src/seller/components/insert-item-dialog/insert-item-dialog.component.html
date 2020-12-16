@@ -1,0 +1,9 @@
+<h2>Lägga in bulle med</h2>
+<mat-list>
+  <mat-list-item>Namn: {{data.item.itemName}}</mat-list-item>
+  <mat-list-item>Price: {{data.item.price}}?</mat-list-item>
+</mat-list>
+<div mat-dialog-actions>
+  <button mat-button (click)="onYesClick()">Ja</button>
+  <button mat-button (click)="onNoClick()">Nej</button>
+</div>

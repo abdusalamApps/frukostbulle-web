@@ -15,15 +15,14 @@ export class ItemsGuard implements CanActivate {
   }
 
   canActivate(): Observable<boolean> {
-    let sellerId: string = '';
-    let fromStorage = localStorage.getItem('currentUserId');
+    let sellerId = '';
+    const fromStorage = localStorage.getItem('currentUserId');
     if (fromStorage) {
       sellerId = fromStorage;
+      this.store.dispatch(new fromState.LoadItems(parseInt(sellerId, 10)));
     }
-    return this.checkStore(parseInt(sellerId)).pipe(
-      switchMap(() => of(true)),
-      catchError(() => of(false))
-    );
+
+    return of(true);
   }
 
   checkStore(sellerId: number): Observable<boolean> {

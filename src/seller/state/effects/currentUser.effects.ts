@@ -26,13 +26,13 @@ export class CurrentUserEffects {
   );
 
   loadCurrentUserSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.LOAD_CURRENT_USER_SUCCESS),
-      map((action: userActions.LoadCurrentUserSuccess) => {
-        localStorage.setItem('currentUserId', action.payload.id.toString(10))
-        localStorage.setItem('currentUserEmail', action.payload.email)
-      })
-    ),
+      this.actions$.pipe(
+        ofType(userActions.LOAD_CURRENT_USER_SUCCESS),
+        map((action: userActions.LoadCurrentUserSuccess) => {
+          localStorage.setItem('currentUserId', action.payload.id.toString(10));
+          localStorage.setItem('currentUserEmail', action.payload.email);
+        })
+      ),
     {dispatch: false}
   );
 

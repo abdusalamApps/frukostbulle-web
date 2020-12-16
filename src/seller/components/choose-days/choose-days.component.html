@@ -4,7 +4,7 @@
   </button>
   <span>{{title}}</span>
 </mat-toolbar>
-
+<div *ngIf="dateValues$ | async"></div>
 <div class="container">
   <mat-card>
     <ejs-calendar weekNumber='true'

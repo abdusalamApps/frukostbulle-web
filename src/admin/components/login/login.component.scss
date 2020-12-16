@@ -1,0 +1,59 @@
+.toolbar {
+    cursor: default;
+    position: sticky;
+  }
+  .back-icon {
+    margin-right: 16px;
+  }
+  
+  .container {
+    padding: 16px 16px 0 16px;
+    margin-bottom: 20%;
+  }
+  
+  .form-container {
+    margin: 16px;
+    display: grid;
+    grid-gap: 2em;
+  }
+  
+  .form-field {
+    width: 100%;
+  }
+  
+  .text-button {
+    color: #c79100;
+  }
+  
+  .header {
+    margin: 2em 0 2em 0;
+    text-align: center;
+  }
+  
+  .buttons-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    bottom: 5em;
+  }
+  
+  @media (min-width: 1150px) {
+  
+    .toolbar {
+      padding: 0 25% 0 25%;
+    }
+  
+    .form-container {
+      width: 50%;
+      padding: 0 25% 0 25%;
+      margin: 1em 0 0 0;
+    }
+  
+    .buttons-container {
+
+      width: 50%;
+      padding: 0 25% 0 25%;
+    }
+  }
+  
+  

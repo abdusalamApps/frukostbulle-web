@@ -1,0 +1,32 @@
+<div class="container">
+  <h1 class="header">Logga in</h1>
+
+  <div class="form-container">
+
+    <mat-form-field appearance="fill">
+      <mat-label>E-post</mat-label>
+      <input matInput placeholder="Placeholder" value="{{email}}">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Lösenord</mat-label>
+      <input class='enteredPassword' matInput [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"> <!-- default is that password is visible, make it not visible-->
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="buttons-container">
+
+      <button
+        (click)="login();"
+        mat-raised-button color="accent">
+        LOGGA IN
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

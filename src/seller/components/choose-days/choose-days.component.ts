@@ -16,7 +16,7 @@ export class ChooseDaysComponent implements OnInit {
   title = 'Välj dagar';
 
   public dateValues$ = new Observable<Date[] | undefined>();
-  public multiSelect: Boolean = true;
+  public multiSelect = true;
   public newDates: Date[] = [];
 
   userId$ = new Observable();
@@ -30,14 +30,10 @@ export class ChooseDaysComponent implements OnInit {
   }
 
   onSave(): void {
-    console.log(`new dates: ${this.newDates}`)
-    this.userId$ = this.store.select(fromState.getCurrentUserId).pipe(
-      tap((userId: number | undefined) => {
-        if (userId) {
-          this.store.dispatch(new fromState.UpdateDates(userId, this.newDates))
-        }
-      })
-    )
+    const id = localStorage.getItem('currentUserId');
+    if (id) {
+      this.store.dispatch(new fromState.UpdateDates(parseInt(id), this.newDates));
+    }
   }
 
   navigateBack(): void {

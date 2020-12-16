@@ -7,6 +7,8 @@ export const LOAD_ITEMS_FAIL = '[Seller] Load Items Fail';
 export const LOAD_ITEMS_SUCCESS = '[Seller] Load Items Success';
 
 export const INSERT_ITEM = '[Seller] Insert Item';
+export const INSERT_ITEM_CONFIRM = '[Seller] Insert Item Confirm';
+export const INSERT_ITEM_CANCEL = '[Seller] Insert Item Cancel';
 export const INSERT_ITEM_SUCCESS = '[Seller] Insert Item Success';
 export const INSERT_ITEM_FAIL = '[Seller] Insert Item Fail';
 
@@ -46,6 +48,20 @@ export class InsertItem implements Action {
   constructor(public payload: Item) {
   }
 }
+
+export class InsertItemConfirm implements Action {
+  readonly type = INSERT_ITEM_CONFIRM;
+
+  constructor(public payload: Item) {
+  }
+}
+
+export class InsertItemCancel implements Action {
+  readonly type = INSERT_ITEM_CANCEL;
+
+}
+
+
 
 export class InsertItemSuccess implements Action {
   readonly type = INSERT_ITEM_SUCCESS;

@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <span>{{title}}</span>
+</mat-toolbar>
+
+<div class="container">
+
+
+  <mat-list>
+    <mat-list-item mat-ripple (click)="bakeryRowClicked();" class="list-item">
+      <h3 matLine class="user-id"> ID </h3>
+      <p matLine class="bakery-mail"> Bagerinamn </p>
+      <p matLine class="bakery-name"> Mail </p>
+      <p matLine class="bakery-number"> Nummer? </p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+
+  </mat-list>
+
+
+  <button mat-fab matSuffix class="fab" routerLink="/create-bakery" routerLinkActive="active">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
