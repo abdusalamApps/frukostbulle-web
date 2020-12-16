@@ -53,7 +53,7 @@ const routes: Routes = [
       },
       {
         path: 'map', component: Components.MapComponent,
-        canActivate: [fromGuards.AuthGuard],
+        canActivate: [fromGuards.AuthGuard, fromGuards.AreaGuard],
       },
       {
         path: 'items/:itemId', component: Components.ItemEditorComponent,

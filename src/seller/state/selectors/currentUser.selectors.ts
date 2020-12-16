@@ -82,3 +82,8 @@ export const getCurrentUserLastOrderDay = createSelector(
   getCurrentUserState,
   fromCurrentUser.getCurrentUserLastOrderDay
 );
+
+export const getCurrentUserArea = createSelector(
+  getCurrentUserState,
+  fromCurrentUser.getCurrentUserArea
+);

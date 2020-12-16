@@ -6,8 +6,10 @@
   <span>{{ title }}</span>
   <span  class="toolbar-spacer"></span>
   <mat-icon
-  *ngIf="pointList.length > 0"
+  *ngIf="(pointList.length > 0) && editing"
   (click)="deleteSelectedShape()">delete</mat-icon>
+  <mat-icon *ngIf="!editing" (click)="onEdit()" style="margin-left: 8px">edit</mat-icon>
+  <mat-icon *ngIf="editing" (click)="onEdit()" style="margin-left: 8px">close</mat-icon>
 </mat-toolbar>
 
 <div class="container">
@@ -17,8 +19,8 @@
            (mapReady)="onMapReady($event)">
 
     <agm-marker [latitude]="lat" [longitude]="lng">
-
     </agm-marker>
+    <agm-polygon *ngIf="!editing" [paths]="(area$ | async).coordinates"></agm-polygon>
   </agm-map>
 
   <div class="buttons-container" style="margin-top: 16px">
