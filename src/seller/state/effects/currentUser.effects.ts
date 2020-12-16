@@ -6,11 +6,17 @@ import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import * as fromRoot from 'src/app/state';
 import {User} from 'src/models/user.model';
+import {BakeryService} from '../../services/bakery.service';
+import {Bakery} from '../../../models/bakery.model';
+import {AreaService} from '../../services/area.service';
+import {Area} from '../../../models/area.model';
 
 @Injectable()
 export class CurrentUserEffects {
   constructor(private actions$: Actions,
-              private userService: UsersService) {
+              private userService: UsersService,
+              private bakeryService: BakeryService,
+              private areaService: AreaService) {
   }
 
   loadCurrentUser$ = createEffect(() =>
@@ -25,16 +31,63 @@ export class CurrentUserEffects {
     )
   );
 
+  /*
+    loadCurrentUserSuccess$ = createEffect(() =>
+        this.actions$.pipe(
+          ofType(userActions.LOAD_CURRENT_USER_SUCCESS),
+          map((action: userActions.LoadCurrentUserSuccess) => {
+            localStorage.setItem('currentUserId', action.payload.id.toString(10));
+            localStorage.setItem('currentUserEmail', action.payload.email);
+          })
+        ),
+      {dispatch: false}
+    );
+  */
+
   loadCurrentUserSuccess$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(userActions.LOAD_CURRENT_USER_SUCCESS),
-        map((action: userActions.LoadCurrentUserSuccess) => {
-          localStorage.setItem('currentUserId', action.payload.id.toString(10));
-          localStorage.setItem('currentUserEmail', action.payload.email);
-        })
-      ),
-    {dispatch: false}
+    this.actions$.pipe(
+      ofType(userActions.LOAD_CURRENT_USER_SUCCESS),
+      switchMap((action: userActions.LoadCurrentUserSuccess) => {
+        localStorage.setItem('currentUserId', action.payload.id.toString(10));
+        localStorage.setItem('currentUserEmail', action.payload.email);
+        return of(new userActions.LoadCurrentUserBakery(action.payload.id));
+      })
+    ),
   );
+
+  loadCurrentUserSuccess2$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.LOAD_CURRENT_USER_SUCCESS),
+      switchMap((action: userActions.LoadCurrentUserSuccess) => {
+        return of(new userActions.LoadCurrentUserArea(action.payload.id));
+      })
+    ),
+  );
+
+  loadCurrentUserBakery$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.LOAD_CURRENT_USER_BAKERY),
+      switchMap((action: userActions.LoadCurrentUserBakery) => {
+        return this.bakeryService.getBakeryBySellerId(action.payload).pipe(
+          map((bakery: Bakery) => new userActions.LoadCurrentUserBakerySuccess(bakery)),
+          catchError((error: any) => of(new userActions.LoadCurrentUserBakeryFail(error)))
+        );
+      })
+    )
+  );
+
+  loadCurrentUserArea$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.LOAD_CURRENT_USER_AREA),
+      switchMap((action: userActions.LoadCurrentUserArea) => {
+        return this.areaService.getAreaBySellerId(action.payload).pipe(
+          map((area: Area) => new userActions.LoadCurrentUserAreaSuccess(area)),
+          catchError((error: any) => of(new userActions.LoadCurrentUserAreaFail(error)))
+        );
+      })
+    )
+  );
+
 
   updateUser$ = createEffect(() =>
     this.actions$.pipe(

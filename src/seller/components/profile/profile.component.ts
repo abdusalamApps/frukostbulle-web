@@ -32,25 +32,14 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userObservable$ = this.store.select(fromState.getCurrentUser).pipe(
-      tap(user => {
-        if (user) {
-          if (user.associatedBakery) {
-            this.store.dispatch(new fromState.LoadBakeryById(user.associatedBakery));
-            this.bakery$ = this.store.select(fromState.getAssociatedBakery);
-          }
-        }
-      })
-    );
+    this.userObservable$ = this.store.select(fromState.getCurrentUser);
+    this.bakery$ = this.store.select(fromState.getAssociatedBakery);
   }
 
   public navigateToProfileEditor(): void {
   }
 
-  onChooseBakery() {
-  }
-
-  chooseImage(event: any) {
+  chooseImage(event: any): void {
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       [this.file] = event.target.files;
@@ -63,7 +52,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onLogout() {
+  onLogout(): void {
     this.store.dispatch(new fromState.Logout());
   }
 }

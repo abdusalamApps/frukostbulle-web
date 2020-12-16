@@ -1,17 +1,22 @@
 import {User} from '../../../models/user.model';
 import * as userActions from '../actions/currentUser.action';
-import {UPDATE_DATES_SUCCESS} from '../actions/currentUser.action';
+import {Bakery} from '../../../models/bakery.model';
+import {Area} from '../../../models/area.model';
 
 export interface CurrentUserState {
   currentUserLoading: boolean;
   currentUserLoaded: boolean;
   currentUser: User | null;
+  currentUserBakery: Bakery | null;
+  currentUserArea: Area | null;
 }
 
 export const initialState: CurrentUserState = {
   currentUserLoading: false,
   currentUserLoaded: false,
-  currentUser: null
+  currentUser: null,
+  currentUserBakery: null,
+  currentUserArea: null
 };
 
 export function reducer(
@@ -27,11 +32,16 @@ export function reducer(
         currentUserLoading: true
       };
     }
-    case userActions.UPDATE_USER_SUCCESS:
+    case userActions.UPDATE_USER_SUCCESS: {
+      return {
+        ...state,
+        currentUser: action.payload
+      };
+    }
     case userActions.LOAD_CURRENT_USER_SUCCESS: {
       return {
         ...state,
-        currentUserLoaded: true,
+        currentUserLoaded: false,
         currentUserLoading: false,
         currentUser: action.payload
       };
@@ -53,6 +63,18 @@ export function reducer(
       }
       return state;
     }
+    case userActions.LOAD_CURRENT_USER_BAKERY_SUCCESS: {
+      return {
+        ...state,
+        currentUserBakery: action.payload
+      };
+    }
+    case userActions.LOAD_CURRENT_USER_AREA_SUCCESS: {
+      return {
+        ...state,
+        currentUserArea: action.payload
+      };
+    }
     default:
       return state;
   }
@@ -71,7 +93,8 @@ export const getCurrentUserEmail = (state: CurrentUserState) => state.currentUse
 export const getCurrentUserPassword = (state: CurrentUserState) => state.currentUser?.password;
 export const getCurrentUserPermissionLevel = (state: CurrentUserState) => state.currentUser?.permissionLevel;
 export const getCurrentUserReminder = (state: CurrentUserState) => state.currentUser?.reminder;
-export const getCurrentUserAssociatedBakery = (state: CurrentUserState) => state.currentUser?.associatedBakery;
+export const getCurrentUserAssociatedBakery = (state: CurrentUserState) => state.currentUserBakery;
 export const getCurrentUserActive = (state: CurrentUserState) => state.currentUser?.active;
 export const getCurrentUserAvailableDates = (state: CurrentUserState) => state.currentUser?.availableDates;
 export const getCurrentUserLastOrderDay = (state: CurrentUserState) => state.currentUser?.lasOrderDay;
+export const getCurrentUserArea = (state: CurrentUserState) => state.currentUserArea;

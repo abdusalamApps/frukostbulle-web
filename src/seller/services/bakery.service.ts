@@ -25,12 +25,16 @@ export class BakeryService {
     return this.http.get<Bakery[]>(`${urls.bakeryUrls.Get.getBakeriesByCountyUrl}${county}`);
   }
 
-  associateBakery(userId: number, bakeryId: number) {
+  associateBakery(userId: number, bakeryId: number): any {
     return this.http.post<any>(`${urls.bakeryUrls.Post.associateBakeryUrl}?userId=${userId}&bakeryId=${bakeryId}`, {});
   }
 
   getBakeryById(bakeryId: number): Observable<Bakery> {
     return this.http.get<Bakery>(`${urls.bakeryUrls.Get.getBakeryByIdUrl}${bakeryId}`);
+  }
+
+  getBakeryBySellerId(sellerId: number): Observable<Bakery> {
+    return this.http.get<Bakery>(`${urls.bakeryUrls.Get.getBakeryByIdSellerUrl}${sellerId}`);
   }
 
 }

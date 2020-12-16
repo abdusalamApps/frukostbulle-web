@@ -29,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: 'profile', component: Components.ProfileComponent,
-        canActivate: [fromGuards.AuthGuard],
+        canActivate: [fromGuards.AuthGuard, fromGuards.ProfileGuard],
       },
       {
         path: 'notifications', component: Components.NotificationsComponent,

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from '../../models/user.model';
 import {Observable} from 'rxjs';
 import * as urls from '../../urls';
@@ -10,10 +10,15 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AreaService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   updateArea(area: Area): Observable<any> {
     return this.http.post<any>(urls.areasUrls.Post.updateAreaUrl, area);
+  }
+
+  getAreaBySellerId(sellerId: number): Observable<Area> {
+    return this.http.get<Area>(`${urls.areasUrls.Get.getAreaBySellerIdUrl}${sellerId}`);
   }
 
 }
