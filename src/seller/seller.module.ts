@@ -31,6 +31,7 @@ import { ChooseBakeryDialogComponent } from './components/choose-bakery-dialog/c
 import {CalendarModule} from '@syncfusion/ej2-angular-calendars';
 import { OrderDetailsCardComponent } from './components/order-details/order-details-card/order-details-card.component';
 import { InsertItemDialogComponent } from './components/insert-item-dialog/insert-item-dialog.component';
+import { MapComponent } from './components/seller-area/map/map.component';
 
 // @ts-ignore
 @NgModule({
@@ -39,7 +40,7 @@ import { InsertItemDialogComponent } from './components/insert-item-dialog/inser
     Components.ChooseBakeryComponent,
     Components.SignupComponent,
     Components.ChooseDaysComponent,
-    Components.MapComponent,
+    Components.SellerAreaComponent,
     Components.MyItemsComponent,
     Components.NotificationsComponent,
     Components.OrderDetailsComponent,
@@ -57,6 +58,7 @@ import { InsertItemDialogComponent } from './components/insert-item-dialog/inser
     ChooseBakeryDialogComponent,
     OrderDetailsCardComponent,
     InsertItemDialogComponent,
+    MapComponent,
   ],
   imports: [
     CommonModule,

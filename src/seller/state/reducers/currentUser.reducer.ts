@@ -10,7 +10,6 @@ export interface CurrentUserState {
   currentUserBakery: Bakery | null;
   currentUserArea: Area | null;
 }
-
 export const initialState: CurrentUserState = {
   currentUserLoading: false,
   currentUserLoaded: false,
@@ -98,3 +97,4 @@ export const getCurrentUserActive = (state: CurrentUserState) => state.currentUs
 export const getCurrentUserAvailableDates = (state: CurrentUserState) => state.currentUser?.availableDates;
 export const getCurrentUserLastOrderDay = (state: CurrentUserState) => state.currentUser?.lasOrderDay;
 export const getCurrentUserArea = (state: CurrentUserState) => state.currentUserArea;
+export const getCurrentUserCoordinates = (state: CurrentUserState) => state.currentUserArea?.coordinates;

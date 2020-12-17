@@ -2,7 +2,7 @@ export { ItemEditorComponent } from './item-editor/item-editor.component';
 export { ChooseBakeryComponent } from './choose-bakery/choose-bakery.component';
 export { SignupComponent } from './signup/signup.component';
 export { ChooseDaysComponent } from './choose-days/choose-days.component';
-export { MapComponent } from './map/map.component';
+export { SellerAreaComponent } from './seller-area/seller-area.component';
 export { MyItemsComponent } from './my-items/my-items.component';
 export { NotificationsComponent } from './notifications/notifications.component';
 export { OrderDetailsComponent } from './order-details/order-details.component';

@@ -47,8 +47,8 @@ export class LoginEffects {
         new userActions.LoadCurrentUser(action.payload.email),
         new fromRoot.Go({path: ['seller/items']})
       ]),
-      // map((authResponse) => new userActions.LoadCurrentUser(authResponse)),
-      // map((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
+      // seller-area((authResponse) => new userActions.LoadCurrentUser(authResponse)),
+      // seller-area((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
     )
   );
 

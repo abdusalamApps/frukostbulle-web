@@ -72,3 +72,4 @@ export function reducer(
 export const getSellerOrdersEntities = (state: OrderState) => state.entities;
 export const getSellerOrdersLoaded = (state: OrderState) => state.ordersLoaded;
 export const getSellerOrdersLoading = (state: OrderState) => state.ordersLoading;
+export const getOrderHistory = (state: OrderState) => state.orderHistory;

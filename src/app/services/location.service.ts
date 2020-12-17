@@ -18,11 +18,9 @@ export class LocationService {
   currentLng$ = this.lngSource.asObservable();
   currentLatLng$ = this.latLngSource.asObservable();
 
-  getCurrentLocation() {
+  getCurrentLocation(): void {
     if ('geolocation' in navigator) {
       navigator.geolocation.watchPosition((position) => {
-        console.log('lat: ' + position.coords.latitude);
-        console.log('lng: ' + position.coords.longitude);
         this.latSource.next(
           parseFloat(position.coords.latitude.toPrecision(15))
         );

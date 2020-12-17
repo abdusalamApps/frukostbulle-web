@@ -87,3 +87,8 @@ export const getCurrentUserArea = createSelector(
   getCurrentUserState,
   fromCurrentUser.getCurrentUserArea
 );
+
+export const getCurrentUserCoordinates = createSelector(
+  getCurrentUserState,
+  fromCurrentUser.getCurrentUserCoordinates
+)

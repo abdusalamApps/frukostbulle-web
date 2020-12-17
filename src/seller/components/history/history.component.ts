@@ -21,7 +21,7 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.orders$ = this.store.select(fromState.getSellerOrders);
+    this.orders$ = this.store.select(fromState.getOrderHistory);
   }
 
   getOrderTotal(orderId: number): number {

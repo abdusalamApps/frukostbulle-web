@@ -11,11 +11,11 @@ import {Observable} from 'rxjs';
 declare const google: any;
 
 @Component({
-  selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  selector: 'app-seller-area',
+  templateUrl: './seller-area.component.html',
+  styleUrls: ['./seller-area.component.scss']
 })
-export class MapComponent implements OnInit, OnDestroy {
+export class SellerAreaComponent implements OnInit, OnDestroy {
   title = 'Säljare i ditt område';
 
   username = 'User';
@@ -29,6 +29,7 @@ export class MapComponent implements OnInit, OnDestroy {
   observableId$ = new Observable();
 
   area$ = new Observable<Area | null>();
+  coordinates$ = new Observable<{ lat: number, lng: number }[] | null>();
 
   editing = false;
   map: any;
@@ -78,60 +79,6 @@ export class MapComponent implements OnInit, OnDestroy {
       this.initDrawingManager(map);
     }
   }
-
-  invalidateDrawingManger = (map: any) => {
-    const self = this;
-    const options = {
-      drawingControl: false,
-      drawingControlOptions: {
-        drawingModes: null,
-      },
-      polygonOptions: {
-        draggable: false,
-        editable: false,
-      },
-      drawingMode: null,
-    };
-    this.drawingManager = new google.maps.drawing.DrawingManager(options);
-    this.drawingManager.setMap(map);
-    google.maps.event.addListener(
-      this.drawingManager, 'overlaycomplete', (event: any) => {
-        if ((event.type === google.maps.drawing.OverlayType.POLYGON)) {
-          const paths = event.overlay.getPaths();
-          for (let p = 0; p < paths.getLength(); p++) {
-            google.maps.event.addListener(
-              paths.getAt(p), 'set_at', () => {
-                if (!event.overlay.drag) {
-                  self.updatePointList(event.overlay.getPath());
-                }
-              }
-            );
-            google.maps.event.addListener(
-              paths.getAt(p), 'insert_at', () => {
-                self.updatePointList(event.overlay.getPath());
-              }
-            );
-            google.maps.event.addListener(
-              paths.getAt(p), 'remove_at', () => {
-                self.updatePointList(event.overlay.getPath());
-              }
-            );
-          }
-          self.updatePointList(event.overlay.getPath());
-          this.selectedShape = event.overlay;
-          this.selectedShape.type = event.type;
-        }
-        if (event.type !== google.maps.drawing.OverlayType.MARKER) {
-          // Switch back to non-drawing mode after drawing a shape.
-          self.drawingManager.setDrawingMode(null);
-          // To hide:
-          self.drawingManager.setOptions({
-            drawingControl: false,
-          });
-        }
-      }
-    );
-  };
 
   initDrawingManager = (map: any) => {
     const self = this;

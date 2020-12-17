@@ -51,3 +51,16 @@ export const getOrderLoading = createSelector(
   getOrderState,
   fromOrder.getSellerOrdersLoading
 );
+
+export const getOrderHistoryEntities = createSelector(
+  getOrderState,
+  fromOrder.getOrderHistory
+);
+
+export const getOrderHistory = createSelector(
+  getOrderHistoryEntities, (entities) => {
+    return Object.keys(entities).map((id) => {
+      return entities[parseInt(id, 10)];
+    });
+  }
+);

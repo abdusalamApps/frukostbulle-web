@@ -1,9 +1,5 @@
-interface Pos {
-  lat: number;
-  lng: number;
-}
 
 export interface Area {
   sellerId: number;
-  coordinates: Pos[];
+  coordinates: { lat: number, lng: number }[] | null;
 }

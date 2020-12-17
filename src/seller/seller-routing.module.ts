@@ -41,7 +41,7 @@ const routes: Routes = [
       },
       {
         path: 'order-history', component: Components.HistoryComponent,
-        canActivate: [fromGuards.AuthGuard, fromGuards.OrdersGuard],
+        canActivate: [fromGuards.AuthGuard, fromGuards.HistoryGuard],
       },
       {
         path: 'choose-days', component: Components.ChooseDaysComponent,
@@ -52,7 +52,7 @@ const routes: Routes = [
         canActivate: [fromGuards.AuthGuard],
       },
       {
-        path: 'map', component: Components.MapComponent,
+        path: 'map', component: Components.SellerAreaComponent,
         canActivate: [fromGuards.AuthGuard, fromGuards.AreaGuard],
       },
       {

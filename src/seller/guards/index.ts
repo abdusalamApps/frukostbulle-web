@@ -4,6 +4,7 @@ import {OrdersGuard} from './orders.guard';
 import {ItemsGuard} from './items.guard';
 import {ProfileGuard} from './profile.guard';
 import {AreaGuard} from './area.guard';
+import {HistoryGuard} from './history.guard';
 
 export const guards: any[] = [
   AuthGuard,
@@ -11,7 +12,8 @@ export const guards: any[] = [
   OrdersGuard,
   ItemsGuard,
   ProfileGuard,
-  AreaGuard
+  AreaGuard,
+  HistoryGuard
 ];
 
 export * from './auth.guard';
@@ -20,3 +22,4 @@ export * from './orders.guard';
 export * from './items.guard';
 export * from './profile.guard';
 export * from './area.guard';
+export * from './history.guard';
