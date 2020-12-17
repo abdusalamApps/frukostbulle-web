@@ -14,4 +14,8 @@ export class OrdersService {
   getOrdersBySellerId(sellerId: number): Observable<Order[]> {
     return this.http.get<Order[]>(`${urls.ordersUrls.Get.getOrdersBySellerIdUrl}${sellerId}`)
   }
+
+  getOrderHistoryBySellerId(sellerId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${urls.ordersUrls.Get.gerOrderHistoryBySellerIdUrl}${sellerId}`)
+  }
 }
