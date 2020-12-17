@@ -41,7 +41,7 @@ const routes: Routes = [
       },
       {
         path: 'order-history', component: Components.HistoryComponent,
-        canActivate: [fromGuards.AuthGuard],
+        canActivate: [fromGuards.AuthGuard, fromGuards.OrdersGuard],
       },
       {
         path: 'choose-days', component: Components.ChooseDaysComponent,

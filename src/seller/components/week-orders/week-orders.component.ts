@@ -15,28 +15,27 @@ export class WeekOrdersComponent implements OnInit {
 
   title = 'Beställningar';
 
-  orders$ = new Observable<Order[]>()
+  orders$ = new Observable<Order[]>();
 
   constructor(private store: Store<fromState.SellerState>) {
-    this.orders$ = this.store.select(fromState.getSellerOrders);
-  }
-
-  getOrderTotal(orderId: number): number {
-    this.store.select(fromState.getOrderTotal, {orderId: orderId}).pipe(
-      map((total) => {
-        return total;
-      }),
-      take(1)
-    )
-    return 0;
   }
 
   ngOnInit(): void {
+    this.orders$ = this.store.select(fromState.getSellerOrders);
 
   }
 
-  public navigateBack(): void {
-
+  getOrderTotal(orderId: number): number {
+    let theTotal = 0;
+    this.store.select(fromState.getOrderTotal, {orderId}).pipe(
+      map((total) => {
+        theTotal = total;
+      }),
+      take(1)
+    );
+    return theTotal;
   }
+
+
 
 }
