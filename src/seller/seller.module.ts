@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 import {SellerRoutingModule} from './seller-routing.module';
 
 // Components
-import * as Components from './components';
+import {components} from './components';
 
 // Material Modules
 import {materialModules} from '../material-modules';
@@ -36,22 +36,7 @@ import { MapComponent } from './components/seller-area/map/map.component';
 // @ts-ignore
 @NgModule({
   declarations: [
-    Components.ItemEditorComponent,
-    Components.ChooseBakeryComponent,
-    Components.SignupComponent,
-    Components.ChooseDaysComponent,
-    Components.SellerAreaComponent,
-    Components.MyItemsComponent,
-    Components.NotificationsComponent,
-    Components.OrderDetailsComponent,
-    Components.HistoryComponent,
-    Components.ProfileComponent,
-    Components.ProfileEditorComponent,
-    Components.RootComponent,
-    Components.SendToBakeryComponent,
-    Components.LoginComponent,
-    Components.WeekOrdersComponent,
-    Components.UpdatePasswordComponent,
+    ...components,
     LogoutDialog,
     DeleteDialog,
     ProfileCardComponent,
