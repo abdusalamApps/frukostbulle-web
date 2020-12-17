@@ -6,6 +6,9 @@ export namespace Get {
   export const getAllOrdersUrl = `${baseUrl}/get-all-orders`;
   export const getOrdersBySellerIdUrl = `${baseUrl}/get-orders-sellerid?id=`;
   export const getOrdersByBuyerIdUrl = `${baseUrl}/get-orders-buyerid`;
+  export const gerOrderHistoryBySellerIdUrl = `${baseUrl}/get-order-history-by-sellerId?sellerId=`;
+  export const gerOrderHistoryByBuyerIdUrl = `${baseUrl}/get-order-history-by-buyerId?buyerId=`;
+  export const gerOrderHistoryByBakeryIdUrl = `${baseUrl}/get-order-history-by-bakeryId?bakeryId=`;
 }
 
 export namespace Post {
