@@ -2,15 +2,17 @@ import * as orderActions from '../actions/order.actions';
 import {Order} from '../../../models/order.model';
 
 export interface OrderState {
-  entities: { [orderId: number]: Order }
+  entities: { [orderId: number]: Order };
   ordersLoaded: boolean;
   ordersLoading: boolean;
+  orderHistory: { [orderId: number]: Order };
 }
 
 export const initialState: OrderState = {
   entities: {},
   ordersLoaded: false,
   ordersLoading: false,
+  orderHistory: {},
 };
 
 export function reducer(
@@ -26,8 +28,7 @@ export function reducer(
       };
     }
     case orderActions.LOAD_SELLER_ORDERS_SUCCESS: {
-      const orders = action.payload;
-      const entities = orders.reduce(
+      const entities = action.payload.reduce(
         (newEns: { [id: number]: Order }, order) => {
           return {
             ...newEns,
@@ -36,6 +37,7 @@ export function reducer(
         }, {}
       );
       return {
+        ...state,
         entities,
         ordersLoaded: true,
         ordersLoading: false,
@@ -46,6 +48,20 @@ export function reducer(
         ...state,
         ordersLoaded: false,
         ordersLoading: false,
+      };
+    }
+    case orderActions.LOAD_ORDER_HISTORY_SUCCESS: {
+      const entities = action.payload.reduce(
+        (newEns: { [id: number]: Order }, order) => {
+          return {
+            ...newEns,
+            [order.id]: order,
+          };
+        }, {}
+      );
+      return {
+        ...state,
+        orderHistory: entities
       };
     }
     default:
