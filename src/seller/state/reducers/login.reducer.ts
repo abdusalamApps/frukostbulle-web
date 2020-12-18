@@ -1,6 +1,7 @@
 import {AuthResponse} from '../../../models/authResponse.model';
 import * as fromLogin from './../actions/login.action';
 import * as constants from 'src/constants';
+
 export interface LoginState {
   pending: boolean;
   loggedIn: boolean;

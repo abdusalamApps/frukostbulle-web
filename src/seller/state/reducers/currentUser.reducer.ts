@@ -40,7 +40,7 @@ export function reducer(
     case userActions.LOAD_CURRENT_USER_SUCCESS: {
       return {
         ...state,
-        currentUserLoaded: false,
+        currentUserLoaded: true,
         currentUserLoading: false,
         currentUser: action.payload
       };
