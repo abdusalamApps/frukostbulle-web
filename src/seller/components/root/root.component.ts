@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterOutlet} from "@angular/router";
-import {animate, query, style, transition, trigger} from "@angular/animations";
+import {RouterOutlet} from '@angular/router';
+import {animate, query, style, transition, trigger} from '@angular/animations';
 
 export const fader =
   trigger('routerAnimations', [
@@ -18,14 +18,13 @@ export const fader =
         animate('400ms ease', style({opacity: 1}))
       ])
     ])
-  ])
+  ]);
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.scss'],
-  animations: [fader]
 })
 export class RootComponent implements OnInit {
 
