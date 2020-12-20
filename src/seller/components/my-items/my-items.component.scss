@@ -4,10 +4,21 @@
   left: 50%;
 }
 
-  .grid-img {
-    object-fit: scale-down;
-    height: 100px;
+.grid-container {
+  .grid-item {
+    mat-card-title, mat-card-subtitle {
+      cursor: default;
+    }
+    .grid-img {
+      object-fit: scale-down;
+      height: 100px;
+    }
   }
+}
+
+mat-card:focus {
+  outline: 0;
+}
 
 .fab {
   position: fixed;
