@@ -43,8 +43,8 @@ export class ChooseBakeryComponent implements OnInit {
       tap(sellerId => {
         if (sellerId) {
           this.store.dispatch(new fromState.AssociateBakery({
-            bakeryId: bakeryId,
-            sellerId: sellerId
+            bakeryId,
+            sellerId
           }));
         }
       })
@@ -52,15 +52,17 @@ export class ChooseBakeryComponent implements OnInit {
 
   }
 
-  getBakeriesByCounty(county: string) {
+  getBakeriesByCounty(county: string): void {
     console.log(county);
     this.cities = this.citiesService.getCitiesByCounty(county);
+    this.bakeries$ = this.store.select(fromState.getBakeriesByCounty, {county});
   }
 
-  getBakeriesByCity(city: string) {
+  getBakeriesByCity(city: string): void {
+    this.bakeries$ = this.store.select(fromState.getBakeriesByCity, {city});
   }
 
-  findBakeryByName(name: string) {
+  findBakeryByName(name: string): void {
   }
 
 
