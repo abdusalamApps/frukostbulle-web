@@ -63,6 +63,7 @@ export class ChooseBakeryComponent implements OnInit {
   }
 
   findBakeryByName(name: string): void {
+    this.bakeries$ = this.store.select(fromState.getBakeriesByName, {name});
   }
 
 

@@ -20,7 +20,7 @@
           <mat-label>Bagerinamn</mat-label>
           <input matInput placeholder="" #bakeryName>
           <mat-icon matRipple matSuffix style="clip-path: circle()"
-                    (click)="accordion ? accordion.closeAll() : '';">
+                    (click)="accordion ? accordion.closeAll() : ''; findBakeryByName(bakeryName.value)">
             search
           </mat-icon>
         </mat-form-field>

@@ -50,6 +50,20 @@ export const getBakeriesByCity = createSelector(
     });
   });
 
+export const getBakeriesByName = createSelector(
+  getBakeryEntities,
+  (entities: { [p: number]: Bakery } , props: any) => {
+    const filtered = Object.keys(entities)
+      .filter(id => entities[parseInt(id, 10)].name.includes(props.name))
+      .reduce((obj: { [p: number]: Bakery }, id) => {
+        obj[parseInt(id, 10)] = entities[parseInt(id, 10)];
+        return obj;
+      }, {});
+    return Object.keys(filtered).map((bakeryId) => {
+      return filtered[parseInt(bakeryId, 10)];
+    });
+  });
+
 
 export const getBakeriesLoaded = createSelector(
   getBakeryState,
