@@ -4,9 +4,8 @@
   </button>
   <span>{{title}}</span>
 </mat-toolbar>
-<div *ngIf="dateValues$ | async"></div>
 <div class="container">
-  <mat-card>
+  <mat-card *ngIf="dateValues$ | async">
     <ejs-calendar weekNumber='true'
                   [(values)]="newDates" [isMultiSelection]='multiSelect'>
     </ejs-calendar>

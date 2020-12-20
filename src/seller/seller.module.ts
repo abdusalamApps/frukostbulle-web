@@ -62,7 +62,7 @@ import { MapComponent } from './components/seller-area/map/map.component';
     }),
     EffectsModule.forFeature(effects),
     ...commonModules,
-    CalendarModule
+    CalendarModule,
   ],
   providers: [
     ...fromGuards.guards,

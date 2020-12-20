@@ -20,7 +20,7 @@ export class DatesGuard implements CanActivate {
   }
 
   checkStore(): Observable<boolean> {
-    let storage = localStorage.getItem('currentUserEmail');
+    const storage = localStorage.getItem('currentUserEmail');
     let email = '';
     if (storage) {
       email = storage;

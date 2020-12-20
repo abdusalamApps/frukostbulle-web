@@ -34,9 +34,6 @@ export class RootComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  prepareRouter(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-  }
 
 }
 
