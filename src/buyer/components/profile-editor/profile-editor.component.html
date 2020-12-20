@@ -1,1 +1,41 @@
-<p>profile-editor works!</p>
+<mat-toolbar class="toolbar" color="primary">
+  <mat-icon class="back-icon" (click)="onCancel()">arrow_back</mat-icon>
+  <span class="spacer"></span>
+  <span>{{ title }}</span>
+</mat-toolbar>
+
+<div class="container">
+  <mat-card *ngIf="(userObservable$ | async)">
+    <div class="form-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Epost</mat-label>
+        <input matInput placeholder="Placeholder" [formControl]="emailControl">
+        <mat-hint>Ex: namn@domän.se</mat-hint>
+        <mat-error *ngIf="emailControl.invalid">Ogiltigt mejladdress</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Namn</mat-label>
+        <input matInput placeholder="Placeholder" [formControl]="nameControl">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Mobilnummer</mat-label>
+        <input matInput placeholder="Placeholder" [formControl]="mobileControl">
+        <mat-hint>13 eller 10 siffrigt</mat-hint>
+        <mat-error *ngIf="mobileControl.invalid">Ogiltigt nummer</mat-error>
+      </mat-form-field>
+
+      <div class="buttons-container">
+        <button mat-button class="text-button" (click)="onCancel()">
+          AVBRYT
+        </button>
+        <button mat-raised-button color="accent" (click)="onSave()">
+          BEKRÄFTA
+        </button>
+      </div>
+    </div>
+
+  </mat-card>
+
+</div>

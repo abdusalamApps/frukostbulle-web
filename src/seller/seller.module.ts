@@ -87,6 +87,9 @@ import { MapComponent } from './components/seller-area/map/map.component';
       multi: true
     }
   ],
+  exports: [
+    ProfileCardComponent
+  ]
 })
 export class SellerModule {
 }

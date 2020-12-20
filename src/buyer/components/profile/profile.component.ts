@@ -14,7 +14,7 @@ import {tap} from 'rxjs/operators';
 export class ProfileComponent implements OnInit {
 
   userObservable$ = new Observable<User | null>();
-  seller$ = new Observable<User | null>();
+ // seller$ = new Observable<User | null>();
 
   title = 'Min profil';
 
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userObservable$ = this.store.select(fromState.getCurrentUser);
-    this.seller$ = this.store.select(fromState.getCurrentUserAssociatedSeller);
+    // this.seller$ = this.store.select(fromState.getCurrentUserAssociatedSeller);
   }
 
   public navigateToProfileEditor(): void {

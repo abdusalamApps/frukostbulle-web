@@ -27,7 +27,7 @@ export class ProfileCardComponent {
     profilePictureUrl: ''
   };
 
-  @Input() associatedBakery: Bakery | null = null;
+  @Input() associatedSeller: Bakery | null = null;
 
   @Output() logout = new EventEmitter();
 
