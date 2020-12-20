@@ -14,7 +14,7 @@ import * as fromRoot from 'src/app/state';
 })
 export class ItemsComponent implements OnInit {
 
-  title = 'Mina frallor';
+  title = 'Säljarens frallor';
 
   items$: Observable<Item[]> = new Observable<[]>();
   loading$: Observable<boolean> = new Observable<boolean>();

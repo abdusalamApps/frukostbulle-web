@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Location} from '@angular/common';
+import {Store} from '@ngrx/store';
+import * as fromStore from '../../state';
 
 @Component({
   selector: 'app-confirmation-no-login',
@@ -7,8 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmationNoLoginComponent implements OnInit {
 
-  constructor() { }
+  title = 'Bekräftelse';
 
+  constructor(
+    public location: Location,
+    private store: Store<fromStore.BuyerState>
+  ) {
+  }
   ngOnInit(): void {
   }
 
