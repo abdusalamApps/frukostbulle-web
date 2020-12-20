@@ -58,16 +58,16 @@
   </mat-accordion>
 
 
-  <div *ngIf="sellerId$ | async"></div>
+  <div ></div>
   <mat-card style="margin-top: 16px">
-    <mat-list>
-      <mat-list-item matRipple *ngFor="let bakery of bakeries$ | async"
+    <mat-list *ngIf="(bakeries$ | async) as bakeries">
+      <mat-list-item matRipple *ngFor="let bakery of bakeries; index as i"
       (click)="onListItemClick(bakery.id)">
         <h3 matLine>{{bakery.name}}</h3>
         <p matLine>
           <span>{{bakery.address}}</span>
         </p>
-        <mat-divider></mat-divider>
+        <mat-divider *ngIf="(i + 1) !== bakeries.length"></mat-divider>
       </mat-list-item>
     </mat-list>
   </mat-card>
