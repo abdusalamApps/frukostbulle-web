@@ -22,6 +22,8 @@ import {commonModules} from '../common-modules';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../app/token.interceptor';
 import {effects, reducers} from '../buyer/state';
+import {SellerModule} from '../seller/seller.module';
+import {ProfileCardComponent} from './components/profile/profile-card/profile-card.component';
 
 
 @NgModule({
@@ -40,17 +42,21 @@ import {effects, reducers} from '../buyer/state';
     components.OrderNoLoginComponent,
     components.SellerDetailsComponent,
     components.ShoppingCartComponent,
+    ProfileCardComponent,
   ],
-    imports: [CommonModule,
-      BuyerRoutingModule,
-      StoreModule.forFeature('buyer', reducers),
-      StoreDevtoolsModule.instrument({
-        maxAge: 25,
-        logOnly: environment.production,
-      }),
-      EffectsModule.forFeature(effects),
-      ...materialModules,
-      FormsModule
-    ],
+  imports: [CommonModule,
+    BuyerRoutingModule,
+    StoreModule.forFeature('buyer', reducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forFeature(effects),
+    ...materialModules,
+    FormsModule, ReactiveFormsModule, AgmCoreModule, SellerModule
+  ],
+  exports: [
+    ProfileCardComponent
+  ]
 })
 export class BuyerModule {}

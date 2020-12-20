@@ -1,0 +1,81 @@
+<mat-card style="margin:16px 0 5em 0;">
+  <h1 style="margin-top: 1em" routerLink="/buyer/profile-editor" matRipple>
+    {{user ? user.name : ''}}
+  </h1>
+
+  <mat-list role="list">
+    <mat-list-item mat-ripple role="listitem"
+                   routerLink="/buyer/profile-editor"
+                   matRipple>
+      <h3 matLine>
+        {{user ? user.email : ''}}
+      </h3>
+      <mat-icon>email</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem" routerLink="/buyer/profile-editor">
+      <h3 matLine>
+        {{user ? user.address : ''}}
+      </h3>
+      <mat-icon>Address</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem" routerLink="/buyer/profile-editor">
+      <h3 matLine>
+        {{user ? user.city : ''}}
+      </h3>
+      <mat-icon>City</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+    <mat-list-item mat-ripple routerLink="/buyer/profile-editor" role="listitem">
+      <h3 matLine>
+        {{user ? user.county : ''}}
+      </h3>
+      <mat-icon>Län</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem" routerLink="../order-history">
+      <h3 matLine>
+        Beställningar
+      </h3>
+      <mat-icon>list_alt</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+
+    <mat-list-item mat-ripple role="listitem" routerLink="../map">
+      <h3 matLine>{{associatedSeller ? associatedSeller.name: 'Välj seller'}}</h3>
+      <h2 matLine>{{associatedSeller ? associatedSeller.address: ''}}</h2>
+      <mat-icon>storefront</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem"
+                   routerLink="/buyer/profile-editor"
+                   matRipple>
+      <h3 matLine>{{user ? user.mobilenbr : ''}}</h3>
+      <mat-icon>phone</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem"
+                   matRipple
+                   routerLink="/buyer/update-password">
+      <h3 matLine>ÄNDRA LÖSENORD</h3>
+      <mat-icon>settings</mat-icon>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+    <mat-list-item mat-ripple role="listitem"
+                   matRipple
+    >
+      <h3 matLine class="logout" (click)="logoutClick()">LOGGA UT</h3>
+      <mat-icon color="warn">exit_to_app</mat-icon>
+    </mat-list-item>
+  </mat-list>
+
+
+</mat-card>

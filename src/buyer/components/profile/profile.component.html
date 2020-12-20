@@ -1,1 +1,28 @@
-<p>profile works!</p>
+<mat-toolbar class="toolbar" color="primary">
+  <span class="spacer"></span>
+  <span>{{ title }}</span>
+  <span class="toolbar-spacer"></span>
+  <button routerLink="../profile-editor"
+          mat-icon-button>
+    <mat-icon>edit</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="container">
+
+  <label class="image-chooser">
+    <input id="image-input" type="file" accept="image/*" (change)="chooseImage($event)">
+    <img class="profile-photo" alt="profile photo"
+         src="{{
+         (userObservable$ | async) ?
+          (userObservable$ | async)?.profilePictureUrl ?
+           (userObservable$ | async)?.profilePictureUrl : 'assets/img/profile-photo-placeholder.png'
+           :
+           'assets/img/profile-photo-placeholder.png'}}">
+  </label>
+  <app-profile-card
+    [user]="userObservable$ | async"
+    [associatedSeller]="seller$ | async"
+    (logout)="onLogout()">
+
+  </app-profile-card>
+</div>

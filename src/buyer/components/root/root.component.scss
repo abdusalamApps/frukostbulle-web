@@ -1,0 +1,44 @@
+@import "../../../styles.scss";
+
+.nav-container {
+  position: fixed;
+  bottom: 8px;
+  width: 100%;
+
+  .bottom-nav-bar {
+    width: 95%;
+    height: 4em;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    cursor: default;
+    user-select: none;
+    border-radius: 0.5em;
+    margin: 0 auto;
+  }
+
+  .nav-icon {
+    height: 100%;
+    width: 100%;
+    color: #707070;
+    display: grid;
+    place-items: center;
+    font-size: 2em;
+    cursor: pointer;
+    transform: scale(0.85);
+  }
+
+  .active {
+    color: mat-color($frukostbulle-accent);
+    transform: scale(1.2);
+  }
+}
+
+@media (min-width: 900px) {
+  .nav-container {
+    .bottom-nav-bar {
+      width: 50%;
+    }
+  }
+}

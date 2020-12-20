@@ -11,7 +11,7 @@ const routes: Routes = [
       {path: 'profile-editor', component: components.ProfileEditorComponent},
       {path: 'confirmation-login', component: components.ConfirmationLoginComponent},
       {path: 'seller-details', component: components.SellerDetailsComponent},
-      {path: 'seller-items', component: components.ItemsComponent},
+      {path: 'items', component: components.ItemsComponent},
       {path: 'shopping-cart', component: components.ShoppingCartComponent},
       {path: 'order-no-login', component: components.OrderNoLoginComponent},
       {path: '', component: components.MapComponent},
