@@ -26,7 +26,7 @@ export class ProfileEditorComponent implements OnInit {
   email: string = '';
   mobile = '';
 
-  emailControl = new FormControl();
+  // emailControl = new FormControl();
   mobileControl = new FormControl(0, [
     Validators.minLength(10),
     Validators.maxLength(13)
@@ -43,9 +43,9 @@ export class ProfileEditorComponent implements OnInit {
         if (user) {
           this.name = user.name;
           this.nameControl = new FormControl(user.name, [Validators.required]);
-          this.email = user.email;
+          /*this.email = user.email;
           this.emailControl = new FormControl(user.email,
-            [Validators.email, Validators.required]);
+            [Validators.email, Validators.required]);*/
           this.mobile = user.mobilenbr;
           this.mobileControl = new FormControl(user.mobilenbr, [
             Validators.minLength(10),
@@ -59,9 +59,9 @@ export class ProfileEditorComponent implements OnInit {
 
   onSave() {
     if (
-      this.emailControl.hasError('email')
-      || this.emailControl.hasError('required')
-      || this.mobileControl.hasError('maxLength')
+      // this.emailControl.hasError('email')
+      //  this.emailControl.hasError('required')
+      this.mobileControl.hasError('maxLength')
       || this.mobileControl.hasError('minLength')
       || this.mobileControl.hasError('required')
       || this.nameControl.hasError('required')
@@ -75,7 +75,7 @@ export class ProfileEditorComponent implements OnInit {
       });
     } else {
 
-      if (this.isMobileChanged() || this.isNameChanged() || this.isEmailChanged()) {
+      if ( this.isNameChanged() || this.isMobileChanged()) {
         /*
                 this.snackBar.open('Ändringarna sparades', 'ok', {
                   duration: 2000
@@ -87,7 +87,6 @@ export class ProfileEditorComponent implements OnInit {
               const newUser =
                 {
                   ...user,
-                  email:  this.emailControl.value,
                   name: this.nameControl.value,
                   mobilenbr: this.mobileControl.value
                 };
@@ -103,19 +102,17 @@ export class ProfileEditorComponent implements OnInit {
 
       }
     }
-    console.log('isEmailChanged: ' + this.isEmailChanged());
-    console.log('isNameChanged: ' + this.isNameChanged());
-    console.log('isMobileChanged: ' + this.isMobileChanged());
-
   }
 
   onCancel() {
     this.store.dispatch(new fromRoot.Back());
   }
 
+/*
   private isEmailChanged() {
     return this.email !== this.emailControl.value;
   }
+*/
 
   private isNameChanged() {
     return this.name !== this.nameControl.value;

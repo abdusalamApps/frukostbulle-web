@@ -6,12 +6,14 @@
 <div class="container">
   <mat-card *ngIf="(userObservable$ | async)">
     <div class="form-container">
+<!--
       <mat-form-field appearance="fill">
         <mat-label>Epost</mat-label>
         <input matInput placeholder="Placeholder" [formControl]="emailControl">
         <mat-hint>Ex: namn@domän.se</mat-hint>
         <mat-error *ngIf="emailControl.invalid">Ogiltigt mejladdress</mat-error>
       </mat-form-field>
+-->
 
       <mat-form-field appearance="fill">
         <mat-label>Namn</mat-label>
