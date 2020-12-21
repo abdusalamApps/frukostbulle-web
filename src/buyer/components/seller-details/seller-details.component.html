@@ -1,1 +1,52 @@
-<p>seller-details works!</p>
+<mat-toolbar class="toolbar" color="primary">
+  <span class="spacer"></span>
+  <span>{{ title }}</span>
+</mat-toolbar>
+<div class="container">
+
+  <label class="image-chooser">
+    <input id="image-input" type="file" accept="image/*">
+    <img class="profile-photo" alt="profile photo"
+         src="{{
+         (userObservable$ | async) ?
+          (userObservable$ | async)?.profilePictureUrl ?
+           (userObservable$ | async)?.profilePictureUrl : 'assets/img/profile-photo-placeholder.png'
+           :
+           'assets/img/profile-photo-placeholder.png'}}">
+  </label>
+
+
+  <mat-card style="margin:16px 0 5em 0;">
+    <h1 style="margin-top: 1em" routerLink="/seller/profile-editor" matRipple>
+      {{userObservable$ ? userObservable$ :''}}  //säljarens namn
+    </h1>
+
+      <mat-list-item mat-ripple role="listitem" routerLink="/buyers">
+        <h3 matLine>Säljarens frallor</h3>
+        <mat-icon>store_mall_directory</mat-icon>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+
+      <mat-list-item mat-ripple role="listitem" routerLink="./seller/choose-days">
+        <h3 matLine>Säljarens dagar</h3>
+        <mat-icon>date_range</mat-icon>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+
+      <mat-list-item mat-ripple role="listitem" routerLink="./seller/map">
+        <h3 matLine>Säljarens område</h3>
+        <mat-icon>room</mat-icon>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+
+      <!--<mat-list-item mat-ripple role="listitem">
+
+        <h3 matLine>{{associatedBakery ? bakery$.name: 'Här är bageri som säljare köper från som text'}}</h3>
+        <h2 matLine>{{associatedBakery ? bakery$.address: ''}}</h2>
+        <mat-icon>storefront</mat-icon>
+        <mat-divider></mat-divider>
+      </mat-list-item>-->
+
+  </mat-card>
+
+</div>
