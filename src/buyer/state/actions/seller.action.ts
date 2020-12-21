@@ -16,17 +16,17 @@ export class LoadSeller {
 export class LoadSellerSuccess {
   readonly type = LOAD_USER_BUY_ID_SUCCESS;
 
-  constructor(public payload: User) {
-  }
+  constructor(public payload: User) {}
+
 }
 
-export class LoadSELLERFail {
+export class LoadSellerFail {
   readonly type = LOAD_USER_BUY_ID_FAIL;
 
   constructor(public payload: any) {
   }
 }
 
-export type sellerAction = LoadSeller | LoadSELLERFail | LoadSellerSuccess;
+export type sellerAction = LoadSeller | LoadSellerFail | LoadSellerSuccess;
 
 

@@ -19,7 +19,6 @@ export class ProfileEditorComponent implements OnInit {
   title = 'Redigera din profil';
 
   newName = '';
-  newEmail = '';
   newMobile = '';
 
   name = '';
@@ -43,9 +42,6 @@ export class ProfileEditorComponent implements OnInit {
         if (user) {
           this.name = user.name;
           this.nameControl = new FormControl(user.name, [Validators.required]);
-          this.email = user.email;
-          this.emailControl = new FormControl(user.email,
-            [Validators.email, Validators.required]);
           this.mobile = user.mobilenbr;
           this.mobileControl = new FormControl(user.mobilenbr, [
             Validators.minLength(10),
@@ -57,11 +53,9 @@ export class ProfileEditorComponent implements OnInit {
     );
   }
 
-  onSave() {
+  onSave(): void {
     if (
-      this.emailControl.hasError('email')
-      || this.emailControl.hasError('required')
-      || this.mobileControl.hasError('maxLength')
+       this.mobileControl.hasError('maxLength')
       || this.mobileControl.hasError('minLength')
       || this.mobileControl.hasError('required')
       || this.nameControl.hasError('required')
@@ -75,7 +69,7 @@ export class ProfileEditorComponent implements OnInit {
       });
     } else {
 
-      if (this.isMobileChanged() || this.isNameChanged() || this.isEmailChanged()) {
+      if (this.isMobileChanged() || this.isNameChanged()) {
         /*
                 this.snackBar.open('Ändringarna sparades', 'ok', {
                   duration: 2000
@@ -103,25 +97,20 @@ export class ProfileEditorComponent implements OnInit {
 
       }
     }
-    console.log('isEmailChanged: ' + this.isEmailChanged());
     console.log('isNameChanged: ' + this.isNameChanged());
     console.log('isMobileChanged: ' + this.isMobileChanged());
 
   }
 
-  onCancel() {
+  onCancel(): void {
     this.store.dispatch(new fromRoot.Back());
   }
 
-  private isEmailChanged() {
-    return this.email !== this.emailControl.value;
-  }
-
-  private isNameChanged() {
+  private isNameChanged(): boolean {
     return this.name !== this.nameControl.value;
   }
 
-  private isMobileChanged() {
+  private isMobileChanged(): boolean {
     return this.mobile !== this.mobileControl.value;
   }
 
