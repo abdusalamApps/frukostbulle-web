@@ -112,7 +112,9 @@ body {
   font-size: medium;
 }
 
-
+.mat-list-item {
+  cursor: default;
+}
 @media (min-width: 900px) {
   .mat-toolbar-row,
   .mat-toolbar-single-row {
