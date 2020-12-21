@@ -16,4 +16,6 @@ export namespace Post {
   export const addSellerDateUrl = `${baseUrl}/add-date`;
   export const removeSellerDateUrl = `${baseUrl}/remove-date`;
   export const updateSellerDatesUrl = `${baseUrl}/update-dates`;
+  export const updatePasswordUrl = `${baseUrl}/update-password`;
+  export const checkPasswordUrl = `${baseUrl}/check-password`;
 }
