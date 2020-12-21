@@ -57,7 +57,7 @@ export class ProfileEditorComponent implements OnInit {
     );
   }
 
-  onSave() {
+  onSave(): void {
     if (
       // this.emailControl.hasError('email')
       //  this.emailControl.hasError('required')
@@ -104,7 +104,7 @@ export class ProfileEditorComponent implements OnInit {
     }
   }
 
-  onCancel() {
+  onCancel(): void {
     this.store.dispatch(new fromRoot.Back());
   }
 
@@ -114,11 +114,11 @@ export class ProfileEditorComponent implements OnInit {
   }
 */
 
-  private isNameChanged() {
+  private isNameChanged(): boolean {
     return this.name !== this.nameControl.value;
   }
 
-  private isMobileChanged() {
+  private isMobileChanged(): boolean {
     return this.mobile !== this.mobileControl.value;
   }
 
