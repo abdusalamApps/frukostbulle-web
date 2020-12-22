@@ -34,9 +34,9 @@ export const getOrderTotal = createSelector(
   getOrderEntities,
   (entities: { [p: number]: Order }, props: any) => {
     let total = 0;
-    for (const [key, value] of
+    for (const contentItem of
       entities[props.orderId].content[Symbol.iterator]()) {
-      total += key.price * value;
+      total += contentItem.item.price * contentItem.amount;
     }
     return total;
   }

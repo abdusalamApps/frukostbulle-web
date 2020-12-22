@@ -15,5 +15,5 @@ export interface Order {
   paid: boolean;
   delivered: boolean;
   fake: boolean;
-  content: Map<Item, number>;
+  content: { item: Item, amount: number }[];
 }

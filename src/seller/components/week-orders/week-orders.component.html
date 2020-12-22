@@ -20,20 +20,15 @@
                        [routerLink]="['/seller/orders', order.id]">
           <img mat-list-avatar src="assets/img/no-image.png">
           <h3 matLine> {{order.buyerName}} </h3>
-          <div matLine *ngFor="let item of order.content | keyvalue; index as i">
-            <p *ngIf="i === 0">{{item.key.itemName}}...</p>
-          </div>
-          <h3 matLine> {{getOrderTotal(order.id)}}:- </h3>
+          <p matLine>{{order.content[0]?.item.itemName}}...</p>
+          <p matLine *ngIf="(getOrderTotal(order.id) | async) as total">
+            {{total}}:-
+          </p>
           <mat-divider *ngIf="(k + 1) < orders.length"></mat-divider>
         </mat-list-item>
       </div>
     </mat-list>
 
-    <div class="form-container" style="margin-top: 16px">
-      <button mat-raised-button color="accent" routerLink="../seller-send-to-bakery">
-        SKICKA TILL BAGERIET
-      </button>
-    </div>
   </mat-card>
 
 </div>

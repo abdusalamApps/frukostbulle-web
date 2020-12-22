@@ -5,7 +5,6 @@ import {Observable} from 'rxjs';
 import {Order} from '../../../models/order.model';
 import * as fromState from '../../state';
 
-// @ts-ignore
 @Component({
   selector: 'app-week-orders',
   templateUrl: './week-orders.component.html',
@@ -22,20 +21,12 @@ export class WeekOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.orders$ = this.store.select(fromState.getSellerOrders);
-
+    this.store.select(fromState.getSellerOrders);
   }
 
-  getOrderTotal(orderId: number): number {
-    let theTotal = 0;
-    this.store.select(fromState.getOrderTotal, {orderId}).pipe(
-      map((total) => {
-        theTotal = total;
-      }),
-      take(1)
-    );
-    return theTotal;
+  getOrderTotal(orderId: number): Observable<number> {
+    return this.store.select(fromState.getOrderTotal, {orderId});
   }
-
 
 
 }

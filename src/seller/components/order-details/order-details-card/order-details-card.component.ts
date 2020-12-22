@@ -27,15 +27,14 @@ export class OrderDetailsCardComponent implements OnInit {
     paid: false,
     delivered: false,
     fake: false,
-    content: new Map<Item, number>()
+    content: []
   };
 
-  total = 0;
 
   buyer$ = new Observable<User | null>();
 
   constructor(private store: Store<fromState.SellerState>) {
-    this.total = this.getOrderTotal();
+
   }
 
   ngOnInit(): void {
@@ -45,16 +44,8 @@ export class OrderDetailsCardComponent implements OnInit {
     }
   }
 
-  getOrderTotal(): number {
-    let to = 0;
-    if (this.order && this.order.content) {
-      for (const [key, value] of this.order.content) {
-        console.log(`${key}: ${value}`);
-        to += key.price * value;
-      }
-      return to;
-    }
-    return -1;
+  getOrderTotal(orderId: number): Observable<number> {
+    return this.store.select(fromState.getOrderTotal, {orderId});
   }
 
 }
