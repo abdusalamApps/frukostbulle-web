@@ -1,0 +1,47 @@
+.map-container {
+  height: 100vh;
+  position: relative;
+  display: grid;
+
+
+  .search-container {
+    position: absolute;
+    top: 0;
+    background: white;
+    border-radius: 8px;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    width: 90%;
+    margin: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    #search-field {
+      padding: 16px;
+      background: white;
+      border: 0;
+      border-radius: 8px;
+
+
+    }
+    #profile-icon {
+      align-self: center;
+      justify-self: center;
+      padding: 8px;
+      clip-path: circle();
+    }
+  }
+  agm-map {
+    height: 100vh;
+    align-self: start;
+  }
+
+  .fab {
+    position: absolute;
+    bottom: 10em;
+    right: 0.5em;
+    background: white;
+    padding: 10px;
+    clip-path: circle();
+
+  }
+}

@@ -5,8 +5,7 @@
 <mat-spinner color="accent" class="spinner" *ngIf="(loading$ | async)"></mat-spinner>
 <div class="grid-container">
   <mat-card class="grid-item"
-            mat-ripple *ngFor="let item of items$ | async"
-            [routerLink]="['/seller/items', item.itemId]">
+            mat-ripple *ngFor="let item of items$ | async">
     <div class="img-container">
       <img mat-card-image
            class="grid-img"

@@ -3,8 +3,6 @@ import {Observable, of} from 'rxjs';
 import {Item} from 'src/models/item.model';
 import {Store} from '@ngrx/store';
 import * as fromState from '../../state';
-import {catchError, map, tap} from 'rxjs/operators';
-import {AuthResponse} from '../../../models/authResponse.model';
 import * as fromRoot from 'src/app/state';
 
 @Component({
@@ -19,7 +17,6 @@ export class ItemsComponent implements OnInit {
   items$: Observable<Item[]> = new Observable<[]>();
   loading$: Observable<boolean> = new Observable<boolean>();
   loaded$: Observable<boolean> = new Observable<boolean>();
-  email$: Observable<AuthResponse> = new Observable<AuthResponse>();
 
   constructor(private store: Store<fromState.BuyerState>,
               private rootStore: Store<fromRoot.State>) {
@@ -27,9 +24,9 @@ export class ItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  //  this.items$ = this.store.select(fromState.getAllItems);
-  //  this.loading$ = this.store.select(fromState.getItemsLoading);
-  //  this.loaded$ = this.store.select(fromState.getItemsLoaded);
+    this.items$ = this.store.select(fromState.getSellerItems);
+    this.loading$ = this.store.select(fromState.getItemsLoading);
+    this.loaded$ = this.store.select(fromState.getItemsLoaded);
   }
 
 }

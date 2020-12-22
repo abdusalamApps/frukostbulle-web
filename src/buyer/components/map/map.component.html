@@ -1,1 +1,35 @@
-<p>map works!</p>
+<!--
+<mat-toolbar color="primary">
+  <span class="spacer"></span>
+  <mat-icon mat-ripple class="back-icon" (click)="navigateBack()">
+    arrow_back
+  </mat-icon>  <span>{{ title }}</span>
+</mat-toolbar>
+-->
+
+<div class="map-container">
+
+  <agm-map [zoom]="15" [latitude]="lat"
+           [longitude]="lng">
+
+    <agm-marker [latitude]="lat" [longitude]="lng">
+
+    </agm-marker>
+    <agm-polygon [paths]="polygon" (polyClick)="click($event)" >
+
+    </agm-polygon>
+  </agm-map>
+
+  <p class="search-container">
+    <input id="search-field"
+           placeholder="Sök address"
+           type="text" class="form-control"
+           (keydown.enter)="$event.preventDefault()"
+           autocorrect="off"
+           autocapitalize="off"
+           spellcheck="off" #search>
+
+    <mat-icon matRipple id="profile-icon"
+              routerLink="../profile">account_circle</mat-icon>
+  </p>
+</div>
