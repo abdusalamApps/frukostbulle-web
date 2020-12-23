@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LocationService} from 'src/app/services/location.service';
 import * as fromRoot from 'src/app/state';
 import * as fromState from '../../state';
@@ -7,6 +7,7 @@ import {Store} from '@ngrx/store';
 import {tap} from 'rxjs/operators';
 import {Area} from '../../../models/area.model';
 import {Observable} from 'rxjs';
+import {MapsAPILoader} from '@agm/core';
 
 declare const google: any;
 
@@ -16,6 +17,9 @@ declare const google: any;
   styleUrls: ['./seller-area.component.scss']
 })
 export class SellerAreaComponent implements OnInit, OnDestroy {
+  @ViewChild('search')
+  public searchElementRef: ElementRef | undefined;
+
   title = 'Säljare i ditt område';
 
   username = 'User';
@@ -34,8 +38,14 @@ export class SellerAreaComponent implements OnInit, OnDestroy {
   editing = false;
   map: any;
 
+  address = '';
+  private geoCoder: any;
+  zoom = 10;
+
   constructor(private locationService: LocationService,
-              private store: Store) {
+              private store: Store,
+              private mapsLoader: MapsAPILoader,
+              private ngZone: NgZone) {
   }
 
   ngOnInit(): void {
@@ -47,6 +57,52 @@ export class SellerAreaComponent implements OnInit, OnDestroy {
       this.lng = v;
     });
     this.area$ = this.store.select(fromState.getCurrentUserArea);
+
+    this.mapsLoader.load().then(() => {
+      this.geoCoder = new google.maps.Geocoder();
+      this.getAddress(this.lat, this.lng);
+      let autocomplete = new google.maps.places.Autocomplete(
+        this.searchElementRef !== undefined
+          ? this.searchElementRef.nativeElement
+          : console.log(`search element undefined`)
+      );
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          let place = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.lat = place.geometry.location.lat();
+          this.lng = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
+
+  }
+
+  getAddress(latitude: number, longitude: number) {
+    this.geoCoder.geocode(
+      { location: { lat: latitude, lng: longitude } },
+      (results: { formatted_address: string }[], status: string) => {
+        console.log(results);
+        console.log(status);
+        if (status === 'OK') {
+          if (results[0]) {
+            this.zoom = 12;
+            this.address = results[0].formatted_address;
+          } else {
+            window.alert('No results found');
+          }
+        } else {
+          window.alert('Geocoder failed due to: ' + status);
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {

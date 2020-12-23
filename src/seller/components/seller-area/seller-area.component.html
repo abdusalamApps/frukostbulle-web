@@ -24,7 +24,17 @@
       (mapReady)="onMapReady($event)"
     ></app-map>
   -->
-
+  <input
+    id="search-field"
+    placeholder="Sök address..."
+    type="text"
+    class="form-control"
+    (keydown.enter)="$event.preventDefault()"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="off"
+    #search
+  />
   <agm-map *ngIf="(area$ | async) as area"
            [zoom]="15" [latitude]="lat"
            [longitude]="lng"
