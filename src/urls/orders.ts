@@ -17,4 +17,8 @@ export namespace Post {
   export const insertOrderUrl = `${baseUrl}/insert-order`;
   export const updateOrderUrl = `${baseUrl}/update-order`;
   export const deleteOrderUrl = `${baseUrl}/delete-order`;
+
+  export const markOrderPaidUrl = `${baseUrl}/mark-order-paid?orderId=`;
+  export const markOrderDeliveredUrl = `${baseUrl}/mark-order-delivered?orderId=`;
+  export const markOrderFakeUrl = `${baseUrl}/mark-order-fake?orderId=`;
 }
