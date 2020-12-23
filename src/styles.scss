@@ -112,6 +112,9 @@ body {
   font-size: medium;
 }
 
+.background-warn {
+  background-color: mat-color($frukostbulle-warn);
+}
 .mat-list-item {
   cursor: default;
 }

@@ -5,5 +5,7 @@
 
 <div class="container">
 
-  <app-order-details-card [order]="order$ | async"></app-order-details-card>
+  <div *ngIf="(order$ | async) as order">
+    <app-order-details-card [order]="order"></app-order-details-card>
+  </div>
 </div>
