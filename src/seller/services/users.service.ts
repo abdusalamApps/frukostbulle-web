@@ -35,4 +35,9 @@ export class UsersService {
   createUser(user: User, coordinates: { lat: number, lng: number }[]): Observable<any> {
     return this.http.post(`${urls.usersUrls.Post.createUserUrl}`, {user, coordinates})
   }
+
+  sendConfirmationEmail(email: string): Observable<any> {
+    return this.http.post(`${urls.usersUrls.Post.sendCreateEmailUrl}${email}`, {})
+  }
+
 }

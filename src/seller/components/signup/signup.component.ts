@@ -80,7 +80,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   multiSelect = true;
 
   userSubscription$ = new Subscription();
-  areaSubscription$ = new Subscription();
+  cEmailSubscription = new Subscription();
 
   constructor(private router: Router,
               public location: Location,
@@ -98,7 +98,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userSubscription$.unsubscribe();
-    this.areaSubscription$.unsubscribe();
+    this.cEmailSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -154,7 +154,7 @@ export class SignupComponent implements OnInit, OnDestroy {
             this.city = this.address.split(' ')[4].replace(',', '');
             console.log(`address city: ${this.city}`);
             this.setCounty();
-            console.log(`address county: ${this.county}`)
+            console.log(`address county: ${this.county}`);
           } else {
             this.snackBar.open('No results found',
               'Ok', {duration: 2000});
@@ -181,8 +181,8 @@ export class SignupComponent implements OnInit, OnDestroy {
         const newUser: User = {
           id: -1,
           name: this.name,
-          county: '',
-          city: '',
+          county: this.county,
+          city: this.city,
           address: this.address,
           mobilenbr: this.mobile,
           email: this.email,
@@ -195,10 +195,18 @@ export class SignupComponent implements OnInit, OnDestroy {
           lasOrderDay: '',
           profilePictureUrl: ''
         };
+        console.log(`pointList: ${JSON.stringify(this.pointList)}`);
         this.userSubscription$ = this.userService.createUser(newUser, this.pointList).subscribe(
           res => {
-            this.store.dispatch(new fromRoot.Go({path: ['seller/signup-confirmation']}));
-            console.log(`createUser res: ${res}`);
+            this.cEmailSubscription = this.userService.sendConfirmationEmail(newUser.email).subscribe(
+              res => {
+                this.store.dispatch(new fromRoot.Go({path: ['seller/signup-confirmation']}));
+                console.log(`createUser res: ${res}`);
+              },
+              err => {
+                console.log(`send confirmation email failed ${err}`);
+              }
+            );
           },
           err => {
             console.log(`createUser error: ${err}`);
@@ -314,9 +322,9 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   setCounty(): void {
     let counties = this.citiesService.getCounties();
-    for(let county of counties) {
+    for (let county of counties) {
       let cities = this.citiesService.getCitiesByCounty(county);
-      for(let ci of cities) {
+      for (let ci of cities) {
         if (ci === this.city) {
           this.county = county;
           return;
