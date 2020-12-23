@@ -20,10 +20,15 @@
                        [routerLink]="['/seller/orders', order.id]">
           <img mat-list-avatar src="assets/img/no-image.png">
           <h3 matLine> {{order.buyerName}} </h3>
-          <p matLine>{{order.content[0]?.item.itemName}}...</p>
+
+          <p *ngIf="order.content as contents" matLine>
+            {{contents[0]?.item?.itemName}}...
+          </p>
+
           <p matLine *ngIf="(getOrderTotal(order.id) | async) as total">
             {{total}}:-
           </p>
+
           <mat-divider *ngIf="(k + 1) < orders.length"></mat-divider>
         </mat-list-item>
       </div>
