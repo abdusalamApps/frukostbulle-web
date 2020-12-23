@@ -23,6 +23,9 @@ export class TokenInterceptor implements HttpInterceptor {
     const tokenized = request.clone({
       headers: request.headers.set('Authorization', `Bearer ${t}`)
     });
+    if (t == null || t === '' || t === undefined) {
+      return next.handle(request);
+    }
     return next.handle(tokenized);
 
   }
