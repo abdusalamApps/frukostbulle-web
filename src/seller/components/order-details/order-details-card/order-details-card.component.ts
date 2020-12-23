@@ -54,7 +54,7 @@ export class OrderDetailsCardComponent implements OnInit, OnDestroy {
     return this.store.select(fromState.getOrderTotal, {orderId});
   }
 
-  private onMarkClick(markType: MarkType) {
+  onMarkClick(markType: MarkType) {
     switch (markType) {
       case MarkType.PAID:
         this.dialog.open(MarkOrderDialog, {
