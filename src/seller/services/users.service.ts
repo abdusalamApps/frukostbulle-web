@@ -3,6 +3,7 @@ import * as urls from '../../urls';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../../models/user.model';
+import {Area} from '../../models/area.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class UsersService {
 
   updateSellerDates(sellerId: number, dates: Date[]): Observable<any> {
     return this.http.post<any>(`${urls.usersUrls.Post.updateSellerDatesUrl}`, {sellerId, dates});
+  }
+
+  createUser(user: User, coordinates: { lat: number, lng: number }[]): Observable<any> {
+    return this.http.post(`${urls.usersUrls.Post.createUserUrl}`, {user, coordinates})
   }
 }

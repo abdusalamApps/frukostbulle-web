@@ -15,3 +15,9 @@ export interface User {
   lasOrderDay: string;
   profilePictureUrl: string;
 }
+export enum PermissionLevel {
+  ADMIN,
+  BAKERY,
+  SELLER,
+  BUYER
+}

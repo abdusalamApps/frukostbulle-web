@@ -12,9 +12,9 @@
       <ng-template matStepLabel>Namn, e-post och mobilnummer</ng-template>
       <mat-form-field>
         <mat-label>Namn</mat-label>
-        <input matInput required [(ngModel)]="name" />
+        <input matInput required [(ngModel)]="name"/>
       </mat-form-field>
-      <br />
+      <br/>
       <mat-form-field>
         <mat-label>E-postadress</mat-label>
         <input
@@ -24,7 +24,7 @@
           [(ngModel)]="email"
         />
       </mat-form-field>
-      <br />
+      <br/>
       <mat-form-field>
         <mat-label>Mobilnummer</mat-label>
         <input
@@ -60,7 +60,7 @@
         [longitude]="lng"
         (mapReady)="onMapReady($event)"
       >
-        <agm-marker [latitude]="lat" [longitude]="lng"> </agm-marker>
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
       </agm-map>
 
       <div>
@@ -68,6 +68,103 @@
         <button mat-button matStepperNext>Nästa</button>
       </div>
     </mat-step>
+
+    <mat-step label="Dagar du kan leverera">
+      <ejs-calendar weekNumber='true'
+                    [(values)]="selectedDates" [isMultiSelection]='multiSelect'>
+      </ejs-calendar>
+
+      <div>
+        <button mat-button matStepperPrevious>Tillbaka</button>
+        <button mat-button matStepperNext>Nästa</button>
+      </div>
+
+    </mat-step>
+
+    <mat-step label="Bageri">
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel hideToggle
+                             (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>Filter</mat-panel-title>
+            <mat-panel-description style="display: grid; justify-content: end">
+              <mat-icon>filter_list</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>
+            <mat-form-field appearance="legacy" style="width: 90%; padding: 0 5%;">
+              <mat-label>Bagerinamn</mat-label>
+              <input matInput placeholder="" #bakeryName>
+              <mat-icon matRipple matSuffix style="clip-path: circle()"
+                        (click)="accordion ? accordion.closeAll() : '';
+                         findBakeryByName(bakeryName.value)">
+                search
+              </mat-icon>
+            </mat-form-field>
+          </p>
+          <div style="
+       display: grid;
+        grid-gap: 1em;
+        width: 90%;
+        padding: 0 5%;
+         grid-template-columns: repeat(auto-fit, minmax(15em, 1fr))
+">
+            <mat-form-field appearance="legacy">
+              <mat-label>Län</mat-label>
+              <mat-select>
+                <mat-option>''</mat-option>
+                <mat-option *ngFor="let county of counties"
+                            value="{{county}}"
+                            (click)="getBakeriesByCounty(county)">
+                  {{county}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="legacy">
+              <mat-label>Stad</mat-label>
+              <mat-select>
+                <mat-option>''</mat-option>
+                <mat-option *ngFor="let city of cities"
+                            value="{{city}}"
+                            (click)="getBakeriesByCity(city)">
+                  {{city}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-list *ngIf="(bakeries$ | async) as bakeries">
+        <mat-list-item matRipple *ngFor="let bakery of bakeries; index as i"
+                       (click)="onListItemClick(bakery)">
+          <h3 matLine>{{bakery.name}}</h3>
+          <p matLine>
+            <span>{{bakery.address}}</span>
+          </p>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+
+      <mat-list *ngIf="selectedBakery" style="margin-top: 16px">
+        <p matSubheader>Din valda bageri</p>
+        <mat-list-item>
+          <h3 matLine>{{selectedBakery.name}}</h3>
+          <p matLine>
+            <span>{{selectedBakery.address}}</span>
+          </p>
+        </mat-list-item>
+      </mat-list>
+
+      <div>
+        <button mat-button matStepperPrevious>Tillbaka</button>
+        <button mat-button matStepperNext>Nästa</button>
+      </div>
+
+    </mat-step>
+
     <mat-step>
       <ng-template matStepLabel>Lösenord</ng-template>
 
@@ -78,17 +175,14 @@
           matInput
           [type]="hide ? 'password' : 'text'"
         />
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="hide = !hide"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide"
+        <button mat-icon-button matSuffix (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
         >
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
       </mat-form-field>
-      <br />
+      <br/>
       <mat-form-field>
         <mat-label>Bekräfta lösenord</mat-label>
         <input
@@ -109,11 +203,13 @@
 
       <mat-error>{{
         enteredPassword === enteredPassword2 ? "" : "Passwords do not match"
-      }}</mat-error>
+        }}</mat-error>
       <div>
         <button mat-button matStepperPrevious>Tillbaka</button>
-        <button mat-button (click)="onCreate()">Skapa</button>
+        <button mat-button matStepperNästa (click)="onCreate()">Skapa</button>
       </div>
     </mat-step>
+
   </mat-vertical-stepper>
+
 </div>

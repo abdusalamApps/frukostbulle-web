@@ -69,6 +69,7 @@ const routes: Routes = [
     canActivate: [fromGuards.AuthGuard],
   },
   {path: 'login', component: Components.LoginComponent},
+  {path: 'signup-confirmation', component: Components.SignupConfirmComponent},
 ];
 
 // @ts-ignore
