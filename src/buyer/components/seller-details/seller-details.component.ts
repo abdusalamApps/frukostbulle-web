@@ -19,14 +19,14 @@ export class SellerDetailsComponent implements OnInit {
   title = 'Säljarens detaljer';
 
   constructor(private store: Store<fromState.BuyerState>,
-              private rootStore: Store<fromRoot.State>,
-  ) {
-  }
+              private rootStore: Store<fromRoot.State>) {}
 
   ngOnInit(): void {
+/*
     this.userObservable$ = this.store.select(fromState.getCurrentUser);
-    // this.associatedSeller$ = this.store.select(fromState.getCurrentUserAssociatedSeller);
-   // this.bakery$ = this.store.select(fromState.getCurrentUserAssociatedBakery);
+    this.associatedSeller$ = this.store.select(fromState.getCurrentUserAssociatedSeller);
+    this.bakery$ = this.store.select(fromState.getCurrentUserAssociatedBakery);
+*/
 
   }
 

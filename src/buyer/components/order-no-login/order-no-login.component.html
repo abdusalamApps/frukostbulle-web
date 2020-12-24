@@ -1,1 +1,50 @@
-<p>order-no-login works!</p>
+<mat-toolbar class="toolbar" color="primary">
+  <span class="spacer"></span>
+  <mat-icon mat-ripple class="back-icon" (click)="navigateHome()">
+    arrow_back
+  </mat-icon>
+  <span>{{ title }}</span>
+</mat-toolbar>
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <div class="form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="name" />
+        </mat-form-field>
+
+        <mat-card-title>Address</mat-card-title>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Gatan</mat-label>
+          <input matInput [(ngModel)]="street" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+        <mat-label>Ort</mat-label>
+        <input matInput [(ngModel)]="city" />
+      </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Län</mat-label>
+          <input matInput [(ngModel)]="county" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+        <mat-label>Mobilnummer</mat-label>
+        <input matInput [(ngModel)]="mobile" />
+      </mat-form-field>
+
+        <div class="buttons-container">
+          <button mat-raised-button color="accent" (click)="confirmOrder()">
+            Bekräftelse
+          </button>
+
+
+      </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

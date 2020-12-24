@@ -22,18 +22,18 @@ export class OrderHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   // this.orders$ = this.store.select(fromState.getOrderHistory);
+    this.orders$ = this.store.select(fromState.getBuyerOrderHistory);
   }
 
   getOrderTotal(orderId: number): number {
-    /* let theTotal = 0;
-   this.store.select(fromState.getOrderTotal, {orderId}).pipe(
+    let theTotal = 0;
+    this.store.select(fromState.getBuyerOrderTotal, {orderId}).pipe(
       map((total) => {
         theTotal = total;
       }),
       take(1)
     );
-    return theTotal; */
+    return theTotal;
     return 0;
   }
 
