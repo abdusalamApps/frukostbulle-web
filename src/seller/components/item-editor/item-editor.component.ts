@@ -120,11 +120,11 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
 }
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // tslint:disable-next-line:components-selector
   selector: 'delete-dialog',
   templateUrl: 'delete-dialog.html',
 })
-// tslint:disable-next-line:component-class-suffix
+// tslint:disable-next-line:components-class-suffix
 export class DeleteDialog {
 
   constructor(
