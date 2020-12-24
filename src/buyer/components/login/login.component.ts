@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {LoginInfo} from '../../../models/loginInfo.model';
+import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
+import * as fromStore from '../../state';
+import * as fromRoot from 'src/app/state';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-login',
@@ -6,10 +13,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  title = 'Inloggning';
+  public loginInfo: LoginInfo = {email: '', password: ''};
+  hide = true;
 
-  constructor() { }
+  signup = false;
+
+  pending$ = new Observable();
+
+  email = '';
+  password = '';
+
+  constructor(
+    public location: Location,
+    private store: Store<fromStore.BuyerState>
+  ) {
+  }
 
   ngOnInit(): void {
+    this.pending$ = this.store.select(fromStore.getPending);
   }
+
+  signIn(): void {
+    this.loginInfo = {email: this.email, password: this.password};
+    this.store.dispatch(new fromStore.Login(this.loginInfo));
+  }
+
+  onSignup(): void {
+  }
+
+  navigateHome(): void {
+    this.store.dispatch(new fromRoot.Go({path: [''], extras: {replaceUrl: true}}));
+  }
+
 
 }

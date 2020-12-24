@@ -1,1 +1,14 @@
-<p>confirmation-login works!</p>
+<mat-toolbar class="toolbar" color="primary">
+  <span class="spacer"></span>
+
+  <span>{{ title }}</span>
+</mat-toolbar>
+<div class="container">
+  <h1 color="accent">Tack för din beställning</h1>
+
+  <button [routerLink]="['../items']" mat-raised-button color="accent">
+    Köp fler
+  </button>
+
+
+</div>

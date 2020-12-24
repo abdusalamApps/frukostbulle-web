@@ -74,6 +74,9 @@ import { MarkOrderDialog } from './components/mark-order/mark-order-dialog.compo
       multi: true
     }
   ],
+  exports: [
+    ProfileCardComponent
+  ]
 })
 export class SellerModule {
 }

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingCartComponent implements OnInit {
 
+  title = 'Varukorg';
   constructor() { }
 
   ngOnInit(): void {

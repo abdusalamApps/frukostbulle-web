@@ -1,1 +1,20 @@
-<p>confirmation-no-login works!</p>
+<mat-toolbar class="toolbar" color="primary">
+  <span class="spacer"></span>
+
+  <span>{{ title }}</span>
+</mat-toolbar>
+<div class="container">
+  <h1 color="accent">Tack för din beställning</h1>
+
+  <h2>Skapa konto för lättare beställning</h2>
+
+  <button [routerLink]="['buyer/signup']" mat-raised-button color="accent">
+    Skapa konto
+  </button>
+
+  <button [routerLink]="['buyer/items']" mat-raised-button color="accent">
+    Köp fler
+  </button>
+
+
+</div>
