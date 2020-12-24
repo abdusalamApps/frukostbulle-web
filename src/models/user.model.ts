@@ -10,6 +10,7 @@ export interface User {
   permissionLevel: number;
   reminder: boolean;
   associatedBakery: number;
+  associatedSeller: number;
   active: boolean;
   availableDates: Date[];
   lasOrderDay: string;

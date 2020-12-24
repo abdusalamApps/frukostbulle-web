@@ -1,6 +1,6 @@
 <mat-toolbar class="toolbar" color="primary">
   <span class="spacer"></span>
-  <mat-icon mat-ripple class="back-icon" (click)="location.back()">
+  <mat-icon mat-ripple class="back-icon" (click)="navigateBack()">
     arrow_back
   </mat-icon>
   <span>{{ title }}</span>
@@ -9,10 +9,10 @@
 <div class="container">
   <mat-vertical-stepper [linear]="isLinear" #stepper>
     <mat-step>
-      <ng-template matStepLabel>Namn, e-post, Address och mobilnummer</ng-template>
+      <ng-template matStepLabel>Namn och e-post</ng-template>
       <mat-form-field>
         <mat-label>Namn</mat-label>
-        <input matInput required [(ngModel)]="name" />
+        <input matInput required [formControl]="nameControl" />
       </mat-form-field>
       <br />
       <mat-form-field>
@@ -20,18 +20,21 @@
         <input
           matInput
           required
-          [formControl]="emailControl"
-          [(ngModel)]="email"
-        />
+          [formControl]="emailControl"/>
       </mat-form-field>
       <br />
+      <div  style="margin-top: 16px">
+        <button mat-button matStepperNext>Nästa</button>
+      </div>
+
+    </mat-step>
+    <mat-step label="Address och mobilnummer">
       <mat-form-field>
-        <mat-label>Address</mat-label>
+        <mat-label>Gatuaddress</mat-label>
         <input
           matInput
           required
-          [formControl]="emailControl"
-          [(ngModel)]="email"
+          [formControl]="streetControl"
         />
       </mat-form-field>
       <br />
@@ -40,20 +43,10 @@
         <input
           matInput
           required
-          [formControl]="emailControl"
-          [(ngModel)]="email"
+          [formControl]="cityControl"
         />
       </mat-form-field>
       <br />
-      <mat-form-field>
-        <mat-label>Län</mat-label>
-        <input
-          matInput
-          required
-          [formControl]="emailControl"
-          [(ngModel)]="email"
-        />
-      </mat-form-field>
       <br />
       <mat-form-field>
         <mat-label>Mobilnummer</mat-label>
@@ -61,42 +54,15 @@
           matInput
           required
           [formControl]="mobileControl"
-          [(ngModel)]="mobile"
         />
         <mat-hint>Mobilnummer måste vara 10 siffror</mat-hint>
       </mat-form-field>
-      <div>
-        <button mat-button matStepperNext style="margin-top: 16px">
-          Nästa
-        </button>
-      </div>
-    </mat-step>
-
-    //ändras till alla säljaren
-    <mat-step label="Säljarea">
-      <input
-        id="search-field"
-        placeholder="Välj den närmaste säljaren:"
-        type="text"
-        class="form-control"
-        (keydown.enter)="$event.preventDefault()"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="off"
-        #search/>
-      <agm-map
-        [zoom]="15"
-        [latitude]="lat"
-        [longitude]="lng"
-        (mapReady)="onMapReady($event)">
-        <agm-marker [latitude]="lat" [longitude]="lng"> </agm-marker>
-      </agm-map>
-
-      <div>
+      <div  style="margin-top: 16px">
         <button mat-button matStepperPrevious>Tillbaka</button>
         <button mat-button matStepperNext>Nästa</button>
       </div>
     </mat-step>
+
     <mat-step>
       <ng-template matStepLabel>Lösenord</ng-template>
 
@@ -105,6 +71,8 @@
         <input
           [(ngModel)]="enteredPassword"
           matInput
+          required
+
           [type]="hide ? 'password' : 'text'"
         />
         <button
