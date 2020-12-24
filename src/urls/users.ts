@@ -12,6 +12,8 @@ export namespace Post {
   export const loginUrl = `${baseUrl}/login`;
   export const createUserUrl = `${baseUrl}/create-user`;
   export const sendCreateEmailUrl = `${baseUrl}/send-create-email?userEmail=`;
+  export const confirmAccountUrl = `${baseUrl}/confirm`;
+
   export const updateUserUrl = `${baseUrl}/update-user`;
   export const deleteUserByIdUrl = `${baseUrl}/delete-user`;
   export const addSellerDateUrl = `${baseUrl}/add-date`;

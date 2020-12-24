@@ -32,12 +32,16 @@ export class UsersService {
     return this.http.post<any>(`${urls.usersUrls.Post.updateSellerDatesUrl}`, {sellerId, dates});
   }
 
-  createUser(user: User, coordinates: { lat: number, lng: number }[]): Observable<any> {
-    return this.http.post(`${urls.usersUrls.Post.createUserUrl}`, {user, coordinates})
+  createUser(user: User, coordinates: { lat: number, lng: number }[]): Observable<number> {
+    return this.http.post<number>(`${urls.usersUrls.Post.createUserUrl}`, {user, coordinates})
   }
 
   sendConfirmationEmail(email: string): Observable<any> {
     return this.http.post(`${urls.usersUrls.Post.sendCreateEmailUrl}${email}`, {})
+  }
+
+  confirmAccount(userId: number, code: number): Observable<any> {
+    return this.http.post(`${urls.usersUrls.Post.confirmAccountUrl}?userId=${userId}&code=${code}`, {})
   }
 
 }

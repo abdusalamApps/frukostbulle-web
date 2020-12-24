@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupConfirmComponent implements OnInit {
 
+  code = '';
+
   constructor() { }
 
   ngOnInit(): void {

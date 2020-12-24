@@ -63,11 +63,20 @@ export class SignupComponent implements OnInit, OnDestroy {
   selectedShape: any;
   selectedArea = 0;
 
-  emailControl = new FormControl('', [Validators.email]);
-  mobileControl = new FormControl(0, [
+  // Form controls
+  nameControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(2)
+  ])
+  emailControl = new FormControl('', [
+    Validators.email,
+    Validators.required,
+  ]);
+  mobileControl = new FormControl('', [
     Validators.minLength(10),
     Validators.maxLength(10),
   ]);
+
 
   cities: string[] = [];
   counties: string[] = [];
@@ -81,24 +90,28 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   userSubscription$ = new Subscription();
   cEmailSubscription = new Subscription();
+  confirmSubscription$ = new Subscription();
 
-  constructor(private router: Router,
-              public location: Location,
-              private snackBar: MatSnackBar,
-              private aRoute: ActivatedRoute,
-              private locationService: LocationService,
-              private mapsLoader: MapsAPILoader,
-              private ngZone: NgZone,
-              private citiesService: CitiesService,
-              private store: Store<fromState.SellerState>,
-              private userService: UsersService,
-              private areaService: AreaService
+  signupSuccess = false;
+  code = -1;
+  newUserId = -1;
+
+  constructor(
+    private snackBar: MatSnackBar,
+    private aRoute: ActivatedRoute,
+    private locationService: LocationService,
+    private mapsLoader: MapsAPILoader,
+    private ngZone: NgZone,
+    private citiesService: CitiesService,
+    private store: Store<fromState.SellerState>,
+    private userService: UsersService,
   ) {
   }
 
   ngOnDestroy(): void {
     this.userSubscription$.unsubscribe();
     this.cEmailSubscription.unsubscribe();
+    this.confirmSubscription$.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -169,9 +182,13 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   onCreate(): void {
     if (this.enteredPassword != this.enteredPassword2
-      || this.email == ''
-      || this.name == ''
-      || this.mobile == ''
+      || this.emailControl.hasError('required')
+      || this.emailControl.hasError('email')
+      || this.mobileControl.hasError('required')
+      || this.mobileControl.hasError('minlength')
+      || this.mobileControl.hasError('maxlength')
+      || this.nameControl.hasError('required')
+      || this.nameControl.hasError('minlength')
       || this.selectedBakery === null) {
       this.snackBar.open('Rätta felen.', 'Ok', {
         duration: 2000,
@@ -180,12 +197,12 @@ export class SignupComponent implements OnInit, OnDestroy {
       if (this.selectedBakery) {
         const newUser: User = {
           id: -1,
-          name: this.name,
+          name: this.nameControl.value,
           county: this.county,
           city: this.city,
           address: this.address,
-          mobilenbr: this.mobile,
-          email: this.email,
+          mobilenbr: this.mobileControl.value,
+          email: this.emailControl.value,
           password: this.enteredPassword,
           permissionLevel: PermissionLevel.SELLER,
           reminder: false,
@@ -198,13 +215,15 @@ export class SignupComponent implements OnInit, OnDestroy {
         console.log(`pointList: ${JSON.stringify(this.pointList)}`);
         this.userSubscription$ = this.userService.createUser(newUser, this.pointList).subscribe(
           res => {
+            this.newUserId = res;
+            this.signupSuccess = true;
             this.cEmailSubscription = this.userService.sendConfirmationEmail(newUser.email).subscribe(
               res => {
                 this.store.dispatch(new fromRoot.Go({path: ['seller/signup-confirmation']}));
                 console.log(`createUser res: ${res}`);
               },
               err => {
-                console.log(`send confirmation email failed ${err}`);
+                console.log(`send confirmation email failed ${JSON.stringify(err)}`);
               }
             );
           },
@@ -332,6 +351,17 @@ export class SignupComponent implements OnInit, OnDestroy {
       }
 
     }
+  }
+
+  navigateBack(): void {
+    this.store.dispatch(new fromRoot.Back())
+  }
+
+  onConfirm(): void {
+    this.confirmSubscription$ = this.userService.confirmAccount(this.newUserId, this.code).subscribe(
+      res => console.log(`accountConfirm res: ${res}`),
+      err => console.log(`accountConfirm error: ${JSON.stringify(err)}`)
+    )
   }
 
 }
