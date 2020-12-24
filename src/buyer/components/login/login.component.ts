@@ -1,7 +1,7 @@
 import {LoginInfo} from '../../../models/loginInfo.model';
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import * as fromStore from '../../state';
+import * as fromStore from 'src/buyer/state';
 import * as fromRoot from 'src/app/state';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
@@ -31,15 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pending$ = this.store.select(fromStore.getPending);
+    this.pending$ = this.store.select(fromStore.getBuyerLoginPending);
   }
 
   signIn(): void {
     this.loginInfo = {email: this.email, password: this.password};
-    this.store.dispatch(new fromStore.Login(this.loginInfo));
-  }
-
-  onSignup(): void {
+    this.store.dispatch(new fromStore.BuyerLogin(this.loginInfo));
   }
 
   navigateHome(): void {

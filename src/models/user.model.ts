@@ -17,8 +17,8 @@ export interface User {
   profilePictureUrl: string;
 }
 export enum PermissionLevel {
-  ADMIN,
+  BUYER,
   BAKERY,
   SELLER,
-  BUYER
+  Admin
 }

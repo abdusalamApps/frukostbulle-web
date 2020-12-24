@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
 
 import {Effect, Actions, createEffect, ofType} from '@ngrx/effects';
-import * as loginAction from '../actions/login.action';
+import * as loginAction from '../actions/buyerLoginAction';
 import {map, switchMap, catchError, mergeMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 
 import * as fromRoot from '../../../app/state';
-import * as userActions from '../actions/currentUser.action';
-import * as loginActions from '../actions/login.action';
+import * as userActions from '../actions/buyerCurrentUserAction';
+import * as loginActions from '../actions/buyerLoginAction';
 
 import {MatDialog} from '@angular/material/dialog';
 
 import {Store} from '@ngrx/store';
 import {LogoutDialog} from 'src/seller/components/logout-dialog/logout-dialog.component';
-import {LoginState} from '../reducers/login.reducer';
+import {BuyerLoginState} from '../reducers/login.reducer';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {UsersService} from '../../../seller/services/users.service';
 import {User} from '../../../models/user.model';
@@ -23,27 +23,41 @@ import {User} from '../../../models/user.model';
 export class CurrentUserEffect {
   constructor(private actions$: Actions,
               private userService: UsersService,
-              private store: Store<LoginState>,
+              private store: Store<BuyerLoginState>,
   ) {
   }
 
   loadCurrentUser$ = createEffect(() =>
-    this.actions$.pipe(ofType(userActions.LOAD_CURRENT_USER),
-      switchMap((action: userActions.LoadCurrentUser) => {
+    this.actions$.pipe(ofType(userActions.BUYER_LOAD_CURRENT_USER),
+      switchMap((action: userActions.BuyerLoadCurrentUser) => {
         return this.userService.getUserByEmail(action.payload).pipe(
-          map((user: User) => new userActions.LoadCurrentUserSuccess((user))),
-          catchError((error: any) => of(new userActions.LoadCurrentUserFail(error)))
+          map((user: User) => new userActions.BuyerLoadCurrentUserSuccess((user))),
+          catchError((error: any) => of(new userActions.BuyerLoadCurrentUserFail(error)))
         );
       })
     )
   );
   loadCurrentUserSuccess$ = createEffect(() =>
-    this.actions$.pipe(ofType(userActions.LOAD_CURRENT_USER_SUCCESS),
-      switchMap((action: userActions.LoadCurrentUserSuccess) => {
-        localStorage.setItem('userId', action.payload.id.toString(10));
-        localStorage.setItem('userEmail', action.payload.email);
-        return of(new userActions.LoadCurrentUserSeller(action.payload.id));
+    this.actions$.pipe(ofType(userActions.BUYER_BUYER_LOAD_CURRENT_USER_SUCCESS),
+      switchMap((action: userActions.BuyerLoadCurrentUserSuccess) => {
+        localStorage.setItem('currentUserId', action.payload.id.toString(10));
+        localStorage.setItem('currentUserEmail', action.payload.email);
+        return of(new userActions.BuyerLoadCurrentUserSeller(action.payload.id));
       })
     )
   );
+
+  updateCurrentSeller$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.BUYER_UPDATE_SELLER),
+      switchMap((action: userActions.BuyerUpdateSeller) => {
+        return this.userService.associateSeller(action.payload.buyerId, action.payload.sellerId).pipe(
+          map((user: User) => new userActions.BuyerUpdateSellerSuccess(user)),
+          catchError((error: any) => of(new userActions.BuyerUpdateSellerFail(error)))
+        );
+      })
+    )
+  );
+
+
 }

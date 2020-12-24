@@ -44,4 +44,9 @@ export class UsersService {
     return this.http.post(`${urls.usersUrls.Post.confirmAccountUrl}?userId=${userId}&code=${code}`, {})
   }
 
+  associateSeller(buyerId: number, sellerId: number): Observable<any> {
+    return this.http.post<any>(
+      `${urls.usersUrls.Post.associateSellerUrl}?buyerId=${buyerId}&sellerId${sellerId}`, {});
+  }
+
 }

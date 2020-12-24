@@ -1,10 +1,15 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
-import {LatLngLiteral, MapsAPILoader, PolyMouseEvent} from '@agm/core';
+import {MapsAPILoader} from '@agm/core';
 import {LocationService} from '../../../app/services/location.service';
+import {Area} from '../../../models/area.model';
+import {AreaService} from '../../../seller/services/area.service';
+import * as fromState from 'src/buyer/state';
+import * as fromRoot from 'src/app/state';
+import {Store} from '@ngrx/store';
 
 declare const google: any;
+
 export class Point {
   latitude: number;
   longitude: number;
@@ -40,32 +45,20 @@ export class MapComponent implements OnInit {
   username = 'User';
   lat = 0;
   lng = 0;
-  zoom = 0 ;
+  zoom = 0;
   address = '';
   private geoCoder: any;
 
-  polygon: LatLngLiteral[] = [
-    /*{lat: 55.8703477, lng: 12.8300802},
-    {lat: 55.8703477, lng: 12.8310802},
-    {lat: 55.8723579, lng: 12.8300802},
-    {lat: 55.8703477, lng: 12.8300802},*/
-  ];
+  areas: Area[] = [];
 
-  polygons: Polygon[] = [
-    new Polygon('2', [new Point(2, 2), new Point(3, 3)])
-  ];
-  paths: { lat: number, lng: number }[] = [];
-
-  constructor(private router: Router,
-              private location: Location,
-              private mapsLoader: MapsAPILoader,
+  constructor(private mapsLoader: MapsAPILoader,
               private ngZone: NgZone,
               private locationService: LocationService,
-              private aRoute: ActivatedRoute) {
+              private areaService: AreaService,
+              private store: Store<fromState.BuyerState>) {
   }
 
   ngOnInit(): void {
-
     this.locationService.getCurrentLocation();
     this.locationService.currentLat$.subscribe(lat => {
       this.lat = lat;
@@ -73,14 +66,6 @@ export class MapComponent implements OnInit {
     this.locationService.currentLng$.subscribe(lng => {
       this.lng = lng;
     });
-    this.locationService.currentLatLng$.subscribe(latLng => {
-      this.polygon = [];
-      this.polygon.push({lat: latLng.lat - 0.001, lng: latLng.lng - 0.001 });
-      this.polygon.push({lat: latLng.lat + 0.004, lng: latLng.lng - 0.001 });
-      this.polygon.push({lat: latLng.lat + 0.004, lng: latLng.lng + 0.004});
-      this.polygon.push({lat: latLng.lat - 0.001, lng: latLng.lng + 0.004});
-    })
-
 
     this.mapsLoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder();
@@ -104,6 +89,12 @@ export class MapComponent implements OnInit {
         });
       });
     });
+    this.areaService.getAllAreas().subscribe(
+      result => this.areas = result,
+      error => {
+        console.log(`getAreas error ${JSON.stringify(error)}`);
+      }
+    );
   }
 
 
@@ -126,14 +117,19 @@ export class MapComponent implements OnInit {
   }
 
   public navigateBack(): void {
-    this.location.back();
+    this.store.dispatch(new fromRoot.Back());
   }
-
-
-  click($event: PolyMouseEvent): void {
-    this.router.navigate(
-      ['/buyer/seller-details'],
-      {relativeTo: this.aRoute});
+  associateSeller(sellerId: number): void {
+    console.log(`toSellerItems ${sellerId}`);
+    const buyerIdStorage = localStorage.getItem('currentUserId');
+    if (buyerIdStorage) {
+      console.log(`buyerId: ${buyerIdStorage}`);
+      const buyerId = parseInt(buyerIdStorage, 10);
+      this.store.dispatch(new fromState.BuyerUpdateSeller({
+         buyerId,
+        sellerId
+      }));
+    }
   }
 
 }

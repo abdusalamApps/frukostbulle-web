@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
 
   canActivate(): Observable<boolean> {
-    return this.store.select(fromBuyer.getLoggedIn).pipe(
+    return this.store.select(fromBuyer.getBuyerLoggedIn).pipe(
       tap((loggedIn) => {
         if (!loggedIn) {
           this.store.dispatch(new fromRoot.Go({ path: ['buyer/login'] }));

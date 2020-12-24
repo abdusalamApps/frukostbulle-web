@@ -34,6 +34,6 @@ export class OrderLoginOrNotComponent implements OnInit {
   }
   signIn(): void {
     this.loginInfo = {email: this.email, password: this.password};
-    this.store.dispatch(new fromStore.Login(this.loginInfo));
+    this.store.dispatch(new fromStore.BuyerLogin(this.loginInfo));
   }
 }

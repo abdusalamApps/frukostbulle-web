@@ -7,14 +7,14 @@ import {ActionReducerMap, createFeatureSelector} from '@ngrx/store';
 
 
 export interface BuyerState {
-  login: fromLogin.LoginState;
+  buyerLogin: fromLogin.BuyerLoginState;
   currentUser: fromCurrentUser.CurrentUserState;
   items: fromItems.ItemState;
   orders: fromOrder.OrderState;
 }
 
 export const reducers: ActionReducerMap<BuyerState, any> = {
-  login: fromLogin.reducer,
+  buyerLogin: fromLogin.reducer,
   currentUser: fromCurrentUser.reducer,
   items: fromItems.reducer,
   orders: fromOrder.reducer,

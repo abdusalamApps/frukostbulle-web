@@ -1,38 +1,38 @@
 import {Injectable} from '@angular/core';
 
 import {Effect, Actions, createEffect, ofType} from '@ngrx/effects';
-import * as loginAction from '../actions/login.action';
+import * as loginAction from '../actions/buyerLoginAction';
 import {map, switchMap, catchError, mergeMap} from 'rxjs/operators';
 import {AuthService} from '../../../app/services/auth.service';
 import {of} from 'rxjs';
 
 import * as fromRoot from '../../../app/state';
-import * as userActions from '../actions/currentUser.action';
-import * as loginActions from '../actions/login.action';
+import * as userActions from '../actions/buyerCurrentUserAction';
+import * as loginActions from '../actions/buyerLoginAction';
 
 import {MatDialog} from '@angular/material/dialog';
 
 import {Store} from '@ngrx/store';
 import {LogoutDialog} from 'src/seller/components/logout-dialog/logout-dialog.component';
-import {LoginState} from '../reducers/login.reducer';
+import {BuyerLoginState} from '../reducers/login.reducer';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable()
-export class LoginEffect {
+export class BuyerLoginEffect {
   constructor(private actions$: Actions,
               private authService: AuthService,
               private dialog: MatDialog,
-              private store: Store<LoginState>,
+              private store: Store<BuyerLoginState>,
               private snackBar: MatSnackBar) {
   }
 
   login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loginAction.LOGIN),
-      switchMap((action: loginAction.Login) => {
+      ofType(loginAction.BUYER_LOGIN),
+      switchMap((action: loginAction.BuyerLogin) => {
         return this.authService.login(action.payload).pipe(
-          map((response) => new loginAction.LoginSuccess(response)),
-          catchError((error) => of(new loginAction.LoginFail(error)))
+          map((response) => new loginAction.BuyerLoginSuccess(response)),
+          catchError((error) => of(new loginAction.BuyerLoginFail(error)))
         );
       })
     )
@@ -40,11 +40,11 @@ export class LoginEffect {
 
   loginSuccess$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loginAction.LOGIN_SUCCESS),
-      switchMap((action: loginAction.LoginSuccess) => [
+      ofType(loginAction.BUYER_LOGIN_SUCCESS),
+      switchMap((action: loginAction.BuyerLoginSuccess) => [
         // console.log(`paylod@LoginSuccess: ${action.payload.email}`);
-        new userActions.LoadCurrentUser(action.payload.email),
-        new fromRoot.Go({path: ['buyer/seller-items']})
+        new userActions.BuyerLoadCurrentUser(action.payload.email),
+        new fromRoot.Go({path: ['buyer/items']})
       ]),
       // seller-area((authResponse) => new userActions.LoadCurrentUser(authResponse)),
       // seller-area((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
@@ -53,8 +53,8 @@ export class LoginEffect {
 
   logout$ = createEffect(() =>
       this.actions$.pipe(
-        ofType(loginAction.LOGOUT),
-        map((action: loginAction.Logout) => {
+        ofType(loginAction.BUYER_LOGOUT),
+        map((action: loginAction.BuyerLogout) => {
           this.dialog.open(LogoutDialog, {
             data: {
               name: '',
@@ -68,8 +68,8 @@ export class LoginEffect {
 
   loginFail$ = createEffect(() =>
       this.actions$.pipe(
-        ofType(loginActions.LOGIN_FAIL),
-        map((action: loginActions.LoginFail) => {
+        ofType(loginActions.BUYER_LOGIN_FAIL),
+        map((action: loginActions.BuyerLoginFail) => {
           this.snackBar.open('Fel e-post eller lösenord!', 'Ok', {
             duration: 2000
           });
@@ -81,8 +81,8 @@ export class LoginEffect {
 
   logoutConfirm$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loginAction.LOGOUT_CONFIRM),
-      mergeMap((action: loginAction.LogoutConfirm) => {
+      ofType(loginAction.BUYER_LOGOUT_CONFIRM),
+      mergeMap((action: loginAction.BuyerLogoutConfirm) => {
         return of(new fromRoot.Go({path: ['/buyer/login'], extras: {replaceUrl: true}}));
       })
     )

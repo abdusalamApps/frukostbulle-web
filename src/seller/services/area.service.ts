@@ -21,4 +21,8 @@ export class AreaService {
     return this.http.get<Area>(`${urls.areasUrls.Get.getAreaBySellerIdUrl}${sellerId}`);
   }
 
+  getAllAreas(): Observable<Area[]> {
+    return this.http.get<Area[]>(`${urls.areasUrls.Get.getAreasUrl}`);
+  }
+
 }

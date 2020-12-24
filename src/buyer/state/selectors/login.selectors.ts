@@ -1,18 +1,16 @@
 import {createSelector} from '@ngrx/store';
-import * as fromRoot from '../../state';
-import {AuthResponse} from '../../../models/authResponse.model';
 import * as fromFeature from '../reducers';
 import * as fromLogin from '../reducers/login.reducer';
 
-export const getLoginState = createSelector(
+export const getBuyerLoginState = createSelector(
   fromFeature.getBuyerState,
-  (state: fromFeature.BuyerState) => state.login
+  (state: fromFeature.BuyerState) => state.buyerLogin
 );
 
-export const getPending = createSelector(getLoginState, fromLogin.getPending);
-export const getLoggedIn = createSelector(getLoginState, fromLogin.getLoggedIn);
+export const getBuyerLoginPending = createSelector(getBuyerLoginState, fromLogin.getPending);
+export const getBuyerLoggedIn = createSelector(getBuyerLoginState, fromLogin.getLoggedIn);
 
-export const getAuthResponse = createSelector(getLoginState, fromLogin.getAuthResponse);
+export const getBuyerAuthResponse = createSelector(getBuyerLoginState, fromLogin.getAuthResponse);
 
-export const getToken = createSelector(getLoginState, fromLogin.getToken);
-export const getAuthEmail = createSelector(getLoginState, fromLogin.getAuthEmail);
+export const getBuyerToken = createSelector(getBuyerLoginState, fromLogin.getToken);
+export const getBuyerAuthEmail = createSelector(getBuyerLoginState, fromLogin.getAuthEmail);

@@ -1,11 +1,10 @@
-<!--
 <mat-toolbar color="primary">
   <span class="spacer"></span>
   <mat-icon mat-ripple class="back-icon" (click)="navigateBack()">
     arrow_back
-  </mat-icon>  <span>{{ title }}</span>
+  </mat-icon>
+  <span>Välj en säljare</span>
 </mat-toolbar>
--->
 
 <div class="map-container">
 
@@ -15,7 +14,9 @@
     <agm-marker [latitude]="lat" [longitude]="lng">
 
     </agm-marker>
-    <agm-polygon [paths]="polygon" (polyClick)="click($event)" >
+    <agm-polygon *ngFor="let area of areas"
+                 [paths]="area.coordinates"
+                 (polyClick)="associateSeller(area.sellerId)" >
 
     </agm-polygon>
   </agm-map>

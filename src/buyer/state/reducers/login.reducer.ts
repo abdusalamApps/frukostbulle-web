@@ -1,14 +1,14 @@
 import {AuthResponse} from '../../../models/authResponse.model';
-import * as fromLogin from './../actions/login.action';
+import * as fromLogin from '../actions/buyerLoginAction';
 import * as constants from 'src/constants';
 
-export interface LoginState {
+export interface BuyerLoginState {
   pending: boolean;
   loggedIn: boolean;
   response: AuthResponse | null;
 }
 
-export const initialState: LoginState = {
+export const initialState: BuyerLoginState = {
   pending: false,
   loggedIn: false,
   response: null,
@@ -16,17 +16,17 @@ export const initialState: LoginState = {
 
 export function reducer(
   state = initialState,
-  action: fromLogin.LoginAction
-): LoginState {
+  action: fromLogin.BuyerLoginAction
+): BuyerLoginState {
   switch (action.type) {
-    case fromLogin.LOGIN: {
+    case fromLogin.BUYER_LOGIN: {
       return {
         ...state,
         pending: true,
         loggedIn: false,
       };
     }
-    case fromLogin.LOGIN_SUCCESS: {
+    case fromLogin.BUYER_LOGIN_SUCCESS: {
       return {
         ...state,
         pending: false,
@@ -34,8 +34,8 @@ export function reducer(
         response: action.payload,
       };
     }
-    case fromLogin.LOGOUT_CONFIRM:
-    case fromLogin.LOGIN_FAIL:
+    case fromLogin.BUYER_LOGOUT_CONFIRM:
+    case fromLogin.BUYER_LOGIN_FAIL:
     {
       return {
         ...state,
@@ -49,8 +49,8 @@ export function reducer(
   }
 }
 
-export const getAuthResponse = (state: LoginState) => state.response;
-export const getPending = (state: LoginState) => state.pending;
-export const getLoggedIn = (state: LoginState) => state.loggedIn && state.response?.roles === constants.ROLE_BUYER;
-export const getToken = (state: LoginState) => state.response?.Authorization;
-export const getAuthEmail = (state: LoginState) => state.response?.email;
+export const getAuthResponse = (state: BuyerLoginState) => state.response;
+export const getPending = (state: BuyerLoginState) => state.pending;
+export const getLoggedIn = (state: BuyerLoginState) => state.loggedIn && state.response?.roles === constants.ROLE_BUYER;
+export const getToken = (state: BuyerLoginState) => state.response?.Authorization;
+export const getAuthEmail = (state: BuyerLoginState) => state.response?.email;

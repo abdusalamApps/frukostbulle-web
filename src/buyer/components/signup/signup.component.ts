@@ -99,7 +99,7 @@ export class SignupComponent implements OnInit, OnDestroy {
           mobilenbr: this.mobileControl.value,
           email: this.emailControl.value,
           password: this.enteredPassword,
-          permissionLevel: PermissionLevel.SELLER,
+          permissionLevel: PermissionLevel.BUYER,
           reminder: false,
           associatedBakery: -1,
           associatedSeller: -1,

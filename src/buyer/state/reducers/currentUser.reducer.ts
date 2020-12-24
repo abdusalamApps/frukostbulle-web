@@ -1,5 +1,5 @@
 import {User} from '../../../models/user.model';
-import * as userActions from '../actions/currentUser.action';
+import * as userActions from '../actions/buyerCurrentUserAction';
 
 export interface CurrentUserState {
   currentUserLoading: boolean;
@@ -17,24 +17,24 @@ export const initialState: CurrentUserState = {
 
 export function reducer(
   state = initialState,
-  action: userActions.CurrentUserAction
+  action: userActions.BuyerCurrentUserAction
 ): CurrentUserState {
   switch (action.type) {
-    case userActions.UPDATE_USER:
-    case userActions.LOAD_CURRENT_USER: {
+    case userActions.BUYER_UPDATE_USER:
+    case userActions.BUYER_LOAD_CURRENT_USER: {
       return {
         ...state,
         currentUserLoaded: false,
         currentUserLoading: true
       };
     }
-    case userActions.UPDATE_USER_SUCCESS: {
+    case userActions.BUYER_UPDATE_USER_SUCCESS: {
       return {
         ...state,
         currentUser: action.payload
       };
     }
-    case userActions.LOAD_CURRENT_USER_SUCCESS: {
+    case userActions.BUYER_BUYER_LOAD_CURRENT_USER_SUCCESS: {
       return {
         ...state,
         currentUserLoaded: true,
@@ -42,7 +42,7 @@ export function reducer(
         currentUser: action.payload
       };
     }
-    case userActions.LOAD_CURRENT_USER_FAIL: {
+    case userActions.BUYER_LOAD_CURRENT_USER_FAIL: {
       return {
         ...state,
         currentUserLoaded: false,
@@ -50,8 +50,8 @@ export function reducer(
         currentUser: null,
       };
     }
-    case userActions.UPDATE_SELLER_SUCCESS:
-    case userActions.LOAD_CURRENT_USER_SELLER_SUCCESS: {
+    case userActions.BUYER_UPDATE_SELLER_SUCCESS:
+    case userActions.BUYER_LOAD_CURRENT_USER_SELLER_SUCCESS: {
       return {
         ...state,
         currentUserSeller: action.payload,
