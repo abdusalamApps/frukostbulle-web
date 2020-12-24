@@ -67,7 +67,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   nameControl = new FormControl('', [
     Validators.required,
     Validators.minLength(2)
-  ])
+  ]);
   emailControl = new FormControl('', [
     Validators.email,
     Validators.required,
@@ -354,14 +354,14 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   navigateBack(): void {
-    this.store.dispatch(new fromRoot.Back())
+    this.store.dispatch(new fromRoot.Back());
   }
 
   onConfirm(): void {
     this.confirmSubscription$ = this.userService.confirmAccount(this.newUserId, this.code).subscribe(
       res => console.log(`accountConfirm res: ${res}`),
       err => console.log(`accountConfirm error: ${JSON.stringify(err)}`)
-    )
+    );
   }
 
 }
