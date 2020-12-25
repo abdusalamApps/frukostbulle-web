@@ -1,13 +1,5 @@
+@import 'src/styles';
 
-.container {
-  button {
-    margin-top: 2em;
-    align-self: center;
-  }
-}
-mat-list{
-  margin-bottom: 20px;
-}
-mat-panel-title{
-  color: gold;
+.warn {
+  color: mat-color($frukostbulle-warn);
 }

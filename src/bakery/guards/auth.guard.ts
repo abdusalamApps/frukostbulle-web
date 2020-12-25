@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import {CanActivate, Router} from '@angular/router';
-import {AuthService} from '../../app/services/auth.service';
+import {CanActivate} from '@angular/router';
 import {Store} from '@ngrx/store';
-import * as fromBakery from '../../bakery/state';
+import * as fromBakery from '../state';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import * as fromRoot from '../../app/state';

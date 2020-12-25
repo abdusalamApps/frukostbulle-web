@@ -11,6 +11,8 @@ import {Store} from '@ngrx/store';
 import {tap} from 'rxjs/operators';
 import * as fromSellerState from 'src/seller/state';
 import * as fromBuyerState from 'src/buyer/state';
+import * as fromAdminState from 'src/admin/state';
+import * as fromBakeryState from 'src/bakery/state';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -27,6 +29,12 @@ export class TokenInterceptor implements HttpInterceptor {
 
     if (fromBuyerState.getBuyerState != null || fromBuyerState.getBuyerState !== undefined) {
       this.store.select(fromBuyerState.getBuyerToken).subscribe(token => t = token).unsubscribe();
+    }
+    if (fromAdminState.getAdminState != null || fromAdminState.getAdminState !== undefined) {
+      this.store.select(fromAdminState.getToken).subscribe(token => t = token).unsubscribe();
+    }
+    if (fromBakeryState.getBakeryState != null || fromBakeryState.getBakeryState !== undefined) {
+      this.store.select(fromBakeryState.getToken).subscribe(token => t = token).unsubscribe();
     }
 
     const tokenized = request.clone({
