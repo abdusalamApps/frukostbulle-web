@@ -1,5 +1,4 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {MapsAPILoader} from '@agm/core';
 import {LocationService} from '../../../app/services/location.service';
 import {Area} from '../../../models/area.model';
@@ -7,34 +6,14 @@ import {AreaService} from '../../../seller/services/area.service';
 import * as fromState from 'src/buyer/state';
 import * as fromRoot from 'src/app/state';
 import {Store} from '@ngrx/store';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 declare const google: any;
-
-export class Point {
-  latitude: number;
-  longitude: number;
-
-  constructor(latitude: number, longitude: number) {
-    this.latitude = latitude;
-    this.longitude = longitude;
-  }
-}
-
-export class Polygon {
-  sellerId: string;
-  paths: Point[];
-
-  constructor(sellerId: string, paths: Point[]) {
-    this.sellerId = sellerId;
-    this.paths = paths;
-  }
-}
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
-  providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 
 })
 export class MapComponent implements OnInit {
@@ -55,7 +34,8 @@ export class MapComponent implements OnInit {
               private ngZone: NgZone,
               private locationService: LocationService,
               private areaService: AreaService,
-              private store: Store<fromState.BuyerState>) {
+              private store: Store<fromState.BuyerState>,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -107,10 +87,10 @@ export class MapComponent implements OnInit {
           this.zoom = 12;
           this.address = results[0].formatted_address;
         } else {
-          window.alert('No results found');
+          this.snackBar.open('No results found', 'Close', {duration: 1000});
         }
       } else {
-        window.alert('Geocoder failed due to: ' + status);
+        this.snackBar.open('Geocoder failed due to: ' + status, 'Close', {duration: 1000});
       }
 
     });
@@ -119,6 +99,7 @@ export class MapComponent implements OnInit {
   public navigateBack(): void {
     this.store.dispatch(new fromRoot.Back());
   }
+
   associateSeller(sellerId: number): void {
     console.log(`toSellerItems ${sellerId}`);
     const buyerIdStorage = localStorage.getItem('currentUserId');
@@ -126,10 +107,15 @@ export class MapComponent implements OnInit {
       console.log(`buyerId: ${buyerIdStorage}`);
       const buyerId = parseInt(buyerIdStorage, 10);
       this.store.dispatch(new fromState.BuyerUpdateSeller({
-         buyerId,
+        buyerId,
         sellerId
       }));
     }
+  }
+
+  toSellerDetails(sellerId: number): void {
+    this.store.dispatch(new fromState.LoadSelectedSeller(sellerId));
+    this.store.dispatch(new fromRoot.Go({path: ['buyer/seller-details']}));
   }
 
 }

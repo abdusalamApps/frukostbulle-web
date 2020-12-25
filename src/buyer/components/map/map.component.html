@@ -16,7 +16,7 @@
     </agm-marker>
     <agm-polygon *ngFor="let area of areas"
                  [paths]="area.coordinates"
-                 (polyClick)="associateSeller(area.sellerId)" >
+                 (polyClick)="toSellerDetails(area.sellerId)" >
 
     </agm-polygon>
   </agm-map>

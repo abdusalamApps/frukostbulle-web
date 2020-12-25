@@ -9,7 +9,8 @@ import {Observable} from 'rxjs';
 import * as fromSeller from '../seller/state';
 import {Store} from '@ngrx/store';
 import {tap} from 'rxjs/operators';
-import * as fromState from '../seller/state/selectors/login.selectors';
+import * as fromSellerState from 'src/seller/state';
+import * as fromBuyerState from 'src/buyer/state';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -19,10 +20,20 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let t: string | undefined = '';
-    this.store.select(fromState.getToken).subscribe(token => t = token).unsubscribe();
+
+    if (fromSellerState.getSellerState != null) {
+      this.store.select(fromSellerState.getToken).subscribe(token => t = token).unsubscribe();
+    }
+
+    if (fromBuyerState.getBuyerState != null) {
+      this.store.select(fromBuyerState.getBuyerToken).subscribe(token => t = token).unsubscribe();
+    }
+
     const tokenized = request.clone({
       headers: request.headers.set('Authorization', `Bearer ${t}`)
     });
+
+
     if (t == null || t === '' || t === undefined) {
       return next.handle(request);
     }
