@@ -1,6 +1,6 @@
-<mat-toolbar class="toolbar" color="primary">
+<mat-toolbar *ngIf="(userObservable$ | async) as user" class="toolbar" color="primary">
   <span class="spacer"></span>
-  <span>{{ title }}</span>
+  <span>{{ user.name }} detaljer</span>
 </mat-toolbar>
 <div class="container" *ngIf="(userObservable$ | async) as user">
 
@@ -13,37 +13,28 @@
   </label>
 
 
-  <mat-card style="margin:16px 0 5em 0;">
-    <h1 style="margin-top: 1em" matRipple>
-      {{userObservable$ ? userObservable$ : ''}}
-    </h1>
+  <mat-card style="margin:16px 0 5em 0; display: grid;">
+    <mat-list>
+      <mat-list-item mat-ripple role="listitem" [routerLink]="['/buyer/items']">
+        <h3 matLine>{{user.name}} frallor</h3>
+        <mat-icon>store_mall_directory</mat-icon>
+        <mat-divider></mat-divider>
+      </mat-list-item>
 
-    <mat-list-item mat-ripple role="listitem" [routerLink]="['/buyer/items', user.associatedSeller]">
-      <h3 matLine>Säljarens frallor</h3>
-      <mat-icon>store_mall_directory</mat-icon>
-      <mat-divider></mat-divider>
-    </mat-list-item>
+      <mat-list-item mat-ripple role="listitem" routerLink="./seller/choose-days">
+      </mat-list-item>
 
-    <mat-list-item mat-ripple role="listitem" routerLink="./seller/choose-days">
-      <h3 matLine>Säljarens dagar</h3>
-      <mat-icon>date_range</mat-icon>
-      <mat-divider></mat-divider>
-    </mat-list-item>
+    </mat-list>
 
-    <mat-list-item mat-ripple role="listitem" routerLink="./seller/map">
-      <h3 matLine>Säljarens område</h3>
-      <mat-icon>room</mat-icon>
-      <mat-divider></mat-divider>
-    </mat-list-item>
+    <h3 matLine>Säljarens dagar</h3>
+    <ejs-calendar matLine [(value)]="dateValue" (renderDayCell)="disableDate($event)"></ejs-calendar>
 
-    <!--<mat-list-item mat-ripple role="listitem">
-
-      <h3 matLine>{{associatedBakery$ ? bakery$.name: 'Här är bageri som säljare köper från som text'}}</h3>
-      <h2 matLine>{{associatedBakery$ ? bakery$.address: ''}}</h2>
-      <mat-icon>storefront</mat-icon>
-      <mat-divider></mat-divider>
-    </mat-list-item>-->
+    <button (click)="associateSeller(user.id)"
+      mat-raised-button color="accent" style="margin-top: 16px">
+      Välj denna säljare som favorit
+    </button>
 
   </mat-card>
+
 
 </div>
