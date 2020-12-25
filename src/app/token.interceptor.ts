@@ -11,6 +11,8 @@ import {Store} from '@ngrx/store';
 import {tap} from 'rxjs/operators';
 import * as fromSellerState from 'src/seller/state';
 import * as fromBuyerState from 'src/buyer/state';
+import * as fromAdminState from 'src/admin/state';
+import * as fromBakeryState from 'src/bakery/state';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -21,18 +23,41 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let t: string | undefined = '';
 
-    if (fromSellerState.getSellerState != null || fromSellerState.getSellerState !== undefined) {
-      this.store.select(fromSellerState.getToken).subscribe(token => t = token).unsubscribe();
-    }
+    this.store.select(fromSellerState.getSellerState).pipe(
+      tap(state => {
+        if (state) {
+          this.store.select(fromSellerState.getToken).subscribe(token => t = token).unsubscribe();
+        }
+      })
+    );
 
-    if (fromBuyerState.getBuyerState != null || fromBuyerState.getBuyerState !== undefined) {
-      this.store.select(fromBuyerState.getBuyerToken).subscribe(token => t = token).unsubscribe();
-    }
+    this.store.select(fromBuyerState.getBuyerState).pipe(
+      tap(state => {
+        if (state) {
+          this.store.select(fromBuyerState.getBuyerToken).subscribe(token => t = token).unsubscribe();
+        }
+      })
+    );
+
+    this.store.select(fromAdminState.getAdminState).pipe(
+      tap(state => {
+        if (state) {
+          this.store.select(fromAdminState.getToken).subscribe(token => t = token).unsubscribe();
+        }
+      })
+    );
+
+    this.store.select(fromBakeryState.getBakeryState).pipe(
+      tap(state => {
+        if (state) {
+          this.store.select(fromBakeryState.getToken).subscribe(token => t = token).unsubscribe();
+        }
+      })
+    );
 
     const tokenized = request.clone({
       headers: request.headers.set('Authorization', `Bearer ${t}`)
     });
-
 
     if (t == null || t === '' || t === undefined) {
       return next.handle(request);
