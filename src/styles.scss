@@ -18,6 +18,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $frukostbulle-primary: mat-palette($mat-deep-purple);
+$frukostbulle-primary-dark: mat-palette($mat-deep-purple, 900);
 $frukostbulle-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -29,6 +30,7 @@ $frukostbulle-theme: mat-light-theme(
   (
     color: (
       primary: $frukostbulle-primary,
+      primary-dark: $frukostbulle-primary-dark,
       accent: $frukostbulle-accent,
       warn: $frukostbulle-warn,
     ),
