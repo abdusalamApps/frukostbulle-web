@@ -14,11 +14,11 @@ const routes: Routes = [
     path: '',
     component: Components.RootComponent,
     children: [
-      {path: 'bakery/order-details', component: OrderDetailsComponent},
-      {path: 'bakery/order-history', component: OrderHistoryComponent},
-      {path: 'bakery/orders', component: OrdersComponent}
+      {path: 'order-details', component: OrderDetailsComponent},
+      {path: 'order-history', component: OrderHistoryComponent},
+      {path: 'orders', component: OrdersComponent}
     ]},
-  {path: 'bakery/login', component: LoginComponent}
+  {path: 'login', component: LoginComponent}
 ];
 
 
