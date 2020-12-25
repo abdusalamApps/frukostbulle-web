@@ -12,7 +12,6 @@ import {
   SellersAndBuyersComponent
 } from './components';
 
-import {GenerateSellercodeComponent} from './components/generate-sellercode/generate-sellercode.component';
 import * as Components from '../seller/components';
 
 const routes: Routes = [
@@ -22,7 +21,6 @@ const routes: Routes = [
     children: [
       {path: 'bakeries', component: BakeriesComponent},
       {path: 'create-bakery', component: CreateBakeryComponent},
-      {path: 'generate-sellercode', component: GenerateSellercodeComponent},
       {path: 'create-seller', component: CreateSellerComponent},
       {path: 'manage-account', component:  ManageAccountComponent},
       {path: 'manage-bakery', component:  ManageBakeryComponent},
