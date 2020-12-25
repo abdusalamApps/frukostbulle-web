@@ -1,56 +1,64 @@
-<!--
 <mat-toolbar class="toolbar" color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon (click)="navigateBack()">arrow_back</mat-icon>
-  </button>
-  <span>{{title}}</span>
-  <span class="toolbar-spacer"></span>
-  <button mat-icon-button>
-    <mat-icon>print</mat-icon>
-  </button>
+  <mat-icon class="back-icon" (click)="navigateBack()">arrow_back</mat-icon>
+  <span>Beställningsdetaljer</span>
 </mat-toolbar>
 
-
 <div class="container">
-  <mat-accordion class="example-headers-align" [multi]="true">
 
-    <mat-expansion-panel [expanded]="expanded">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Sammanfattning
-        </mat-panel-title>
-      </mat-expansion-panel-header>
+  <div *ngIf="(order$ | async) as order">
+
+    <mat-card *ngIf="order?.fake" class="background-warn">
+      <h1>Denna beställning är fejk</h1>
+    </mat-card>
+    <mat-card style="margin-top: 16px">
+      <h1>{{(seller$ | async)?.name}}</h1>
       <mat-list>
-        <mat-list-item *ngFor="let item of summary">
-          <img matListAvatar src="../../../assets/img/profile-photo-placeholder.png" alt="...">
-          <h3 matLine> {{item.name}} </h3>
-          <span> {{item.count}} </span>
+
+        <h3 matSubheader>Frallor</h3>
+        <mat-list-item *ngFor="let entry of order?.content">
+          <img mat-list-avatar src="assets/img/no-image.png">
+          <h3 matLine> {{entry.item.itemName}} </h3>
+          <p matLine>{{entry.item.price}}:-/st</p>
+          <p matLine> {{entry.amount}}</p>
+          <h3> {{entry.item.price * entry.amount}}:- </h3>
           <mat-divider></mat-divider>
         </mat-list-item>
+
       </mat-list>
-    </mat-expansion-panel>
-  </mat-accordion>
 
-
-    <mat-accordion class="example-headers-align" [multi]="true">
-
-    <mat-expansion-panel [expanded]="expanded">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Detaljer
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-list *ngFor="let orderId of orderIds()">
-        <h3 matSubheader >Beställning #{{orderId}}</h3>
-        <mat-list-item *ngFor="let item of sellerItems(orderId)">
-          <h3 mat-line> {{item.name}} </h3>
-          <span> {{item.count}} </span>
-          <mat-divider></mat-divider>
+      <mat-list>
+        <mat-list-item>
+          <h2>Total</h2>
+          <span class="toolbar-spacer"></span>
+          <h2 *ngIf="(getOrderTotal(order.id) | async) as total">{{total}}:-</h2>
         </mat-list-item>
       </mat-list>
-    </mat-expansion-panel>
-  </mat-accordion>
 
 
+      <mat-list>
+        <h3 matSubheader>Address</h3>
+        <mat-list-item>
+          <h2>{{(seller$ | async)?.address}}</h2>
+        </mat-list-item>
+      </mat-list>
+
+      <mat-list>
+        <h3 matSubheader>Beställningsnummer</h3>
+        <mat-list-item>
+          <h2>{{order?.id}}</h2>
+        </mat-list-item>
+
+        <h3 matSubheader>Status</h3>
+        <mat-list-item>
+          <h2 matLine>{{order.delivered ? 'Levererad' : 'Inte levererad'}}</h2>
+          <h2 matLine>{{order.paid ? 'Betald' : 'Obetald'}}</h2>
+          <h2 matLine>{{order.handled ? 'Redo för hämtning från bageriet' : 'Inte redo för hämtning från bageriet'}}</h2>
+        </mat-list-item>
+
+      </mat-list>
+
+    </mat-card>
+
+
+  </div>
 </div>
--->

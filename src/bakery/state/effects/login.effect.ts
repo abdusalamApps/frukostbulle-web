@@ -36,20 +36,16 @@ export class LoginEffects {
       })
     )
   );
-  /*
-    loginSuccess$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(loginAction.LOGIN_SUCCESS),
-        switchMap((actions: loginAction.LoginSuccess) => [
-          // console.log(`paylod@LoginSuccess: ${actions.payload.email}`);
-          new userActions.LoadCurrentUser(actions.payload.email),
-          new fromRoot.Go({path: ['seller/items']})
-        ]),
-        // seller-area((authResponse) => new userActions.LoadCurrentUser(authResponse)),
-        // seller-area((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
-      )
-    );
-  */
+  /* loginSuccess$ = createEffect(() =>
+     this.actions$.pipe(
+       ofType(loginAction.LOGIN_SUCCESS),
+       switchMap((actions: loginAction.LoginSuccess) => [
+         // console.log(`paylod@LoginSuccess: ${actions.payload.email}`);
+         new userActions.LoadCurrentUser(actions.payload.email),
+         new fromRoot.Go({path: ['seller/items']})
+       ]),
+     )
+   );*/
 
   logout$ = createEffect(() =>
       this.actions$.pipe(
