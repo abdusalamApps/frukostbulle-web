@@ -1,16 +1,25 @@
 <mat-toolbar class="toolbar" color="primary">
   <span class="spacer"></span>
   <span>{{ title }}</span>
+  <span class="toolbar-spacer"></span>
+  <mat-icon
+    routerLink="../shopping-cart"
+    matBadge="{{getItemsCount()}}"
+    matBadgeColor="accent"
+    matBadgePosition="above"
+    matBadgeSize="small">shopping_cart
+  </mat-icon>
+
 </mat-toolbar>
 <mat-spinner color="accent" class="spinner" *ngIf="(loading$ | async)"></mat-spinner>
 <div *ngIf="(associatedSellerId$ | async) as sellerId">
   <h1 *ngIf="sellerId < 0" class="spinner">Du har ingen favorit säljare</h1>
 </div>
 <div *ngIf="(items$ | async) as items">
-  <h1 *ngIf="items.length < 1" class="spinner">Säljaren har inga bullar</h1>
+<!--  <h1 *ngIf="items.length < 1" class="spinner">Säljaren har inga bullar</h1>-->
   <div class="grid-container">
     <mat-card class="grid-item"
-              mat-ripple *ngFor="let item of items">
+              *ngFor="let item of items">
       <div class="img-container">
         <img mat-card-image
              class="grid-img"
@@ -24,6 +33,11 @@
       </div>
       <mat-card-title>{{ item.itemName }}</mat-card-title>
       <mat-card-subtitle>{{ item.price }}:-</mat-card-subtitle>
+      <mat-card-actions>
+        <button mat-flat-button (click)="addToCart(item)">
+          <mat-icon>add_shopping_cart</mat-icon> LÄGG TILL
+        </button>
+      </mat-card-actions>
     </mat-card>
 
   </div>
