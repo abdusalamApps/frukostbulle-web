@@ -1,0 +1,51 @@
+<router-outlet #outlet="outlet"></router-outlet>
+
+<section class="nav-container">
+  <div class="bottom-nav-bar">
+    <a>
+      <mat-icon
+        matRipple
+        class="nav-icon hover-effect"
+        aria-hidden="false"
+        routerLinkActive="active"
+        routerLink="items"
+      >
+        store
+      </mat-icon>
+    </a>
+    <a>
+      <mat-icon
+        matRipple
+        class="nav-icon hover-effect"
+        aria-hidden="false"
+        routerLink="orders"
+        routerLinkActive="active"
+      >
+        list_alt
+      </mat-icon>
+    </a>
+
+    <a>
+      <mat-icon
+        matRipple
+        class="nav-icon hover-effect"
+        aria-hidden="false"
+        routerLink="profile"
+        routerLinkActive="active"
+      >
+        account_circle
+      </mat-icon>
+    </a>
+    <!--<a>
+      <mat-icon
+        class="nav-icon hover-effect"
+        aria-hidden="false"
+        matRipple
+        routerLink="notifications"
+        routerLinkActive="active"
+      >
+        notifications
+      </mat-icon>
+    </a>-->
+  </div>
+</section>

@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+  <span class="spacer"></span>
+  <span>{{ title }}</span>
+</mat-toolbar>
+
+<div class="container">
+  <h1 class="header">Logg in</h1>
+
+  <div class="form-container">
+
+    <mat-form-field appearance="fill">
+      <mat-label>E-post</mat-label>
+      <input matInput placeholder="Placeholder"  value="{{email}}">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Lösenord</mat-label>
+      <input [(ngModel)]='enteredPassword' matInput [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="buttons-container">
+
+      <button routerLink="/password" routerLinkActive="active"
+              mat-button class="text-button">
+        Glömde lösenord?
+      </button>
+      <button (click)="login();"
+              mat-raised-button color="accent">
+        LOGGA IN
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
