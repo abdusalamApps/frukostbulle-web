@@ -7,6 +7,7 @@ import {of} from 'rxjs';
 
 import * as fromRoot from '../../../app/state';
 import * as userActions from '../actions/buyerCurrentUserAction';
+import * as itemActions from '../actions/items.action';
 import * as loginActions from '../actions/buyerLoginAction';
 
 import {MatDialog} from '@angular/material/dialog';
@@ -15,7 +16,7 @@ import {Store} from '@ngrx/store';
 import {LogoutDialog} from 'src/seller/components/logout-dialog/logout-dialog.component';
 import {BuyerLoginState} from '../reducers/login.reducer';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {UsersService} from '../../../seller/services/users.service';
+import {UsersService} from 'src/seller/services/users.service';
 import {User} from '../../../models/user.model';
 
 
@@ -31,14 +32,18 @@ export class CurrentUserEffect {
     this.actions$.pipe(ofType(userActions.BUYER_LOAD_CURRENT_USER),
       switchMap((action: userActions.BuyerLoadCurrentUser) => {
         return this.userService.getUserByEmail(action.payload).pipe(
-          map((user: User) => new userActions.BuyerLoadCurrentUserSuccess((user))),
+          map((user: User) => {
+
+            return new userActions.BuyerLoadCurrentUserSuccess((user));
+          }),
           catchError((error: any) => of(new userActions.BuyerLoadCurrentUserFail(error)))
         );
       })
     )
   );
+
   loadCurrentUserSuccess$ = createEffect(() =>
-    this.actions$.pipe(ofType(userActions.BUYER_BUYER_LOAD_CURRENT_USER_SUCCESS),
+    this.actions$.pipe(ofType(userActions.BUYER_LOAD_CURRENT_USER_SUCCESS),
       switchMap((action: userActions.BuyerLoadCurrentUserSuccess) => {
         localStorage.setItem('currentUserId', action.payload.id.toString(10));
         localStorage.setItem('currentUserEmail', action.payload.email);
@@ -59,5 +64,25 @@ export class CurrentUserEffect {
     )
   );
 
+  updateSellerSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.BUYER_UPDATE_SELLER_SUCCESS),
+      switchMap((action: userActions.BuyerUpdateSellerSuccess) => {
+        let state = localStorage.getItem('state');
+        if (!state) state = '';
+        const email = JSON.parse(state).buyer.buyerLogin.response.email;
+        return of(new userActions.BuyerLoadCurrentUser(email));
+      })
+    )
+  );
+
+  updateSellerSuccess1$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.BUYER_UPDATE_SELLER_SUCCESS),
+      switchMap((action: userActions.BuyerUpdateSellerSuccess) => {
+        return of(new itemActions.LoadItems(action.payload.id));
+      })
+    )
+  );
 
 }

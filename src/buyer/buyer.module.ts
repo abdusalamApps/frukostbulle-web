@@ -22,6 +22,7 @@ import {commonModules} from '../common-modules';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../app/token.interceptor';
 import {effects, reducers} from '../buyer/state';
+import {CalendarModule} from '@syncfusion/ej2-angular-calendars';
 
 
 @NgModule({
@@ -41,17 +42,17 @@ import {effects, reducers} from '../buyer/state';
     components.SellerDetailsComponent,
     components.ShoppingCartComponent,
   ],
-  imports: [CommonModule,
-    BuyerRoutingModule,
-    StoreModule.forFeature('buyer', reducers),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production,
-    }),
-    EffectsModule.forFeature(effects),
-    ...materialModules,
-    FormsModule, ReactiveFormsModule, AgmCoreModule
-  ],
+    imports: [CommonModule,
+        BuyerRoutingModule,
+        StoreModule.forFeature('buyer', reducers),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: environment.production,
+        }),
+        EffectsModule.forFeature(effects),
+        ...materialModules,
+        FormsModule, ReactiveFormsModule, AgmCoreModule, CalendarModule
+    ],
 
 })
 export class BuyerModule {}

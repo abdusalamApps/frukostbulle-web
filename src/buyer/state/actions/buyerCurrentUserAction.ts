@@ -2,7 +2,7 @@ import {Action} from '@ngrx/store';
 import {User} from '../../../models/user.model';
 
 export const BUYER_LOAD_CURRENT_USER = '[Buyer Current User] Buyer Load Current User';
-export const BUYER_BUYER_LOAD_CURRENT_USER_SUCCESS = '[Buyer Current User] Buyer Load Current User Success';
+export const BUYER_LOAD_CURRENT_USER_SUCCESS = '[Buyer Current User] Buyer Load Current User Success';
 export const BUYER_LOAD_CURRENT_USER_FAIL = '[Buyer Current User] Buyer Load Current User Fail';
 
 export const BUYER_LOAD_CURRENT_USER_SELLER = '[BuyerCurrent User] Buyer Load Current User Seller';
@@ -22,14 +22,14 @@ export class BuyerLoadCurrentUser implements Action {
 
   // payload == current user's email
   constructor(public payload: string) {
-
   }
 }
 
 export class BuyerLoadCurrentUserSuccess implements Action {
-  readonly type = BUYER_BUYER_LOAD_CURRENT_USER_SUCCESS;
+  readonly type = BUYER_LOAD_CURRENT_USER_SUCCESS;
 
   constructor(public payload: User) {
+
   }
 }
 
