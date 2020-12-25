@@ -1,15 +1,12 @@
 <mat-toolbar class="toolbar" color="primary">
   <mat-icon class="back-icon" (click)="navigateBack()">arrow_back</mat-icon>
-  <span>Beställningsdetaljer</span>
+  <span>{{title}}</span>
 </mat-toolbar>
 
 <div class="container">
 
   <div *ngIf="(order$ | async) as order">
 
-    <mat-card *ngIf="order?.fake" class="background-warn">
-      <h1>Denna beställning är fejk</h1>
-    </mat-card>
     <mat-card style="margin-top: 16px">
       <h1>{{(seller$ | async)?.name}}</h1>
       <mat-list>
@@ -34,27 +31,11 @@
         </mat-list-item>
       </mat-list>
 
-
-      <mat-list>
-        <h3 matSubheader>Address</h3>
-        <mat-list-item>
-          <h2>{{(seller$ | async)?.address}}</h2>
-        </mat-list-item>
-      </mat-list>
-
       <mat-list>
         <h3 matSubheader>Beställningsnummer</h3>
         <mat-list-item>
           <h2>{{order?.id}}</h2>
         </mat-list-item>
-
-        <h3 matSubheader>Status</h3>
-        <mat-list-item>
-          <h2 matLine>{{order.delivered ? 'Levererad' : 'Inte levererad'}}</h2>
-          <h2 matLine>{{order.paid ? 'Betald' : 'Obetald'}}</h2>
-          <h2 matLine>{{order.handled ? 'Redo för hämtning från bageriet' : 'Inte redo för hämtning från bageriet'}}</h2>
-        </mat-list-item>
-
       </mat-list>
 
     </mat-card>
