@@ -1,50 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {Observable} from 'rxjs';
+import {Order} from '../../../models/order.model';
+import {Store} from '@ngrx/store';
+import * as fromState from '../../../bakery/state';
 
 @Component({
-  selector: 'app-bakery-orders',
+  selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss'],
-  providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 
 })
 export class OrdersComponent implements OnInit {
   title = 'Beställningar';
+  orders$ = new Observable<Order[]>();
 
-  location: Location;
-  router: Router;
- // sellers: BakerySellers[] ;
-  sellerId = '';
+  constructor(private store: Store<fromState.BakeryState>) {}
 
-  constructor(location: Location,
-              router: Router,
-             // private authService: AuthService,
-             // private orderDetails: OrderDetailsService,
-              private aRoute: ActivatedRoute) {
-    this.location = location;
-    this.router = router;
-   // this.sellers = [];
-    this.fetchBakeryWeekSellers();
-
-  }
 
   ngOnInit(): void {
-  //  this.orderDetails.currentSellerId$.subscribe(sellerId => this.sellerId = sellerId);
-  }
-  public navigateBack(): void {
-    this.router.navigate(['/login'], {relativeTo: this.aRoute});  }
-
-  fetchBakeryWeekSellers(): void {
+    this.orders$ = this.store.select(fromState.getBakeryOrders);
+    this.store.select(fromState.getBakeryOrders);
   }
 
-  navigateToDetails(sellerId: string): void {
+  getOrderTotal(orderId: number): Observable<number> {
+    return this.store.select(fromState.getOrderTotal, {orderId});
   }
-
-  logOut(): void {
-  }
-
-  changePassword(): void{
-  }
-
 }

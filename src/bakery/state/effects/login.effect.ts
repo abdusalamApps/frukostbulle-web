@@ -8,6 +8,7 @@ import {of} from 'rxjs';
 
 import * as fromRoot from '../../../app/state';
 import * as loginActions from '../actions/login.action';
+import * as orderActions from '../actions/order.action';
 
 import {MatDialog} from '@angular/material/dialog';
 
@@ -36,16 +37,15 @@ export class LoginEffects {
       })
     )
   );
-  /* loginSuccess$ = createEffect(() =>
+   loginSuccess$ = createEffect(() =>
      this.actions$.pipe(
        ofType(loginAction.LOGIN_SUCCESS),
        switchMap((actions: loginAction.LoginSuccess) => [
-         // console.log(`paylod@LoginSuccess: ${actions.payload.email}`);
-         new userActions.LoadCurrentUser(actions.payload.email),
-         new fromRoot.Go({path: ['seller/items']})
+         new orderActions.LoadBakeryOrders(actions.payload.email),
+         new fromRoot.Go({path: ['bakery/orders']})
        ]),
      )
-   );*/
+   );
 
   logout$ = createEffect(() =>
       this.actions$.pipe(
@@ -79,7 +79,7 @@ export class LoginEffects {
     this.actions$.pipe(
       ofType(loginAction.LOGOUT_CONFIRM),
       mergeMap((action: loginAction.LogoutConfirm) => {
-        return of(new fromRoot.Go({path: ['/seller/login'], extras: {replaceUrl: true}}));
+        return of(new fromRoot.Go({path: ['/bakery/login'], extras: {replaceUrl: true}}));
       })
     )
   );

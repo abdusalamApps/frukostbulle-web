@@ -5,7 +5,6 @@ import {Store} from '@ngrx/store';
 import {Observable, Subscription} from 'rxjs';
 import {Order} from '../../../models/order.model';
 import {OrdersService} from '../../../seller/services/orders.service';
-import {MarkOrderDialog, MarkType} from '../../../seller/components/mark-order/mark-order-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {User} from '../../../models/user.model';
 
@@ -15,7 +14,7 @@ import {User} from '../../../models/user.model';
   styleUrls: ['./order-details.component.scss'],
 })
 export class OrderDetailsComponent implements OnInit {
-  title = 'Order details';
+  title = 'Beställningens details';
   order$ = new Observable<Order>();
   @Input() order: Order = {
     id: -1,
@@ -60,9 +59,8 @@ export class OrderDetailsComponent implements OnInit {
 
   }
 
-  getOrderTotal(orderId: number): void{
-    // Observable<number> {
-  //  return this.store.select(fromState.getOrderTotal, {orderId});
+  getOrderTotal(orderId: number): Observable<number> {
+    return this.store.select(fromState.getOrderTotal, {orderId});
   }
 
 }
