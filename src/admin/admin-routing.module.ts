@@ -17,7 +17,7 @@ import * as Components from '../seller/components';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: '',
     component: Components.RootComponent,
     children: [
       {path: 'bakeries', component: BakeriesComponent},

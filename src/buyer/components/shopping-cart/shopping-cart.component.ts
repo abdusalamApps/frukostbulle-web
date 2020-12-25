@@ -22,7 +22,7 @@ export class ShoppingCartComponent implements OnInit {
   deliveryDates = [];
   constructor(private store: Store<fromState.BuyerState>) {}
   ngOnInit(): void {
-    this.orders$ = this.store.select(fromState.getBuyerOrders);
+   // this.orders$ = this.store.select(fromState.getBuyerOrders);
   }
   incrementAmount(itemId: string): void{
   }

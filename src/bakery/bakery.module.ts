@@ -17,4 +17,4 @@ import {components} from './components';
     ...commonModules
   ]
 })
-export class AdminModule { }
+export class BakeryModule { }
