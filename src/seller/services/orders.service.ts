@@ -15,11 +15,16 @@ export class OrdersService {
   getOrdersBySellerId(sellerId: number): Observable<Order[]> {
     return this.http.get<Order[]>(`${urls.ordersUrls.Get.getOrdersBySellerIdUrl}${sellerId}`);
   }
+  getOrdersByBakeryId(bakeryId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${urls.ordersUrls.Get.getOrdersByBakeryIdUrl}${bakeryId}`);
+  }
 
   getOrderHistoryBySellerId(sellerId: number): Observable<Order[]> {
     return this.http.get<Order[]>(`${urls.ordersUrls.Get.gerOrderHistoryBySellerIdUrl}${sellerId}`);
   }
-
+  getOrderHistoryByBakeryId(bakeryId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${urls.ordersUrls.Get.gerOrderHistoryByBakeryIdUrl}${bakeryId}`);
+  }
   updateOrder(order: Order): Observable<any> {
     return this.http.post<any>(`${urls.ordersUrls.Post.updateOrderUrl}`, order);
   }

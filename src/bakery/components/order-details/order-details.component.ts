@@ -60,9 +60,8 @@ export class OrderDetailsComponent implements OnInit {
 
   }
 
-  getOrderTotal(orderId: number): void{
-    // Observable<number> {
-  //  return this.store.select(fromState.getOrderTotal, {orderId});
+  getOrderTotal(orderId: number): Observable<number> {
+    return this.store.select(fromState.getOrderTotal, {orderId});
   }
 
 }

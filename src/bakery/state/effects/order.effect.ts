@@ -15,7 +15,7 @@ export class OrderEffects {
     this.actions$.pipe(
       ofType(orderActions.LOAD_BAKERY_ORDERS),
       switchMap((action: orderActions.LoadBakeryOrders) => {
-        return this.orderService.getOrdersBySellerId(action.payload).pipe(
+        return this.orderService.getOrdersByBakeryId(action.payload).pipe(
           map((orders) => new orderActions.LoadBakeryOrdersSuccess(orders)),
           catchError((error) => of(new orderActions.LoadBakeryOrdersFail(error)))
         );
