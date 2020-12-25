@@ -3,9 +3,9 @@ import { baseUrl } from './base';
 export namespace Get {
   export const getUserByIdUrl = `${baseUrl}/user-by-id?id=`;
   export const getUserByEmailUrl = `${baseUrl}/user-by-email?user-email=`;
-  export const getAllUsersUrl = `${baseUrl}/user-users`;
+  export const getAllUersUrl = `${baseUrl}/user-users`;
   export const getSellerDatesUrl = `${baseUrl}/user-dates`;
-  export const getUsersByPermissionLevelUrl = `${baseUrl}/get-users-level`;
+  export const getUsersByPermissionLevelUrl = `${baseUrl}/get-users-level?level=`;
 }
 
 export namespace Post {
