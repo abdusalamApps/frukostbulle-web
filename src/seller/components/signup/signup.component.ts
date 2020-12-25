@@ -207,6 +207,7 @@ export class SignupComponent implements OnInit, OnDestroy {
           permissionLevel: PermissionLevel.SELLER,
           reminder: false,
           associatedBakery: this.selectedBakery.id,
+          associatedSeller: -1,
           active: false,
           availableDates: this.selectedDates,
           lasOrderDay: '',
