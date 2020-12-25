@@ -7,6 +7,7 @@ import {of} from 'rxjs';
 
 import * as fromRoot from '../../../app/state';
 import * as userActions from '../actions/buyerCurrentUserAction';
+import * as itemActions from '../actions/items.action';
 import * as loginActions from '../actions/buyerLoginAction';
 
 import {MatDialog} from '@angular/material/dialog';
@@ -71,6 +72,15 @@ export class CurrentUserEffect {
         if (!state) state = '';
         const email = JSON.parse(state).buyer.buyerLogin.response.email;
         return of(new userActions.BuyerLoadCurrentUser(email));
+      })
+    )
+  );
+
+  updateSellerSuccess1$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.BUYER_UPDATE_SELLER_SUCCESS),
+      switchMap((action: userActions.BuyerUpdateSellerSuccess) => {
+        return of(new itemActions.LoadItems(action.payload.id));
       })
     )
   );

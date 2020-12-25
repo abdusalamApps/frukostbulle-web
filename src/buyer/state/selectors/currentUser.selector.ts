@@ -80,3 +80,8 @@ export const getCurrentAssociatedSeller  = createSelector(
   getCurrentUserState,
   fromCurrentUser.getCurrentUserAssociatedSeller
 );
+
+export const getAssociatedSellerId = createSelector(
+  getCurrentUserState,
+  fromCurrentUser.getAssociatedSellerId
+)

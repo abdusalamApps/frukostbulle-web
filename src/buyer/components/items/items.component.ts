@@ -17,6 +17,7 @@ export class ItemsComponent implements OnInit {
   items$: Observable<Item[]> = new Observable<[]>();
   loading$: Observable<boolean> = new Observable<boolean>();
   loaded$: Observable<boolean> = new Observable<boolean>();
+  associatedSellerId$ = new Observable<number | undefined>();
 
   constructor(private store: Store<fromState.BuyerState>,
               private rootStore: Store<fromRoot.State>) {
@@ -25,7 +26,9 @@ export class ItemsComponent implements OnInit {
       state = '';
     }
     const sellerId = JSON.parse(state).buyer.currentUser.currentUser.associatedSeller;
-    this.store.dispatch(new fromState.LoadItems(sellerId));
+    if (sellerId > -1) {
+      this.store.dispatch(new fromState.LoadItems(sellerId));
+    }
 
   }
 
@@ -33,6 +36,7 @@ export class ItemsComponent implements OnInit {
     this.items$ = this.store.select(fromState.getSellerItems);
     this.loading$ = this.store.select(fromState.getItemsLoading);
     this.loaded$ = this.store.select(fromState.getItemsLoaded);
+    this.associatedSellerId$ = this.store.select(fromState.getAssociatedSellerId);
   }
 
 }

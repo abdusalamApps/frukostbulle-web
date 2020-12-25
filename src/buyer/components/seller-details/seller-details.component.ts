@@ -69,8 +69,13 @@ export class SellerDetailsComponent implements OnInit {
         buyerId,
         sellerId
       }));
+      this.store.dispatch(new fromState.LoadItems(sellerId));
       this.store.dispatch(new fromRoot.Go({path: ['buyer/items']}));
     }
+  }
+
+  navigateBack(): void {
+    this.store.dispatch(new fromRoot.Back());
   }
 
 }

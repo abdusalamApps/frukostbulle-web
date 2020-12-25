@@ -77,5 +77,6 @@ export const getCurrentUserPassword = (state: CurrentUserState) => state.current
 export const getCurrentUserPermissionLevel = (state: CurrentUserState) => state.currentUser?.permissionLevel;
 export const getCurrentUserReminder = (state: CurrentUserState) => state.currentUser?.reminder;
 export const getCurrentUserAssociatedSeller = (state: CurrentUserState) => state.currentUserSeller;
+export const getAssociatedSellerId = (state: CurrentUserState) => state.currentUser?.associatedSeller;
 export const getCurrentUserActive = (state: CurrentUserState) => state.currentUser?.active;
 export const getCurrentUserLastOrderDay = (state: CurrentUserState) => state.currentUser?.lasOrderDay;
