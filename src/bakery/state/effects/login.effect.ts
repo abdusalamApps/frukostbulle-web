@@ -7,14 +7,12 @@ import {AuthService} from '../../../app/services/auth.service';
 import {of} from 'rxjs';
 
 import * as fromRoot from '../../../app/state';
-import * as userActions from '../actions/currentUser.action';
 import * as loginActions from '../actions/login.action';
-import * as userSelectors from '../selectors/currentUser.selectors';
 
 import {MatDialog} from '@angular/material/dialog';
 
 import {Store} from '@ngrx/store';
-import {LogoutDialog} from '../../components/logout-dialog/logout-dialog.component';
+import {LogoutDialog} from '../../../seller/components/logout-dialog/logout-dialog.component';
 import {LoginState} from '../reducers/login.reducer';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -38,19 +36,20 @@ export class LoginEffects {
       })
     )
   );
-
-  loginSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(loginAction.LOGIN_SUCCESS),
-      switchMap((action: loginAction.LoginSuccess) => [
-        // console.log(`paylod@LoginSuccess: ${actions.payload.email}`);
-        new userActions.LoadCurrentUser(action.payload.email),
-        new fromRoot.Go({path: ['seller/items']})
-      ]),
-      // seller-area((authResponse) => new userActions.LoadCurrentUser(authResponse)),
-      // seller-area((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
-    )
-  );
+  /*
+    loginSuccess$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(loginAction.LOGIN_SUCCESS),
+        switchMap((actions: loginAction.LoginSuccess) => [
+          // console.log(`paylod@LoginSuccess: ${actions.payload.email}`);
+          new userActions.LoadCurrentUser(actions.payload.email),
+          new fromRoot.Go({path: ['seller/items']})
+        ]),
+        // seller-area((authResponse) => new userActions.LoadCurrentUser(authResponse)),
+        // seller-area((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
+      )
+    );
+  */
 
   logout$ = createEffect(() =>
       this.actions$.pipe(

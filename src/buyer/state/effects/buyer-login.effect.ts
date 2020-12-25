@@ -42,7 +42,7 @@ export class BuyerLoginEffect {
     this.actions$.pipe(
       ofType(loginAction.BUYER_LOGIN_SUCCESS),
       switchMap((action: loginAction.BuyerLoginSuccess) => [
-        // console.log(`paylod@LoginSuccess: ${action.payload.email}`);
+        // console.log(`paylod@LoginSuccess: ${actions.payload.email}`);
         new userActions.BuyerLoadCurrentUser(action.payload.email),
         new fromRoot.Go({path: ['buyer/items']})
       ]),

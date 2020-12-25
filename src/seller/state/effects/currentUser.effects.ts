@@ -35,9 +35,9 @@ export class CurrentUserEffects {
     loadCurrentUserSuccess$ = createEffect(() =>
         this.actions$.pipe(
           ofType(userActions.LOAD_CURRENT_USER_SUCCESS),
-          seller-area((action: userActions.LoadCurrentUserSuccess) => {
-            localStorage.setItem('currentUserId', action.payload.id.toString(10));
-            localStorage.setItem('currentUserEmail', action.payload.email);
+          seller-area((actions: userActions.LoadCurrentUserSuccess) => {
+            localStorage.setItem('currentUserId', actions.payload.id.toString(10));
+            localStorage.setItem('currentUserEmail', actions.payload.email);
           })
         ),
       {dispatch: false}

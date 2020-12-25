@@ -27,7 +27,7 @@ export class PasswordEffects {
   checkPasswordSuccess$ = createEffect(() =>
   this.actions$.pipe(
     ofType(passwordActions.CHECK_PASSWORD_SUCCESS),
-    switchMap((action: passwordActions.CheckPasswordSuccess) => {
+    switchMap((actions: passwordActions.CheckPasswordSuccess) => {
 
     })
   ))
@@ -35,8 +35,8 @@ export class PasswordEffects {
   updatePassword$ = createEffect(() =>
   this.actions$.pipe(
     ofType(passwordActions.UPDATE_PASSWORD),
-    switchMap((action: passwordActions.UpdatePassword) => {
-      return this.passwordService.updatePassword(action.payload).pipe(
+    switchMap((actions: passwordActions.UpdatePassword) => {
+      return this.passwordService.updatePassword(actions.payload).pipe(
         map((res))
       )
     })

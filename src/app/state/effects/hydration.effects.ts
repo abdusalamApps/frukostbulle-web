@@ -66,7 +66,7 @@ export class HydrationEffects implements OnInitEffects {
           // let stateFromStorage = localStorage.getItem('state');
           // if (stateFromStorage != null) {
           //   let jsonState = JSON.parse(stateFromStorage);
-          //   jsonState.seller.currentUser.currentUser['availableDates'] = action.newDates;
+          //   jsonState.seller.currentUser.currentUser['availableDates'] = actions.newDates;
           //   console.log(`newJsonState ${JSON.stringify(jsonState.seller.currentUser.currentUser)}`);
           //   localStorage.clear();
           //   localStorage.setItem('state', 'non');
