@@ -21,11 +21,11 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let t: string | undefined = '';
 
-    if (fromSellerState.getSellerState != null) {
+    if (fromSellerState.getSellerState != null || fromSellerState.getSellerState !== undefined) {
       this.store.select(fromSellerState.getToken).subscribe(token => t = token).unsubscribe();
     }
 
-    if (fromBuyerState.getBuyerState != null) {
+    if (fromBuyerState.getBuyerState != null || fromBuyerState.getBuyerState !== undefined) {
       this.store.select(fromBuyerState.getBuyerToken).subscribe(token => t = token).unsubscribe();
     }
 
