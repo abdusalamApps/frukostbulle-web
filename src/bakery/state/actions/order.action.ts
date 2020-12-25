@@ -12,7 +12,7 @@ export const LOAD_ORDER_HISTORY_FAIL = '[Order] Load Order History Fail';
 export class LoadBakeryOrders implements Action {
   readonly type = LOAD_BAKERY_ORDERS;
 
-  constructor(public payload: string) {
+  constructor(public payload: number) {
   }
 }
 

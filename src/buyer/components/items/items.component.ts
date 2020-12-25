@@ -20,6 +20,12 @@ export class ItemsComponent implements OnInit {
 
   constructor(private store: Store<fromState.BuyerState>,
               private rootStore: Store<fromRoot.State>) {
+    let state = localStorage.getItem('state');
+    if (!state) {
+      state = '';
+    }
+    const sellerId = JSON.parse(state).buyer.currentUser.currentUser.associatedSeller;
+    this.store.dispatch(new fromState.LoadItems(sellerId));
 
   }
 

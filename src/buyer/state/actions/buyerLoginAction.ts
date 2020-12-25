@@ -16,7 +16,9 @@ export class BuyerLogin implements Action {
 
 export class BuyerLoginSuccess implements Action {
   readonly type = BUYER_LOGIN_SUCCESS;
-  constructor(public payload: AuthResponse) {}
+  constructor(public payload: AuthResponse) {
+    localStorage.setItem('token', payload.Authorization);
+  }
 }
 
 export class BuyerLoginFail implements Action {

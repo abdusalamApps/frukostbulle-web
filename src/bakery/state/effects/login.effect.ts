@@ -41,7 +41,7 @@ export class LoginEffects {
      this.actions$.pipe(
        ofType(loginAction.LOGIN_SUCCESS),
        switchMap((actions: loginAction.LoginSuccess) => [
-         new orderActions.LoadBakeryOrders(actions.payload.email),
+         // new orderActions.LoadBakeryOrders(actions.payload.email),
          new fromRoot.Go({path: ['bakery/orders']})
        ]),
      )

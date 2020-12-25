@@ -34,7 +34,7 @@ export function reducer(
         currentUser: action.payload
       };
     }
-    case userActions.BUYER_BUYER_LOAD_CURRENT_USER_SUCCESS: {
+    case userActions.BUYER_LOAD_CURRENT_USER_SUCCESS: {
       return {
         ...state,
         currentUserLoaded: true,

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../../models/user.model';
 import {Store} from '@ngrx/store';
-import * as fromState from '../../state';
+import * as fromState from 'src/buyer/state';
 import * as fromRoot from '../../../app/state';
 import {Observable, of} from 'rxjs';
 import {Bakery} from '../../../models/bakery.model';
@@ -23,7 +23,8 @@ export class SellerDetailsComponent implements OnInit {
   public dateValue: Date = new Date();
 
   constructor(private store: Store<fromState.BuyerState>,
-              private rootStore: Store<fromRoot.State>) {}
+              private rootStore: Store<fromRoot.State>) {
+  }
 
   ngOnInit(): void {
 
@@ -48,7 +49,7 @@ export class SellerDetailsComponent implements OnInit {
   }
 
   private contains(date: Date): boolean {
-    let formattedCalendarDate = JSON.stringify(date.toJSON()).split('T')[0].substring(1)
+    let formattedCalendarDate = JSON.stringify(date.toJSON()).split('T')[0].substring(1);
     for (let i = 0; i < this.sellerDates.length; i++) {
       if (formattedCalendarDate === this.sellerDates[i].toString()) {
         return true;
@@ -58,14 +59,17 @@ export class SellerDetailsComponent implements OnInit {
   }
 
   associateSeller(sellerId: number): void {
-    const buyerIdStorage = localStorage.getItem('currentUserId');
-    if (buyerIdStorage) {
-      console.log(`buyerId: ${buyerIdStorage}`);
-      const buyerId = parseInt(buyerIdStorage, 10);
+    const state = localStorage.getItem('state');
+    if (state) {
+      const buyerId = parseInt(JSON.parse(state).buyer.currentUser.currentUser.id, 10);
+      console.log(`buyerId: ${
+        JSON.parse(state).buyer.currentUser.currentUser.id
+      }`);
       this.store.dispatch(new fromState.BuyerUpdateSeller({
         buyerId,
         sellerId
       }));
+      this.store.dispatch(new fromRoot.Go({path: ['buyer/items']}));
     }
   }
 
