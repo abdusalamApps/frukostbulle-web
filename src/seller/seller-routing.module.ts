@@ -59,8 +59,10 @@ const routes: Routes = [
         path: 'items/:itemId', component: Components.ItemEditorComponent,
         canActivate: [fromGuards.AuthGuard],
       },
-      {path: 'update-password', component: Components.UpdatePasswordComponent}
-
+      {
+        path: 'update-password',
+        component: Components.UpdatePasswordComponent
+      }
     ],
   },
   {path: 'signup', component: Components.SignupComponent},
@@ -68,8 +70,13 @@ const routes: Routes = [
     path: 'choose-bakery', component: Components.ChooseBakeryComponent,
     canActivate: [fromGuards.AuthGuard],
   },
-  {path: 'login', component: Components.LoginComponent},
-  {path: 'signup-confirmation', component: Components.SignupConfirmComponent},
+  {
+    path: 'login', component: Components.LoginComponent
+  },
+  {
+    path: 'signup-confirmation',
+    component: Components.SignupConfirmComponent
+  },
 ];
 
 // @ts-ignore

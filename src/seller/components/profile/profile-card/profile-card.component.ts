@@ -21,6 +21,7 @@ export class ProfileCardComponent {
     permissionLevel: -1,
     reminder: false,
     associatedBakery: -1,
+    associatedSeller: -1,
     active: false,
     availableDates: [new Date('')],
     lasOrderDay: '',
