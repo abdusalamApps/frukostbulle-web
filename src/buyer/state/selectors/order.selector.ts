@@ -22,26 +22,31 @@ export const getBuyerSelectedOrder = createSelector(
   }
 );
 
-export const getBuyerOrders = createSelector(
-  getOrderEntities, (entities) => {
-    return Object.keys(entities).map((id) => {
-      return entities[parseInt(id, 10)];
-    });
-  }
-);
 
-export const getBuyerOrderTotal = createSelector(
+export const getBuyerOrders = createSelector(
   getOrderEntities,
   (entities: { [p: number]: Order }, props: any) => {
     let total = 0;
-    for (const [key, value] of
+    for (const contentItem of
       entities[props.orderId].content[Symbol.iterator]()) {
-      total += key.price * value;
+      total += contentItem.item.price * contentItem.amount;
     }
     return total;
   }
 );
 
+
+export const getBuyerOrderTotal = createSelector(
+  getOrderEntities,
+  (entities: { [p: number]: Order }, props: any) => {
+    let total = 0;
+    for (const contentItem of
+      entities[props.orderId].content[Symbol.iterator]()) {
+      total += contentItem.item.price * contentItem.amount;
+    }
+    return total;
+  }
+);
 export const getBuyerOrdersLoaded = createSelector(
   getOrderState,
   fromOrder.getBuyerOrdersLoaded
