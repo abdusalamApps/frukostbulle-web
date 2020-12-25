@@ -233,6 +233,8 @@ export class SignupComponent implements OnInit, OnDestroy {
             this.snackBar.open(`Fel: ${err}`, 'Ok', {duration: 2000});
           }
         );
+      } else {
+        this.snackBar.open('Välj en bageri först', 'Ok', {duration: 2000});
       }
     }
   }
