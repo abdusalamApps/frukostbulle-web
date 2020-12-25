@@ -1,32 +1,66 @@
+<mat-toolbar class="toolbar" color="primary">
+  <span class="spacer"></span>
+  <mat-icon mat-ripple class="back-icon" (click)="navigateHome()">
+    arrow_back
+  </mat-icon>
+  <span>{{ title }}</span>
+</mat-toolbar>
+
 <div class="container">
-  <h1 class="header">Logga in</h1>
+  <mat-card>
+    <mat-card-content>
+      <div class="form-container">
+        <h1 class="header">Logg in</h1>
 
-  <div class="form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>E-post</mat-label>
+          <input matInput [(ngModel)]="email" />
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>E-post</mat-label>
-      <input matInput placeholder="Placeholder" value="{{email}}">
-    </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Lösenord</mat-label>
+          <input
+            [(ngModel)]="password"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Lösenord</mat-label>
-      <input class='enteredPassword' matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide"> <!-- default is that password is visible, make it not visible-->
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
+        <div class="buttons-container">
+          <button mat-button class="text-button" (click)="signup = !signup">
+            SKAPA PROFIL
+          </button>
+          <mat-spinner color="accent" diameter="30" *ngIf="(pending$ | async)"></mat-spinner>
+          <button *ngIf="!(pending$ | async)" (click)="signIn()" mat-raised-button color="accent">
+            LOGGA IN
+          </button>
+        </div>
 
-    <div class="buttons-container">
-
-      <button
-        (click)="login();"
-        mat-raised-button color="accent">
-        LOGGA IN
-      </button>
-
-    </div>
-
-  </div>
+        <button
+          style="
+            text-align: end;
+            color: rgba(41, 41, 41, 0.733);
+            font-size: x-small;
+          "
+          mat-button
+          routerLink="password-reset"
+        >
+          ÅTERSTÄLL LÖSENORDET
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
 </div>
+
+
+

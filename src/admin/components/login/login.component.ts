@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {LoginInfo} from '../../../models/loginInfo.model';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import * as fromStore from '../../../admin/state';
+import * as fromRoot from '../../../app/state';
 
 @Component({
   selector: 'app-login',
@@ -7,31 +11,30 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  router: Router;
-
   title = 'Admin login';
-  email = '';
-  enteredPassword = '';
+  public loginInfo: LoginInfo = {email: '', password: ''};
   hide = true;
 
-  constructor(router: Router) {
-    this.router = router;
+  signup = false;
 
-  }
+  pending$ = new Observable();
+
+  email = '';
+  password = '';
+
+  constructor(private store: Store<fromStore.AdminState>) {}
 
   ngOnInit(): void {
+    this.pending$ = this.store.select(fromStore.getPending);
   }
 
-  public login(): void {
-    // log in if credentials are correct
-    if (this.checkCred()) {
-      this.router.navigate(['/sellers-and-buyers']);
-    }
+  signIn(): void {
+    this.loginInfo = {email: this.email, password: this.password};
+    this.store.dispatch(new fromStore.Login(this.loginInfo));
   }
 
-  public checkCred(): boolean {
-    return true;
+  navigateHome(): void {
+    this.store.dispatch(new fromRoot.Go({path: [''], extras: {replaceUrl: true}}));
   }
 
 }
