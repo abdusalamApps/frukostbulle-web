@@ -1,16 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormControl, Validators} from '@angular/forms';
 import * as fromRoot from '../../../app/state';
 import {Store} from '@ngrx/store';
 import * as fromState from '../../state';
+import {PermissionLevel, User} from '../../../models/user.model';
+import {CitiesService} from '../../../seller/services/cities.service';
+import {Subscription} from 'rxjs';
+import {UsersService} from '../../../seller/services/users.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
 
   title = 'Skapa profil';
   hide = true;
@@ -44,10 +48,27 @@ export class SignupComponent implements OnInit {
     Validators.required
   ]);
 
-  constructor(private store: Store<fromState.BuyerState>, private snackBar: MatSnackBar) {
+  userSubscription$ = new Subscription();
+  cEmailSubscription = new Subscription();
+  confirmSubscription$ = new Subscription();
+
+  newUserId = -1;
+  signupSuccess = false;
+  code = -1;
+
+  constructor(private store: Store<fromState.BuyerState>,
+              private snackBar: MatSnackBar,
+              private citiesService: CitiesService,
+              private userService: UsersService
+  ) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    this.userSubscription$.unsubscribe();
+    this.cEmailSubscription.unsubscribe();
+    this.confirmSubscription$.unsubscribe();
   }
 
   onCreate(): void {
@@ -69,14 +90,67 @@ export class SignupComponent implements OnInit {
         duration: 2000,
       });
     } else {
-      this.snackBar.open('Inga fel.', 'Ok', {
-        duration: 2000,
-      });
-
+        const newUser: User = {
+          id: -1,
+          name: this.nameControl.value,
+          county: this.getCounty(this.cityControl.value),
+          city: this.cityControl.value,
+          address: `${this.streetControl.value}, ${this.cityControl}`,
+          mobilenbr: this.mobileControl.value,
+          email: this.emailControl.value,
+          password: this.enteredPassword,
+          permissionLevel: PermissionLevel.BUYER,
+          reminder: false,
+          associatedBakery: -1,
+          associatedSeller: -1,
+          active: false,
+          availableDates: [],
+          lasOrderDay: '',
+          profilePictureUrl: ''
+        };
+        this.userSubscription$ = this.userService.createUser(newUser, []).subscribe(
+            (res: any) => {
+            this.newUserId = res;
+            this.signupSuccess = true;
+            this.cEmailSubscription = this.userService.sendConfirmationEmail(newUser.email).subscribe(
+              (result: any) => {
+                console.log(`createUser res: ${result}`);
+              },
+                (err: any) => {
+                console.log(`send confirmation email failed ${JSON.stringify(err)}`);
+              }
+            );
+          },
+            (err: any) => {
+            console.log(`createUser error: ${JSON.stringify(err)}`);
+            this.snackBar.open(`Fel: ${err}`, 'Ok', {duration: 2000});
+          }
+        );
     }
   }
 
   public navigateBack(): void {
     this.store.dispatch(new fromRoot.Back());
   }
+
+  getCounty(city: string): string {
+    const counties = this.citiesService.getCounties();
+    for (const county of counties) {
+      const cities = this.citiesService.getCitiesByCounty(county);
+      for (const ci of cities) {
+        if (ci === city) {
+          return county;
+        }
+      }
+    }
+    return '';
+  }
+
+  onConfirm(): void {
+    this.confirmSubscription$ = this.userService.confirmAccount(this.newUserId, this.code).subscribe(
+      res => console.log(`accountConfirm res: ${res}`),
+      err => console.log(`accountConfirm error: ${JSON.stringify(err)}`)
+    );
+  }
+
 }

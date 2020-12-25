@@ -85,7 +85,7 @@ export class ProfileEditorComponent implements OnInit {
                   name: this.nameControl.value,
                   mobilenbr: this.mobileControl.value
                 };
-              this.store.dispatch(new fromState.UpdateUser(newUser));
+              this.store.dispatch(new fromState.BuyerUpdateUser(newUser));
             }
           })
         );

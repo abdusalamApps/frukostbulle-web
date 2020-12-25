@@ -30,4 +30,5 @@ export class UsersService {
   updateSellerDates(sellerId: number, dates: Date[]): Observable<any> {
     return this.http.post<any>(`${urls.usersUrls.Post.updateSellerDatesUrl}`, {sellerId, dates});
   }
+
 }

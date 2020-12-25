@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onLogout(): void {
-    this.store.dispatch(new fromState.Logout());
+    this.store.dispatch(new fromState.BuyerLogout());
   }
 
 }
