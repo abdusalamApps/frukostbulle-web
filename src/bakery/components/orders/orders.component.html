@@ -9,6 +9,7 @@
     <mat-icon>history</mat-icon>
   </button>
 
+<!--
   <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
     <mat-icon>more_vert</mat-icon>
   </button>
@@ -23,6 +24,7 @@
       <span>LOGGA UT</span>
     </button>
   </mat-menu>
+-->
 
 </mat-toolbar>
 
@@ -30,12 +32,14 @@
 
   <h2>Aktuell denna vecka</h2>
   <mat-list>
+<!--
     <mat-list-item mat-ripple *ngFor="let seller of sellers" (click)="navigateToDetails(seller.sellerId)">
       <img mat-list-avatar src="../../../assets/img/product-placeholder.png">
       <h3 matLine> {{seller.sellerName}} </h3>
       <p matLine> {{seller.firstProduct}}... </p>
       <mat-divider></mat-divider>
     </mat-list-item>
+-->
   </mat-list>
 
 
