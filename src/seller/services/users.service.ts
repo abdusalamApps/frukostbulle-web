@@ -16,7 +16,7 @@ export class UsersService {
   getUserByEmail(email: string): Observable<User> {
     const jsonString = JSON.stringify(email);
     const e = jsonString.substring(12, jsonString.search(',') - 1);
-    return this.http.get<User>(urls.usersUrls.Get.getUserByEmailUrl + e);
+    return this.http.get<User>(urls.usersUrls.Get.getUserByEmailUrl + email);
   }
 
   getUserById(id: number): Observable<User> {
@@ -46,7 +46,7 @@ export class UsersService {
 
   associateSeller(buyerId: number, sellerId: number): Observable<any> {
     return this.http.post<any>(
-      `${urls.usersUrls.Post.associateSellerUrl}?buyerId=${buyerId}&sellerId${sellerId}`, {});
+      `${urls.usersUrls.Post.associateSellerUrl}?buyerId=${buyerId}&sellerId=${sellerId}`, {});
   }
 
 }
