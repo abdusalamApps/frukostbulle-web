@@ -1,10 +1,10 @@
 import {ActionReducerMap, createFeatureSelector} from '@ngrx/store';
-import * as fromLogin from './login.reducer';
+import * as fromLogin from './bakery-login.reducer';
 import * as fromOrder from './order.reducer';
 
 
 export interface BakeryState {
-  login: fromLogin.LoginState;
+  login: fromLogin.BakeryLoginState;
   orders: fromOrder.OrderState;
 }
 

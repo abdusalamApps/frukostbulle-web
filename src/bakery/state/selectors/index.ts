@@ -1,2 +1,2 @@
-export * from './login.selector';
+export * from './bakery-login.selector';
 export * from './order.selector';

@@ -13,7 +13,7 @@ import {
 } from './components';
 
 import * as Components from '../admin/components';
-import * as fromGuards from '../seller/guards';
+import * as fromGuards from './guards';
 
 const routes: Routes = [
   {

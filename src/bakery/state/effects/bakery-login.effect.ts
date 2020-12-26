@@ -1,20 +1,17 @@
 import {Injectable} from '@angular/core';
 
-import {Effect, Actions, createEffect, ofType} from '@ngrx/effects';
-import * as loginAction from '../actions/login.action';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import * as loginActions from '../actions/bakery-login.action';
 import {map, switchMap, catchError, mergeMap} from 'rxjs/operators';
 import {AuthService} from '../../../app/services/auth.service';
 import {of} from 'rxjs';
 
 import * as fromRoot from '../../../app/state';
-import * as loginActions from '../actions/login.action';
-import * as orderActions from '../actions/order.action';
-
 import {MatDialog} from '@angular/material/dialog';
 
 import {Store} from '@ngrx/store';
 import {LogoutDialog} from '../../../seller/components/logout-dialog/logout-dialog.component';
-import {LoginState} from '../reducers/login.reducer';
+import {BakeryLoginState} from '../reducers/bakery-login.reducer';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable()
@@ -22,25 +19,25 @@ export class LoginEffects {
   constructor(private actions$: Actions,
               private authService: AuthService,
               private dialog: MatDialog,
-              private store: Store<LoginState>,
+              private store: Store<BakeryLoginState>,
               private snackBar: MatSnackBar) {
   }
 
   login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loginAction.LOGIN),
-      switchMap((action: loginAction.Login) => {
+      ofType(loginActions.LOGIN_BAKERY),
+      switchMap((action: loginActions.LoginBakery) => {
         return this.authService.login(action.payload).pipe(
-          map((response) => new loginAction.LoginSuccess(response)),
-          catchError((error) => of(new loginAction.LoginFail(error)))
+          map((response) => new loginActions.LoginBakerySuccess(response)),
+          catchError((error) => of(new loginActions.LoginBakeryFail(error)))
         );
       })
     )
   );
    loginSuccess$ = createEffect(() =>
      this.actions$.pipe(
-       ofType(loginAction.LOGIN_SUCCESS),
-       switchMap((actions: loginAction.LoginSuccess) => [
+       ofType(loginActions.LOGIN_BAKERY_SUCCESS),
+       switchMap((actions: loginActions.LoginBakerySuccess) => [
          // new orderActions.LoadBakeryOrders(actions.payload.email),
          new fromRoot.Go({path: ['bakery/orders']})
        ]),
@@ -49,8 +46,8 @@ export class LoginEffects {
 
   logout$ = createEffect(() =>
       this.actions$.pipe(
-        ofType(loginAction.LOGOUT),
-        map((action: loginAction.Logout) => {
+        ofType(loginActions.LOGOUT_BAKERY),
+        map((action: loginActions.LogoutBakery) => {
           this.dialog.open(LogoutDialog, {
             data: {
               name: '',
@@ -64,8 +61,8 @@ export class LoginEffects {
 
   loginFail$ = createEffect(() =>
       this.actions$.pipe(
-        ofType(loginActions.LOGIN_FAIL),
-        map((action: loginActions.LoginFail) => {
+        ofType(loginActions.LOGIN_BAKERY_FAIL),
+        map((action: loginActions.LoginBakeryFail) => {
           this.snackBar.open('Fel e-post eller lösenord!', 'Ok', {
             duration: 2000
           });
@@ -77,8 +74,8 @@ export class LoginEffects {
 
   logoutConfirm$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loginAction.LOGOUT_CONFIRM),
-      mergeMap((action: loginAction.LogoutConfirm) => {
+      ofType(loginActions.LOGOUT_BAKERY_CONFIRM),
+      mergeMap((action: loginActions.LogoutBakeryConfirm) => {
         return of(new fromRoot.Go({path: ['/bakery/login'], extras: {replaceUrl: true}}));
       })
     )

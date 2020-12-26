@@ -1,4 +1,4 @@
-import {LoginEffects} from './login.effect';
+import {LoginEffects} from './bakery-login.effect';
 import {OrderEffects} from './order.effect';
 
 export const effects: any[] = [
@@ -6,6 +6,6 @@ export const effects: any[] = [
   OrderEffects,
 ];
 
-export * from './login.effect';
+export * from './bakery-login.effect';
 export * from './order.effect';
 

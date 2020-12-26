@@ -31,7 +31,7 @@ export class BuyerLoginEffect {
       ofType(loginAction.BUYER_LOGIN),
       switchMap((action: loginAction.BuyerLogin) => {
         return this.authService.login(action.payload).pipe(
-          map((response) => new loginAction.BuyerLoginSuccess(response)),
+          map((response) => new loginActions.BuyerLoginSuccess(response)),
           catchError((error) => of(new loginAction.BuyerLoginFail(error)))
         );
       })
