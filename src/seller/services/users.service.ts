@@ -33,11 +33,13 @@ export class UsersService {
   }
 
   createUser(user: User, coordinates: { lat: number, lng: number }[]): Observable<number> {
-    return this.http.post<number>(`${urls.usersUrls.Post.createUserUrl}`, {user, coordinates})
+    return this.http.post<number>(`${urls.usersUrls.Post.createUserUrl}`, {user, coordinates});
   }
-
+  createUserNoPass(user: User, coordinates: []): Observable<number>{
+    return this.http.post<number>(`${urls.usersUrls.Post.createUserNoPassUrl}`, {user, coordinates});
+  }
   sendConfirmationEmail(email: string): Observable<any> {
-    return this.http.post(`${urls.usersUrls.Post.sendCreateEmailUrl}${email}`, {})
+    return this.http.post(`${urls.usersUrls.Post.sendCreateEmailUrl}${email}`, {});
   }
 
   confirmAccount(userId: number, code: number): Observable<any> {
@@ -49,4 +51,10 @@ export class UsersService {
       `${urls.usersUrls.Post.associateSellerUrl}?buyerId=${buyerId}&sellerId=${sellerId}`, {});
   }
 
+  deleteUser(userId: number): Observable<any> {
+    return this.http.post<any>(
+      `${urls.usersUrls.Post.deleteUserByIdUrl}${userId}`,
+      {}
+    )
+  }
 }

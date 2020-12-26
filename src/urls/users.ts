@@ -11,11 +11,12 @@ export namespace Get {
 export namespace Post {
   export const loginUrl = `${baseUrl}/login`;
   export const createUserUrl = `${baseUrl}/create-user`;
+  export const createUserNoPassUrl = `${baseUrl}/create-user-auto-pass`;
   export const sendCreateEmailUrl = `${baseUrl}/send-create-email?userEmail=`;
   export const confirmAccountUrl = `${baseUrl}/confirm`;
 
   export const updateUserUrl = `${baseUrl}/update-user`;
-  export const deleteUserByIdUrl = `${baseUrl}/delete-user`;
+  export const deleteUserByIdUrl = `${baseUrl}/delete-user?userId=`;
   export const addSellerDateUrl = `${baseUrl}/add-date`;
   export const removeSellerDateUrl = `${baseUrl}/remove-date`;
   export const updateSellerDatesUrl = `${baseUrl}/update-dates`;

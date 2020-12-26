@@ -23,9 +23,9 @@ const routes: Routes = [
       {path: 'create-bakery', component: CreateBakeryComponent},
       {path: 'create-seller', component: CreateSellerComponent},
       {path: 'manage-account', component:  ManageAccountComponent},
-      {path: 'manage-bakery', component:  ManageBakeryComponent},
-      {path: 'manage-buyer', component: ManageBuyerComponent},
-      {path: 'manage-seller', component: ManageSellerComponent},
+      {path: 'manage-bakery/:bakeryId', component:  ManageBakeryComponent},
+      {path: 'manage-buyer/:buyerId', component: ManageBuyerComponent},
+      {path: 'manage-seller/:sellerId', component: ManageSellerComponent},
       {path: 'sellers-and-buyers', component: SellersAndBuyersComponent}
     ]},
   {path: 'login', component: LoginComponent},

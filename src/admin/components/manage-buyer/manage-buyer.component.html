@@ -7,8 +7,31 @@
   </mat-icon>
   <span>{{ title }}</span>
 </mat-toolbar>
-<div class="container">
-  <button mat-raised-button class="delete-button" style="margin: 16px 0 16px 0" (click)="confirmDelete('köparnamn');">
-    TA BORT KÖPARE
-  </button>
+<div class="container" *ngIf="(buyer$ | async) as buyer">
+
+  <mat-card>
+    <mat-card-header>
+      <img mat-card-avatar src="{{!buyer.profilePictureUrl || buyer.profilePictureUrl === ''
+       ? 'assets/img/profile-photo-placeholder.png' : buyer.profilePictureUrl}}"
+           alt="photo"
+           id="profile-photo"/>
+      <mat-card-title>
+        {{buyer.name}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        User id {{buyer.id}}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-actions>
+      <button mat-button color="warn" (click)="delete(buyer.id)">
+        Ta bort
+      </button>
+    </mat-card-actions>
+
+
+  </mat-card>
+
+
 </div>
+

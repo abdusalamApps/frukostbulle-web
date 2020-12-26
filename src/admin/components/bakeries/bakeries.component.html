@@ -4,20 +4,27 @@
 
 <div class="container">
 
+  <mat-card>
 
-  <mat-list>
-    <mat-list-item mat-ripple (click)="bakeryRowClicked();" class="list-item">
-      <h3 matLine class="user-id"> ID </h3>
-      <p matLine class="bakery-mail"> Bagerinamn </p>
-      <p matLine class="bakery-name"> Mail </p>
-      <p matLine class="bakery-number"> Nummer? </p>
-    </mat-list-item>
-    <mat-divider></mat-divider>
+    <mat-list>
+      <div *ngIf="(bakeries$ | async) as bakeries">
 
-  </mat-list>
+        <mat-list-item mat-ripple
+                       *ngFor="let bakery of bakeries; index as k;"
+                       [routerLink]="['/admin/manage-bakery', bakery.id]">
+          <img matListAvatar class="list-img">
+          <h3 matLine> {{bakery.id}} </h3>
+          <p matLine> {{bakery.name}} </p>
+          <p matLine> {{bakery.email}} </p>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+      </div>
+    </mat-list>
+  </mat-card>
 
 
-  <button mat-fab matSuffix class="fab" routerLink="/create-bakery" routerLinkActive="active">
+  <button mat-fab matSuffix class="fab" routerLink="/admin/create-bakery">
     <mat-icon>add</mat-icon>
   </button>
 </div>

@@ -9,61 +9,46 @@
 
 <div class="container">
   <div class="form-container">
+    <mat-card>
+      <mat-form-field appearance="fill">
+        <mat-label>Epost</mat-label>
+        <input matInput required [formControl]="emailControl" >
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Epost</mat-label>
-      <input matInput placeholder="Placeholder" value="{{email}}">
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Namn</mat-label>
+        <input matInput required [formControl]="nameControl">
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Namn</mat-label>
-      <input matInput placeholder="Placeholder">
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Mobilnummer</mat-label>
+        <input matInput required [formControl]="mobileControl">
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Mobilnummer</mat-label>
-      <input matInput placeholder="Placeholder">
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Gatuadress</mat-label>
+        <input matInput required [formControl]="streetControl">
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Län</mat-label>
-      <mat-select>
-        <mat-option value="option">Skåne</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Ort</mat-label>
+        <input matInput required [formControl]="cityControl">
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Stad</mat-label>
-      <mat-select>
-        <mat-option value="option">Höganäs</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <div class="buttons-container">
+        <button mat-stroked-button style="margin-top: 16px"
+                (click)="navigateBack()">
+          AVBRYT
+        </button>
+        <button mat-raised-button color="accent" style="margin-top: 16px"
+                (click)="onCreateBakery()">
+          SKAPA
+        </button>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Lösenord</mat-label>
-      <input [(ngModel)]='enteredPassword' matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Bekräfta lösenord</mat-label>
-      <input [(ngModel)]='enteredPassword2' matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
+      </div>
 
-    <mat-error>{{enteredPassword === enteredPassword2 ? '' : 'Passwords do not match'}}</mat-error>
-
-    <button mat-raised-button color="accent" style="margin-top: 16px"
-            (click)="createProfile()">
-      SKAPA
-    </button>
-
+    </mat-card>
 
   </div>
 

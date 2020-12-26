@@ -84,7 +84,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   onDelete(item: { item: Item, amount: number }): void {
     this.dialog.open(DeleteDialog, {
       data: {
-        item: item,
+        item,
         cartItems: this.cartItems,
         component: this
       }

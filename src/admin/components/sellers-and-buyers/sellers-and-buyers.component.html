@@ -8,7 +8,7 @@
 
             <mat-list-item mat-ripple
                            *ngFor="let seller of sellers; index as k;"
-                           [routerLink]="['/manage-seller', seller.id]">
+                           [routerLink]="['/admin/manage-seller', seller.id]">
               <img matListAvatar class="list-img">
               <h3 matLine> {{seller.id}} </h3>
               <p matLine> {{seller.name}} </p>
@@ -33,7 +33,7 @@
 
           <mat-list-item mat-ripple
                          *ngFor="let buyer of buyers; index as k;"
-                         [routerLink]="['/manage-buyer', buyer.id]">
+                         [routerLink]="['/admin/manage-buyer', buyer.id]">
             <img matListAvatar class="list-img">
             <h3 matLine> {{buyer.id}} </h3>
             <p matLine> {{buyer.name}} </p>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { Router } from '@angular/router';
+import {Observable} from 'rxjs';
+import {Bakery} from '../../../models/bakery.model';
+import * as fromState from '../../state';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-bakeries',
@@ -10,30 +12,14 @@ import { Router } from '@angular/router';
 export class BakeriesComponent implements OnInit {
 
   title = 'Bagerier';
+  bakeries$ = new Observable<Bakery[]>();
 
-  location: Location;
-  router: Router;
 
-  constructor(location: Location, router: Router) {
-    this.location = location;
-    this.router = router;
+  constructor(private store: Store<fromState.AdminState>) {}
 
-  }
 
   ngOnInit(): void {
+    this.store.dispatch(new fromState.LoadBakeries());
+    this.bakeries$ = this.store.select(fromState.getBakeries);
   }
-
-  public bakeryRowClicked(): void {
-    // needs to get userId from row
-    this.router.navigate(['/manage-bakery']);
-  }
-
-  public navigateBack(): void {
-    this.location.back();
-  }
-
-  public navigateToSellers(): void {
-
-  }
-
 }
