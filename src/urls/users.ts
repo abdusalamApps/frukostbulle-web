@@ -11,6 +11,7 @@ export namespace Get {
 export namespace Post {
   export const loginUrl = `${baseUrl}/login`;
   export const createUserUrl = `${baseUrl}/create-user`;
+  export const createUserNoPassUrl = `${baseUrl}/create-user-auto-pass`;
   export const sendCreateEmailUrl = `${baseUrl}/send-create-email?userEmail=`;
   export const confirmAccountUrl = `${baseUrl}/confirm`;
 

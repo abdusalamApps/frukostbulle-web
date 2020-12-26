@@ -10,12 +10,12 @@ import {effects, reducers} from '../admin/state';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {TokenInterceptor} from '../app/token.interceptor';
+import {AddBakeryDialog} from './components/create-bakery/create-bakery.component';
 
 @NgModule({
   declarations: [
     ...components,
+    AddBakeryDialog
   ],
   imports: [
     CommonModule,
