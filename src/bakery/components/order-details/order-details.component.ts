@@ -4,18 +4,18 @@ import * as fromState from '../../state';
 import {Store} from '@ngrx/store';
 import {Observable, Subscription} from 'rxjs';
 import {Order} from '../../../models/order.model';
-import {OrdersService} from '../../../seller/services/orders.service';
-import {MatDialog} from '@angular/material/dialog';
 import {User} from '../../../models/user.model';
+import * as fromSeller from 'src/seller/state';
 
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.scss'],
 })
-export class OrderDetailsComponent implements OnInit {
-  title = 'Beställningens details';
+export class OrderDetailsComponent implements OnInit, OnDestroy {
+  title = 'Beställningens detailer';
   order$ = new Observable<Order>();
+
   @Input() order: Order = {
     id: -1,
     sellerId: -1,
@@ -24,8 +24,8 @@ export class OrderDetailsComponent implements OnInit {
     sellerName: '',
     buyerName: '',
     bakeryName: '',
-    deliveryMethod: -1,
-    deliveryTime: '',
+    deliveryMethod: false,
+    deliveryTime: 0,
     deliveryDate: '',
     handled: false,
     paid: false,
@@ -38,15 +38,18 @@ export class OrderDetailsComponent implements OnInit {
   sub$ = new Subscription();
   constructor(private rootStore: Store<fromRoot.State>,
               private state: Store<fromState.BakeryState>,
-              private store: Store<fromState.BakeryState>,
-              private orderService: OrdersService,
-              private dialog: MatDialog) {
+              private store: Store<fromState.BakeryState>) {
   }
+
+  ngOnDestroy(): void {
+        throw new Error('Method not implemented.');
+    }
   ngOnInit(): void {
-  //  this.order$ = this.state.select(fromState.getSelectedOrder);
+    this.order$ = this.state.select(fromState.getSelectedOrder);
+    // this.order= this.state.dispatch(new fromState.getOrderById())
     if (this.order) {
-    //  this.store.dispatch(new fromState.LoadUserById(this.order.sellerId));
-    //  this.seller$ = this.store.select(fromState.getUserById);
+      this.store.dispatch(new fromSeller.LoadUserById(this.order.sellerId));
+      this.seller$ = this.store.select(fromSeller.getUserById);
     }
   }
 

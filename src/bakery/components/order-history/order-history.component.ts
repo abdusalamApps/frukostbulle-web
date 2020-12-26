@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Location} from '@angular/common';
 import * as fromRoot from '../../../app/state';
 import {Observable} from 'rxjs';
 import {Order} from '../../../models/order.model';
@@ -20,7 +19,9 @@ export class OrderHistoryComponent implements OnInit {
   orders$ = new Observable<Order[]>();
 
   constructor(private store: Store<fromState.BakeryState>) {}
+
   ngOnInit(): void {
+
     this.orders$ = this.store.select(fromState.getOrderHistory);
   }
   public navigateBack(): void {
