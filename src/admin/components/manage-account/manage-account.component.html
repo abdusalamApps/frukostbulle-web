@@ -5,44 +5,50 @@
 
 <div class="container">
   <mat-card>
+    <div class="form-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Ditt nuvarande lösenord</mat-label>
+        <input [(ngModel)]='currentPassword' matInput [type]="hide1 ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide1">
+          <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="margin-top: 16px">
+        <mat-label>Nytt Lösenord</mat-label>
+        <input [(ngModel)]='enteredPassword' matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Ditt nuvarande lösenord</mat-label>
-    <input [(ngModel)]='currentPassword' matInput [type]="hide1 ? 'password' : 'text'">
-    <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide1">
-      <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-  </mat-form-field>
-  <mat-form-field appearance="fill" style="margin-top: 16px">
-    <mat-label>Nytt Lösenord</mat-label>
-    <input [(ngModel)]='enteredPassword' matInput [type]="hide ? 'password' : 'text'">
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-  </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Bekräfta lösenord</mat-label>
+        <input [(ngModel)]='enteredPassword2' matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Bekräfta lösenord</mat-label>
-    <input [(ngModel)]='enteredPassword2' matInput [type]="hide ? 'password' : 'text'">
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-  </mat-form-field>
+      <mat-error>{{enteredPassword === enteredPassword2 ? '' : 'Passwords do not match'}}</mat-error>
 
-  <mat-error>{{enteredPassword === enteredPassword2 ? '' : 'Passwords do not match'}}</mat-error>
 
-  <button mat-raised-button color="accent" style="margin-top: 16px"
-          (click)="updatePassword()">
-    ÄNDRA LÖSENORD
-  </button>
+    </div>
 
-  <button mat-button  [routerLink]="['admin/login']"
-           color="warn" id="logout-button">
-    LOGGA UT
-  </button>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" style="margin-top: 16px"
+              (click)="updatePassword()">
+        ÄNDRA LÖSENORD
+      </button>
+
+      <button mat-button [routerLink]="['admin/login']"
+              color="warn" id="logout-button">
+        LOGGA UT
+      </button>
+    </mat-card-actions>
+
 
   </mat-card>
 </div>

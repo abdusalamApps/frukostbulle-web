@@ -19,10 +19,37 @@
         User id {{bakery.id}}
       </mat-card-subtitle>
     </mat-card-header>
+    <mat-form-field appearance="fill">
+      <mat-label>Namn</mat-label>
+      <input matInput required
+             [formControl]="nameControl" placeholder="name">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Mobilnummer</mat-label>
+      <input matInput required
+             [formControl]="mobileControl" placeholder="mobile number">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>GatuAAddress</mat-label>
+      <input matInput required
+             [formControl]="streetControl" placeholder="GatuAddress">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Ort</mat-label>
+      <input matInput required
+             [formControl]="cityControl" placeholder="city">
+    </mat-form-field>
 
     <mat-card-actions>
       <button mat-button color="warn" (click)="delete(bakery.id)">
         Ta bort
+      </button>
+      <button mat-raised-button color="accent" style="margin-top: 16px"
+              (click)="onUpdateBakery(bakery)">
+        UPDATE
       </button>
     </mat-card-actions>
 
