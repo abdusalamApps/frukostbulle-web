@@ -16,7 +16,9 @@ export class Login implements Action {
 
 export class LoginSuccess implements Action {
   readonly type = LOGIN_SUCCESS;
-  constructor(public payload: AuthResponse) {}
+  constructor(public payload: AuthResponse) {
+    localStorage.setItem('token', payload.Authorization);
+  }
 }
 
 export class LoginFail implements Action {

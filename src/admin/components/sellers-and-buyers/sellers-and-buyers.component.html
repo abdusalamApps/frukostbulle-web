@@ -1,38 +1,49 @@
 <mat-tab-group mat-stretch-tabs color="primary" backgroundColor="primary">
   <mat-tab label="SÄLJARE">
     <div class="container">
-      <mat-list>
-        <mat-list-item mat-ripple (click)="sellerRowClicked();" class="list-item">
-          <img matListAvatar class="list-img"
-               src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png">
-          <h3 matLine class="userid"> ID </h3>
-          <p matLine class="seller-name"> Säljarnamn </p>
-          <p matLine class="seller-email"> Mejladdress </p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
+      <mat-card>
 
-      </mat-list>
+        <mat-list>
+          <div *ngIf="(sellers$ | async) as sellers">
 
-      <button class="fab" mat-fab color="accent" routerLink="/generate-sellercode">
-        <mat-icon>add</mat-icon>
-      </button>
+            <mat-list-item mat-ripple
+                           *ngFor="let seller of sellers; index as k;"
+                           [routerLink]="['/manage-seller', seller.id]">
+              <img matListAvatar class="list-img">
+              <h3 matLine> {{seller.id}} </h3>
+              <p matLine> {{seller.name}} </p>
+              <p matLine> {{seller.email}} </p>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+          </div>
+        </mat-list>
+      </mat-card>
 
     </div>
   </mat-tab>
 
   <mat-tab label="KÖPARE">
     <div class="container">
-      <mat-list>
-        <mat-list-item mat-ripple (click)="buyerRowClicked();" class="list-item">
-          <img matListAvatar class="list-img"
-               src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png">
-          <h3 matLine class="user-id"> DummyId</h3>
-          <p matLine class="buyer-name"> Köparnamn </p>
-          <p matLine class="buyer-mail"> Mail </p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-      </mat-list>
+      <mat-card>
 
+      <mat-list>
+
+        <div *ngIf="(buyers$ | async) as buyers">
+
+          <mat-list-item mat-ripple
+                         *ngFor="let buyer of buyers; index as k;"
+                         [routerLink]="['/manage-buyer', buyer.id]">
+            <img matListAvatar class="list-img">
+            <h3 matLine> {{buyer.id}} </h3>
+            <p matLine> {{buyer.name}} </p>
+            <p matLine> {{buyer.email}} </p>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+        </div>
+      </mat-list>
+      </mat-card>
     </div>
   </mat-tab>
 

@@ -5,6 +5,13 @@ import { AdminRoutingModule } from './admin-routing.module';
 import {components} from './components';
 import {materialModules} from '../material-modules';
 import {commonModules} from '../common-modules';
+import {StoreModule} from '@ngrx/store';
+import {effects, reducers} from '../admin/state';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TokenInterceptor} from '../app/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -14,7 +21,13 @@ import {commonModules} from '../common-modules';
     CommonModule,
     AdminRoutingModule,
     ...materialModules,
-    ...commonModules
+    ...commonModules,
+    StoreModule.forFeature('admin', reducers),
+    EffectsModule.forFeature(effects),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ]
 })
 export class AdminModule { }

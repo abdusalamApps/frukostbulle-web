@@ -12,7 +12,7 @@ import {
   SellersAndBuyersComponent
 } from './components';
 
-import * as Components from '../seller/components';
+import * as Components from '../admin/components';
 
 const routes: Routes = [
   {

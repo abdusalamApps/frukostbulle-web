@@ -43,9 +43,9 @@ export class LoginEffects {
       ofType(loginAction.LOGIN_SUCCESS),
       switchMap((actions: loginAction.LoginSuccess) => [
         // console.log(`paylod@LoginSuccess: ${actions.payload.email}`);
-        new loadUsersAction.LoadBakeries(actions.payload.email),
-        new loadUsersAction.LoadSellers(actions.payload.email),
-        new loadUsersAction.LoadBuyers(actions.payload.email),
+        new loadUsersAction.LoadBakeries(),
+        new loadUsersAction.LoadSellers(),
+        new loadUsersAction.LoadBuyers(),
         new fromRoot.Go({path: ['admin/sellers-and-buyers']})
       ]),
     )

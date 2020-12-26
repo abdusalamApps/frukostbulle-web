@@ -17,8 +17,6 @@ export const LOAD_BAKERIES_FAIL = '[Bakeries] Load Bakeries Fail';
 export class LoadSellers implements Action {
   readonly type = LOAD_SELLERS;
 
-  constructor(public payload: string) {
-  }
 }
 
 export class LoadSellersSuccess implements Action {
@@ -37,9 +35,6 @@ export class LoadSellersFail implements Action {
 
 export class LoadBuyers implements Action {
   readonly type = LOAD_BUYERS;
-
-  constructor(public payload: string) {
-  }
 }
 
 export class LoadBuyersSuccess implements Action {
@@ -58,8 +53,6 @@ export class LoadBuyersFail implements Action {
 export class LoadBakeries implements Action {
   readonly type = LOAD_BAKERIES;
 
-  constructor(public payload: string) {
-  }
 }
 
 export class LoadBakeriesSuccess implements Action {
