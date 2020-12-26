@@ -3,9 +3,11 @@
   </button>
   <span>{{title}}</span>
   <span class="toolbar-spacer"></span>
-  <button routerLink="/bakery/order-history"
-          mat-icon-button>
+  <button routerLink="/bakery/order-history" mat-icon-button>
     <mat-icon>history</mat-icon>
+  </button>
+  <button [routerLink]="['admin/login']" mat-icon-button>
+    <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
 
@@ -16,7 +18,7 @@
       <div *ngIf="(orders$ | async) as orders">
         <mat-list-item mat-ripple
                        *ngFor="let order of orders; index as k;"
-                       [routerLink]="['/bakery/order-details', order.id]">
+                       [routerLink]="['/bakery/order-details', order.sellerId]">
           <img mat-list-avatar src="assets/img/no-image.png">
           <h3 matLine> {{order.sellerName}} </h3>
 
@@ -24,7 +26,7 @@
             {{contents[0]?.item?.itemName}}...
           </p>
 
-          <p matLine *ngIf="(getOrderTotal(order.id) | async) as total">
+          <p matLine *ngIf="(getOrderTotal(order.sellerId) | async) as total">
             {{total}}:-
           </p>
 

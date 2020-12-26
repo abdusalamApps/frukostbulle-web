@@ -2,10 +2,10 @@ import * as orderActions from '../actions/order.action';
 import {Order} from '../../../models/order.model';
 
 export interface OrderState {
-  entities: { [orderId: number]: Order };
+  entities: { [sellerId: number]: Order };
   ordersLoaded: boolean;
   ordersLoading: boolean;
-  orderHistory: { [orderId: number]: Order };
+  orderHistory: { [sellerId: number]: Order };
 }
 
 export const initialState: OrderState = {
@@ -55,7 +55,7 @@ export function reducer(
         (newEns: { [id: number]: Order }, order) => {
           return {
             ...newEns,
-            [order.id]: order,
+            [order.sellerId]: order,
           };
         }, {}
       );

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Order} from '../../../models/order.model';
 import {Store} from '@ngrx/store';
@@ -14,15 +14,22 @@ export class OrdersComponent implements OnInit {
   title = 'Beställningar';
   orders$ = new Observable<Order[]>();
 
-  constructor(private store: Store<fromState.BakeryState>) {}
+  constructor(private store: Store<fromState.BakeryState>) {
+  }
 
 
   ngOnInit(): void {
+    const userId = localStorage.getItem('currentUserId');
+    if (userId) {
+      this.store.dispatch(new fromState.LoadBakeryOrders(
+        parseInt(userId, 10)
+      ));
+    }
     this.orders$ = this.store.select(fromState.getBakeryOrders);
-    this.store.select(fromState.getBakeryOrders);
   }
 
-  getOrderTotal(orderId: number): Observable<number> {
-    return this.store.select(fromState.getOrderTotal, {orderId});
+  getOrderTotal(sellerId: number): Observable<number> {
+    return this.store.select(fromState.getOrderTotal, {sellerId});
   }
+
 }

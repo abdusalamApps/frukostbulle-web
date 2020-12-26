@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import * as fromGuards from './guards';
+
 import { AdminRoutingModule } from './admin-routing.module';
 import {components} from './components';
 import {materialModules} from '../material-modules';
@@ -14,6 +16,8 @@ import {AddBakeryDialog} from './components/create-bakery/create-bakery.componen
 import {DeleteDialog} from './components/manage-seller/manage-seller.component';
 import {DeleteBuyerDialog} from './components/manage-buyer/manage-buyer.component';
 import {DeleteBakeryDialog} from './components/manage-bakery/manage-bakery.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TokenInterceptor} from '../app/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,14 @@ import {DeleteBakeryDialog} from './components/manage-bakery/manage-bakery.compo
       maxAge: 25,
       logOnly: environment.production,
     }),
-  ]
+  ],
+  providers: [
+    ...fromGuards.guards,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
 })
 export class AdminModule { }

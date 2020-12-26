@@ -13,20 +13,21 @@ import {
 } from './components';
 
 import * as Components from '../admin/components';
+import * as fromGuards from '../seller/guards';
 
 const routes: Routes = [
   {
     path: '',
     component: Components.RootComponent,
     children: [
-      {path: 'bakeries', component: BakeriesComponent},
-      {path: 'create-bakery', component: CreateBakeryComponent},
-      {path: 'create-seller', component: CreateSellerComponent},
-      {path: 'manage-account', component:  ManageAccountComponent},
-      {path: 'manage-bakery/:bakeryId', component:  ManageBakeryComponent},
-      {path: 'manage-buyer/:buyerId', component: ManageBuyerComponent},
-      {path: 'manage-seller/:sellerId', component: ManageSellerComponent},
-      {path: 'sellers-and-buyers', component: SellersAndBuyersComponent}
+      {path: 'bakeries', component: BakeriesComponent, canActivate: [fromGuards.AuthGuard],},
+      {path: 'create-bakery', component: CreateBakeryComponent, canActivate: [fromGuards.AuthGuard],},
+      {path: 'create-seller', component: CreateSellerComponent, canActivate: [fromGuards.AuthGuard],},
+      {path: 'manage-account', component:  ManageAccountComponent, canActivate: [fromGuards.AuthGuard],},
+      {path: 'manage-bakery/:bakeryId', component:  ManageBakeryComponent, canActivate: [fromGuards.AuthGuard],},
+      {path: 'manage-buyer/:buyerId', component: ManageBuyerComponent, canActivate: [fromGuards.AuthGuard],},
+      {path: 'manage-seller/:sellerId', component: ManageSellerComponent, canActivate: [fromGuards.AuthGuard],},
+      {path: 'sellers-and-buyers', component: SellersAndBuyersComponent, canActivate: [fromGuards.AuthGuard],}
     ]},
   {path: 'login', component: LoginComponent},
 

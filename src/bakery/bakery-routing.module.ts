@@ -9,15 +9,16 @@ import {
 } from './components';
 
 import * as Components from './components';
+import * as fromGuards from '../seller/guards';
 
 const routes: Routes = [
   {
     path: '',
     component: Components.RootComponent,
     children: [
-      {path: 'order-details', component: OrderDetailsComponent},
-      {path: 'order-history', component: OrderHistoryComponent},
-      {path: 'orders', component: OrdersComponent}
+      {path: 'order-details/:sellerId', component: OrderDetailsComponent, canActivate: [fromGuards.AuthGuard],},
+      {path: 'order-history', component: OrderHistoryComponent, canActivate: [fromGuards.AuthGuard],},
+      {path: 'orders', component: OrdersComponent, canActivate: [fromGuards.AuthGuard],}
     ]},
   {path: 'login', component: LoginComponent}
 
