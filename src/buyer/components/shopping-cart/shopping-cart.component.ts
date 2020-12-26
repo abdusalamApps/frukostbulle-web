@@ -15,33 +15,37 @@ import {User} from "../../../models/user.model";
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
-
   title = 'Varukorg';
-  orders$ = new Observable<Order[]>();
 
-  amount = 1;
-  cartItems: { item: Item, count: number }[] = [];
+  cartItems: { item: Item, amount: number }[] = [];
   total = 0;
 
-  deliveryDates = [];
-
   sellerDates: Date[] = [];
-  public dateValue: Date = new Date();
 
-  userObservable$ = new Observable<User | null>();
+  // @ts-ignore
+  public selectedDate: Date;
+  selectedTime = 7;
+  selectedDeliveryMethod = 0;
+
+  seller$ = new Observable<User | null>();
+  currentUser$ = new Observable();
+  seller: User | null = null;
 
   constructor(private store: Store<fromState.BuyerState>,
               private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.userObservable$ = this.store.select(fromState.getCurrentAssociatedSeller).pipe(
+    this.seller$ = this.store.select(fromState.getCurrentAssociatedSeller).pipe(
       tap(user => {
         if (user) {
           this.sellerDates = user.availableDates;
+          this.seller = user;
         }
       })
     );
+    this.currentUser$ = this.store.select(fromState.getCurrentUser);
+
     this.parseCartItems();
   }
 
@@ -56,28 +60,28 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   incrementAmount(itemId: number): void {
-    this.findItem(itemId).count++;
+    this.findItem(itemId).amount++;
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
     this.parseCartItems();
   }
 
   decrementAmount(itemId: number): void {
     let item = this.findItem(itemId);
-    if (item.count > 1) {
-      item.count--;
+    if (item.amount > 1) {
+      item.amount--;
     }
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
     this.parseCartItems();
   }
 
-  findItem(itemId: number): { item: Item, count: number } {
+  findItem(itemId: number): { item: Item, amount: number } {
     let filter = this.cartItems.filter(e => {
       return e.item.itemId == itemId;
     });
     return filter[0];
   }
 
-  onDelete(item: { item: Item, count: number }): void {
+  onDelete(item: { item: Item, amount: number }): void {
     this.dialog.open(DeleteDialog, {
       data: {
         item: item,
@@ -91,11 +95,44 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   calculateTotal(): void {
     this.total = 0;
     for (let item of this.cartItems) {
-      this.total += item.item.price * item.count;
+      this.total += item.item.price * item.amount;
     }
   }
 
-  onConfirm(): void {
+  changeTime(time: number): void {
+    this.selectedTime = time;
+    console.log(`changeTime() ${this.selectedTime}`);
+
+  }
+
+  changeDeliveryMethod(method: number): void {
+    this.selectedDeliveryMethod = method;
+    console.log(`changeDeliveryMethod() ${this.selectedDeliveryMethod}`);
+
+  }
+
+  onConfirm(currentUser: User): void {
+    if (this.seller) {
+      let newOrder: Order = {
+        id: -1,
+        sellerId: this.seller.id,
+        buyerId: currentUser.id,
+        bakeryId: this.seller.associatedBakery,
+        sellerName: this.seller.name,
+        buyerName: currentUser.name,
+        bakeryName: '',
+        deliveryMethod: this.selectedDeliveryMethod != 0,
+        deliveryTime: this.selectedTime,
+        deliveryDate: JSON.stringify(this.selectedDate.toJSON()).split('T')[0].substring(1),
+        handled: false,
+        paid: false,
+        delivered: false,
+        fake: false,
+        content: this.cartItems
+      };
+      console.log(`onConfirm() order: ${JSON.stringify(newOrder)}`);
+      this.store.dispatch(new fromState.InsertOrder(newOrder));
+    }
   }
 
   disableDate(args: any) {
