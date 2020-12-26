@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {User} from '../../../models/user.model';
+import {Bakery} from '../../../models/bakery.model';
+import {Store} from '@ngrx/store';
+import * as fromState from 'src/admin/state';
+import * as fromRoot from 'src/app/state';
 
 @Component({
   selector: 'app-sellers-and-buyers',
@@ -9,31 +13,30 @@ import {Router} from '@angular/router';
 })
 export class SellersAndBuyersComponent implements OnInit {
   title = 'Välkommen';
-  location: Location;
-  router: Router;
 
-  constructor(location: Location, router: Router) {
-    this.location = location;
-    this.router = router;
+  buyers$ = new Observable<User[]>();
+  sellers$ = new Observable<User[]>();
+  bakeries$ = new Observable<Bakery[]>();
 
-  }
+  constructor(private store: Store<fromState.AdminState>) {}
 
   public buyerRowClicked(): void {
-    // needs to get userId from row
-    this.router.navigate(['/manage-buyer']);
+    this.store.dispatch(new fromRoot.Go({path: ['manage-buyer']}));
   }
 
   public sellerRowClicked(): void {
-    // needs to get userId from row
-    this.router.navigate(['/manage-seller']);
+    this.store.dispatch(new fromRoot.Go({path: ['manage-seller']}));
   }
 
 
   public navigateBack(): void {
-    this.location.back();
+    this.store.dispatch(new fromRoot.Back());
   }
 
   ngOnInit(): void {
+    this.bakeries$ = this.store.select(fromState.getBakeries);
+    this.buyers$ = this.store.select(fromState.getBuyers);
+    this.sellers$ = this.store.select(fromState.getSellers);
   }
 
 }
