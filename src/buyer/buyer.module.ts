@@ -6,7 +6,7 @@ import { BuyerRoutingModule } from './buyer-routing.module';
 
 import * as components from './components';
 
-import { materialModules } from './../material-modules';
+import { materialModules } from '../material-modules';
 
 // Google maps
 import {AgmCoreModule} from '@agm/core';
@@ -23,6 +23,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../app/token.interceptor';
 import {effects, reducers} from '../buyer/state';
 import {CalendarModule} from '@syncfusion/ej2-angular-calendars';
+import {DeleteDialog} from "./components/shopping-cart/shopping-cart.component";
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import {CalendarModule} from '@syncfusion/ej2-angular-calendars';
     components.OrderNoLoginComponent,
     components.SellerDetailsComponent,
     components.ShoppingCartComponent,
+    DeleteDialog
   ],
     imports: [CommonModule,
         BuyerRoutingModule,
