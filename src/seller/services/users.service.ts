@@ -51,4 +51,10 @@ export class UsersService {
       `${urls.usersUrls.Post.associateSellerUrl}?buyerId=${buyerId}&sellerId=${sellerId}`, {});
   }
 
+  deleteUser(userId: number): Observable<any> {
+    return this.http.post<any>(
+      `${urls.usersUrls.Post.deleteUserByIdUrl}${userId}`,
+      {}
+    )
+  }
 }

@@ -16,7 +16,7 @@ export namespace Post {
   export const confirmAccountUrl = `${baseUrl}/confirm`;
 
   export const updateUserUrl = `${baseUrl}/update-user`;
-  export const deleteUserByIdUrl = `${baseUrl}/delete-user`;
+  export const deleteUserByIdUrl = `${baseUrl}/delete-user?userId=`;
   export const addSellerDateUrl = `${baseUrl}/add-date`;
   export const removeSellerDateUrl = `${baseUrl}/remove-date`;
   export const updateSellerDatesUrl = `${baseUrl}/update-dates`;

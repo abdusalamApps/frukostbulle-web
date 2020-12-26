@@ -46,7 +46,7 @@ export const getSelectedSeller = createSelector(
   getSellersEntities,
   fromRoot.getRouterState,
   (entities, router): User => {
-    return router.state && entities[router.state.params.userId];
+    return router.state && entities[router.state.params.sellerId];
   }
 );
 export const getBakeriesLoaded = createSelector(

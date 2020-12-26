@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from '../../../models/user.model';
-import {Bakery} from '../../../models/bakery.model';
 import {Store} from '@ngrx/store';
 import * as fromState from 'src/admin/state';
 import * as fromRoot from 'src/app/state';

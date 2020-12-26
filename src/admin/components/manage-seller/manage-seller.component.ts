@@ -1,40 +1,88 @@
-import {Component, OnInit} from '@angular/core';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-import {Router} from '@angular/router';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import * as fromRoot from '../../../app/state';
+import {Store} from '@ngrx/store';
+import * as fromState from '../../state';
+import {AddBakeryDialog} from '../create-bakery/create-bakery.component';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Observable, Subscription} from 'rxjs';
+import {User} from '../../../models/user.model';
+import {UsersService} from '../../../seller/services/users.service';
 
 @Component({
   selector: 'app-manage-seller',
   templateUrl: './manage-seller.component.html',
   styleUrls: ['./manage-seller.component.scss']
 })
-export class ManageSellerComponent implements OnInit {
+export class ManageSellerComponent implements OnInit, OnDestroy {
   title = 'Hantera säljare';
-  router: Router;
-  location: Location;
-  hide = true;
-  enteredPassword = '';
-  enteredPassword2 = '';
 
-  constructor(location: Location, router: Router) {
-    this.location = location;
-    this.router = router;
+  seller$ = new Observable<User>();
+
+  deleteSub = new Subscription();
+
+  constructor(private store: Store<fromState.AdminState>,
+              private dialog: MatDialog,
+              private userService: UsersService) {
+
   }
 
   ngOnInit(): void {
+    this.seller$= this.store.select(fromState.getSelectedSeller);
   }
 
-  changePassword(): void {
-
+  delete(sellerId: number): void {
+    this.dialog.open(DeleteDialog, {
+      data: {
+        component: this,
+        sellerId: sellerId
+      }
+    });
   }
 
-  confirmDelete(name: string): void {
-    if (confirm('är du säker att du vill ta bort profilen för ' + name + '?')) {
-      console.log('Implement delete functionality here');
-    }
+  public confirmDelete(sellerId: number): void {
+    this.userService.deleteUser(sellerId).subscribe(
+      res => {
+        console.log(`user with id ${sellerId} deleted`);
+        this.store.dispatch(new fromRoot.Go({path:['/admin/sellers-and-buyers'], extras: {replaceUrl: true}}));
+      },
+      error => console.log(`error ${error} deleting user with id ${sellerId}`)
+    )
   }
 
   public navigateBack(): void {
-    this.location.back();
+    this.store.dispatch(new fromRoot.Back());
   }
 
+  ngOnDestroy(): void {
+    this.deleteSub.unsubscribe();
+  }
+}
+
+@Component({
+  selector: 'app-manage-seller',
+  template: `<h2 mat-dialog-title>Är du säker?</h2>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onYesClick()">Ja</button>
+    <button mat-button (click)="onNoClick()">Nej</button>
+  </div>`,
+  styleUrls: ['./manage-seller.component.scss']
+})
+
+export class DeleteDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DeleteDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: {
+      component: ManageSellerComponent,
+      sellerId: number
+    }) {
+  }
+
+  onNoClick() {
+    this.dialogRef.close();
+  }
+
+  onYesClick() {
+    this.data.component.confirmDelete(this.data.sellerId);
+    this.dialogRef.close();
+  }
 }
