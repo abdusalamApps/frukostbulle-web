@@ -47,7 +47,18 @@ export class CurrentUserEffect {
       switchMap((action: userActions.BuyerLoadCurrentUserSuccess) => {
         localStorage.setItem('currentUserId', action.payload.id.toString(10));
         localStorage.setItem('currentUserEmail', action.payload.email);
-        return of(new userActions.BuyerLoadCurrentUserSeller(action.payload.id));
+        return of(new userActions.BuyerLoadCurrentUserSeller(action.payload.associatedSeller));
+      })
+    )
+  );
+
+  loadAssociatedSeller$ = createEffect(() =>
+    this.actions$.pipe(ofType(userActions.BUYER_LOAD_CURRENT_USER_SELLER),
+      switchMap((action: userActions.BuyerLoadCurrentUserSeller) => {
+        return this.userService.getUserById(action.payload).pipe(
+          map((seller: User) => new userActions.BuyerLoadCurrentUserSellerSuccess(seller)),
+          catchError((error: any) => of(new userActions.BuyerLoadCurrentUserSellerFail(error)))
+        );
       })
     )
   );

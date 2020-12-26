@@ -1,19 +1,20 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {ShoppingCartItem} from '../../../models/shoppingCartItem';
-import {Observable} from 'rxjs';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {Order} from '../../../models/order.model';
 import * as fromState from '../../state';
 import {Store} from '@ngrx/store';
 import {Item} from "../../../models/item.model";
 import * as fromRoot from "../../../app/state";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {tap} from "rxjs/operators";
+import {User} from "../../../models/user.model";
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   title = 'Varukorg';
   orders$ = new Observable<Order[]>();
@@ -27,16 +28,27 @@ export class ShoppingCartComponent implements OnInit {
   sellerDates: Date[] = [];
   public dateValue: Date = new Date();
 
+  userObservable$ = new Observable<User | null>();
+
   constructor(private store: Store<fromState.BuyerState>,
               private dialog: MatDialog) {
-
   }
 
   ngOnInit(): void {
+    this.userObservable$ = this.store.select(fromState.getCurrentAssociatedSeller).pipe(
+      tap(user => {
+        if (user) {
+          this.sellerDates = user.availableDates;
+        }
+      })
+    );
     this.parseCartItems();
   }
 
-  parseCartItems(): void {
+  ngOnDestroy(): void {
+  }
+
+  public parseCartItems(): void {
     if (JSON.parse(<string>localStorage.getItem('cart')) !== null) {
       this.cartItems = JSON.parse(<string>localStorage.getItem('cart'));
     }
@@ -74,11 +86,6 @@ export class ShoppingCartComponent implements OnInit {
       }
     })
     this.parseCartItems();
-  }
-
-  public setCartItems(cartItems: { item: Item, count: number }[]): void {
-    this.cartItems = cartItems;
-    this.calculateTotal();
   }
 
   calculateTotal(): void {
@@ -138,7 +145,7 @@ export class DeleteDialog {
   onYesClick() {
     this.data.cartItems = this.data.cartItems.filter(e => e !== this.data.item);
     localStorage.setItem('cart', JSON.stringify(this.data.cartItems));
-    this.data.component.setCartItems(this.data.cartItems);
+    this.data.component.parseCartItems();
     this.dialogRef.close();
   }
 

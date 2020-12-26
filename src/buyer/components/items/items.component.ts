@@ -29,7 +29,8 @@ export class ItemsComponent implements OnInit {
     if (!state) {
       state = '';
     }
-    const sellerId = JSON.parse(state).buyer.currentUser.currentUser.associatedSeller;
+    let sellerId = -1;
+    sellerId = JSON.parse(state)?.buyer?.currentUser?.currentUser?.associatedSeller;
     if (sellerId > -1) {
       this.store.dispatch(new fromState.LoadItems(sellerId));
     }
