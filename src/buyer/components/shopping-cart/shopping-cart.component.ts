@@ -33,16 +33,20 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.parseCartItems();
+  }
 
+  parseCartItems(): void {
     if (JSON.parse(<string>localStorage.getItem('cart')) !== null) {
       this.cartItems = JSON.parse(<string>localStorage.getItem('cart'));
     }
-
+    this.calculateTotal();
   }
 
   incrementAmount(itemId: number): void {
     this.findItem(itemId).count++;
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    this.parseCartItems();
   }
 
   decrementAmount(itemId: number): void {
@@ -51,6 +55,7 @@ export class ShoppingCartComponent implements OnInit {
       item.count--;
     }
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    this.parseCartItems();
   }
 
   findItem(itemId: number): { item: Item, count: number } {
@@ -68,10 +73,19 @@ export class ShoppingCartComponent implements OnInit {
         component: this
       }
     })
+    this.parseCartItems();
   }
 
   public setCartItems(cartItems: { item: Item, count: number }[]): void {
     this.cartItems = cartItems;
+    this.calculateTotal();
+  }
+
+  calculateTotal(): void {
+    this.total = 0;
+    for (let item of this.cartItems) {
+      this.total += item.item.price * item.count;
+    }
   }
 
   onConfirm(): void {
