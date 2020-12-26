@@ -20,7 +20,7 @@ export class ItemsComponent implements OnInit {
   loaded$: Observable<boolean> = new Observable<boolean>();
   associatedSellerId$ = new Observable<number | undefined>();
 
-  cartItems: { item: Item, count: number }[] = [];
+  cartItems: { item: Item, amount: number }[] = [];
 
   constructor(private store: Store<fromState.BuyerState>,
               private rootStore: Store<fromRoot.State>,
@@ -51,12 +51,12 @@ export class ItemsComponent implements OnInit {
   addToCart(item: Item): void {
     let filter = this.cartItems.filter(e => {
       if (e.item.itemId == item.itemId) {
-        e.count++;
+        e.amount++;
       }
       return e.item.itemId == item.itemId;
     });
     if (filter.length <= 0) {
-      this.cartItems.push({item: item, count: 1});
+      this.cartItems.push({item: item, amount: 1});
     }
     console.log(this.cartItems);
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
@@ -68,7 +68,7 @@ export class ItemsComponent implements OnInit {
   getItemsCount(): number {
     let count = 0;
     for(let item of this.cartItems) {
-      count += item.count;
+      count += item.amount;
     }
     return count;
   }

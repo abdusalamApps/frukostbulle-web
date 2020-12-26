@@ -29,15 +29,19 @@ export class OrdersService {
     return this.http.post<any>(`${urls.ordersUrls.Post.updateOrderUrl}`, order);
   }
 
-  markOrderDelivered(orderId: number) {
-    return this.http.post<any>(`${urls.ordersUrls.Post.markOrderDeliveredUrl}${orderId}`, {})
+  markOrderDelivered(orderId: number): Observable<any> {
+    return this.http.post<any>(`${urls.ordersUrls.Post.markOrderDeliveredUrl}${orderId}`, {});
   }
 
-  markOrderPaid(orderId: number) {
-    return this.http.post<any>(`${urls.ordersUrls.Post.markOrderPaidUrl}${orderId}`, {})
+  markOrderPaid(orderId: number): Observable<any> {
+    return this.http.post<any>(`${urls.ordersUrls.Post.markOrderPaidUrl}${orderId}`, {});
   }
 
-  markOrderFake(orderId: number) {
-    return this.http.post<any>(`${urls.ordersUrls.Post.markOrderFakeUrl}${orderId}`, {})
+  markOrderFake(orderId: number): Observable<any> {
+    return this.http.post<any>(`${urls.ordersUrls.Post.markOrderFakeUrl}${orderId}`, {});
+  }
+
+  insertOrder(order: Order): Observable<any> {
+    return this.http.post(`${urls.ordersUrls.Post.insertOrderUrl}`, order);
   }
 }

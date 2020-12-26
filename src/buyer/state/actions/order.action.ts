@@ -9,6 +9,10 @@ export const LOAD_BUYER_ORDER_HISTORY = '[Order] Load Buyer Order History';
 export const LOAD_BUYER_ORDER_HISTORY_SUCCESS = '[Order] Load Buyer Order History Success';
 export const LOAD_BUYER_ORDER_HISTORY_FAIL = '[Order] Load Buyer Order History Fail';
 
+export const INSERT_ORDER = '[Order] Insert Order';
+export const INSERT_ORDER_SUCCESS = '[Order] Insert Order Success';
+export const INSERT_ORDER_FAIL = '[Order] Insert Order Fail';
+
 export class LoadBuyerOrders implements Action {
   readonly type = LOAD_BUYER_ORDERS;
 
@@ -51,7 +55,30 @@ export class LoadBuyerOrderHistoryFail implements Action {
   }
 }
 
+export class InsertOrder implements Action {
+  readonly type = INSERT_ORDER;
+
+  constructor(public payload: Order) {
+  }
+}
+
+export class InsertOrderSuccess implements Action {
+  readonly type = INSERT_ORDER_SUCCESS;
+
+  constructor(public payload: Order) {
+  }
+}
+
+export class InsertOrderFail implements Action {
+  readonly type = INSERT_ORDER_FAIL;
+
+  constructor(public payload: any) {
+    console.log(`insert order fail ${JSON.stringify(payload)}`);
+  }
+}
+
 
 export type OrderActions =
   | LoadBuyerOrders | LoadBuyerOrdersFail | LoadBuyerOrdersSuccess
-  | LoadBuyerOrderHistory | LoadBuyerOrderHistorySuccess | LoadBuyerOrderHistoryFail;
+  | LoadBuyerOrderHistory | LoadBuyerOrderHistorySuccess | LoadBuyerOrderHistoryFail
+  | InsertOrder | InsertOrderSuccess | InsertOrderFail;

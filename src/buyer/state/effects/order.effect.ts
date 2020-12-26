@@ -1,9 +1,11 @@
 import * as orderActions from '../actions/order.action';
+import * as rootActions from 'src/app/state/actions';
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {OrdersService} from '../../../seller/services/orders.service';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
+import {create} from "domain";
 
 @Injectable()
 export class OrderEffect {
@@ -35,4 +37,24 @@ export class OrderEffect {
     )
   );
 
+  insertOrder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(orderActions.INSERT_ORDER),
+      switchMap((action: orderActions.InsertOrder) => {
+        return this.orderService.insertOrder(action.payload).pipe(
+          map(() => new orderActions.InsertOrderSuccess(action.payload)),
+          catchError((error: any) => of(new orderActions.InsertOrderFail(error)))
+        )
+      })
+    )
+  )
+
+  insertOrderSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(orderActions.INSERT_ORDER_SUCCESS),
+      switchMap((action: orderActions.InsertOrderSuccess) => {
+        return of(new rootActions.Go({path: ['buyer/confirmation-login']}))
+      })
+    )
+  )
 }

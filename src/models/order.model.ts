@@ -8,8 +8,8 @@ export interface Order {
   sellerName: string;
   buyerName: string;
   bakeryName: string;
-  deliveryMethod: number;
-  deliveryTime: string;
+  deliveryMethod: boolean;
+  deliveryTime: number;
   deliveryDate: string;
   handled: boolean;
   paid: boolean;
