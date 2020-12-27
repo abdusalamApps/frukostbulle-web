@@ -30,14 +30,15 @@ export const getBakeryOrders = createSelector(
   }
 );
 
-export const getOrderTotal = createSelector(
-  getOrderEntities,
+  export const getOrderTotal = createSelector(
+    getOrderEntities,
   (entities: { [p: number]: Order }, props: any) => {
     let total = 0;
-    for (const contentItem of
+
+  /*  for (const contentItem of
       entities[props.orderId].content[Symbol.iterator]()) {
       total += contentItem.item.price * contentItem.amount;
-    }
+    }*/
     return total;
   }
 );

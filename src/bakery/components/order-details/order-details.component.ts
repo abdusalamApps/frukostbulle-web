@@ -4,8 +4,6 @@ import * as fromState from '../../state';
 import {Store} from '@ngrx/store';
 import {Observable, Subscription} from 'rxjs';
 import {Order} from '../../../models/order.model';
-import {User} from '../../../models/user.model';
-import * as fromSeller from 'src/seller/state';
 
 @Component({
   selector: 'app-order-details',
@@ -33,24 +31,19 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
     fake: false,
     content: []
   };
-  seller$ = new Observable<User | null>();
 
   sub$ = new Subscription();
   constructor(private rootStore: Store<fromRoot.State>,
-              private state: Store<fromState.BakeryState>,
-              private store: Store<fromState.BakeryState>) {
+              private state: Store<fromState.BakeryState>) {
   }
 
   ngOnDestroy(): void {
-        throw new Error('Method not implemented.');
-    }
+    this.sub$.unsubscribe();
+  }
+
   ngOnInit(): void {
     this.order$ = this.state.select(fromState.getSelectedOrder);
-    // this.order= this.state.dispatch(new fromState.getOrderById())
-    if (this.order) {
-      this.store.dispatch(new fromSeller.LoadUserById(this.order.sellerId));
-      this.seller$ = this.store.select(fromSeller.getUserById);
-    }
+
   }
 
 
@@ -63,7 +56,10 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
   }
 
   getOrderTotal(orderId: number): Observable<number> {
-    return this.store.select(fromState.getOrderTotal, {orderId});
+    for (let item of this.order.content){
+
+    }
+    return this.state.select(fromState.getOrderTotal, {orderId});
   }
 
 }

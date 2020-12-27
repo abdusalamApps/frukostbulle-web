@@ -16,7 +16,7 @@ const routes: Routes = [
     path: '',
     component: Components.RootComponent,
     children: [
-      {path: 'order-details/:sellerId', component: OrderDetailsComponent, canActivate: [fromGuards.AuthGuard],},
+      {path: 'order-details/:orderId', component: OrderDetailsComponent, canActivate: [fromGuards.AuthGuard],},
       {path: 'order-history', component: OrderHistoryComponent, canActivate: [fromGuards.AuthGuard],},
       {path: 'orders', component: OrdersComponent, canActivate: [fromGuards.AuthGuard],}
     ]},
