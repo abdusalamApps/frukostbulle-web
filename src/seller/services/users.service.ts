@@ -3,7 +3,6 @@ import * as urls from '../../urls';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../../models/user.model';
-import {Area} from '../../models/area.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,9 @@ export class UsersService {
   getUserByEmail(email: string): Observable<User> {
     const jsonString = JSON.stringify(email);
     const e = jsonString.substring(12, jsonString.search(',') - 1);
+    console.log('email in the user.service: ' + email)
     return this.http.get<User>(urls.usersUrls.Get.getUserByEmailUrl + email);
+
   }
 
   getUserById(id: number): Observable<User> {

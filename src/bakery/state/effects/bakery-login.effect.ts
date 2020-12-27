@@ -14,6 +14,7 @@ import {LogoutDialog} from '../../../seller/components/logout-dialog/logout-dial
 import {BakeryLoginState} from '../reducers/bakery-login.reducer';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {PermissionLevel} from "../../../models/user.model";
+import * as userActions from '../actions/currentUser.action';
 
 @Injectable()
 export class LoginEffects {
@@ -38,9 +39,9 @@ export class LoginEffects {
    loginSuccess$ = createEffect(() =>
      this.actions$.pipe(
        ofType(loginActions.LOGIN_BAKERY_SUCCESS),
-       switchMap((actions: loginActions.LoginBakerySuccess) => [
-         // new orderActions.LoadBakeryOrders(actions.payload.email),
-         new fromRoot.Go({path: ['bakery/orders']})
+       switchMap((action: loginActions.LoginBakerySuccess) => [
+         new userActions.LoadCurrentUser(action.payload.email),
+         new fromRoot.Go({path: ['bakery/orders']}),
        ]),
      )
    );

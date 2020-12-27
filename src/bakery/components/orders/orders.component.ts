@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Order} from '../../../models/order.model';
 import {Store} from '@ngrx/store';
 import * as fromState from '../../../bakery/state';
+import {LoginInfo} from '../../../models/loginInfo.model';
 
 @Component({
   selector: 'app-orders',
@@ -12,6 +13,7 @@ import * as fromState from '../../../bakery/state';
 })
 export class OrdersComponent implements OnInit {
   title = 'Beställningar';
+
   orders$ = new Observable<Order[]>();
 
   constructor(private store: Store<fromState.BakeryState>) {
@@ -20,7 +22,9 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = localStorage.getItem('currentUserId');
+    console.log(userId);
     if (userId) {
+      console.log('hej hej abdo el jini');
       this.store.dispatch(new fromState.LoadBakeryOrders(
         parseInt(userId, 10)
       ));
