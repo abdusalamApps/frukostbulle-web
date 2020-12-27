@@ -8,7 +8,15 @@
 
 <div class="container" *ngIf="seller$ | async">
 
-  <mat-card>
+  <mat-card *ngIf="cartItems.length == 0">
+    <mat-card-header>
+      <mat-card-title>
+        Din varukorg är tom
+      </mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card *ngIf="cartItems.length > 0">
     <mat-list>
       <mat-list-item *ngFor="let item of cartItems">
         <img mat-list-avatar src="src/assets/no-image.png" alt="photo"/>
