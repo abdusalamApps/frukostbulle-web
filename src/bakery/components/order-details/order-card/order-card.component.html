@@ -1,0 +1,37 @@
+<mat-card style="margin-top: 16px">
+  <mat-card-header>
+    <mat-card-title>
+      <h1>{{order.sellerName}}</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-list>
+
+    <h3 matSubheader>Frallor</h3>
+    <mat-list-item *ngFor="let entry of order.content">
+      <img mat-list-avatar src="assets/img/no-image.png">
+      <h3 matLine> {{entry.item.itemName}} </h3>
+      <p matLine>{{entry.item.price}}:-/st</p>
+      <p matLine> {{entry.amount}}</p>
+      <h3> {{entry.item.price * entry.amount}}:- </h3>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+  </mat-list>
+
+  <mat-list>
+    <mat-list-item>
+      <h2>Total</h2>
+      <span class="toolbar-spacer"></span>
+      <h2>{{getOrderTotal(order.id)}}:-</h2>
+    </mat-list-item>
+  </mat-list>
+
+  <mat-list>
+    <h3 matSubheader>Beställningsnummer</h3>
+    <mat-list-item>
+      <h2>{{order?.id}}</h2>
+    </mat-list-item>
+  </mat-list>
+
+</mat-card>
+

@@ -14,10 +14,12 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../app/token.interceptor';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
+import { OrderCardComponent } from './components/order-details/order-card/order-card.component';
 
 @NgModule({
   declarations: [
     ...components,
+    OrderCardComponent,
   ],
   imports: [
     CommonModule,

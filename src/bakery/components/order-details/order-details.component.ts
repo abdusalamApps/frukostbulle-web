@@ -14,25 +14,8 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
   title = 'Beställningens detailer';
   order$ = new Observable<Order>();
 
-  @Input() order: Order = {
-    id: -1,
-    sellerId: -1,
-    buyerId: -1,
-    bakeryId: -1,
-    sellerName: '',
-    buyerName: '',
-    bakeryName: '',
-    deliveryMethod: false,
-    deliveryTime: 0,
-    deliveryDate: '',
-    handled: false,
-    paid: false,
-    delivered: false,
-    fake: false,
-    content: []
-  };
-
   sub$ = new Subscription();
+
   constructor(private rootStore: Store<fromRoot.State>,
               private state: Store<fromState.BakeryState>) {
   }
@@ -49,17 +32,6 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
 
   navigateBack(): void {
     this.rootStore.dispatch(new fromRoot.Back());
-  }
-  OnDestroy(): void{
-    this.sub$.unsubscribe();
-
-  }
-
-  getOrderTotal(orderId: number): Observable<number> {
-    for (let item of this.order.content){
-
-    }
-    return this.state.select(fromState.getOrderTotal, {orderId});
   }
 
 }

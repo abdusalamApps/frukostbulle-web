@@ -66,6 +66,7 @@ export class InsertOrderSuccess implements Action {
   readonly type = INSERT_ORDER_SUCCESS;
 
   constructor(public payload: Order) {
+    localStorage.removeItem('cart');
   }
 }
 
