@@ -26,10 +26,7 @@ export class ProfileEditorComponent implements OnInit {
   mobile = '';
 
   emailControl = new FormControl();
-  mobileControl = new FormControl(0, [
-    Validators.minLength(10),
-    Validators.maxLength(13)
-  ]);
+  mobileControl = new FormControl();
   nameControl = new FormControl();
 
   constructor(private snackBar: MatSnackBar,
@@ -43,6 +40,10 @@ export class ProfileEditorComponent implements OnInit {
           this.name = user.name;
           this.nameControl = new FormControl(user.name, [Validators.required]);
           this.mobile = user.mobilenbr;
+          this.mobileControl = new FormControl(user.mobilenbr, [
+            Validators.minLength(10),
+            Validators.maxLength(13)
+          ]);
           this.mobileControl = new FormControl(user.mobilenbr, [
             Validators.minLength(10),
             Validators.maxLength(13),
@@ -70,11 +71,6 @@ export class ProfileEditorComponent implements OnInit {
     } else {
 
       if (this.isMobileChanged() || this.isNameChanged()) {
-        /*
-                this.snackBar.open('Ändringarna sparades', 'ok', {
-                  duration: 2000
-                });
-        */
         this.userObservable$ = this.store.select(fromState.getCurrentUser).pipe(
           tap(user => {
             if (user) {

@@ -16,6 +16,7 @@ import {Store} from '@ngrx/store';
 import {LogoutDialog} from 'src/seller/components/logout-dialog/logout-dialog.component';
 import {BuyerLoginState} from '../reducers/login.reducer';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {PermissionLevel} from "../../../models/user.model";
 
 @Injectable()
 export class BuyerLoginEffect {
@@ -58,7 +59,8 @@ export class BuyerLoginEffect {
           this.dialog.open(LogoutDialog, {
             data: {
               name: '',
-              store: this.store
+              store: this.store,
+              permissionLevel: PermissionLevel.BUYER
             }
           });
         })

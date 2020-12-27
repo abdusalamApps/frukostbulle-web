@@ -38,22 +38,8 @@
         <h3 matLine>
           {{user ? user.address : ''}}
         </h3>
-        <mat-icon>Address</mat-icon>
-        <mat-divider></mat-divider>
-      </mat-list-item>
-
-      <mat-list-item mat-ripple role="listitem" routerLink="/buyer/profile-editor">
-        <h3 matLine>
-          {{user ? user.city : ''}}
-        </h3>
-        <mat-icon>City</mat-icon>
-        <mat-divider></mat-divider>
-      </mat-list-item>
-      <mat-list-item mat-ripple routerLink="/buyer/profile-editor" role="listitem">
-        <h3 matLine>
-          {{user ? user.county : ''}}
-        </h3>
-        <mat-icon>Län</mat-icon>
+        <p matLine>{{user.city}}</p>
+        <mat-icon>address</mat-icon>
         <mat-divider></mat-divider>
       </mat-list-item>
 

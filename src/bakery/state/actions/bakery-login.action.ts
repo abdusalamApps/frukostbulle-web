@@ -16,7 +16,9 @@ export class LoginBakery implements Action {
 
 export class LoginBakerySuccess implements Action {
   readonly type = LOGIN_BAKERY_SUCCESS;
-  constructor(public payload: AuthResponse) {}
+  constructor(public payload: AuthResponse) {
+    localStorage.setItem('token', payload.Authorization);
+  }
 }
 
 export class LoginBakeryFail implements Action {

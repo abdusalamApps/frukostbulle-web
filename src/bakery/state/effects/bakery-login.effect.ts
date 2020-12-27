@@ -13,6 +13,7 @@ import {Store} from '@ngrx/store';
 import {LogoutDialog} from '../../../seller/components/logout-dialog/logout-dialog.component';
 import {BakeryLoginState} from '../reducers/bakery-login.reducer';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {PermissionLevel} from "../../../models/user.model";
 
 @Injectable()
 export class LoginEffects {
@@ -51,7 +52,8 @@ export class LoginEffects {
           this.dialog.open(LogoutDialog, {
             data: {
               name: '',
-              store: this.store
+              store: this.store,
+              permissionLevel: PermissionLevel.BAKERY
             }
           });
         })

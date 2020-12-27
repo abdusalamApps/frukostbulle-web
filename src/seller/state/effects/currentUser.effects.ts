@@ -10,6 +10,7 @@ import {BakeryService} from '../../services/bakery.service';
 import {Bakery} from '../../../models/bakery.model';
 import {AreaService} from '../../services/area.service';
 import {Area} from '../../../models/area.model';
+import {LoadCurrentUser} from "../actions/currentUser.action";
 
 @Injectable()
 export class CurrentUserEffects {
@@ -22,8 +23,8 @@ export class CurrentUserEffects {
   loadCurrentUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.LOAD_CURRENT_USER),
-      switchMap((email: string) => {
-        return this.userService.getUserByEmail(email).pipe(
+      switchMap((action: LoadCurrentUser) => {
+        return this.userService.getUserByEmail(action.payload).pipe(
           map((user: User) => new userActions.LoadCurrentUserSuccess(user)),
           catchError((error: any) => of(new userActions.LoadCurrentUserFail(error)))
         );
