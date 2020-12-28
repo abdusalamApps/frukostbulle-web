@@ -164,7 +164,8 @@ export class SignupComponent implements OnInit, OnDestroy {
             this.zoom = 12;
             this.address = results[0].formatted_address;
             console.log(`address: ${this.address}`);
-            this.city = this.address.split(' ')[4].replace(',', '');
+            const arr = this.address.split(",")[1].split(" ");
+            this.city = arr[arr.length - 1];
             console.log(`address city: ${this.city}`);
             this.setCounty();
             console.log(`address county: ${this.county}`);
