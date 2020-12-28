@@ -5,24 +5,20 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import {Location} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {MapsAPILoader} from '@agm/core';
 import {LocationService} from 'src/app/services/location.service';
 import {MatAccordion} from '@angular/material/expansion';
-import {tap} from 'rxjs/operators';
 import {Observable, Subscription} from 'rxjs';
 import {Bakery} from '../../../models/bakery.model';
 import {CitiesService} from '../../services/cities.service';
 import {Store} from '@ngrx/store';
 import {PermissionLevel, User} from '../../../models/user.model';
-import {BakeryService} from '../../services/bakery.service';
 import {UsersService} from '../../services/users.service';
 import * as fromState from '../../state';
 import * as fromRoot from 'src/app/state';
-import {AreaService} from '../../services/area.service';
 
 declare const google: any;
 
