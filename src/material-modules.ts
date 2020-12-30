@@ -16,6 +16,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatBadgeModule } from '@angular/material/badge';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 
 export const materialModules: any[] = [
@@ -37,5 +39,6 @@ export const materialModules: any[] = [
   MatRippleModule,
   MatBadgeModule,
   MatProgressSpinnerModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSlideToggleModule,
 ];
