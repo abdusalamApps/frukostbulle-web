@@ -26,7 +26,7 @@
             {{contents[0]?.item?.itemName}}...
           </p>
 
-          <p matLine *ngIf="(getOrderTotal(order.sellerId) | async) as total">
+          <p matLine *ngIf="(getOrderTotal(order.id) | async) as total">
             {{total}}:-
           </p>
 

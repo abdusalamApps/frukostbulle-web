@@ -32,8 +32,8 @@ export class OrdersComponent implements OnInit {
     this.orders$ = this.store.select(fromState.getBakeryOrders);
   }
 
-  getOrderTotal(sellerId: number): Observable<number> {
-    return this.store.select(fromState.getOrderTotal, {sellerId});
+  getOrderTotal(orderId: number): Observable<number> {
+    return this.store.select(fromState.getOrderTotal, {orderId});
   }
 
 }
