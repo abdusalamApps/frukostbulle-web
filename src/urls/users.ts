@@ -6,6 +6,7 @@ export namespace Get {
   export const getAllUersUrl = `${baseUrl}/user-users`;
   export const getSellerDatesUrl = `${baseUrl}/user-dates`;
   export const getUsersByPermissionLevelUrl = `${baseUrl}/get-users-level?level=`;
+  export const resetPasswordUrl = `${baseUrl}/reset-pass`;
 }
 
 export namespace Post {
@@ -23,4 +24,6 @@ export namespace Post {
   export const updatePasswordUrl = `${baseUrl}/update-password`;
   export const checkPasswordUrl = `${baseUrl}/check-password`;
   export const associateSellerUrl = `${baseUrl}/associate-seller`;
+
+  export const sendResetPassEmailUrl =`${baseUrl}/send-reset-pass-email`
 }

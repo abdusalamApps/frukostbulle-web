@@ -26,7 +26,7 @@ export class BakeryService {
   }
 
   associateBakery(userId: number, bakeryId: number): Observable<any> {
-    return this.http.post<any>(`${urls.bakeryUrls.Post.associateBakeryUrl}?userId=${userId}&bakeryId=${bakeryId}`, {});
+    return this.http.post<any>(`${urls.bakeryUrls.Post.associateBakeryUrl}`, {firstId: userId, secondId: bakeryId});
   }
 
   getBakeryById(bakeryId: number): Observable<Bakery> {
