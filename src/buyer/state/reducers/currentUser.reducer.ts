@@ -20,6 +20,7 @@ export function reducer(
   action: userActions.BuyerCurrentUserAction
 ): CurrentUserState {
   switch (action.type) {
+    case userActions.SET_REMINDER:
     case userActions.BUYER_UPDATE_USER:
     case userActions.BUYER_LOAD_CURRENT_USER: {
       return {
@@ -28,6 +29,7 @@ export function reducer(
         currentUserLoading: true
       };
     }
+    case userActions.SET_REMINDER_SUCCESS:
     case userActions.BUYER_UPDATE_USER_SUCCESS: {
       return {
         ...state,
@@ -42,6 +44,7 @@ export function reducer(
         currentUser: action.payload
       };
     }
+
     case userActions.BUYER_LOAD_CURRENT_USER_FAIL: {
       return {
         ...state,

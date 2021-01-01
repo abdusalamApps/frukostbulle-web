@@ -17,6 +17,11 @@ export const BUYER_UPDATE_SELLER = '[Buyer Current User] Buyer Update Seller';
 export const BUYER_UPDATE_SELLER_SUCCESS = '[Buyer Current User] Buyer Update Seller Success';
 export const BUYER_UPDATE_SELLER_FAIL = '[Buyer Current User] Buyer Update Seller Fail';
 
+export const SET_REMINDER = '[Reminder] Set Reminder';
+export const SET_REMINDER_SUCCESS = '[Reminder] Set Reminder Success';
+export const SET_REMINDER_FAIL = '[Reminder] Set Reminder Fail';
+
+
 export class BuyerLoadCurrentUser implements Action {
   readonly type = BUYER_LOAD_CURRENT_USER;
 
@@ -104,8 +109,30 @@ export class BuyerUpdateSellerFail implements Action {
   }
 }
 
+export class SetReminder implements Action {
+  readonly type = SET_REMINDER;
+
+  constructor(public payload: User) {
+  }
+}
+
+export class SetReminderSuccess implements Action {
+  readonly type = SET_REMINDER_SUCCESS;
+
+  constructor(public payload: User) {
+  }
+}
+
+export class SetReminderFail implements Action {
+  readonly type = SET_REMINDER_FAIL;
+
+  constructor(public payload: any) {
+  }
+}
+
 export type BuyerCurrentUserAction =
   | BuyerLoadCurrentUser | BuyerLoadCurrentUserSuccess | BuyerLoadCurrentUserFail
   | BuyerUpdateUser | BuyerUpdateUserSuccess | BuyerUpdateUserFail
   | BuyerUpdateSeller | BuyerUpdateSellerSuccess | BuyerUpdateSellerFail
-  | BuyerLoadCurrentUserSeller | BuyerLoadCurrentUserSellerSuccess | BuyerLoadCurrentUserSellerFail ;
+  | BuyerLoadCurrentUserSeller | BuyerLoadCurrentUserSellerSuccess | BuyerLoadCurrentUserSellerFail
+  | SetReminder | SetReminderSuccess | SetReminderFail;

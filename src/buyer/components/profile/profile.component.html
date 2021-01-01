@@ -36,7 +36,7 @@
 
       <mat-list-item>
         <h3 matLine>Slå på påminnelse för att beställa!</h3>
-        <mat-slide-toggle ></mat-slide-toggle>
+        <mat-slide-toggle [checked]="reminder" (change)="reminderChange($event)"></mat-slide-toggle>
         <mat-divider></mat-divider>
       </mat-list-item>
 

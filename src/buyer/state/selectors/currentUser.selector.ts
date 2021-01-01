@@ -1,8 +1,6 @@
 import {createSelector} from '@ngrx/store';
 import * as fromFeature from '../reducers';
 import * as fromCurrentUser from '../reducers/currentUser.reducer';
-import * as fromRoot from '../../state';
-import {User} from '../../../models/user.model';
 
 export const getCurrentUserState = createSelector(
   fromFeature.getBuyerState,
@@ -85,3 +83,4 @@ export const getAssociatedSellerId = createSelector(
   getCurrentUserState,
   fromCurrentUser.getAssociatedSellerId
 )
+

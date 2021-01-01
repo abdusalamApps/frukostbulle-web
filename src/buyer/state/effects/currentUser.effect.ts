@@ -1,21 +1,14 @@
 import {Injectable} from '@angular/core';
 
-import {Effect, Actions, createEffect, ofType} from '@ngrx/effects';
-import * as loginAction from '../actions/buyerLoginAction';
-import {map, switchMap, catchError, mergeMap} from 'rxjs/operators';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {map, switchMap, catchError} from 'rxjs/operators';
 import {of} from 'rxjs';
 
-import * as fromRoot from '../../../app/state';
 import * as userActions from '../actions/buyerCurrentUserAction';
 import * as itemActions from '../actions/items.action';
-import * as loginActions from '../actions/buyerLoginAction';
-
-import {MatDialog} from '@angular/material/dialog';
 
 import {Store} from '@ngrx/store';
-import {LogoutDialog} from 'src/seller/components/logout-dialog/logout-dialog.component';
 import {BuyerLoginState} from '../reducers/login.reducer';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {UsersService} from 'src/seller/services/users.service';
 import {User} from '../../../models/user.model';
 
@@ -96,4 +89,15 @@ export class CurrentUserEffect {
     )
   );
 
+  setReminder$ = createEffect(()=>
+  this.actions$.pipe(
+    ofType(userActions.SET_REMINDER),
+    switchMap((action: userActions.SetReminder)=> {
+      return this.userService.updateUser(action.payload).pipe(
+        map( ()=> new userActions.SetReminderSuccess(action.payload)),
+        catchError((error: any)=> of( new userActions.SetReminderFail(error)) )
+      );
+    })
+  )
+  );
 }
