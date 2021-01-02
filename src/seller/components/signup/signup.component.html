@@ -72,6 +72,12 @@
                     [(values)]="selectedDates" [isMultiSelection]='multiSelect'>
       </ejs-calendar>
 
+      <mat-form-field>
+        <mat-label>Min deadline för beställning</mat-label>
+        <input matInput required [formControl]="orderBufferControl"/>
+      </mat-form-field>
+
+
       <div>
         <button mat-button matStepperPrevious>Tillbaka</button>
         <button mat-button matStepperNext>Nästa</button>
@@ -79,11 +85,6 @@
 
     </mat-step>
 
-    <mat-form-field>
-      <mat-label>Min deadline för beställning</mat-label>
-      <input matInput required [formControl]="orderBufferControl"/>
-    </mat-form-field>
-    <br/>
 
     <mat-step label="Bageri">
       <mat-accordion class="example-headers-align" multi>
@@ -97,6 +98,8 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
           <p>
+
+
             <mat-form-field appearance="legacy" style="width: 90%; padding: 0 5%;">
               <mat-label>Bagerinamn</mat-label>
               <input matInput placeholder="" #bakeryName>
