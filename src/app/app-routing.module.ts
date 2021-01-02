@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './components/landing/landing.component';
+import {ResetPasswordComponent} from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
   },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+  },
+
   {
     path: 'buyer',
     loadChildren: () =>
