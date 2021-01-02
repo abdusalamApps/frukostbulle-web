@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {User} from '../../../../models/user.model';
 import {Bakery} from '../../../../models/bakery.model';
 
@@ -24,6 +24,7 @@ export class ProfileCardComponent {
     associatedSeller: -1,
     active: false,
     availableDates: [new Date('')],
+    orderBuffer: -1,
     lasOrderDay: '',
     profilePictureUrl: ''
   };
