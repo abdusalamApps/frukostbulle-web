@@ -13,6 +13,7 @@ export interface User {
   associatedSeller: number;
   active: boolean;
   availableDates: Date[];
+  orderBuffer: number;
   lasOrderDay: string;
   profilePictureUrl: string;
 }
