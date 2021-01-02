@@ -85,7 +85,6 @@ export class ProfileEditorComponent implements OnInit {
             }
           })
         );
-
       } else {
         this.snackBar.open('Inga ändringar', 'ok', {
           duration: 2000

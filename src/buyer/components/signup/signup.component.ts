@@ -152,6 +152,8 @@ export class SignupComponent implements OnInit, OnDestroy {
       res => console.log(`accountConfirm res: ${res}`),
       err => console.log(`accountConfirm error: ${JSON.stringify(err)}`)
     );
+    this.store.dispatch(new fromRoot.Back());
+
   }
 
 }

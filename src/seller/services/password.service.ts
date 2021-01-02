@@ -20,4 +20,7 @@ export class PasswordService {
     return this.http.post<any>(`${urls.usersUrls.Post.updatePasswordUrl}`, useridPassword);
   }
 
+  requestNewPassword(userEmail: string):Observable<any>{
+    return this.http.post<any>(`${urls.usersUrls.Post.sendResetPassEmailUrl}${userEmail}`, {});
+  }
 }
