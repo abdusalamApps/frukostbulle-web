@@ -43,16 +43,8 @@
         </div>
 
         <button
-          style="
-            text-align: end;
-            color: rgba(41, 41, 41, 0.733);
-            font-size: x-small;
-          "
-          mat-button
-          routerLink="password-reset"
-        >
-          ÅTERSTÄLL LÖSENORDET
-        </button>
+          style="text-align: end; color: rgba(41, 41, 41, 0.733); font-size: x-small; "
+          mat-button [routerLink]="['/reset-password']">ÅTERSTÄLL LÖSENORDET</button>
       </div>
     </mat-card-content>
   </mat-card>

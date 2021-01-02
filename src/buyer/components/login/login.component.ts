@@ -24,11 +24,7 @@ export class LoginComponent implements OnInit {
   email = '';
   password = '';
 
-  constructor(
-    public location: Location,
-    private store: Store<fromStore.BuyerState>
-  ) {
-  }
+  constructor(private store: Store<fromStore.BuyerState>) {}
 
   ngOnInit(): void {
     this.pending$ = this.store.select(fromStore.getBuyerLoginPending);
