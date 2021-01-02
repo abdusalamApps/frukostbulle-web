@@ -24,9 +24,10 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from './token.interceptor';
 
 import {CalendarModule} from '@syncfusion/ej2-angular-calendars';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent],
+  declarations: [AppComponent, LandingComponent, ResetPasswordComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

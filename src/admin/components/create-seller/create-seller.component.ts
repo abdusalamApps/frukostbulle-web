@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-import {Router} from '@angular/router';
+import * as fromRoot from '../../../app/state';
+import {Store} from '@ngrx/store';
+import * as fromState from '../../../bakery/state';
 
 @Component({
   selector: 'app-create-seller',
@@ -9,8 +10,7 @@ import {Router} from '@angular/router';
 })
 export class CreateSellerComponent implements OnInit {
   title = 'Skapa säljarprofil';
-  router: Router;
-  location: Location;
+
   hide = true;
 
   email = '';
@@ -20,20 +20,18 @@ export class CreateSellerComponent implements OnInit {
   enteredPassword2 = '';
 
 
-  constructor(location: Location, router: Router) {
-    this.location = location;
-    this.router = router;
+  constructor(private store: Store<fromState.BakeryState>) {
+
   }
 
   ngOnInit(): void {
   }
 
   public navigateBack(): void {
-    this.location.back();
+    this.store.dispatch(new fromRoot.Back());
   }
 
   public createProfile(): void {
-    // code
-    this.router.navigate(['/sellers'], {replaceUrl: true});
+    this.store.dispatch(new fromRoot.Go({path: ['/sellers'], extras: {replaceUrl: true}}));
   }
 }
