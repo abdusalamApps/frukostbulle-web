@@ -79,6 +79,12 @@
 
     </mat-step>
 
+    <mat-form-field>
+      <mat-label>Min deadline för beställning</mat-label>
+      <input matInput required [formControl]="orderBufferControl"/>
+    </mat-form-field>
+    <br/>
+
     <mat-step label="Bageri">
       <mat-accordion class="example-headers-align" multi>
         <mat-expansion-panel hideToggle

@@ -73,12 +73,15 @@ export class SignupComponent implements OnInit, OnDestroy {
     Validators.maxLength(10),
   ]);
 
+  orderBufferControl = new FormControl(0, [
+    Validators.minLength(1),
+    Validators.maxLength(1)
+  ]);
 
   cities: string[] = [];
   counties: string[] = [];
 
   bakeries$ = new Observable<Bakery[]>();
-  sellerId$ = new Observable();
 
   selectedBakery: Bakery | null = null;
   selectedDates: Date[] = [];
@@ -91,6 +94,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   signupSuccess = false;
   code = -1;
   newUserId = -1;
+  orderBuffer= -1;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -186,6 +190,8 @@ export class SignupComponent implements OnInit, OnDestroy {
       || this.mobileControl.hasError('maxlength')
       || this.nameControl.hasError('required')
       || this.nameControl.hasError('minlength')
+      || this.orderBufferControl.hasError('minLength')
+      || this.orderBufferControl.hasError('maxLength')
       || this.selectedBakery === null) {
       this.snackBar.open('Rätta felen.', 'Ok', {
         duration: 2000,
@@ -207,6 +213,7 @@ export class SignupComponent implements OnInit, OnDestroy {
           associatedSeller: -1,
           active: false,
           availableDates: this.selectedDates,
+          orderBuffer: this.orderBufferControl.value,
           lasOrderDay: '',
           profilePictureUrl: ''
         };

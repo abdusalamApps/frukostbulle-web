@@ -112,6 +112,7 @@ export class ManageBakeryComponent implements OnInit, OnDestroy {
       associatedSeller: -1,
       active: false,
       availableDates: [],
+      orderBuffer: -1,
       lasOrderDay: '',
       profilePictureUrl: ''
     };

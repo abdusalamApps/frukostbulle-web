@@ -18,13 +18,12 @@ export class ProfileEditorComponent implements OnInit {
 
   title = 'Redigera din profil';
 
-  newName = '';
-  newEmail = '';
   newMobile = '';
 
   name: string = '';
   email: string = '';
   mobile = '';
+  deadLine= -1;
 
   // emailControl = new FormControl();
   mobileControl = new FormControl(0, [
@@ -33,6 +32,10 @@ export class ProfileEditorComponent implements OnInit {
   ]);
   nameControl = new FormControl();
 
+  orderBufferControl = new FormControl(0, [
+    Validators.minLength(1),
+    Validators.maxLength(1)
+  ]);
   constructor(private snackBar: MatSnackBar,
               private store: Store<fromState.SellerState>) {
   }
@@ -43,9 +46,11 @@ export class ProfileEditorComponent implements OnInit {
         if (user) {
           this.name = user.name;
           this.nameControl = new FormControl(user.name, [Validators.required]);
-          /*this.email = user.email;
-          this.emailControl = new FormControl(user.email,
-            [Validators.email, Validators.required]);*/
+          this.deadLine = user.orderBuffer;
+          this.orderBufferControl = new FormControl(user.orderBuffer, [
+            Validators.minLength(1),
+            Validators.maxLength(1),
+          ]);
           this.mobile = user.mobilenbr;
           this.mobileControl = new FormControl(user.mobilenbr, [
             Validators.minLength(10),
@@ -59,12 +64,13 @@ export class ProfileEditorComponent implements OnInit {
 
   onSave(): void {
     if (
-      // this.emailControl.hasError('email')
-      //  this.emailControl.hasError('required')
       this.mobileControl.hasError('maxLength')
       || this.mobileControl.hasError('minLength')
       || this.mobileControl.hasError('required')
       || this.nameControl.hasError('required')
+      || this.orderBufferControl.hasError('minLength')
+      || this.orderBufferControl.hasError('maxLength')
+
     ) {
       this.snackBar.open('Rätta felen!', 'Ok', {
         duration: 2000
@@ -75,12 +81,8 @@ export class ProfileEditorComponent implements OnInit {
       });
     } else {
 
-      if ( this.isNameChanged() || this.isMobileChanged()) {
-        /*
-                this.snackBar.open('Ändringarna sparades', 'ok', {
-                  duration: 2000
-                });
-        */
+      if ( this.isNameChanged() || this.isMobileChanged() || this.isOrderBufferChanged() ) {
+
         this.userObservable$ = this.store.select(fromState.getCurrentUser).pipe(
           tap(user => {
             if (user) {
@@ -88,6 +90,7 @@ export class ProfileEditorComponent implements OnInit {
                 {
                   ...user,
                   name: this.nameControl.value,
+                  orderBuffer: this.orderBufferControl.value,
                   mobilenbr: this.mobileControl.value
                 };
               this.store.dispatch(new fromState.UpdateUser(newUser));
@@ -108,11 +111,9 @@ export class ProfileEditorComponent implements OnInit {
     this.store.dispatch(new fromRoot.Back());
   }
 
-/*
-  private isEmailChanged() {
-    return this.email !== this.emailControl.value;
+  private isOrderBufferChanged() {
+    return this.deadLine !== this.orderBufferControl.value;
   }
-*/
 
   private isNameChanged(): boolean {
     return this.name !== this.nameControl.value;
