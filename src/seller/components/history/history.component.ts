@@ -20,7 +20,7 @@ export class HistoryComponent implements OnInit {
   single : any[] | undefined;
   multi : any[] | undefined;
 
-  view: any[] = [700, 400];
+  view: any[] = [300, 400];
 
   // options
   showXAxis = true;
@@ -28,9 +28,9 @@ export class HistoryComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Tid';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Inkomst';
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
