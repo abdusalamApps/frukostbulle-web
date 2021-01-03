@@ -29,6 +29,7 @@
     "@ngrx/store": "^10.1.0",
     "@ngrx/store-devtools": "^10.1.0",
     "@ngx-pwa/local-storage": "^11.0.1",
+    "@swimlane/ngx-charts": "^16.0.0",
     "@syncfusion/ej2-angular-base": "^18.3.52",
     "@syncfusion/ej2-angular-calendars": "^18.3.53",
     "@syncfusion/ej2-angular-grids": "^18.3.50",
