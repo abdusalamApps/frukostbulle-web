@@ -2,6 +2,8 @@ import {StoreModule} from '@ngrx/store';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SellerRoutingModule} from './seller-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 // Components
 import {components} from './components';
@@ -11,8 +13,6 @@ import {materialModules} from '../material-modules';
 
 // Google maps
 import {AgmCoreModule} from '@agm/core';
-
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import * as fromGuards from './guards';
 
@@ -65,6 +65,8 @@ import { MarkOrderDialog } from './components/mark-order/mark-order-dialog.compo
     EffectsModule.forFeature(effects),
     ...commonModules,
     CalendarModule,
+    FormsModule,
+    NgxChartsModule,
   ],
   providers: [
     ...fromGuards.guards,
