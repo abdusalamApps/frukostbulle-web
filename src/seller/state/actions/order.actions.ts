@@ -1,5 +1,6 @@
 import {Action} from '@ngrx/store';
 import {Order} from '../../../models/order.model';
+import {OrderHistory} from '../../../models/order-history.model';
 
 export const LOAD_SELLER_ORDERS = '[Order] Load Seller Orders';
 export const LOAD_SELLER_ORDERS_SUCCESS = '[Order] Load Seller Orders Success';
@@ -40,7 +41,7 @@ export class LoadOrderHistory implements Action {
 export class LoadOrderHistorySuccess implements Action {
   readonly type = LOAD_ORDER_HISTORY_SUCCESS;
 
-  constructor(public payload: Order[]) {
+  constructor(public payload: OrderHistory[]) {
   }
 }
 

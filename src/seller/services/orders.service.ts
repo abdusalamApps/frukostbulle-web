@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import * as urls from '../../urls';
 import {Observable} from 'rxjs';
 import {Order} from '../../models/order.model';
+import {OrderHistory} from '../../models/order-history.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,8 @@ export class OrdersService {
     return this.http.get<Order[]>(`${urls.ordersUrls.Get.getOrdersByBakeryIdUrl}${bakeryId}`);
   }
 
-  getOrderHistoryBySellerId(sellerId: number): Observable<Order[]> {
-    return this.http.get<Order[]>(`${urls.ordersUrls.Get.gerOrderHistoryBySellerIdUrl}${sellerId}`);
+  getOrderHistoryBySellerId(sellerId: number): Observable<OrderHistory[]> {
+    return this.http.get<OrderHistory[]>(`${urls.ordersUrls.Get.gerOrderHistoryBySellerIdUrl}${sellerId}`);
   }
 
   getOrderHistoryByBakeryId(bakeryId: number): Observable<Order[]> {

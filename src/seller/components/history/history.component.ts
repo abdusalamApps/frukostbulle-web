@@ -7,6 +7,7 @@ import {Store} from '@ngrx/store';
 import * as fromRoot from 'src/app/state';
 import {single} from './data';
 import {OrdersService} from '../../services/orders.service';
+import {OrderHistory} from '../../../models/order-history.model';
 
 @Component({
   selector: 'app-history',
@@ -16,7 +17,7 @@ import {OrdersService} from '../../services/orders.service';
 export class HistoryComponent implements OnInit, OnDestroy {
   title = 'Historik';
 
-  orders$ = new Observable<Order[]>();
+  orders$ = new Observable<OrderHistory[]>();
 
   statisticsSubscription$ = new Subscription();
 

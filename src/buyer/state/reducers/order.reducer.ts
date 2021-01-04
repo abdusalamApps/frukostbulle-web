@@ -1,11 +1,12 @@
 import * as orderActions from '../actions/order.action';
 import {Order} from '../../../models/order.model';
+import {OrderHistory} from '../../../models/order-history.model';
 
 export interface OrderState {
   entities: { [orderId: number]: Order };
   ordersLoaded: boolean;
   ordersLoading: boolean;
-  orderHistory: { [orderId: number]: Order };
+  orderHistory: { [orderId: number]: OrderHistory };
 }
 
 export const initialState: OrderState = {
@@ -52,10 +53,10 @@ export function reducer(
     }
     case orderActions.LOAD_BUYER_ORDER_HISTORY_SUCCESS: {
       const entities = action.payload.reduce(
-        (newEns: { [id: number]: Order }, order) => {
+        (newEns: { [id: number]: OrderHistory }, order) => {
           return {
             ...newEns,
-            [order.id]: order,
+            [order.orderId]: order,
           };
         }, {}
       );

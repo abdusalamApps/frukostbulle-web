@@ -5,6 +5,7 @@ import * as fromState from '../../state';
 import {map, take} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import * as fromRoot from 'src/app/state';
+import {OrderHistory} from '../../../models/order-history.model';
 
 @Component({
   selector: 'app-order-history',
@@ -15,7 +16,7 @@ export class OrderHistoryComponent implements OnInit {
 
   title = 'Historik';
 
-  orders$ = new Observable<Order[]>();
+  orders$ = new Observable<OrderHistory[]>();
 
   constructor(private store: Store<fromState.BuyerState>,
   ) {

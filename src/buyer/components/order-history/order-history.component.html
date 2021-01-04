@@ -12,13 +12,15 @@
       <div *ngIf="(orders$ | async) as orders">
         <mat-list-item mat-ripple
                        *ngFor="let order of orders; index as k;"
-                       [routerLink]="['/buyer/orders', order.id]">
+                       [routerLink]="['/buyer/orders', order.orderId]">
           <img mat-list-avatar src="assets/img/no-image.png">
           <h3 matLine> {{order.buyerName}} </h3>
+<!--
           <div matLine *ngFor="let item of order.content; index as i">
             <p *ngIf="i === 0">{{item.item.itemName}}...</p>
           </div>
-          <h3 matLine> {{getOrderTotal(order.id)}}:- </h3>
+-->
+          <h3 matLine> {{order.price}}:- </h3>
           <mat-divider *ngIf="(k + 1) < orders.length"></mat-divider>
         </mat-list-item>
 
