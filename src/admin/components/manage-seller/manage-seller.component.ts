@@ -56,6 +56,11 @@ export class ManageSellerComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.deleteSub.unsubscribe();
   }
+
+  activeSeller(id: number) {
+    console.log("activeSeller");
+
+  }
 }
 
 @Component({
@@ -85,4 +90,6 @@ export class DeleteDialog {
     this.data.component.confirmDelete(this.data.sellerId);
     this.dialogRef.close();
   }
+
+
 }

@@ -30,4 +30,5 @@ export class SellersAndBuyersComponent implements OnInit {
     this.sellers$ = this.store.select(fromState.getSellers);
   }
 
+
 }
