@@ -10,6 +10,8 @@ export namespace Get {
   export const gerOrderHistoryBySellerIdUrl = `${baseUrl}/get-order-history-by-sellerId?sellerId=`;
   export const gerOrderHistoryByBuyerIdUrl = `${baseUrl}/get-order-history-by-buyerId?buyerId=`;
   export const gerOrderHistoryByBakeryIdUrl = `${baseUrl}/get-order-history-by-bakeryId?bakeryId=`;
+
+  export const gerSellerStatisticsUrl = `${baseUrl}/get-seller-statistics`;
 }
 
 export namespace Post {

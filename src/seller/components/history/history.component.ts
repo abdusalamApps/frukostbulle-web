@@ -1,24 +1,29 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {Order} from '../../../models/order.model';
 import * as fromState from '../../state';
 import {map, take} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import * as fromRoot from 'src/app/state';
-import { single } from './data';
+import {single} from './data';
+import {OrdersService} from '../../services/orders.service';
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss']
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent implements OnInit, OnDestroy {
   title = 'Historik';
 
   orders$ = new Observable<Order[]>();
 
-  single : any[] | undefined;
-  multi : any[] | undefined;
+  statisticsSubscription$ = new Subscription();
+
+  statistics: { name: number, value: number }[] = [];
+
+  single: any[] | undefined;
+  multi: any[] | undefined;
 
   view: any[] = [300, 400];
 
@@ -28,7 +33,7 @@ export class HistoryComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Tid';
+  xAxisLabel = 'Veckonummer';
   showYAxisLabel = true;
   yAxisLabel = 'Inkomst';
 
@@ -36,12 +41,27 @@ export class HistoryComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  constructor(private store: Store<fromState.SellerState>) {
-    Object.assign(this, { single })
+  constructor(private store: Store<fromState.SellerState>,
+              private orderService: OrdersService) {
+    Object.assign(this, {single});
   }
 
   ngOnInit(): void {
     this.orders$ = this.store.select(fromState.getOrderHistory);
+    const sellerId = localStorage.getItem('currentUserId');
+    if (sellerId) {
+      this.statisticsSubscription$ = this.orderService.getStatistics(parseInt(sellerId, 10)).subscribe(
+        (res) => {
+          console.log(JSON.stringify(res));
+          this.statistics = res;
+        },
+        err => console.log(`statistics error ${err}`)
+      );
+    }
+  }
+
+  ngOnDestroy() {
+    this.statisticsSubscription$.unsubscribe();
   }
 
   onSelect(event: any) {

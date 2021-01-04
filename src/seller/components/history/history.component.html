@@ -4,14 +4,12 @@
 
 <div class="container">
   <mat-card>
-    <h3 matSubheader>KOMMER SNART</h3>
-<!--
     <mat-list>
       <h3 matSubheader>Statistik</h3>
       <ngx-charts-bar-vertical
         [view]="view"
         [scheme]="colorScheme"
-        [results]="single"
+        [results]="statistics"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -22,12 +20,12 @@
         (select)="onSelect($event)">
       </ngx-charts-bar-vertical>
     </mat-list>
--->
   </mat-card>
-<!--
   <mat-card style="margin-top: 16px;">
     <mat-list>
       <h3 matSubheader>Historik</h3>
+      <h3 matSubheader>KOMMER SNART</h3>
+<!--
       <div *ngIf="(orders$ | async) as orders">
         <mat-list-item mat-ripple
                        *ngFor="let order of orders; index as k;"
@@ -40,9 +38,9 @@
         </mat-list-item>
 
       </div>
+-->
     </mat-list>
 
   </mat-card>
--->
 
 </div>

@@ -48,4 +48,9 @@ export class OrdersService {
   insertOrder(order: Order): Observable<any> {
     return this.http.post(`${urls.ordersUrls.Post.insertOrderUrl}`, order);
   }
+
+  getStatistics(sellerId: number): Observable<{ name: number, value: number }[]> {
+    return this.http.get<{ name: number, value: number }[]>
+    (`${urls.ordersUrls.Get.gerSellerStatisticsUrl}?sellerId=${sellerId}`);
+  }
 }
