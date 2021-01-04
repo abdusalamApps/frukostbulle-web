@@ -45,8 +45,8 @@ export class UsersService {
     return this.http.post(`${urls.usersUrls.Post.sendCreateEmailUrl}${email}`, {});
   }
 
-  confirmAccount(userId: number, code: number): Observable<any> {
-    return this.http.get(`${urls.usersUrls.Post.confirmAccountUrl}?userId=${userId}&code=${code}`);
+  confirmAccount(email: string, code: number): Observable<any> {
+    return this.http.get(`${urls.usersUrls.Post.confirmAccountUrl}?userEmail=${email}&code=${code}`);
   }
 
   associateSeller(buyerId: number, sellerId: number): Observable<any> {

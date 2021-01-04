@@ -11,7 +11,7 @@
       <div class="form-container">
         <mat-form-field appearance="fill">
           <mat-label>E-post</mat-label>
-          <input matInput [(ngModel)]="email" />
+          <input matInput [(ngModel)]="email"/>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -44,7 +44,8 @@
 
         <button
           style="text-align: end; color: rgba(41, 41, 41, 0.733); font-size: x-small; "
-          mat-button [routerLink]="['/reset-password']">ÅTERSTÄLL LÖSENORDET</button>
+          mat-button [routerLink]="['/reset-password']">ÅTERSTÄLL LÖSENORDET
+        </button>
       </div>
     </mat-card-content>
   </mat-card>
@@ -72,4 +73,28 @@
       </mat-list>
     </mat-card-content>
   </mat-card>
+
+  <mat-accordion>
+    <mat-expansion-panel style="margin-top: 16px;">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Aktivera din profil
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="legacy">
+        <mat-label>E-post</mat-label>
+        <input matInput required [(ngModel)]="email">
+      </mat-form-field>
+      <mat-form-field appearance="legacy">
+        <mat-label>Bekräftelsekod</mat-label>
+        <input matInput required [(ngModel)]="code">
+      </mat-form-field>
+
+      <br>
+      <button mat-raised-button color="accent" (click)="onConfirm()">Bekräfta</button>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
 </div>

@@ -365,7 +365,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onConfirm(): void {
-    this.confirmSubscription$ = this.userService.confirmAccount(this.newUserId, this.code).subscribe(
+    this.confirmSubscription$ = this.userService.confirmAccount(this.email, this.code).subscribe(
       res => console.log(`accountConfirm res: ${res}`),
       err => console.log(`accountConfirm error: ${JSON.stringify(err)}`)
     );

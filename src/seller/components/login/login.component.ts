@@ -1,10 +1,11 @@
 import {LoginInfo} from '../../../models/loginInfo.model';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import * as fromStore from '../../state';
 import * as fromRoot from 'src/app/state';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {UsersService} from '../../services/users.service';
 
 // @ts-ignore
 @Component({
@@ -12,7 +13,7 @@ import {Observable} from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   title = 'Inloggning';
   public loginInfo: LoginInfo = {email: '', password: ''};
   hide = true;
@@ -24,14 +25,23 @@ export class LoginComponent implements OnInit {
   email = '';
   password = '';
 
+  code = -1;
+
+  confirmSubscription$ = new Subscription();
+
   constructor(
     public location: Location,
-    private store: Store<fromStore.SellerState>
+    private store: Store<fromStore.SellerState>,
+    private userService: UsersService
   ) {
   }
 
   ngOnInit(): void {
     this.pending$ = this.store.select(fromStore.getPending);
+  }
+
+  ngOnDestroy(): void {
+    this.confirmSubscription$.unsubscribe();
   }
 
   signIn() {
@@ -45,4 +55,14 @@ export class LoginComponent implements OnInit {
   navigateHome() {
     this.store.dispatch(new fromRoot.Go({path: [''], extras: {replaceUrl: true}}));
   }
+
+  onConfirm(): void {
+    this.confirmSubscription$ = this.userService.confirmAccount(this.email, this.code).subscribe(
+      res => console.log(`accountConfirm res: ${res}`),
+      err => console.log(`accountConfirm error: ${JSON.stringify(err)}`)
+    );
+    // this.store.dispatch(new fromRoot.Back());
+
+  }
+
 }

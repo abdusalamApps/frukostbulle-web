@@ -221,6 +221,12 @@
 
   <mat-card *ngIf="signupSuccess">
     <h3>Du kommer få inom kort ett mejl med en kod.</h3>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>E-post</mat-label>
+      <input matInput required [(ngModel)]="email">
+    </mat-form-field>
+
     <mat-form-field appearance="legacy">
       <mat-label>Bekräftelsekod</mat-label>
       <input matInput required [(ngModel)]="code">
