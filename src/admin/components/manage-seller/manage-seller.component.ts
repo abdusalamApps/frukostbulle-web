@@ -2,10 +2,9 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import * as fromRoot from '../../../app/state';
 import {Store} from '@ngrx/store';
 import * as fromState from '../../state';
-import {AddBakeryDialog} from '../create-bakery/create-bakery.component';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Observable, Subscription} from 'rxjs';
-import {User} from '../../../models/user.model';
+import {PermissionLevel, User} from '../../../models/user.model';
 import {UsersService} from '../../../seller/services/users.service';
 
 @Component({
@@ -57,9 +56,34 @@ export class ManageSellerComponent implements OnInit, OnDestroy {
     this.deleteSub.unsubscribe();
   }
 
-  activeSeller(id: number) {
+  activeSeller(seller: User) {
     console.log("activeSeller");
-
+    const newSeller: User = {
+      id: seller.id,
+      name: seller.name,
+      county: seller.county,
+      city: seller.city,
+      address: seller.address,
+      mobilenbr: seller.mobilenbr,
+      email: seller.email,
+      password: '',
+      permissionLevel: PermissionLevel.SELLER,
+      reminder: seller.reminder,
+      associatedBakery: seller.associatedBakery,
+      associatedSeller: -1,
+      active: true,
+      availableDates: [],
+      orderBuffer: seller.orderBuffer,
+      lasOrderDay: '',
+      profilePictureUrl: ''
+    };
+    this.userService.updateUser(newSeller).subscribe(
+      res =>{
+        console.log(`user with id ${seller.id} updated`);
+        this.navigateBack();
+      },
+      error => console.log(`error ${error} updating user with id ${seller.id}`)
+    )
   }
 }
 

@@ -27,7 +27,7 @@
       <button mat-button color="warn" (click)="delete(seller.id)">
         Ta bort
       </button>
-      <button *ngIf="!seller.active" (click)="activeSeller(seller.id)" mat-raised-button color="accent">
+      <button *ngIf="!seller.active" (click)="activeSeller(seller)" mat-raised-button color="accent">
         Aktivera
       </button>
     </mat-card-actions>
