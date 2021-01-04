@@ -114,7 +114,7 @@ export class CreateBakeryComponent implements OnInit, OnDestroy {
       reminder: false,
       associatedBakery: -1,
       associatedSeller: -1,
-      active: false,
+      active: true,
       availableDates: [],
       orderBuffer: -1,
       lasOrderDay: '',
