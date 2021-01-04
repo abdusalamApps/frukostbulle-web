@@ -64,3 +64,11 @@ export const getOrderHistory = createSelector(
     });
   }
 );
+
+export const getStatistics = createSelector(
+  getOrderHistory, (orders) => {
+    let statistics: { name: string, value: number }[] = [];
+    let date = new Date(orders[0].deliveryDate);
+
+  }
+);

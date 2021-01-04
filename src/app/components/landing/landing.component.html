@@ -53,4 +53,26 @@
       </mat-list>
     </mat-card-content>
   </mat-card>
+
+  <mat-card style="margin-top: 2em">
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item
+          matRipple
+          class="landing-item"
+          [routerLink]="['/admin/login']"
+        >
+          <h3 matLine>ADMIN</h3>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+        <mat-list-item
+          matRipple
+          class="landing-item"
+          [routerLink]="['/bakery/login']"
+        >
+          <h3 matLine>BAGERI</h3>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </div>

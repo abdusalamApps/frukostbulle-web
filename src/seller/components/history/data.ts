@@ -1,15 +1,15 @@
 export var single = [
   {
     "name": "Germany",
-    "value": 8940000
+    "value": 89
   },
   {
     "name": "USA",
-    "value": 5000000
+    "value": 50
   },
   {
     "name": "France",
-    "value": 7200000
+    "value": 720
   }
 ];
 
@@ -19,11 +19,11 @@ export var multi = [
     "series": [
       {
         "name": "2010",
-        "value": 7300000
+        "value": 730
       },
       {
         "name": "2011",
-        "value": 8940000
+        "value": 894
       }
     ]
   },

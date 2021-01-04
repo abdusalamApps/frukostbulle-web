@@ -47,6 +47,7 @@ export class HistoryComponent implements OnInit {
   onSelect(event: any) {
     console.log(event);
   }
+
   getOrderTotal(orderId: number): number {
     let theTotal = 0;
     this.store.select(fromState.getOrderTotal, {orderId}).pipe(
