@@ -1,4 +1,9 @@
-@import "../../../styles.scss";
+@import "~@angular/material/theming";
+$frukostbulle-warn: mat-palette($mat-red);
+$frukostbulle-primary: mat-palette($mat-deep-purple);
+$frukostbulle-primary-dark: mat-palette($mat-deep-purple, 900);
+$frukostbulle-accent: mat-palette($mat-pink, A200, A100, A400);
+
 
 .nav-container {
   position: fixed;

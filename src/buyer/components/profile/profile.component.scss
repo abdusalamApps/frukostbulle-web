@@ -1,4 +1,9 @@
-@import "src/styles.scss";
+@import "~@angular/material/theming";
+$frukostbulle-primary: mat-palette($mat-deep-purple);
+$frukostbulle-primary-dark: mat-palette($mat-deep-purple, 900);
+$frukostbulle-accent: mat-palette($mat-pink, A200, A100, A400);
+// The warn palette is optional (defaults to red).
+$frukostbulle-warn: mat-palette($mat-red);
 
 .image-chooser {
   display: grid;

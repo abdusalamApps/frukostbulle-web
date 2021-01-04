@@ -1,4 +1,5 @@
-@import "src/styles.scss";
+@import "~@angular/material/theming";
+$frukostbulle-warn: mat-palette($mat-red);
 
 .image-chooser {
   display: grid;
