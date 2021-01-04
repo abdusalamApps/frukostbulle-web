@@ -18,6 +18,7 @@ export class ManageSellerComponent implements OnInit, OnDestroy {
   seller$ = new Observable<User>();
 
   deleteSub = new Subscription();
+  cEmailSubscription = new Subscription();
 
   constructor(private store: Store<fromState.AdminState>,
               private dialog: MatDialog,
@@ -54,6 +55,8 @@ export class ManageSellerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.deleteSub.unsubscribe();
+    this.cEmailSubscription.unsubscribe();
+
   }
 
   activeSeller(seller: User) {
@@ -80,7 +83,14 @@ export class ManageSellerComponent implements OnInit, OnDestroy {
     this.userService.updateUser(newSeller).subscribe(
       res =>{
         console.log(`user with id ${seller.id} updated`);
-        this.navigateBack();
+        this.cEmailSubscription = this.userService.adminConfirmAccount(newSeller.email).subscribe(
+          res => {
+            this.navigateBack();
+          },
+          err => {
+            console.log(`send confirmation email failed ${JSON.stringify(err)}`);
+          }
+        );
       },
       error => console.log(`error ${error} updating user with id ${seller.id}`)
     )

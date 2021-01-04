@@ -26,7 +26,7 @@ export namespace Post {
   export const associateSellerUrl = `${baseUrl}/associate-seller`;
   export const sendResetPassEmailUrl =`${baseUrl}/send-reset-pass-email?userEmail=`;
   export const resetPassUrl =`${baseUrl}/reset-pass`;
-  export const sendConfirmCreateAccount =`${baseUrl}/send-create-email`;
+  export const adminConfirmAccount =`${baseUrl}/send-create-email`;
 
 
 

@@ -49,6 +49,10 @@ export class UsersService {
     return this.http.get(`${urls.usersUrls.Post.confirmAccountUrl}?userEmail=${email}&code=${code}`);
   }
 
+  adminConfirmAccount(email: string): Observable<any> {
+    return this.http.get(`${urls.usersUrls.Post.adminConfirmAccount}${email}` , {});
+  }
+
   associateSeller(buyerId: number, sellerId: number): Observable<any> {
     return this.http.post<any>(
       `${urls.usersUrls.Post.associateSellerUrl}`, {firstId: buyerId, secondId: sellerId});
