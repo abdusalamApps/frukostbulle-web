@@ -25,4 +25,7 @@ export namespace Post {
   export const checkPasswordUrl = `${baseUrl}/check-password`;
   export const associateSellerUrl = `${baseUrl}/associate-seller`;
   export const sendResetPassEmailUrl =`${baseUrl}/send-reset-pass-email?userEmail=`;
+  export const resetPassUrl =`${baseUrl}/reset-pass`;
+
+
 }
