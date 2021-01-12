@@ -73,10 +73,7 @@ const routes: Routes = [
   {
     path: 'login', component: Components.LoginComponent
   },
-  {
-    path: 'signup-confirmation',
-    component: Components.SignupConfirmComponent
-  },
+
 ];
 
 // @ts-ignore

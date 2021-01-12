@@ -15,7 +15,6 @@ export {LoginComponent} from './login/login.component';
 export {WeekOrdersComponent} from './week-orders/week-orders.component';
 export {UpdatePasswordComponent} from './update-password/update-password.component';
 export {ProfileCardComponent} from './profile/profile-card/profile-card.component';
-export {SignupConfirmComponent} from './signup-confirm/signup-confirm.component';
 
 export const components: any[] = [
   ItemEditorComponent,
@@ -35,7 +34,7 @@ export const components: any[] = [
   WeekOrdersComponent,
   UpdatePasswordComponent,
   ProfileCardComponent,
-  SignupConfirmComponent
+
 ];
 
 import {ItemEditorComponent} from './item-editor/item-editor.component';
@@ -55,4 +54,3 @@ import {LoginComponent} from './login/login.component';
 import {WeekOrdersComponent} from './week-orders/week-orders.component';
 import {UpdatePasswordComponent} from './update-password/update-password.component';
 import {ProfileCardComponent} from './profile/profile-card/profile-card.component';
-import {SignupConfirmComponent} from './signup-confirm/signup-confirm.component';
