@@ -1,5 +1,5 @@
 import {Area} from '../../../models/area.model';
-import * as areaActions from '../actions/area.actions';
+import * as areaActions from '../actions/area.action';
 
 export interface AreaState {
   entities: { [userId: number]: Area }
@@ -15,7 +15,7 @@ export const initialState: AreaState = {
 
 export function reducer(
   state = initialState,
-  action: areaActions.AreaActions
+  action: areaActions.AreaAction
 ): AreaState {
   switch (action.type) {
     case areaActions.UPDATE_AREA_SUCCESS: {

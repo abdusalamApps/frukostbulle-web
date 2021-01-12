@@ -29,19 +29,31 @@ export class ChooseBakeryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // dispatching the action LoadBakeries to request the bakeries from the backend
     this.store.dispatch(new fromState.LoadBakeries());
+    // selecting the bakeries list from the state
+    // and assigning it to an observable variable
     this.bakeries$ = this.store.select(fromState.getAllBakeries);
+    // citiesService gets the list of all counties and cities
+    // in sweden from a json file src/se.json
     this.counties = this.citiesService.getCounties();
   }
 
   public navigateBack(): void {
+    // to navigate to the previous page the action Back()
+    // is dispatched from the app's global state
     this.store.dispatch(new fromRoot.Back());
   }
 
+  // when an list item is clicked the action AssociateBakery
+  // gets dispatched
   onListItemClick(bakeryId: number): void {
+    // getting the current user id (seller id) that is needed
+    // for AssociateBakery action asynchronously from the selector
     this.sellerId$ = this.store.select(fromState.getCurrentUserId).pipe(
       tap(sellerId => {
         if (sellerId) {
+          // dispatch the action only when we get the id
           this.store.dispatch(new fromState.AssociateBakery({
             bakeryId,
             sellerId
@@ -65,6 +77,5 @@ export class ChooseBakeryComponent implements OnInit {
   findBakeryByName(name: string): void {
     this.bakeries$ = this.store.select(fromState.getBakeriesByName, {name});
   }
-
 
 }

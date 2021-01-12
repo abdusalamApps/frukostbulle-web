@@ -28,7 +28,6 @@
       <div *ngIf="(orders$ | async) as orders">
         <mat-list-item mat-ripple
                        *ngFor="let order of orders; index as k;"
-
         >
           <img mat-list-avatar src="assets/img/no-image.png">
           <h3 matLine> {{order.buyerName}} </h3>

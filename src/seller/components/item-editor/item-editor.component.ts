@@ -87,6 +87,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
     }
   }
 
+  // dispatches UpdateItem action when update button is clicked
   onUpdate(): void {
     if (this.name === '' || this.price < 0) {
       this.snackBar.open('Rätta felen!', 'Ok', {duration: 1000});
@@ -94,6 +95,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
       const currentEmail = localStorage.getItem('currentUserEmail');
       const currentUserId = localStorage.getItem('currentUserId');
       if (currentUserId && currentEmail) {
+        // Dispatch UpdateItem only when currentEmail and currentUserId is available
         const imageUrl = this.imageSrc === 'assets/img/product-placeholder.png' ? '' : this.imageSrc;
         const newItem = new Item(this.itemId, parseInt(currentUserId, 10), currentEmail, this.price, this.name, imageUrl);
         this.store.dispatch(new fromState.UpdateItem(newItem));
@@ -106,6 +108,8 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
     this.rootStore.dispatch(new fromRoot.Back());
   }
 
+  // opens a dialog to confirm or to cancel deleting the item
+  // when delete button is clicked
   onDelete(): void {
     this.dialog.open(DeleteDialog, {
       width: '250px',
@@ -119,6 +123,7 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
 
 }
 
+// A dialog that opens to confirm or to cancel deleting the item
 @Component({
   // tslint:disable-next-line:components-selector
   selector: 'delete-dialog',

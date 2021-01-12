@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import * as bakeryActions from '../../state/actions/bakery.actions';
+import * as bakeryActions from '../../state/actions/bakery.action';
 
 import {Store} from '@ngrx/store';
 

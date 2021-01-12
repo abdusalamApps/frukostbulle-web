@@ -5,7 +5,9 @@
   <span>{{title}}</span>
 </mat-toolbar>
 <div class="container">
+<!--  display only when dateValues not null-->
   <mat-card *ngIf="dateValues$ | async">
+
     <ejs-calendar weekNumber='true'
                   [(values)]="newDates" [isMultiSelection]='multiSelect'>
     </ejs-calendar>

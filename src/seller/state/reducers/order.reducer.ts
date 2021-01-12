@@ -1,4 +1,4 @@
-import * as orderActions from '../actions/order.actions';
+import * as orderActions from '../actions/order.action';
 import {Order} from '../../../models/order.model';
 import {OrderHistory} from '../../../models/order-history.model';
 
@@ -18,7 +18,7 @@ export const initialState: OrderState = {
 
 export function reducer(
   state = initialState,
-  action: orderActions.OrderActions
+  action: orderActions.OrderAction
 ): OrderState {
   switch (action.type) {
     case orderActions.LOAD_SELLER_ORDERS: {

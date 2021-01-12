@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {animate, query, style, transition, trigger} from '@angular/animations';
 
+// experimental animation that is not used currently
 export const fader =
   trigger('routerAnimations', [
     transition('* <=> *', [
@@ -20,7 +21,8 @@ export const fader =
     ])
   ]);
 
-
+// This component has the bottom navigation bar and is shown
+// in all seller's component when the user is logged in
 @Component({
   selector: 'app-root',
   templateUrl: './root.component.html',

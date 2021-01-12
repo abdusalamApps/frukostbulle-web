@@ -1,5 +1,6 @@
 <div class="container">
 
+<!--  expandable card for the filter options-->
   <mat-accordion class="example-headers-align" multi>
     <mat-expansion-panel hideToggle
                          (opened)="panelOpenState = true"
@@ -57,9 +58,9 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-
-  <div ></div>
+<!--  a card wrapping the list -->
   <mat-card style="margin-top: 16px">
+<!--    displays a list of bakeries-->
     <mat-list *ngIf="(bakeries$ | async) as bakeries">
       <mat-list-item matRipple *ngFor="let bakery of bakeries; index as i"
       (click)="onListItemClick(bakery.id)">

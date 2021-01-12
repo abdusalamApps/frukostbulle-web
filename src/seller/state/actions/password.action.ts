@@ -9,6 +9,7 @@ export const UPDATE_PASSWORD = '[Password] Update Password';
 export const UPDATE_PASSWORD_SUCCESS = '[Password] Update Password Success';
 export const UPDATE_PASSWORD_FAIL = '[Password] Update Password Fail';
 
+// Action to check if a given password is correct for the logged in user
 export class CheckPassword implements Action {
   readonly type = CHECK_PASSWORD;
 
@@ -30,7 +31,7 @@ export class CheckPasswordFail implements Action {
   }
 }
 
-
+// Action to update the logged in user password
 export class UpdatePassword implements Action {
   readonly type = UPDATE_PASSWORD;
 

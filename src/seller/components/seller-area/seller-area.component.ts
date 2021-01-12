@@ -11,6 +11,8 @@ import {MapsAPILoader} from '@agm/core';
 
 declare const google: any;
 
+// a map that shows the logged in seller's area and enables
+// the seller to edit the area
 @Component({
   selector: 'app-seller-area',
   templateUrl: './seller-area.component.html',
@@ -85,6 +87,7 @@ export class SellerAreaComponent implements OnInit, OnDestroy {
 
   }
 
+  // decode latitude and longitude to an address
   getAddress(latitude: number, longitude: number) {
     this.geoCoder.geocode(
       { location: { lat: latitude, lng: longitude } },
@@ -105,6 +108,7 @@ export class SellerAreaComponent implements OnInit, OnDestroy {
     );
   }
 
+  // unsubscribe to prevent performance and memory leak
   ngOnDestroy(): void {
     this.locationService.currentLat$.subscribe().unsubscribe();
     this.locationService.currentLng$.subscribe().unsubscribe();
@@ -114,6 +118,7 @@ export class SellerAreaComponent implements OnInit, OnDestroy {
     this.store.dispatch(new fromRoot.Back());
   }
 
+  // called when edit button is clicked
   onEdit(): void {
     this.editing = !this.editing;
     if (this.editing) {
@@ -190,6 +195,7 @@ export class SellerAreaComponent implements OnInit, OnDestroy {
     );
   };
 
+  // called when delete button is clicked
   deleteSelectedShape(): void {
     if (this.selectedShape) {
       this.selectedShape.setMap(null);
@@ -215,6 +221,7 @@ export class SellerAreaComponent implements OnInit, OnDestroy {
     );
   }
 
+  // called when save button is clicked
   onSave(): void {
     const userId = localStorage.getItem('currentUserId');
     if (userId) {

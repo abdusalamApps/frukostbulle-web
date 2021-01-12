@@ -1,3 +1,8 @@
+/**
+ * this file contains actions that has to do withe managing
+ * the seller's associated bakery and loading bakeries
+ */
+
 import {Action} from '@ngrx/store';
 import {Bakery} from '../../../models/bakery.model';
 
@@ -99,7 +104,7 @@ export class AssociateBakeryFail implements Action {
 }
 
 
-export type BakeryActions =
+export type BakeryAction =
   | LoadBakeries | LoadBakeriesByCity | LoadBakeriesByCounty
   | LoadBakeriesSuccess | LoadBakeriesFail
   | AssociateBakery | AssociateBakerySuccess | AssociateBakeryFail

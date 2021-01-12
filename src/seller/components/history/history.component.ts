@@ -48,6 +48,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // getting the orders from the history from getOrderHistory selector
     this.orders$ = this.store.select(fromState.getOrderHistory);
     const sellerId = localStorage.getItem('currentUserId');
     if (sellerId) {
@@ -69,6 +70,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
     console.log(event);
   }
 
+  // calculating a total for an order
   getOrderTotal(orderId: number): number {
     let theTotal = 0;
     this.store.select(fromState.getOrderTotal, {orderId}).pipe(

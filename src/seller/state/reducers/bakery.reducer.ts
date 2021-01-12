@@ -1,4 +1,4 @@
-import * as bakeryActions from '../actions/bakery.actions';
+import * as bakeryActions from '../actions/bakery.action';
 import {Bakery} from '../../../models/bakery.model';
 
 export interface BakeryState {
@@ -17,7 +17,7 @@ export const initialState: BakeryState = {
 
 export function reducer(
   state = initialState,
-  action: bakeryActions.BakeryActions
+  action: bakeryActions.BakeryAction
 ): BakeryState {
   switch (action.type) {
     case bakeryActions.LOAD_BAKERIES_BY_CITY:

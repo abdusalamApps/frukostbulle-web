@@ -7,6 +7,7 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {AuthResponse} from '../../../models/authResponse.model';
 import * as fromRoot from 'src/app/state';
 
+// this components displays the seller's own items
 @Component({
   selector: 'app-my-items',
   templateUrl: './my-items.component.html',

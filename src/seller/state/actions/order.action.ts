@@ -53,6 +53,6 @@ export class LoadOrderHistoryFail implements Action {
 }
 
 
-export type OrderActions =
+export type OrderAction =
   | LoadSellerOrders | LoadSellerOrdersFail | LoadSellerOrdersSuccess
   | LoadOrderHistory | LoadOrderHistorySuccess | LoadOrderHistoryFail;

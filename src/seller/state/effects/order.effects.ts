@@ -1,4 +1,4 @@
-import * as orderActions from '../actions/order.actions';
+import * as orderActions from '../actions/order.action';
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {OrdersService} from '../../services/orders.service';

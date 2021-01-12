@@ -1,5 +1,5 @@
 import * as fromRoot from '../../../app/state';
-import * as areaActions from '../actions/area.actions';
+import * as areaActions from '../actions/area.action';
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
 import {AreaService} from '../../services/area.service';

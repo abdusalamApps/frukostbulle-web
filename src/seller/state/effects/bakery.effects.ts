@@ -1,4 +1,4 @@
-import * as bakeryActions from '../actions/bakery.actions';
+import * as bakeryActions from '../actions/bakery.action';
 import * as fromRoot from 'src/app/state';
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';

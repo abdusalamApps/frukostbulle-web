@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Order} from '../../../models/order.model';
 import * as fromState from '../../state';
 
+// displays the orders that are relevant for the current week
 @Component({
   selector: 'app-week-orders',
   templateUrl: './week-orders.component.html',

@@ -11,7 +11,7 @@ import {take, tap} from 'rxjs/operators';
   templateUrl: './choose-days.component.html',
   styleUrls: ['./choose-days.component.scss']
 })
-export class ChooseDaysComponent implements OnInit, OnDestroy {
+export class ChooseDaysComponent implements OnInit {
 
   title = 'Välj dagar';
 
@@ -22,6 +22,7 @@ export class ChooseDaysComponent implements OnInit, OnDestroy {
   userId$ = new Observable();
 
   constructor(private store: Store<fromState.SellerState>) {
+    // getting the current seller's dates from getCurrentUserAvailableDates selector
     this.dateValues$ = this.store.select(fromState.getCurrentUserAvailableDates).pipe(
       tap(dates => {
         if (dates) {
@@ -35,10 +36,7 @@ export class ChooseDaysComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  ngOnDestroy(): void {
-    this.store.select(fromState.getCurrentUserAvailableDates).subscribe().unsubscribe();
-  }
-
+  // dispatches the UpdateDates action when the save button is clicked
   onSave(): void {
     const id = localStorage.getItem('currentUserId');
     if (id) {
