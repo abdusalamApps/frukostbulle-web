@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+// Not used anywhere yet.
 @Component({
   selector: 'app-confirmation-no-login',
   templateUrl: './confirmation-no-login.component.html',
