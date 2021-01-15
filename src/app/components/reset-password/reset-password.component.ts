@@ -79,7 +79,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.confirmSubscription = this.passwordService.resetPassword(this.emailControl.value, this.code).subscribe(
       res => {
         console.log(`confirm reset success ${res}`);
-        this.snackBar.open('Mejl med ett nytt lösenord har skickats', 'Stäng', {
+        this.snackBar.open('Meijl med ett nytt lösenord har skckats', 'Stäng', {
           duration: 3000
         });
       },
