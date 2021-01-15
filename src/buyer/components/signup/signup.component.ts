@@ -72,9 +72,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onCreate(): void {
-    if (this.enteredPassword !== this.enteredPassword2
-      || this.enteredPassword.length < 8
-      || this.emailControl.hasError('email')
+    if (this.emailControl.hasError('email')
       || this.emailControl.hasError('required')
       || this.mobileControl.hasError('minlength')
       || this.mobileControl.hasError('maxlength')
@@ -89,7 +87,17 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.snackBar.open('Rätta felen.', 'Ok', {
         duration: 2000,
       });
-    } else {
+    } else if(this.enteredPassword.length < 8) {
+      this.snackBar.open('Lösenord måste minst vara 8 karaktärer.', 'Ok', {
+        duration: 2000,
+      });
+
+    }else if(this.enteredPassword !== this.enteredPassword2) {
+      this.snackBar.open('Lösenorden matchar inte.', 'Ok', {
+        duration: 2000,
+      });
+
+    }  else {
         const newUser: User = {
           id: -1,
           name: this.nameControl.value,
