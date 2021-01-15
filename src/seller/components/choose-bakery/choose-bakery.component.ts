@@ -37,6 +37,8 @@ export class ChooseBakeryComponent implements OnInit {
     // citiesService gets the list of all counties and cities
     // in sweden from a json file src/se.json
     this.counties = this.citiesService.getCounties();
+
+    this.sellerId$ = this.store.select(fromState.getCurrentUserId);
   }
 
   public navigateBack(): void {
@@ -47,20 +49,13 @@ export class ChooseBakeryComponent implements OnInit {
 
   // when an list item is clicked the action AssociateBakery
   // gets dispatched
-  onListItemClick(bakeryId: number): void {
+  onListItemClick(bakeryId: number, sellerId: number): void {
     // getting the current user id (seller id) that is needed
     // for AssociateBakery action asynchronously from the selector
-    this.sellerId$ = this.store.select(fromState.getCurrentUserId).pipe(
-      tap(sellerId => {
-        if (sellerId) {
-          // dispatch the action only when we get the id
-          this.store.dispatch(new fromState.AssociateBakery({
-            bakeryId,
-            sellerId
-          }));
-        }
-      })
-    );
+    this.store.dispatch(new fromState.AssociateBakery({
+      bakeryId,
+      sellerId
+    }));
 
   }
 

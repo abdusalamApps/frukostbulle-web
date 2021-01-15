@@ -24,7 +24,6 @@
   <mat-card style="margin-top: 16px; margin-bottom: 10em">
     <mat-list>
       <h3 matSubheader>Historik</h3>
-      <h3 matSubheader>KOMMER SNART</h3>
       <div *ngIf="(orders$ | async) as orders">
         <mat-list-item mat-ripple
                        *ngFor="let order of orders; index as k;"

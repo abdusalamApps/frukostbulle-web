@@ -21,7 +21,7 @@ export class PasswordService {
   }
 
   requestNewPassword(userEmail: string): Observable<any> {
-    return this.http.post<any>(`${urls.usersUrls.Post.sendResetPassEmailUrl}${userEmail}`, {});
+    return this.http.post<any>(`${urls.usersUrls.Post.sendResetPassEmailUrl}`, userEmail);
   }
 
   resetPassword(userEmail: string, code: number): Observable<any> {
