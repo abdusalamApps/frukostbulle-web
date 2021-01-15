@@ -1,4 +1,4 @@
-<mat-toolbar class="toolbar" color="primary">
+<mat-toolbar *ngIf="(orders$ | async) as orders" class="toolbar" color="primary">
   <span>{{title}}</span>
   <span class="toolbar-spacer"></span>
   <button routerLink="../seller-order-history"
@@ -6,7 +6,11 @@
     <mat-icon routerLink="/seller/order-history">history</mat-icon>
   </button>
   <button mat-icon-button>
-    <mat-icon>print</mat-icon>
+    <mat-icon (click)="getPdf(orders[0].sellerId,
+     orders[0].bakeryId,
+      orders[0].deliveryDate,
+       orders[orders.length - 1].deliveryDate)">print
+    </mat-icon>
   </button>
 </mat-toolbar>
 
@@ -21,10 +25,10 @@
           <img mat-list-avatar src="assets/img/no-image.png">
           <h3 matLine> {{order.buyerName}} </h3>
 
+          <p>{{order.deliveryDate}}</p>
           <p *ngIf="order.content as contents" matLine>
             {{contents[0]?.item?.itemName}}...
           </p>
-
           <p matLine *ngIf="(getOrderTotal(order.id) | async) as total">
             {{total}}:-
           </p>
