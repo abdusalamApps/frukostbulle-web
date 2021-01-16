@@ -56,13 +56,18 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         res => {
           console.log(`reset success ${res}`);
           this.confirm = true;
+          this.snackBar.open('Tack för din begäran', 'Stäng', {
+            duration: 3000
+          });
         },
-        err => console.log(`reset fail ${JSON.stringify(err)}`)
+        err => {
+          console.log(`reset fail ${JSON.stringify(err)}`);
+          this.snackBar.open('Något gick fel!', 'Stäng', {
+            duration: 3000
+          });
+        }
       );
 
-      this.snackBar.open('Tack för din begäran', 'Stäng', {
-        duration: 3000
-      });
     }
   }
 
@@ -72,8 +77,18 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   onConfirm(): void {
     this.confirmSubscription = this.passwordService.resetPassword(this.emailControl.value, this.code).subscribe(
-      res => console.log(`confirm reset success ${res}`),
-      err => console.log(`confirm reset fail ${JSON.stringify(err)}`)
+      res => {
+        console.log(`confirm reset success ${res}`);
+        this.snackBar.open('Meijl med ett nytt lösenord har skckats', 'Stäng', {
+          duration: 3000
+        });
+      },
+      err => {
+        console.log(`confirm reset fail ${JSON.stringify(err)}`);
+        this.snackBar.open('Något gick fel!', 'Stäng', {
+          duration: 3000
+        });
+      }
     );
 
   }

@@ -54,4 +54,9 @@ export class OrdersService {
     return this.http.get<{ name: number, value: number }[]>
     (`${urls.ordersUrls.Get.gerSellerStatisticsUrl}?sellerId=${sellerId}`);
   }
+
+  getSellerPdf(sellerId: number, bakeryId: number, begin: string, end: string): Observable<any> {
+    return this.http.get<any>
+    (`${urls.ordersUrls.Get.sellerPdfUrl}?sellerId=${sellerId}&bakeryId=${bakeryId}&begin=${begin}&end=${end}`);
+  }
 }

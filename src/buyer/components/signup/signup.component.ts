@@ -63,7 +63,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   ngOnDestroy(): void {
     this.userSubscription$.unsubscribe();
@@ -72,9 +73,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onCreate(): void {
-    if (this.enteredPassword !== this.enteredPassword2
-      || this.enteredPassword.length < 8
-      || this.emailControl.hasError('email')
+    if (this.emailControl.hasError('email')
       || this.emailControl.hasError('required')
       || this.mobileControl.hasError('minlength')
       || this.mobileControl.hasError('maxlength')
@@ -89,44 +88,53 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.snackBar.open('Rätta felen.', 'Ok', {
         duration: 2000,
       });
+    } else if (this.enteredPassword.length < 8) {
+      this.snackBar.open('Lösenord måste minst vara 8 karaktärer.', 'Ok', {
+        duration: 2000,
+      });
+
+    } else if (this.enteredPassword !== this.enteredPassword2) {
+      this.snackBar.open('Lösenorden matchar inte.', 'Ok', {
+        duration: 2000,
+      });
     } else {
-        const newUser: User = {
-          id: -1,
-          name: this.nameControl.value,
-          county: this.getCounty(this.cityControl.value),
-          city: this.cityControl.value,
-          address: `${this.streetControl.value}, ${this.cityControl}`,
-          mobilenbr: this.mobileControl.value,
-          email: this.emailControl.value,
-          password: this.enteredPassword,
-          permissionLevel: PermissionLevel.BUYER,
-          reminder: false,
-          associatedBakery: -1,
-          associatedSeller: -1,
-          active: false,
-          availableDates: [],
-          orderBuffer: -1,
-          lasOrderDay: '',
-          profilePictureUrl: ''
-        };
-        this.userSubscription$ = this.userService.createUser(newUser, []).subscribe(
-            (res: any) => {
-            this.newUserId = res;
-            this.signupSuccess = true;
-            this.cEmailSubscription = this.userService.sendConfirmationEmail(newUser.email).subscribe(
-              (result: any) => {
-                console.log(`createUser res: ${result}`);
-              },
-                (err: any) => {
-                console.log(`send confirmation email failed ${JSON.stringify(err)}`);
-              }
-            );
-          },
+      const newUser: User = {
+        id: -1,
+        name: this.nameControl.value,
+        county: this.getCounty(this.cityControl.value),
+        city: this.cityControl.value,
+        address: `${this.streetControl.value}, ${this.cityControl}`,
+        mobilenbr: this.mobileControl.value,
+        email: this.emailControl.value,
+        password: this.enteredPassword,
+        permissionLevel: PermissionLevel.BUYER,
+        reminder: false,
+        associatedBakery: -1,
+        associatedSeller: -1,
+        active: false,
+        availableDates: [],
+        orderBuffer: -1,
+        lasOrderDay: '',
+        profilePictureUrl: ''
+      };
+      this.userSubscription$ = this.userService.createUser(newUser, []).subscribe(
+        (res: any) => {
+          this.newUserId = res;
+          this.signupSuccess = true;
+          this.cEmailSubscription = this.userService.sendConfirmationEmail(newUser.email).subscribe(
+            (result: any) => {
+              console.log(`createUser res: ${result}`);
+            },
             (err: any) => {
-            console.log(`createUser error: ${JSON.stringify(err)}`);
-            this.snackBar.open(`Fel: ${err}`, 'Ok', {duration: 2000});
-          }
-        );
+              console.log(`send confirmation email failed ${JSON.stringify(err)}`);
+            }
+          );
+        },
+        (err: any) => {
+          console.log(`createUser error: ${JSON.stringify(err)}`);
+          this.snackBar.open(`Fel: ${err}`, 'Ok', {duration: 2000});
+        }
+      );
     }
   }
 
@@ -150,9 +158,9 @@ export class SignupComponent implements OnInit, OnDestroy {
   onConfirm(): void {
     this.confirmSubscription$ = this.userService
       .confirmAccount(this.emailControl.value, this.code).subscribe(
-      res => console.log(`accountConfirm res: ${res}`),
-      err => console.log(`accountConfirm error: ${JSON.stringify(err)}`)
-    );
+        res => console.log(`accountConfirm res: ${res}`),
+        err => console.log(`accountConfirm error: ${JSON.stringify(err)}`)
+      );
     // this.store.dispatch(new fromRoot.Back());
 
   }

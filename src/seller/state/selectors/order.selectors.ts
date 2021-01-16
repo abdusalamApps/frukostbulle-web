@@ -23,12 +23,26 @@ export const getSelectedOrder = createSelector(
 );
 
 export const getSellerOrders = createSelector(
-  getOrderEntities, (entities) => {
-    return Object.keys(entities).map((id) => {
+  getOrderEntities,
+  (entities) => {
+
+    let array = Object.keys(entities).map((id) => {
       return entities[parseInt(id, 10)];
     });
+    array.sort(compare);
+    return array;
   }
 );
+
+function compare(a: Order, b: Order) {
+  if (a.deliveryDate < b.deliveryDate) {
+    return -1;
+  }
+  if (a.deliveryDate > b.deliveryDate) {
+    return 1;
+  }
+  return 0;
+}
 
 export const getOrderTotal = createSelector(
   getOrderEntities,
