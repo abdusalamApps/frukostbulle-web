@@ -42,7 +42,7 @@ export class UsersService {
   }
 
   sendConfirmationEmail(email: string): Observable<any> {
-    return this.http.post(`${urls.usersUrls.Post.sendCreateEmailUrl}${email}`, {});
+    return this.http.post(`${urls.usersUrls.Post.sendCreateEmailUrl}`, email);
   }
 
   confirmAccount(email: string, code: number): Observable<any> {
@@ -50,7 +50,7 @@ export class UsersService {
   }
 
   adminConfirmAccount(email: string): Observable<any> {
-    return this.http.get(`${urls.usersUrls.Post.adminConfirmAccount}${email}` , {});
+    return this.http.post(`${urls.usersUrls.Post.adminConfirmAccount}` , {email});
   }
 
   associateSeller(buyerId: number, sellerId: number): Observable<any> {

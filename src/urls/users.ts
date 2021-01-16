@@ -13,7 +13,7 @@ export namespace Post {
   export const loginUrl = `${baseUrl}/login`;
   export const createUserUrl = `${baseUrl}/create-user`;
   export const createUserNoPassUrl = `${baseUrl}/create-user-auto-pass`;
-  export const sendCreateEmailUrl = `${baseUrl}/send-create-email?userEmail=`;
+  export const sendCreateEmailUrl = `${baseUrl}/send-create-email`;
   export const confirmAccountUrl = `${baseUrl}/confirm`;
 
   export const updateUserUrl = `${baseUrl}/update-user`;
@@ -26,7 +26,7 @@ export namespace Post {
   export const associateSellerUrl = `${baseUrl}/associate-seller`;
   export const sendResetPassEmailUrl =`${baseUrl}/send-reset-pass-email?userEmail=`;
   export const resetPassUrl =`${baseUrl}/reset-pass`;
-  export const adminConfirmAccount =`${baseUrl}/send-create-email`;
+  export const adminConfirmAccount =`${baseUrl}/admin-activate-user`;
 
 
 

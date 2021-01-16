@@ -61,39 +61,14 @@ export class ManageSellerComponent implements OnInit, OnDestroy {
 
   activeSeller(seller: User) {
     console.log("activeSeller");
-    const newSeller: User = {
-      id: seller.id,
-      name: seller.name,
-      county: seller.county,
-      city: seller.city,
-      address: seller.address,
-      mobilenbr: seller.mobilenbr,
-      email: seller.email,
-      password: '',
-      permissionLevel: PermissionLevel.SELLER,
-      reminder: seller.reminder,
-      associatedBakery: seller.associatedBakery,
-      associatedSeller: -1,
-      active: true,
-      availableDates: [],
-      orderBuffer: seller.orderBuffer,
-      lasOrderDay: '',
-      profilePictureUrl: ''
-    };
-    this.userService.updateUser(newSeller).subscribe(
-      res =>{
-        console.log(`user with id ${seller.id} updated`);
-        this.cEmailSubscription = this.userService.adminConfirmAccount(newSeller.email).subscribe(
-          res => {
-            this.navigateBack();
-          },
-          err => {
-            console.log(`send confirmation email failed ${JSON.stringify(err)}`);
-          }
-        );
+    this.cEmailSubscription = this.userService.adminConfirmAccount(seller.email).subscribe(
+      res => {
+        this.navigateBack();
       },
-      error => console.log(`error ${error} updating user with id ${seller.id}`)
-    )
+      err => {
+        console.log(`send confirmation email failed ${JSON.stringify(err)}`);
+      }
+    );
   }
 }
 
