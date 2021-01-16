@@ -73,8 +73,10 @@ export class ItemEditorComponent implements OnInit, OnDestroy {
   }
 
   onSave(): void {
-    if (this.name === '' || this.price < 0) {
-      this.snackBar.open('Rätta felen!', 'Ok', {duration: 1000});
+    if (this.name === '') {
+      this.snackBar.open('namn kan inte vara tomt!', 'Ok', {duration: 1000});
+    } else if (this.price < 1) {
+      this.snackBar.open('priset m[ste vara st;rre n noll!', 'Ok', {duration: 1000});
     } else {
       console.log(`onSave()@ItemEditor`);
       const currentEmail = localStorage.getItem('currentUserEmail');

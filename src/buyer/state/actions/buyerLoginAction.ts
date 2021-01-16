@@ -32,6 +32,10 @@ export class BuyerLogout implements Action {
 
 export class BuyerLogoutConfirm implements Action {
   readonly type = BUYER_LOGOUT_CONFIRM;
+  constructor() {
+    localStorage.clear();
+  }
+
 }
 
 export class BuyerLogoutCancel implements Action {

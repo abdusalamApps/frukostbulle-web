@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
-import { AuthResponse } from '../../../models/authResponse.model';
+import {Action} from '@ngrx/store';
+import {AuthResponse} from '../../../models/authResponse.model';
 
 export const LOGIN = '[Login] Login';
 export const LOGIN_SUCCESS = '[Login] Login Success';
@@ -11,11 +11,14 @@ export const LOGOUT_CANCEL = '[Logout] Logout Cancel';
 
 export class Login implements Action {
   readonly type = LOGIN;
-  constructor(public payload: { email: string; password: string }) {}
+
+  constructor(public payload: { email: string; password: string }) {
+  }
 }
 
 export class LoginSuccess implements Action {
   readonly type = LOGIN_SUCCESS;
+
   constructor(public payload: AuthResponse) {
     localStorage.setItem('token', payload.Authorization);
   }
@@ -23,7 +26,9 @@ export class LoginSuccess implements Action {
 
 export class LoginFail implements Action {
   readonly type = LOGIN_FAIL;
-  constructor(public payload: any) {}
+
+  constructor(public payload: any) {
+  }
 }
 
 export class Logout implements Action {
@@ -32,6 +37,11 @@ export class Logout implements Action {
 
 export class LogoutConfirm implements Action {
   readonly type = LOGOUT_CONFIRM;
+
+  constructor() {
+    localStorage.clear();
+  }
+
 }
 
 export class LogoutCancel implements Action {

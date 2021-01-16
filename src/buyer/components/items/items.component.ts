@@ -25,15 +25,6 @@ export class ItemsComponent implements OnInit {
   constructor(private store: Store<fromState.BuyerState>,
               private rootStore: Store<fromRoot.State>,
               private snackBar: MatSnackBar) {
-    let state = localStorage.getItem('state');
-    if (!state) {
-      state = '';
-    }
-    let sellerId = -1;
-    sellerId = JSON.parse(state)?.buyer?.currentUser?.currentUser?.associatedSeller;
-    if (sellerId > -1) {
-      this.store.dispatch(new fromState.LoadItems(sellerId));
-    }
 
   }
 
@@ -42,8 +33,17 @@ export class ItemsComponent implements OnInit {
     this.loading$ = this.store.select(fromState.getItemsLoading);
     this.loaded$ = this.store.select(fromState.getItemsLoaded);
     this.associatedSellerId$ = this.store.select(fromState.getAssociatedSellerId);
-    if (JSON.parse(<string> localStorage.getItem('cart')) !== null) {
-      this.cartItems = JSON.parse(<string> localStorage.getItem('cart'));
+    if (JSON.parse(<string>localStorage.getItem('cart')) !== null) {
+      this.cartItems = JSON.parse(<string>localStorage.getItem('cart'));
+    }
+    let state = localStorage.getItem('state');
+    if (!state) {
+      state = '';
+    }
+    let sellerId = -1;
+    sellerId = JSON.parse(state)?.buyer?.currentUser?.currentUser?.associatedSeller;
+    if (sellerId > -1) {
+      this.store.dispatch(new fromState.LoadItems(sellerId));
     }
 
   }
@@ -67,7 +67,7 @@ export class ItemsComponent implements OnInit {
 
   getItemsCount(): number {
     let count = 0;
-    for(let item of this.cartItems) {
+    for (let item of this.cartItems) {
       count += item.amount;
     }
     return count;

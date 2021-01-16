@@ -103,7 +103,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         name: this.nameControl.value,
         county: this.getCounty(this.cityControl.value),
         city: this.cityControl.value,
-        address: `${this.streetControl.value}, ${this.cityControl}`,
+        address: `${this.streetControl.value}, ${this.cityControl.value}`,
         mobilenbr: this.mobileControl.value,
         email: this.emailControl.value,
         password: this.enteredPassword,

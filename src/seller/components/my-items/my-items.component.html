@@ -3,9 +3,9 @@
   <span>{{ title }}</span>
 </mat-toolbar>
 <mat-spinner color="accent" class="spinner" *ngIf="(loading$ | async)"></mat-spinner>
-<div class="grid-container">
+<div class="grid-container" *ngIf="(items$ | async) as items">
   <mat-card class="grid-item"
-            mat-ripple *ngFor="let item of items$ | async"
+            mat-ripple *ngFor="let item of items"
             [routerLink]="['/seller/items', item.itemId]"
   >
     <div class="img-container">

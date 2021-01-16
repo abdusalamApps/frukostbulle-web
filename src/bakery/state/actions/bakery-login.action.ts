@@ -33,6 +33,10 @@ export class LogoutBakery implements Action {
 
 export class LogoutBakeryConfirm implements Action {
   readonly type = LOGOUT_BAKERY_CONFIRM;
+  constructor() {
+    localStorage.clear();
+  }
+
 }
 
 export class LogoutBakeryCancel implements Action {

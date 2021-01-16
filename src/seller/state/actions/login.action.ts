@@ -32,6 +32,9 @@ export class Logout implements Action {
 
 export class LogoutConfirm implements Action {
   readonly type = LOGOUT_CONFIRM;
+  constructor() {
+    localStorage.clear();
+  }
 }
 
 export class LogoutCancel implements Action {
