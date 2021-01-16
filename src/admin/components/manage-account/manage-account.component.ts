@@ -75,4 +75,9 @@ export class ManageAccountComponent implements OnInit, OnDestroy{
     this.checkPassWordSubscription$.unsubscribe();
     this.updatePassWordSubscription$.unsubscribe();
   }
+
+  onLogout(): void {
+    this.store.dispatch(new fromState.Logout());
+  }
+
 }

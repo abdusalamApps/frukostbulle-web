@@ -43,7 +43,7 @@
         ÄNDRA LÖSENORD
       </button>
 
-      <button mat-button [routerLink]="['admin/login']"
+      <button mat-button class="logout" (click)="onLogout()"
               color="warn" id="logout-button">
         LOGGA UT
       </button>
