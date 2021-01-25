@@ -94,7 +94,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   signupSuccess = false;
   code = -1;
   newUserId = -1;
-  orderBuffer= -1;
+  orderBuffer = -1;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -164,7 +164,7 @@ export class SignupComponent implements OnInit, OnDestroy {
             this.zoom = 12;
             this.address = results[0].formatted_address;
             console.log(`address: ${this.address}`);
-            const arr = this.address.split(",")[1].split(" ");
+            const arr = this.address.split(',')[1].split(' ');
             this.city = arr[arr.length - 1];
             console.log(`address city: ${this.city}`);
             this.setCounty();
@@ -366,8 +366,21 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   onConfirm(): void {
     this.confirmSubscription$ = this.userService.confirmAccount(this.email, this.code).subscribe(
-      res => console.log(`accountConfirm res: ${res}`),
-      err => console.log(`accountConfirm error: ${JSON.stringify(err)}`)
+      res => {
+        if (res) {
+          this.snackBar.open('Din e-post är nu bekräftad! Vänta på att admin ska aktivera din profil', 'Ok',
+            {duration: 2000});
+        } else {
+          this.snackBar.open('Din e-post var redan bekräftad eller den finns inte!', 'Ok',
+            {duration: 2000});
+        }
+        console.log(`accountConfirm res: ${res}`);
+      },
+      err => {
+        this.snackBar.open('Nåt fel inträffade!', 'Ok',
+          {duration: 2000});
+        console.log(`accountConfirm error: ${JSON.stringify(err)}`);
+      }
     );
     // this.store.dispatch(new fromRoot.Back());
 

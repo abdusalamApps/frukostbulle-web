@@ -50,7 +50,7 @@ export class UsersService {
   }
 
   adminConfirmAccount(email: string): Observable<any> {
-    return this.http.post(`${urls.usersUrls.Post.adminConfirmAccount}` , {email});
+    return this.http.post(`${urls.usersUrls.Post.adminConfirmAccount}` , email);
   }
 
   associateSeller(buyerId: number, sellerId: number): Observable<any> {
