@@ -40,6 +40,6 @@ export class ItemsService {
 
   deleteItem(itemId: number) {
     console.log(`itemId in deleteItem()@ItemsService: ${itemId}`);
-    return this.http.post<any>(`${urls.itemsUrls.Post.deleteItemUrl}${itemId}`, {'itemId': itemId});
+    return this.http.post<any>(`${urls.itemsUrls.Post.deleteItemUrl}`, itemId);
   }
 }
