@@ -15,10 +15,8 @@ export class ItemsGuard implements CanActivate {
   }
 
   canActivate(): Observable<boolean> {
-    let sellerId = '';
-    const fromStorage = localStorage.getItem('currentUserId');
-    if (fromStorage) {
-      sellerId = fromStorage;
+    const sellerId = localStorage.getItem('currentUserId');
+    if (sellerId) {
       this.store.dispatch(new fromState.LoadItems(parseInt(sellerId, 10)));
     }
     return of(true);
