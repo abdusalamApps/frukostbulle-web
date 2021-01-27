@@ -10,7 +10,8 @@ import {BakeryService} from '../../services/bakery.service';
 import {Bakery} from '../../../models/bakery.model';
 import {AreaService} from '../../services/area.service';
 import {Area} from '../../../models/area.model';
-import {LoadCurrentUser} from "../actions/currentUser.action";
+import {LoadCurrentUser} from '../actions/currentUser.action';
+import * as itemActions from '../actions/items.action';
 
 @Injectable()
 export class CurrentUserEffects {
@@ -59,9 +60,14 @@ export class CurrentUserEffects {
   loadCurrentUserSuccess2$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.LOAD_CURRENT_USER_SUCCESS),
-      switchMap((action: userActions.LoadCurrentUserSuccess) => {
+      /*switchMap((action: userActions.LoadCurrentUserSuccess) => {
         return of(new userActions.LoadCurrentUserArea(action.payload.id));
-      })
+      })*/
+      switchMap((action: userActions.LoadCurrentUserSuccess) => [
+        new userActions.LoadCurrentUserArea(action.payload.id),
+        new itemActions.LoadItems(action.payload.id),
+        new fromRoot.Go({path: ['seller/items']})
+      ])
     ),
   );
 

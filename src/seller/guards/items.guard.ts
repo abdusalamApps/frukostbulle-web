@@ -21,7 +21,6 @@ export class ItemsGuard implements CanActivate {
       sellerId = fromStorage;
       this.store.dispatch(new fromState.LoadItems(parseInt(sellerId, 10)));
     }
-
     return of(true);
   }
 

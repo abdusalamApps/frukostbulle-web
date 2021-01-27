@@ -46,7 +46,6 @@ export class LoginEffects {
       switchMap((action: loginAction.LoginSuccess) => [
         // console.log(`paylod@LoginSuccess: ${actions.payload.email}`);
         new userActions.LoadCurrentUser(action.payload.email),
-        new fromRoot.Go({path: ['seller/items']})
       ]),
       // seller-area((authResponse) => new userActions.LoadCurrentUser(authResponse)),
       // seller-area((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))
