@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.snackBar.open('Din e-post är redan bekräftad. Vänta på att admin ska aktivera din profil', 'ok',
                   {duration: 4000});
               }
-              console.log(`createUser res: ${res}`);
+              console.log(`send confirmation email failed: ${res}`);
             },
           );
         }

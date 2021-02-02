@@ -224,8 +224,14 @@ export class SignupComponent implements OnInit, OnDestroy {
             this.signupSuccess = true;
             this.cEmailSubscription = this.userService.sendConfirmationEmail(newUser.email).subscribe(
               res => {
-                this.store.dispatch(new fromRoot.Go({path: ['seller/signup-confirmation']}));
                 console.log(`createUser res: ${res}`);
+                if (res) {
+                  this.snackBar.open('Kod har skickats till angivna e-post', 'ok',
+                    {duration: 2000});
+                } else {
+                  this.snackBar.open('Din e-post är redan bekräftad. Vänta på att admin ska aktivera din profil', 'ok',
+                    {duration: 4000});
+                }
               },
               err => {
                 console.log(`send confirmation email failed ${JSON.stringify(err)}`);

@@ -124,6 +124,13 @@ export class SignupComponent implements OnInit, OnDestroy {
           this.cEmailSubscription = this.userService.sendConfirmationEmail(newUser.email).subscribe(
             (result: any) => {
               console.log(`createUser res: ${result}`);
+              if (res) {
+                this.snackBar.open('Kod har skickats till angivna e-post', 'ok',
+                  {duration: 2000});
+              } else {
+                this.snackBar.open('Din e-post är redan bekräftad.', 'ok',
+                  {duration: 4000});
+              }
             },
             (err: any) => {
               console.log(`send confirmation email failed ${JSON.stringify(err)}`);
@@ -156,11 +163,23 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onConfirm(): void {
-    this.confirmSubscription$ = this.userService
-      .confirmAccount(this.emailControl.value, this.code).subscribe(
-        res => console.log(`accountConfirm res: ${res}`),
-        err => console.log(`accountConfirm error: ${JSON.stringify(err)}`)
-      );
+    this.confirmSubscription$ = this.userService.confirmAccount(this.emailControl.value, this.code).subscribe(
+      res => {
+        if (res) {
+          this.snackBar.open('Din e-post är nu bekräftad!', 'Ok',
+            {duration: 2000});
+        } else {
+          this.snackBar.open('Din e-post var redan bekräftad eller den finns inte!', 'Ok',
+            {duration: 2000});
+        }
+        console.log(`accountConfirm res: ${res}`);
+      },
+      err => {
+        this.snackBar.open('Nåt fel inträffade!', 'Ok',
+          {duration: 2000});
+        console.log(`accountConfirm error: ${JSON.stringify(err)}`);
+      }
+    );
     // this.store.dispatch(new fromRoot.Back());
 
   }

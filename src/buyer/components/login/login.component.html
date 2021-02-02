@@ -86,6 +86,7 @@
         <mat-label>E-post</mat-label>
         <input matInput required [(ngModel)]="email">
       </mat-form-field>
+      <br>
       <mat-form-field appearance="legacy">
         <mat-label>Bekräftelsekod</mat-label>
         <input matInput required [(ngModel)]="code">
@@ -93,6 +94,26 @@
 
       <br>
       <button mat-raised-button color="accent" (click)="onConfirm()">Bekräfta</button>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+  <mat-accordion>
+    <mat-expansion-panel style="margin-top: 16px;">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Jag har inte fått aktiveringskod
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="form-container">
+        <mat-form-field appearance="legacy">
+          <mat-label>E-post</mat-label>
+          <input matInput required [(ngModel)]="email">
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="onSendCode()">Skicka kod</button>
+      </div>
+
     </mat-expansion-panel>
 
   </mat-accordion>
