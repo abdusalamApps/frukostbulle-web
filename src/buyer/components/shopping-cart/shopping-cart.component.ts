@@ -36,9 +36,10 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.seller$ = this.store.select(fromState.getCurrentAssociatedSeller).pipe(
+    this.seller$ = this.store.select(fromState.getSelectedSeller).pipe(
       tap(user => {
         if (user) {
+          console.log(`current seller: ${user.name}`)
           this.sellerDates = user.availableDates;
           this.seller = user;
         }

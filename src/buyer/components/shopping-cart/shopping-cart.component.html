@@ -6,7 +6,7 @@
   <span class="toolbar-spacer"></span>
 </mat-toolbar>
 
-<div class="container" *ngIf="seller$ | async">
+<div class="container" *ngIf="(seller$ | async) as seller">
 
   <mat-card *ngIf="cartItems.length == 0">
     <mat-card-header>
@@ -38,7 +38,7 @@
 
 
     <div class="form-container">
-
+      <h3>{{seller.name}}s dagar</h3>
       <ejs-calendar matLine [(value)]="selectedDate" (renderDayCell)="disableDate($event)"></ejs-calendar>
       <mat-form-field appearance="fill">
         <mat-label>Leveranstid</mat-label>

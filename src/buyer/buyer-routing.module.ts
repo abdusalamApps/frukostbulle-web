@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import * as components from './components';
 import {AuthGuard} from './guards/auth.guard';
+import {ShoppingCartGuard} from './guards/shopping-cart.guard';
 
 const routes: Routes = [
   {
@@ -36,7 +37,7 @@ const routes: Routes = [
       {
         path: 'shopping-cart',
         component: components.ShoppingCartComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, ShoppingCartGuard]
       },
       {
         path: 'order-no-login',
