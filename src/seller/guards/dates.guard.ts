@@ -13,10 +13,8 @@ export class DatesGuard implements CanActivate {
   }
 
   canActivate(): Observable<boolean> {
-    return this.checkStore().pipe(
-      switchMap(() => of(true)),
-      catchError(() => of(false))
-    );
+
+    return of(true);
   }
 
   checkStore(): Observable<boolean> {
@@ -32,18 +30,6 @@ export class DatesGuard implements CanActivate {
       filter(loaded => loaded),
       take(1)
     );
-  }
-
-  getUserEmail(): string {
-    this.store.select(fromState.getAuthEmail).pipe(
-      tap(email => {
-        if (email) {
-          return email;
-        }
-        return '';
-      })
-    );
-    return '';
   }
 
 }

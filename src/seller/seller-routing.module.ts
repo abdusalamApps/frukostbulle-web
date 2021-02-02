@@ -45,7 +45,7 @@ const routes: Routes = [
       },
       {
         path: 'choose-days', component: Components.ChooseDaysComponent,
-        canActivate: [fromGuards.AuthGuard, fromGuards.DatesGuard],
+        canActivate: [fromGuards.AuthGuard],
       },
       {
         path: 'send-to-bakery', component: Components.SendToBakeryComponent,
