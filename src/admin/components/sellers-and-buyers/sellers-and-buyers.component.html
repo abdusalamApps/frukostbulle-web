@@ -11,6 +11,8 @@
                            [routerLink]="['/admin/manage-seller', seller.id]">
               <img matListAvatar class="list-img">
               <h3 matLine> {{seller.id}} </h3>
+              <p *ngIf="seller.active" style="color: green">Aktiverad</p>
+              <p *ngIf="!seller.active" style="color: red">Ej aktiverad</p>
               <p matLine> {{seller.name}} </p>
               <p matLine> {{seller.email}} </p>
 
