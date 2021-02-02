@@ -45,7 +45,7 @@ export class BuyerLoginEffect {
       switchMap((action: loginAction.BuyerLoginSuccess) => [
         // console.log(`paylod@LoginSuccess: ${actions.payload.email}`);
         new userActions.BuyerLoadCurrentUser(action.payload.email),
-        new fromRoot.Go({path: ['buyer/items']})
+        // new fromRoot.Go({path: ['buyer/items']})
       ]),
       // seller-area((authResponse) => new userActions.LoadCurrentUser(authResponse)),
       // seller-area((authResponse) => new fromRoot.Go({ path: ['seller/items'] }))

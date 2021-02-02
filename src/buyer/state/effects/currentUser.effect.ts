@@ -10,7 +10,8 @@ import * as itemActions from '../actions/items.action';
 import {Store} from '@ngrx/store';
 import {BuyerLoginState} from '../reducers/login.reducer';
 import {UsersService} from 'src/seller/services/users.service';
-import {User} from '../../../models/user.model';
+import {User} from 'src/models/user.model';
+import * as fromRoot from 'src/app/state';
 
 
 @Injectable()
@@ -26,7 +27,6 @@ export class CurrentUserEffect {
       switchMap((action: userActions.BuyerLoadCurrentUser) => {
         return this.userService.getUserByEmail(action.payload).pipe(
           map((user: User) => {
-
             return new userActions.BuyerLoadCurrentUserSuccess((user));
           }),
           catchError((error: any) => of(new userActions.BuyerLoadCurrentUserFail(error)))
@@ -37,11 +37,15 @@ export class CurrentUserEffect {
 
   loadCurrentUserSuccess$ = createEffect(() =>
     this.actions$.pipe(ofType(userActions.BUYER_LOAD_CURRENT_USER_SUCCESS),
-      switchMap((action: userActions.BuyerLoadCurrentUserSuccess) => {
-        localStorage.setItem('currentUserId', action.payload.id.toString(10));
-        localStorage.setItem('currentUserEmail', action.payload.email);
-        return of(new userActions.BuyerLoadCurrentUserSeller(action.payload.associatedSeller));
-      })
+      // switchMap((action: userActions.BuyerLoadCurrentUserSuccess) => {
+      //   localStorage.setItem('currentUserId', action.payload.id.toString(10));
+      //   localStorage.setItem('currentUserEmail', action.payload.email);
+      //   return of(new userActions.BuyerLoadCurrentUserSeller(action.payload.associatedSeller));
+      // })
+      switchMap((action: userActions.BuyerLoadCurrentUserSuccess) => [
+        new itemActions.LoadItems(action.payload.associatedSeller),
+        new fromRoot.Go({path: ['buyer/items']})
+      ])
     )
   );
 
@@ -73,7 +77,9 @@ export class CurrentUserEffect {
       ofType(userActions.BUYER_UPDATE_SELLER_SUCCESS),
       switchMap((action: userActions.BuyerUpdateSellerSuccess) => {
         let state = localStorage.getItem('state');
-        if (!state) state = '';
+        if (!state) {
+          state = '';
+        }
         const email = JSON.parse(state).buyer.buyerLogin.response.email;
         return of(new userActions.BuyerLoadCurrentUser(email));
       })
@@ -89,15 +95,15 @@ export class CurrentUserEffect {
     )
   );
 
-  setReminder$ = createEffect(()=>
-  this.actions$.pipe(
-    ofType(userActions.SET_REMINDER),
-    switchMap((action: userActions.SetReminder)=> {
-      return this.userService.updateUser(action.payload).pipe(
-        map( ()=> new userActions.SetReminderSuccess(action.payload)),
-        catchError((error: any)=> of( new userActions.SetReminderFail(error)) )
-      );
-    })
-  )
+  setReminder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.SET_REMINDER),
+      switchMap((action: userActions.SetReminder) => {
+        return this.userService.updateUser(action.payload).pipe(
+          map(() => new userActions.SetReminderSuccess(action.payload)),
+          catchError((error: any) => of(new userActions.SetReminderFail(error)))
+        );
+      })
+    )
   );
 }
