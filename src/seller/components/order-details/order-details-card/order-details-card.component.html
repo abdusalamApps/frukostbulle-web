@@ -1,8 +1,8 @@
 <mat-card *ngIf="order?.fake" class="background-warn">
   <h1>Denna beställning är fejk</h1>
 </mat-card>
-<mat-card style="margin-top: 16px">
-  <h1>{{(buyer$ | async)?.name}}</h1>
+<mat-card style="margin-top: 16px" *ngIf="(buyer$ | async) as buyer">
+  <h1>{{buyer.name}}</h1>
   <mat-list>
 
     <h3 matSubheader>Frallor</h3>
@@ -25,11 +25,24 @@
     </mat-list-item>
   </mat-list>
 
+  <mat-list>
+    <h3 matSubheader>Önskad leveranstid</h3>
+    <mat-list-item>
+      <h2>klockan {{order.deliveryTime}}</h2>
+    </mat-list-item>
+  </mat-list>
+
+  <mat-list>
+    <h3 matSubheader>Önskad leveransmetod</h3>
+    <mat-list-item>
+      <h2>{{order.deliveryMethod ? 'Knacka på dörren' : 'Hänga på dörren'}}</h2>
+    </mat-list-item>
+  </mat-list>
 
   <mat-list>
     <h3 matSubheader>Address</h3>
     <mat-list-item>
-      <h2>{{(buyer$ | async)?.address}}</h2>
+      <h2>{{buyer.address}}</h2>
     </mat-list-item>
   </mat-list>
 
