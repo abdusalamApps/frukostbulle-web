@@ -65,7 +65,8 @@ const routes: Routes = [
       }
     ],
   },
-  {path: 'signup', component: Components.SignupComponent},
+  {
+    path: 'signup', component: Components.SignupComponent},
   {
     path: 'choose-bakery', component: Components.ChooseBakeryComponent,
     canActivate: [fromGuards.AuthGuard],

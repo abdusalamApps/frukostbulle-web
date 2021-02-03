@@ -38,6 +38,8 @@ export class ManageAccountComponent implements OnInit, OnDestroy{
       this.snackBar.open('Fälten kan inte vara tomma', 'Ok', {duration: 2000});
     } else if (this.enteredPassword !== this.enteredPassword2) {
       this.snackBar.open('Lösenorden matchar inte', 'Ok', {duration: 2000});
+    } else if (this.enteredPassword.length < 8) {
+      this.snackBar.open('Lösenordets läng måste minst vara 8', 'Ok', {duration: 2000});
     } else {
       const userid = localStorage.getItem('currentUserId');
       if (userid) {

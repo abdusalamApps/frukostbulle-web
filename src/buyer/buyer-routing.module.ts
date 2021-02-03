@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import * as components from './components';
 import {AuthGuard} from './guards/auth.guard';
 import {ShoppingCartGuard} from './guards/shopping-cart.guard';
+import * as Components from '../seller/components';
 
 const routes: Routes = [
   {
@@ -44,7 +45,8 @@ const routes: Routes = [
         component: components.OrderNoLoginComponent,
         canActivate: [AuthGuard]
       },
-      {path: 'map',
+      {
+        path: 'map',
         component: components.MapComponent,
         canActivate: [AuthGuard]
       },
@@ -53,13 +55,19 @@ const routes: Routes = [
         component: components.OrderLoginOrNotComponent,
         canActivate: [AuthGuard]
       },
-      {path: 'confirmation-no-login',
+      {
+        path: 'confirmation-no-login',
         component: components.ConfirmationNoLoginComponent,
         canActivate: [AuthGuard]
       },
-      {path: 'order-history',
+      {
+        path: 'order-history',
         component: components.OrderHistoryComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'update-password',
+        component: Components.UpdatePasswordComponent
       }
     ],
   },
