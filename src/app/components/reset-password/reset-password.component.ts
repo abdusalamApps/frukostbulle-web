@@ -45,24 +45,22 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   sendResetRequest(): void {
     if (this.emailControl.hasError('required')
       || this.emailControl.hasError('email')) {
-
-      this.snackBar.open('Rätta email.', 'Ok', {
+      this.snackBar.open('Rätta e-post.', 'Ok', {
         duration: 2000,
       });
-
     } else {
       console.log(this.emailControl.value);
       this.resetSubscription = this.passwordService.requestNewPassword(this.emailControl.value).subscribe(
         res => {
           console.log(`reset success ${res}`);
           this.confirm = true;
-          this.snackBar.open('Tack för din begäran', 'Stäng', {
+          this.snackBar.open('Tack för din begäran', 'OK', {
             duration: 3000
           });
         },
         err => {
           console.log(`reset fail ${JSON.stringify(err)}`);
-          this.snackBar.open('Något gick fel!', 'Stäng', {
+          this.snackBar.open('Något gick fel!', 'Ok', {
             duration: 3000
           });
         }
@@ -79,13 +77,13 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.confirmSubscription = this.passwordService.resetPassword(this.emailControl.value, this.code).subscribe(
       res => {
         console.log(`confirm reset success ${res}`);
-        this.snackBar.open('Meijl med ett nytt lösenord har skckats', 'Stäng', {
+        this.snackBar.open('Meijl med ett nytt lösenord har skickats', 'Ok', {
           duration: 3000
         });
       },
       err => {
         console.log(`confirm reset fail ${JSON.stringify(err)}`);
-        this.snackBar.open('Något gick fel!', 'Stäng', {
+        this.snackBar.open('Något gick fel!', 'Ok', {
           duration: 3000
         });
       }
